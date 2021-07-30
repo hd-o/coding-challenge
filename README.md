@@ -1,2 +1,1 @@
-# coding-challenge
-My collection of coding challenge solutions
+My coding challenge solutions, and projects where I explore different technologies/ideas
