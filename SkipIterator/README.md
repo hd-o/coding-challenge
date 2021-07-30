@@ -1,6 +1,6 @@
 # SkipIterator
 
-Iterator implementing skipping through .skip()
+Iterator implementing skipping through `.skip()`
 
 🖥️ [Live Demo @ CodeSandbox][codesandbox]
 
