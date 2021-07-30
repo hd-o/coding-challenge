@@ -1,16 +1,24 @@
 # SkipIterator
 
-An interator which allows skipping values. This implementation accepts an array/list of integers, but could be implemented to accept any type (generic implementation).
+Iterator implementing skipping through .skip()
 
 🖥️ [Live Demo @ CodeSandbox][codesandbox]
 
 ```typescript
-  const myIter = new SkipIterator([1,3,4,3,5])
-  myIter.next() // 1
-  myIter.skip(3)
-  myIter.skip(3)
-  myIter.next() // 4
-  myIter.next() // 5
+const myIter = new SkipIterator([1,3,4,3,5])
+myIter.next() // 1
+myIter.skip(3)
+myIter.skip(3)
+myIter.next() // 4
+myIter.next() // 5
+```
+
+This implementation accepts an array of integers, but could accept any type through generics:
+
+```typescript
+class SkipIterator<Value> {
+  constructor(values: Value[])
+}
 ```
 
 ## Development
