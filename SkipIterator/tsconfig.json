@@ -1,22 +1,18 @@
 {
   "exclude": [
-    "node_modules/",
-    ".cache/",
-    "dist/"
+    "node_modules/"
   ],
   "compilerOptions": {
-    "target": "ES5",
+    "target": "ES6",
     "strict": true,
     "module": "commonjs",
-    "jsx": "preserve",
     "esModuleInterop": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "allowJs": true,
     "lib": [
       "es6",
-      "dom"
+      "DOM"
     ],
-    "rootDir": "src",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true
   }

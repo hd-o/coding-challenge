@@ -30,5 +30,4 @@ for (const { values, results, toSkip } of testValues) {
   assert.equal(currentResults.join(), results.join())
 }
 
-document.write(`<strong>✅ Test Passed: </strong>`)
-document.write(`<code>src/SkipIterator.test.ts</code>`)
+console.log('✅ SkipIterator Test Passed')
