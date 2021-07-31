@@ -25,8 +25,8 @@ class SkipIterator<Value> {
 
 1. Install [Node]
 2. Clone and open this repo
-2. Install dependencies: `npm i`
-3. Run dev server: `npm start`
+2. Install dependencies: `npm install`
+3. Run test file: `npm start`
 
 [codesandbox]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/SkipIterator?file=/src/SkipIterator.ts
 
