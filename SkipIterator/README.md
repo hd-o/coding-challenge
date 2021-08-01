@@ -23,11 +23,9 @@ class SkipIterator<Value> {
 
 ## Development
 
-1. Install [Node]
-2. Clone and open this repo
-2. Install dependencies: `npm install`
-3. Run test file: `npm start`
+1. Install [Deno]
+2. Run test file: `deno run SkipIterator.test.ts`
 
 [codesandbox]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/SkipIterator?file=/src/SkipIterator.ts
 
-[Node]: https://nodejs.org/en/
+[Deno]: https://deno.land/#installation
