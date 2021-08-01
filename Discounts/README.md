@@ -80,9 +80,7 @@ def discount(cart: ShoppingCart) -> Optional[Price]
 def coupon(cart: ShoppingCart) -> Optional[Price]
 ```
 
-The class `ShoppingCart` can then fetch the price rules for each selected product, and run the defined functions, receiving a list of prices, and knowing the type of the rule  (`"price"`, `"discount"`, `"coupon"`, e.t.c). This resulting data can be used to render UI copy/text, and inform the user on prices, and applied discounts.
-
-Some rules can return an `Optional` type, where the rule might not be applied, e.g: expired coupons, or a product quantity not enough for the discount, e.t.c.
+The class `ShoppingCart` can then fetch the price rules for each selected product, and run the defined functions, receiving a list of prices, and knowing the type of the rule  (`"price"`, `"discount"`, `"coupon"`, e.t.c). This resulting data can be used to render UI copy/text, and inform the user on prices, and applied discounts. Some rules can return an `Optional` type, where the rule might not be applied, e.g: expired coupons, or a product quantity not enough for the discount, e.t.c.
 
 ## Further Research
 
