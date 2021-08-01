@@ -1,5 +1,5 @@
-import { assert } from 'chai'
-import { SkipIterator } from './SkipIterator'
+import { assertEquals } from 'https://deno.land/std@0.103.0/testing/asserts.ts'
+import { SkipIterator } from './SkipIterator.ts'
 
 const testValues = [
   {
@@ -27,7 +27,7 @@ for (const { values, results, toSkip } of testValues) {
     iterator.hasNext,
     iterator.next(),
   ]
-  assert.equal(currentResults.join(), results.join())
+  assertEquals(currentResults.join(), results.join())
 }
 
 console.log('✅ SkipIterator Test Passed')
