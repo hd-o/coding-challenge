@@ -1,5 +1,5 @@
-dist
-node_modules
+__pycache__
 .cache
 .vscode
-
+dist
+node_modules
