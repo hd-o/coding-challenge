@@ -37,3 +37,53 @@ carts = [
 
 [python]: https://www.python.org
 
+## Scaling a Shopping Cart
+
+In this challenge I coded a function that calculates the total price, and applies discounts for certain product quantities. The following are my current ideas related to scaling this solution.
+
+### Scenario
+
+1. A store with thousands of items
+2. Discounts applied based on multiple rules
+
+### Requirement
+
+1. System architecture handling dynamic product lists  
+2. Solution allowing discount updates by non-engineers 
+    - Marketing department could insert a promotion
+
+### Solution
+
+A product's final price can be influenced by several factors: Discount based on product quantity, discount based on a brand's products quantity, coupons, loyalty plans, premium plans, e.t.c
+
+On all purchases, two value types are certain, the product ids, and their quantities. With this data, transformations can be applied to calculate the final cart price. My current solution is to have "price rules" defining the calculation for a product price, and discounts if any. Example:
+
+```
+price_rule:
+  id: unique_key
+  product_id: unique_key(table: product)
+  type: "price" | "discount" | "coupon"
+```
+
+For each `price_rule` there is a function which, given a `ShoppingCart`, will calculate product price, or discount. This function can be saved in a database, or in file storage like S3:
+
+```
+# File name format "price_rule_{price_rule.id}.py"
+
+# price_rule_001.py
+def price(cart: ShoppingCart) -> Price
+
+# price_rule_002.py
+def discount(cart: ShoppingCart) -> Optional[Price]
+
+# price_rule_003.py
+def coupon(cart: ShoppingCart) -> Optional[Price]
+```
+
+The class `ShoppingCart` can then fetch the price rules for each selected product, and run the defined functions, receiving a list of prices, and knowing the type of the rule  (`"price"`, `"discount"`, `"coupon"`, e.t.c). This resulting data can be used to render UI copy/text, and inform the user on prices, and applied discounts.
+
+Some rules can return an `Optional` type, where the rule might not be applied, e.g: expired coupons, or a product quantity not enough for the discount, e.t.c.
+
+## Further Research
+
+> TODO
