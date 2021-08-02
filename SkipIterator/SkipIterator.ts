@@ -19,7 +19,7 @@ export class SkipIterator {
    */
   private skipQueue: number[] = []
   /**
-   * @param iterator Iterator with values to be looped by next()
+   * @param iterator Values to be looped by next()
    */
   constructor(private iterator: number[]) {}
   /**
