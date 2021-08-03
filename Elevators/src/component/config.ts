@@ -20,9 +20,9 @@ const floorCount = 6
 const floors = range(floorCount - 1, -1)
 
 // TODO: Insert through context
-export const Cfg = <const>{
+export const Cfg = {
   border,
   floorHeight,
   floorCount,
   floors,
-}
+} as const
