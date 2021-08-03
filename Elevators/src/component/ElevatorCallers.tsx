@@ -9,12 +9,14 @@ const ElevatorCallerCell = styled(Cell)`
   border-left: ${Cfg.border};
 `
 
-export const ElevatorCallers: FC = () => (
-  <>
-    {Cfg.floors.map((floor) => (
-      <ElevatorCallerCell key={floor}>
-        <Button shape="circle">{floor}</Button>
-      </ElevatorCallerCell>
-    ))}
-  </>
-)
+export function ElevatorCallers () {
+  return (
+    <>
+      {Cfg.floors.map((floor) => (
+        <ElevatorCallerCell key={floor}>
+          <Button shape="circle">{floor}</Button>
+        </ElevatorCallerCell>
+      ))}
+    </>
+  )
+}

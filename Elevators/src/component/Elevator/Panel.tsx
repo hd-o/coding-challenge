@@ -13,12 +13,14 @@ const ElevatorPanelCell = styled(Cell)`
 /**
  * Internal elevator buttons
  */
-export const ElevatorPanel = () => (
-  <ElevatorPanelCell>
-    {Cfg.floors.map((floor) => (
-      <Button shape="circle" key={floor}>
-        {floor}
-      </Button>
-    ))}
-  </ElevatorPanelCell>
-)
+export function ElevatorPanel () {
+  return (
+    <ElevatorPanelCell>
+      {Cfg.floors.map((floor) => (
+        <Button shape="circle" key={floor}>
+          {floor}
+        </Button>
+      ))}
+    </ElevatorPanelCell>
+  )
+}
