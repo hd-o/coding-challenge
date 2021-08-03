@@ -1,5 +1,6 @@
 __pycache__
 .cache
+.parcel-cache
 .vscode
 dist
 Elevators/package-lock.json
