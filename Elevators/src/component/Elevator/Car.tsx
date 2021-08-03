@@ -39,7 +39,7 @@ const ElevatorInterior = styled.div`
   z-index: 0;
 `
 // TODO: Refactor config
-export const ElevatorCar = () => {
+export function ElevatorCar () {
   const openDoors = false
   return (
     <CarContainer top={200}>

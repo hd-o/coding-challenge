@@ -4,7 +4,6 @@ import { range } from 'lodash'
  * UI base border style
  */
 const border = '1px solid #ccc'
-
 /**
  * Height, in pixels, of each floor
  */
@@ -19,7 +18,7 @@ const floorCount = 6
  */
 const floors = range(floorCount - 1, -1)
 
-// TODO: Insert through context
+// TODO: Use context
 export const Cfg = {
   border,
   floorHeight,

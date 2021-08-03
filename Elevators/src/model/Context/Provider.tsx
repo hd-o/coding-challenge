@@ -1,15 +1,17 @@
-import { FC } from 'react'
+import { PropsWithChildren } from 'react'
 import { ReactContext, defaultValue } from './React'
 
-interface AppContextProps {
+type AppContextProps = PropsWithChildren<{
   value?: typeof defaultValue
-}
+}>
 
 /**
  * Dependency injection through React tree
  */
-export const ContextProvider: FC<AppContextProps> = (props) => (
-  <ReactContext.Provider value={props.value ?? defaultValue}>
-    {props.children}
-  </ReactContext.Provider>
-)
+export function ContextProvider (props: AppContextProps) {
+  return (
+    <ReactContext.Provider value={props.value ?? defaultValue}>
+      {props.children}
+    </ReactContext.Provider>
+  )
+}

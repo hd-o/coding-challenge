@@ -10,11 +10,13 @@ const ElevatorContainer = styled(Cell)`
   height: ${Cfg.floorCount * Cfg.floorHeight}px;
 `
 
-export const Elevator: FC = () => (
-  <>
-    <ElevatorContainer>
-      <ElevatorCar />
-    </ElevatorContainer>
-    <ElevatorPanel />
-  </>
-)
+export function Elevator () {
+  return (
+    <>
+      <ElevatorContainer>
+        <ElevatorCar />
+      </ElevatorContainer>
+      <ElevatorPanel />
+    </>
+  )
+}

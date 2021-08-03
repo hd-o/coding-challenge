@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css'
 import { Row, Col } from 'antd'
 import styled from 'styled-components'
-import { FC, useContext } from 'react'
+import { PropsWithChildren, useContext } from 'react'
 import { Cfg } from './config'
 import { Elevator } from './Elevator'
 import { ElevatorCallers } from './ElevatorCallers'
@@ -21,7 +21,7 @@ const ContainerRow = styled(Row)`
   border-right: ${Cfg.border};
 `
 
-const Column: FC = (props) => {
+function Column (props: PropsWithChildren<{}>) {
   return <Col span={6}>{props.children}</Col>
 }
 
