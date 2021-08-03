@@ -56,7 +56,7 @@ export class ElevatorController {
     /**
      * Elevators available for this controller
      */
-    private elevators: Elevator[],
+    public elevators: Elevator[],
   ) {}
   /**
    * Requests nearest Elevator to given floor
