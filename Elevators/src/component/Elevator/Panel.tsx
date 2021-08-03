@@ -10,7 +10,9 @@ const ElevatorPanelCell = styled(Cell)`
   padding: 0 30px 2px;
 `
 
-/** Internal elevator buttons */
+/**
+ * Internal elevator buttons
+ */
 export const ElevatorPanel = () => (
   <ElevatorPanelCell>
     {Cfg.floors.map((floor) => (
