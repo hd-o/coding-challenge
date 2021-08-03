@@ -5,7 +5,7 @@ import { FC, useContext } from 'react'
 import { Cfg } from './config'
 import { Elevator } from './Elevator'
 import { ElevatorCallers } from './ElevatorCallers'
-import { UiContext } from '../model/Context/react'
+import { ReactContext } from '../model/Context/React'
 
 const AppContainer = styled.div`
   padding: 20px;
@@ -26,7 +26,7 @@ const Column: FC = (props) => {
 }
 
 export function App() {
-  const { elevatorService } = useContext(UiContext)
+  const { elevatorService } = useContext(ReactContext)
   return (
     <AppContainer>
       <ContainerRow>
