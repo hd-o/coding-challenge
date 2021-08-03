@@ -1,4 +1,3 @@
-import './debug'
 import { render } from 'react-dom'
 import { App } from './component/App'
 import { ContextProvider } from './model/Context/Provider'
