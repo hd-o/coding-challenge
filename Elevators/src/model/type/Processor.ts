@@ -1,22 +1,23 @@
 /**
- * @file Start at {@link Processor}
+ * @file Tip: Start at {@link Processor}
  */
 import { boundMethod } from 'autobind-decorator'
 import { cloneDeep } from 'lodash'
 import { Resolvable } from './Resolvable'
 
 /**
- * @see LifecycleHook
+ * @see {@link LifecycleHooks}
  */
 type HookFunction<State> = (s: State) => HookFunctionReturn
 
 /**
- * @see HookFunction
+ * @see {@link HookFunction}
  */
 type HookFunctionReturn = Promise<unknown> | unknown
 
 /**
- * Functions that run during process execution
+ * Functions running during process execution.
+ * @see {@link Processor.runLifecycleHooks}
  */
 interface LifecycleHooks<State> {
   /**
