@@ -2,4 +2,5 @@ __pycache__
 .cache
 .vscode
 dist
+Elevators/package-lock.json
 node_modules

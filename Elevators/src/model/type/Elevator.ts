@@ -1,7 +1,5 @@
 import { uniqueId } from 'lodash'
-import { makeAutoObservable } from 'mobx'
-import { Inject } from 'typedi'
-import { ModelContext } from '../Context/model'
+import { ModelContext } from '../Context'
 import { Floor } from './Floor'
 import { Processor } from './Processor'
 import { Resolvable } from './Resolvable'
@@ -105,7 +103,9 @@ export class Elevator {
    * First item, index 0, is the next floor in queue
    */
   private queue: Floor[] = []
-  /** */
+  /**
+   * Manage processing queued floor requests
+   */
   private queueProcess = new Processor({
     process: async () => {
       const floor = this.queue[0]
@@ -135,10 +135,10 @@ export class Elevator {
    */
   private state = MoveState.Idle
   /**
-    Which floor the elevator is at.
-    Result depends on current MoveState.
-    The elevator can be positioned at a floor which
-    it does not service, this will then return undefined
+   * Which floor the elevator is at.
+   * Result depends on current MoveState.
+   * The elevator can be positioned at a floor which
+   * it does not service, this will then return undefined
   */
   private get currentFloor() {
     return this.floors.find((floor) => {
@@ -213,10 +213,8 @@ export class Elevator {
    */
   constructor(
     private floors: Floor[],
-    @Inject() private ctx: ModelContext,
-  ) {
-    makeAutoObservable(this)
-  }
+    private ctx: ModelContext,
+  ) { }
   /**
    * Used by external code.
    * Example in UI rendering loops
