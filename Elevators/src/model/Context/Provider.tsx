@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { UiContext, defaultValue } from './react'
+import { ReactContext, defaultValue } from './React'
 
 interface AppContextProps {
   value?: typeof defaultValue
@@ -9,7 +9,7 @@ interface AppContextProps {
  * Dependency injection through React tree
  */
 export const ContextProvider: FC<AppContextProps> = (props) => (
-  <UiContext.Provider value={props.value ?? defaultValue}>
+  <ReactContext.Provider value={props.value ?? defaultValue}>
     {props.children}
-  </UiContext.Provider>
+  </ReactContext.Provider>
 )

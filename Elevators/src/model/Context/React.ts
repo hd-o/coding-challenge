@@ -25,4 +25,4 @@ export const defaultValue = {
  * Context used by React UI tree
  * @see {@link ModelContext}
  */
-export const UiContext = createContext(defaultValue)
+export const ReactContext = createContext(defaultValue)
