@@ -1,5 +1,4 @@
-import { Inject } from 'typedi'
-import { ModelContext } from '../Context/model'
+import { ModelContext } from '../Context'
 
 /**
  * Represents a building's floor
@@ -7,7 +6,7 @@ import { ModelContext } from '../Context/model'
 export class Floor {
   constructor(
     public number: number,
-    @Inject() private ctx: ModelContext,
+    private ctx: ModelContext,
   ) {
     this.id = String(number)
   }

@@ -2,6 +2,17 @@ import { boundMethod } from 'autobind-decorator'
 import { Elevator } from '../Elevator'
 import { Floor } from '../Floor'
 
+/**
+ * Features:
+ * - Decides on nearest elevator to call on request
+ * - Manages "callback queue" when elevator is requested
+ * @example
+ * // Instantiate controller with given Elevators
+ * const controller = new ElevatorController({ elevators })
+ * // Request an elevator for given floor
+ * await controller.requestElevator(floor)
+ * console.log(`Elevator arrived at floor ${flor.id}`)
+ */
 export class ElevatorController {
   /**
    * Track if floor is awaiting an elevator
@@ -39,16 +50,7 @@ export class ElevatorController {
     return nearestElevator.goTo(floor)
   }
   /**
-   * Features:
-   * - Decides on nearest elevator to call on request
-   * - Manages "callback queue" when elevator is requested
    * @param elevators Elevators controlled by this controller
-   * @example
-   * // Instantiate controller with given Elevators
-   * const controller = new ElevatorController({ elevators })
-   * // Request an elevator for given floor
-   * await controller.requestElevator(floor)
-   * console.log(`Elevator arrived at floor ${flor.id}`)
    */
   constructor(
     /**
