@@ -6,8 +6,8 @@ import { Resolvable } from './Resolvable'
 import { timer } from './timer'
 
 /**
- * Identifies if, or to which direction,
- * an elevator is moving. 
+ * If, or to which direction, thre is movement.
+ * @see {@link Elevator.moveState} 
  */
 enum MoveState {
   /**
@@ -38,7 +38,8 @@ enum DoorState {
 // TODO: class Doors {}
 
 /**
- * Class controlling an Elevator unit
+ * Class controlling an Elevator unit.
+ * Tip: Start with {@link Elevator.goTo}
  */
 export class Elevator {
   /**
@@ -87,7 +88,7 @@ export class Elevator {
     // A setInterval timer enables pausing the movement
     initialState: { interval: -1 },
     before: () => this.doorCloseProcessor.run(),
-    onPause: (state) => clearInterval(state.interval),
+    always: (state) => clearInterval(state.interval),
     process: (state) => new Promise<void>(resolve => {
       const move = () => {
         if (
