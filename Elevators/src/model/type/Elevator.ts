@@ -5,6 +5,10 @@ import { Processor } from './Processor'
 import { Resolvable } from './Resolvable'
 import { timer } from './timer'
 
+/**
+ * Identifies if, or to which direction,
+ * an elevator is moving. 
+ */
 enum MoveState {
   /**
    * Is not moving, and at a serviced Floor.
@@ -21,6 +25,10 @@ enum MoveState {
   MovingUp,
 }
 
+/**
+ * Identifies elevator door state.
+ * @see {@link Elevator.doorCloseProcessor}
+*/
 enum DoorState {
   Closed,
   Closing,
@@ -55,19 +63,19 @@ export class Elevator {
    */
   private doorCloseProcessor = new Processor<undefined>({
     before: () => {
-      this.doors = DoorState.Closing
+      this.doorState = DoorState.Closing
       // Doors should stay open for a short period
       // so passangers can block its close if needed
       return timer(3000)
     },
-    after: () => (this.doors = DoorState.Closed),
+    after: () => (this.doorState = DoorState.Closed),
     process: () => timer(Elevator.CLOSE_DURATION),
     onPause: () => this.openDoors(),
   })
   /**
-   * 
+   * @see {@link DoorState}
    */
-  private doors = DoorState.Closed
+  public doorState = DoorState.Closed
   /**
    * Where elevator is currently moving to
    */
@@ -89,12 +97,13 @@ export class Elevator {
         ) {
           return resolve()
         }
-        switch(this.state) {
+        switch(this.moveState) {
           case MoveState.MovingUp: return ++this._position
           case MoveState.MovingDown: return --this._position
           default: return resolve()
         }
       }
+      // TODO: Add easing for arrival
       state.interval = window.setInterval(move, 1)
     })
   })
@@ -114,14 +123,14 @@ export class Elevator {
       // Only serviced floors will be in queue, and
       // moveProcess only ends on serviced floor arrival
       const currentFloor = this.currentFloor as Floor
-      this.state = floor.number > currentFloor.number
+      this.moveState = floor.number > currentFloor.number
         ? MoveState.MovingUp
         : MoveState.MovingDown
       return this.moveProcess.run()
     },
     after: () => {
       this.queue.shift()
-      this.state = MoveState.Idle
+      this.moveState = MoveState.Idle
       // Same as moveProcess, a queue process
       // only ends on serviced floor arrival
       this.arrivedAt(this.currentFloor as Floor)
@@ -133,7 +142,7 @@ export class Elevator {
    * Elevator is Idle only when not moving
    * and positioned at a serviced floor.
    */
-  private state = MoveState.Idle
+  private moveState = MoveState.Idle
   /**
    * Which floor the elevator is at.
    * Result depends on current MoveState.
@@ -142,7 +151,7 @@ export class Elevator {
   */
   private get currentFloor() {
     return this.floors.find((floor) => {
-      switch (this.state) {
+      switch (this.moveState) {
         case MoveState.Idle:
           return this.position === floor.position
         case MoveState.MovingDown:
@@ -178,7 +187,7 @@ export class Elevator {
    * floor's space (position, topPosition)
    */
   private isPast(floor: Floor) {
-    switch (this.state) {
+    switch (this.moveState) {
       case MoveState.MovingDown:
         return this.position < floor.topPosition
       case MoveState.MovingUp:
@@ -201,8 +210,8 @@ export class Elevator {
    * Only open doors when elevator is idle
    */
   private openDoors() {
-    if (this.state === MoveState.Idle || this.moveProcess.isPaused) {
-      this.doors = DoorState.Open
+    if (this.moveState === MoveState.Idle || this.moveProcess.isPaused) {
+      this.doorState = DoorState.Open
       // Simulate doors opening duration
       // TODO: Refactor this to Doors class
       return timer(Elevator.CLOSE_DURATION)
@@ -237,9 +246,12 @@ export class Elevator {
    * Elevator's distance to a given floor =
    * Distance between stops +
    * Distance from last stop to floor
+   * @returns
+   * False if floor is not serviced,
+   * or distance in height units
    */
-  public distanceTo(floor: Floor) {
-    // TODO: Update: Use reduce
+  public distanceTo(floor: Floor): false | number {
+    if (!this.floors.includes(floor)) return false
     return 0
   }
   /**
@@ -254,22 +266,40 @@ export class Elevator {
     // If queue is empty, no need to find insert position
     if (!this.queue.length) this.queue.push(floor)
     // Otherwise, find optimal position to queue floor.
-    if (this.isPast(floor)) {
+    else if (this.isPast(floor)) {
       // If elevator is past floor, find best position to
       // queue the floor based on elevators move direction
-      const positionIndex = this.queue.findIndex(qFloor =>
-        this.state === MoveState.MovingUp 
-          ? qFloor < floor 
-          : qFloor > floor
+      const positionIndex = this.queue.findIndex(queuedFloor =>
+        this.moveState === MoveState.MovingUp
+          ? queuedFloor < floor 
+          : queuedFloor > floor
       )
-      // The floor should be queued last
+      // Floor should be queued last
       if (positionIndex == -1) this.queue.push(floor)
-      // The floor should be placed before positionIndex
+      // Floor should be placed before positionIndex
       else this.queue.splice(positionIndex, 0, floor)
     } else {
-      // Elevator has not passed floor, and can go to it next
-      this.moveToFloor = floor
-      this.queue.unshift(floor)
+      // If elevator is not past floor
+      // Check if floor can be next in queue
+      const canGoToNext = this.moveState === MoveState.MovingUp
+        ? this.queue[0].number > floor.number
+        : this.queue[0].number < floor.number
+      if (canGoToNext) {
+        // Jump the queue
+        this.moveToFloor = floor
+        this.queue.unshift(floor)
+      } else {
+        // Otherwise find floor's next queue index
+        const positionIndex = this.queue.findIndex(queuedFloor =>
+          this.moveState === MoveState.MovingUp
+            ? queuedFloor > floor 
+            : queuedFloor < floor
+        )
+        // Floor should be queued last
+        if (positionIndex == -1) this.queue.push(floor)
+        // Floor should be placed before positionIndex
+        else this.queue.splice(positionIndex, 0, floor)
+      }
     }
     // Assure queue process is running
     this.queueProcess.run()
