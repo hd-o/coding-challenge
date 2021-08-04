@@ -26,8 +26,7 @@ interface LifecycleHooks<State> {
    */
   after?: HookFunction<State>
   /**
-   * After process pause, and end.
-   * Runs before onPause, and before 'after'
+   * Runs before onPause, and before `after`
    */
   always?: HookFunction<State>
   /**
