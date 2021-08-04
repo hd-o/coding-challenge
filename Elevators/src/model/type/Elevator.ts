@@ -252,6 +252,7 @@ export class Elevator {
    */
   public distanceTo(floor: Floor): false | number {
     if (!this.floors.includes(floor)) return false
+    // TODO
     return 0
   }
   /**
