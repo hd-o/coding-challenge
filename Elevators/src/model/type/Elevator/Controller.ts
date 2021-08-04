@@ -47,7 +47,11 @@ export class ElevatorController {
         nearestDistance = distance
       }
     }
-    return nearestElevator.goTo(floor)
+    return nearestDistance === false
+      // If no elevator services the given floor
+      ? Promise.resolve(false)
+      // Otherwise call nearest elevator
+      : nearestElevator.goTo(floor)
   }
   /**
    * @param elevators Elevators controlled by this controller
@@ -63,7 +67,6 @@ export class ElevatorController {
    */
   @boundMethod
   public async requestElevator(floor: Floor) {
-    // #RustMacros
     const currentRequest = this.requests.get(floor.id)
     if (currentRequest) return currentRequest
     // Request elevator, and store promise
