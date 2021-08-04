@@ -49,7 +49,7 @@ export class ElevatorController {
     }
     return nearestDistance === false
       // If no elevator services the given floor
-      ? Promise.resolve(false)
+      ? false
       // Otherwise call nearest elevator
       : nearestElevator.goTo(floor)
   }
@@ -71,6 +71,7 @@ export class ElevatorController {
     if (currentRequest) return currentRequest
     // Request elevator, and store promise
     const request = this.callNearestElevator(floor)
+    if (request === false) return false
     this.requests.set(floor.id, request)
     // Remove floor from queue when elevator arrives
     request.then(() => this.requests.delete(floor.id))
