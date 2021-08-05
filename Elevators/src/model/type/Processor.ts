@@ -59,6 +59,7 @@ interface Config<State> extends LifecycleHooks<State> {
 
 /**
  * Process execution states
+ * TODO: Research using bluebird for internals
  */
 enum ProcessState {
   /**

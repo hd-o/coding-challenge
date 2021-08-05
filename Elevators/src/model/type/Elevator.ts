@@ -1,4 +1,4 @@
-import { uniqueId } from 'lodash'
+import { findIndex, uniqueId } from 'lodash'
 import { ModelContext } from '../Context'
 import { Floor } from './Floor'
 import { Processor } from './Processor'
@@ -245,16 +245,57 @@ export class Elevator {
   }
   /**
    * Elevator's distance to a given floor =
-   * Distance between stops +
-   * Distance from last stop to floor
+   * Distance between stops until floor +
+   * Distance from last stop to floor. Or
+   * If floor is next, distance from elevator
    * @returns
    * False if floor is not serviced,
    * or distance in height units
    */
   public distanceTo(floor: Floor): false | number {
-    if (!this.floors.includes(floor)) return false
-    // TODO
-    return 0
+    if (!this.floors.includes(floor)) return false    
+    // If queue is empty, floor can be next
+    if (!this.queue.length) {
+      // Return distance from elevator to floor
+      return Math.abs(this._position - floor.position)
+    }
+    // Find where floor would be in the current queue
+    let positionIndex = 0
+    if (this.isPast(floor)) {
+      positionIndex = this.queue.findIndex(queuedFloor =>
+        this.moveState === MoveState.MovingUp
+          ? queuedFloor < floor 
+          : queuedFloor > floor
+      )
+    } else {
+      const canGoToNext = this.moveState === MoveState.MovingUp
+        ? this.queue[0].number > floor.number
+        : this.queue[0].number < floor.number
+      if (canGoToNext) {
+        // Return distance from elevator to floor
+        return Math.abs(this._position - floor.position)
+      } else {
+        // Otherwise find floor's next queue index
+        positionIndex = this.queue.findIndex(queuedFloor =>
+          this.moveState === MoveState.MovingUp
+            ? queuedFloor > floor 
+            : queuedFloor < floor
+        )
+      }
+    }
+    if (positionIndex === -1) {
+      positionIndex = this.queue.length
+    }
+    // Calculate distance between queued floors
+    let distance = Math.abs(this.position - this.queue[0].position)
+    for (let i = 0; i < positionIndex; i++) {
+      const queuedFloor = this.queue[i]
+      const nextQueuedFloor = this.queue[i + 1]
+      distance += !nextQueuedFloor
+        ? Math.abs(queuedFloor.position - floor.position)
+        : Math.abs(queuedFloor.position - nextQueuedFloor.position)
+    }
+    return distance
   }
   /**
    * Efficiently positions floor in queue,
@@ -298,7 +339,7 @@ export class Elevator {
             : queuedFloor < floor
         )
         // Floor should be queued last
-        if (positionIndex == -1) this.queue.push(floor)
+        if (positionIndex === -1) this.queue.push(floor)
         // Floor should be placed before positionIndex
         else this.queue.splice(positionIndex, 0, floor)
       }
