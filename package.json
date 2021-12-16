@@ -1,0 +1,24 @@
+{
+  "name": "coding-challenge",
+  "version": "1.0.0",
+  "description": "My coding challenge solutions, and projects where I explore different technologies/ideas. These solutions were implemented with the knowledge I had at that moment. Some solutions have a _Further Research_ section in their README where I share findings from research done after implementing the solution.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hd-o/coding-challenge.git"
+  },
+  "author": "Hadrian de Oliveira (hd-o)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hd-o/coding-challenge/issues"
+  },
+  "homepage": "https://github.com/hd-o/coding-challenge#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "husky": "^7.0.4"
+  }
+}
