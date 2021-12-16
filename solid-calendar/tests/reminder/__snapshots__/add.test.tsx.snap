@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reminder editor adds reminder on save: editor-reminder-saved 1`] = `"TestWed Dec 01 2021 01:00:00 GMT-0300 (Brasilia Standard Time)Barcelona • 🌦️ Showers 23°C / 23°C"`;
+
+exports[`reminder editor closes, and clears data on cancel: editor-cancel-reopen 1`] = `
+Object {
+  "date": "2021-12-01",
+  "location": "",
+  "title": "",
+  "weather": "",
+}
+`;
+
+exports[`reminder editor closes, and clears data on cancel: editor-cancel-title-input 1`] = `
+Object {
+  "date": "2021-12-01",
+  "location": "",
+  "title": "Test",
+  "weather": "",
+}
+`;
+
+exports[`reminder editor location search, and weather: editor-location 1`] = `
+Object {
+  "date": "2021-12-01",
+  "location": "Barcelona",
+  "title": "",
+  "weather": "Barcelona • 🌦️ Showers 23°C / 23°C",
+}
+`;
+
+exports[`reminder editor location search, and weather: editor-location-weather 1`] = `"Barcelona • 🌦️ Showers 23°C / 23°C"`;
+
+exports[`reminder editor reminder editor is correctly filled when opened: editor-open-data 1`] = `
+Object {
+  "date": "2021-12-01",
+  "location": "",
+  "title": "",
+  "weather": "",
+}
+`;
+
+exports[`reminder editor toggles location weather unit: editor-location-weather-unit 1`] = `"Barcelona • 🌦️ Showers 23°C / 23°C"`;
+
+exports[`reminder editor toggles location weather unit: editor-location-weather-unit-change 1`] = `"Barcelona • 🌦️ Showers 23°C / 23°C"`;
+
+exports[`reminder list "add reminder" button added reminder is shown on list: list-add 1`] = `"TestWed Dec 01 2021 01:00:00 GMT-0300 (Brasilia Standard Time)Barcelona • 🌦️ Showers 23°C / 23°C"`;
+
+exports[`reminder list "add reminder" button added reminder with other date is not shown on list: list-add-other-date 1`] = `"TestWed Dec 01 2021 01:00:00 GMT-0300 (Brasilia Standard Time)Barcelona • 🌦️ Showers 23°C / 23°C"`;
