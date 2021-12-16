@@ -1,6 +1,9 @@
 {
   "name": "solid-calendar",
-  "private": true,
+  "description": "Research on coding a SOLID and functional front-end architecture with React",
+  "keywords": ["solid", "functional", "react"],
+  "license": "MIT",
+  "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,13 +22,11 @@
     "intro.js": "^4.3.0",
     "jotai": "^1.4.6",
     "lodash": "^4.17.21",
-    "next": "12.0.4",
+    "next": "latest",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-intl": "^5.23.0",
-    "react-query": "^3.34.0"
-  },
-  "devDependencies": {
+    "react-query": "^3.34.0",
     "@jest/types": "^27.4.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
