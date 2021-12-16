@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reminder list "delete reminder" button: counter-after-delete 1`] = `
+<div
+  class="MuiListItemButton-root MuiListItemButton-dense MuiListItemButton-gutters MuiButtonBase-root css-tw9svq-MuiButtonBase-root-MuiListItemButton-root"
+  data-testid="calendar-cell-reminder-count"
+  role="button"
+  tabindex="0"
+  title="Open reminder list"
+>
+  <div
+    class="MuiListItemText-root MuiListItemText-dense css-tlelie-MuiListItemText-root"
+  >
+    <span
+      class="MuiTypography-root MuiTypography-body2 MuiListItemText-primary css-et1ao3-MuiTypography-root"
+    >
+      ⚪ 
+      1 Reminder
+    </span>
+  </div>
+  <span
+    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+  />
+</div>
+`;
+
+exports[`reminder list "delete reminder" button: counter-before-delete 1`] = `
+<div
+  class="MuiListItemButton-root MuiListItemButton-dense MuiListItemButton-gutters MuiButtonBase-root css-tw9svq-MuiButtonBase-root-MuiListItemButton-root"
+  data-testid="calendar-cell-reminder-count"
+  role="button"
+  tabindex="0"
+  title="Open reminder list"
+>
+  <div
+    class="MuiListItemText-root MuiListItemText-dense css-tlelie-MuiListItemText-root"
+  >
+    <span
+      class="MuiTypography-root MuiTypography-body2 MuiListItemText-primary css-et1ao3-MuiTypography-root"
+    >
+      ⚪ 
+      2 Reminders
+    </span>
+  </div>
+  <span
+    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+  />
+</div>
+`;
+
+exports[`reminder list "delete reminder" button: list-after-delete 1`] = `
+Array [
+  <div
+    class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1druvyw-MuiButtonBase-root-MuiListItemButton-root"
+    data-testid="reminder-list-item"
+    role="button"
+    tabindex="0"
+  >
+    <div
+      class="MuiBox-root css-0"
+    >
+      <h6
+        class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+      >
+        Test
+      </h6>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
+      >
+        Wed Dec 01 2021 01:00:00 GMT-0300 (Brasilia Standard Time)
+      </p>
+      <div
+        class="MuiBox-root css-0"
+        data-testid="reminder-list-item-weather"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-pml9gb-MuiTypography-root"
+          title="Max: 23°C, Min: 23°C. Click to toggle between °C and °F"
+        >
+          Barcelona
+           • 
+          🌦️
+           
+          Showers
+           
+          23°C
+           / 
+          23°C
+        </p>
+      </div>
+    </div>
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </div>,
+]
+`;
+
+exports[`reminder list "delete reminder" button: list-before-delete 1`] = `
+Array [
+  <div
+    class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1druvyw-MuiButtonBase-root-MuiListItemButton-root"
+    data-testid="reminder-list-item"
+    role="button"
+    tabindex="0"
+  >
+    <div
+      class="MuiBox-root css-0"
+    >
+      <h6
+        class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+      >
+        Test
+      </h6>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
+      >
+        Wed Dec 01 2021 01:00:00 GMT-0300 (Brasilia Standard Time)
+      </p>
+      <div
+        class="MuiBox-root css-0"
+        data-testid="reminder-list-item-weather"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-pml9gb-MuiTypography-root"
+          title="Max: 23°C, Min: 23°C. Click to toggle between °C and °F"
+        >
+          Barcelona
+           • 
+          🌦️
+           
+          Showers
+           
+          23°C
+           / 
+          23°C
+        </p>
+      </div>
+    </div>
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </div>,
+  <div
+    class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1druvyw-MuiButtonBase-root-MuiListItemButton-root"
+    data-testid="reminder-list-item"
+    role="button"
+    tabindex="0"
+  >
+    <div
+      class="MuiBox-root css-0"
+    >
+      <h6
+        class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+      >
+        Test
+      </h6>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
+      >
+        Wed Dec 01 2021 01:00:00 GMT-0300 (Brasilia Standard Time)
+      </p>
+      <div
+        class="MuiBox-root css-0"
+        data-testid="reminder-list-item-weather"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-pml9gb-MuiTypography-root"
+          title="Max: 23°C, Min: 23°C. Click to toggle between °C and °F"
+        >
+          Barcelona
+           • 
+          🌦️
+           
+          Showers
+           
+          23°C
+           / 
+          23°C
+        </p>
+      </div>
+    </div>
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </div>,
+]
+`;

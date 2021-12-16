@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`changing reminder date to other day: counter-after-date-edit 1`] = `"⚪ 1 Reminder"`;
+
+exports[`changing reminder date to other day: list-after-date-edit 1`] = `
+Array [
+  <div
+    class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1druvyw-MuiButtonBase-root-MuiListItemButton-root"
+    data-testid="reminder-list-item"
+    role="button"
+    tabindex="0"
+  >
+    <div
+      class="MuiBox-root css-0"
+    >
+      <h6
+        class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+      >
+        Test
+      </h6>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
+      >
+        Wed Dec 01 2021 01:00:00 GMT-0300 (Brasilia Standard Time)
+      </p>
+      <div
+        class="MuiBox-root css-0"
+        data-testid="reminder-list-item-weather"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-pml9gb-MuiTypography-root"
+          title="Max: 23°C, Min: 23°C. Click to toggle between °C and °F"
+        >
+          Barcelona
+           • 
+          🌦️
+           
+          Showers
+           
+          23°C
+           / 
+          23°C
+        </p>
+      </div>
+    </div>
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </div>,
+]
+`;
+
+exports[`reminder list item click opens filled reminder editor: list-item-open 1`] = `
+Object {
+  "date": "2021-12-01",
+  "location": "",
+  "title": "Test",
+  "weather": "Barcelona • 🌦️ Showers 23°C / 23°C",
+}
+`;
+
+exports[`updating reminder location: list-after-location-edit 1`] = `
+Array [
+  <div
+    class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1druvyw-MuiButtonBase-root-MuiListItemButton-root"
+    data-testid="reminder-list-item"
+    role="button"
+    tabindex="0"
+  >
+    <div
+      class="MuiBox-root css-0"
+    >
+      <h6
+        class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+      >
+        Test
+      </h6>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
+      >
+        Wed Dec 01 2021 01:00:00 GMT-0300 (Brasilia Standard Time)
+      </p>
+      <div
+        class="MuiBox-root css-0"
+        data-testid="reminder-list-item-weather"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-pml9gb-MuiTypography-root"
+          title="Max: 13°C, Min: 13°C. Click to toggle between °C and °F"
+        >
+          London
+           • 
+          ☁️
+           
+          Heavy Cloud
+           
+          13°C
+           / 
+          13°C
+        </p>
+      </div>
+    </div>
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </div>,
+  <div
+    class="MuiListItemButton-root MuiListItemButton-gutters MuiButtonBase-root css-1druvyw-MuiButtonBase-root-MuiListItemButton-root"
+    data-testid="reminder-list-item"
+    role="button"
+    tabindex="0"
+  >
+    <div
+      class="MuiBox-root css-0"
+    >
+      <h6
+        class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+      >
+        Test
+      </h6>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
+      >
+        Wed Dec 01 2021 01:00:00 GMT-0300 (Brasilia Standard Time)
+      </p>
+      <div
+        class="MuiBox-root css-0"
+        data-testid="reminder-list-item-weather"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-pml9gb-MuiTypography-root"
+          title="Max: 23°C, Min: 23°C. Click to toggle between °C and °F"
+        >
+          Barcelona
+           • 
+          🌦️
+           
+          Showers
+           
+          23°C
+           / 
+          23°C
+        </p>
+      </div>
+    </div>
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </div>,
+]
+`;
