@@ -36,5 +36,5 @@
     "index.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "tests/setup.ts"  ]
+  ]
 }
