@@ -3,6 +3,9 @@
   "author": "Hadrian de Oliveira (hd-o)",
   "license": "MIT",
   "private": true,
+  "commitlint": {
+    "extends": ["@commitlint/config-conventional"]
+  },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
