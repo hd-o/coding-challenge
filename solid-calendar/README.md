@@ -2,9 +2,13 @@
 
 Research on coding a [SOLID][solid] and [functional][functional] front-end architecture with [React][react]
 
-[🖥️ Live Demo @ ][live_demo]
+[🖥️ Live Demo @ CodeSandbox][live_demo]
 
-![calendar screenshot](./public/images/calendar.png)
+![calendar screenshot](./public/images/calendar-view.png)
+
+![calendar screenshot](./public/images/reminder-editor.png)
+
+![calendar screenshot](./public/images/reminder-list.png)
 
 ## Project Goals
 
@@ -34,4 +38,4 @@ Research on coding a [SOLID][solid] and [functional][functional] front-end archi
 
 [react]: https://reactjs.org/
 
-[live_demo]: #
+[live_demo]: https://4fr7s.sse.codesandbox.io/
