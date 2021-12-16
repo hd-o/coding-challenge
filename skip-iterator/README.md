@@ -26,6 +26,6 @@ class SkipIterator<Value> {
 1. Install [Deno]
 2. Run test file: `deno run SkipIterator.test.ts`
 
-[denoplayground]: https://deno-playground.mahardi.me?id=Zjg2Mzc4MGR
+[denoplayground]: https://deno-playground.mahardi.me/?id=OTY5MGZiMTJ
 
 [Deno]: https://deno.land/#installation
