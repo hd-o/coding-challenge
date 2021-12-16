@@ -4,12 +4,6 @@ Research on coding a [SOLID][solid] and [functional][functional] front-end archi
 
 [🖥️ Live Demo @ CodeSandbox][live_demo]
 
-![calendar screenshot](./public/images/calendar-view.png)
-
-![calendar screenshot](./public/images/reminder-editor.png)
-
-![calendar screenshot](./public/images/reminder-list.png)
-
 ## Project Goals
 
 - Front-end focused
@@ -31,6 +25,15 @@ Research on coding a [SOLID][solid] and [functional][functional] front-end archi
   - Functional components, and state definition
     - Lazy-loadable modules
     - Isolated, and reusable functionality
+
+## Screenshots
+
+![calendar screenshot](./public/images/calendar-view.png)
+
+![calendar screenshot](./public/images/reminder-editor.png)
+
+![calendar screenshot](./public/images/reminder-list.png)
+
 
 [solid]: https://en.wikipedia.org/wiki/SOLID
 
