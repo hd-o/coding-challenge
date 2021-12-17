@@ -1,29 +1,25 @@
 {
-  "name": "react-typescript",
-  "version": "1.0.0",
+  "name": "virtual-elevators",
   "description": "Virtual elevator simulation",
   "license": "MIT",
+  "version": "1.0.0",
   "keywords": [
     "virtual",
     "elevators",
     "typescript",
     "react"
   ],
-  "main": "src/index.tsx",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.16.5",
     "@types/lodash": "^4.14.178",
+    "@types/node": "^17.0.0",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@types/styled-components": "^5.1.18",
@@ -31,7 +27,9 @@
     "@typescript-eslint/parser": "^5.7.0",
     "antd": "^4.17.3",
     "autobind-decorator": "^2.4.0",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "eslint": "^8.4.1",
+    "eslint-config-next": "^12.0.7",
     "eslint-config-standard-with-typescript": "^21.0.1",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jest": "^25.3.0",
@@ -39,10 +37,13 @@
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "inversify": "^6.0.1",
     "lodash": "^4.17.21",
+    "mobx": "^6.3.9",
+    "mobx-react-lite": "^3.2.2",
+    "next": "^12.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "^5.0.0",
     "reflect-metadata": "^0.1.13",
     "styled-components": "^5.3.3",
     "typescript": "^4.5.4"
