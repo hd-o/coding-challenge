@@ -1,10 +1,10 @@
-import { injectable } from 'inversify'
+import { singleton } from 'tsyringe'
 import { Floor } from '~/model/floor'
 import { Settings } from '~/model/settings'
-import { MobX } from '../mobx'
+import { MobX } from '../pkg/mobx'
 import { Elevator } from './'
 
-@injectable()
+@singleton()
 export class ElevatorFactory {
   constructor (
     private readonly _ctx: Settings,

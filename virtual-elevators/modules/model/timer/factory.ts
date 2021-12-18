@@ -1,6 +1,6 @@
-import { injectable } from 'inversify'
+import { singleton } from 'tsyringe'
 
-@injectable()
+@singleton()
 export class TimerFactory {
   create (msDuration: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, msDuration))

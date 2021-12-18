@@ -1,26 +1,39 @@
 import { Button } from 'antd'
-import styled from 'styled-components'
-import { Cfg } from '../../config'
-import { Row } from '../../row'
+import { createContext, useContext } from 'react'
+import { NestedCSSProperties } from 'typestyle/lib/types'
+import { AntdRowCtx } from '~/view/pkg/antd/row'
+import { TypeStyleClassesCtx } from '~/view/pkg/typestyle/classes'
+import { StateCtx } from '~/view/state'
+import { useStyle } from '~/view/util/useStyle'
+import { elevatorRowStyle } from '../row/style'
 
-const ElevatorPanelCell = styled(Row)`
-  border-left: ${Cfg.border};
-  border-bottom: ${Cfg.border};
-  justify-content: space-between;
-  padding: 0 30px 2px;
-`
+const row = (): NestedCSSProperties => ({
+  borderLeftWidth: 1,
+  borderBottomWidth: 1,
+  justifyContent: 'space-between',
+  padding: '0 30px 2px'
+})
 
-/**
- * Internal elevator buttons
- */
-export function ElevatorPanel (): JSX.Element {
+/** Internal elevator buttons */
+function ElevatorPanel (): JSX.Element {
+  const Row = useContext(AntdRowCtx)
+
+  const state = useContext(StateCtx)
+  const classes = useContext(TypeStyleClassesCtx)
+
+  const rowClass = classes(
+    useStyle(elevatorRowStyle, state.settings),
+    useStyle(row))
+
   return (
-    <ElevatorPanelCell>
-      {Cfg.floors.map((floor) => (
-        <Button shape="circle" key={floor}>
-          {floor}
+    <Row className={rowClass}>
+      {state.floors.map((floor) => (
+        <Button shape="circle" key={floor.id}>
+          {floor.number}
         </Button>
       ))}
-    </ElevatorPanelCell>
+    </Row>
   )
 }
+
+export const ElevatorPanelCtx = createContext(ElevatorPanel)

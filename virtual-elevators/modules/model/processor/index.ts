@@ -52,7 +52,7 @@ interface LifecycleHooks<State> {
 /**
   * @see Processor.constructor
   */
-interface Config<State> extends LifecycleHooks<State> {
+export interface Config<State> extends LifecycleHooks<State> {
   /** Initial state value for new process runs */
   initialState?: State
 }
