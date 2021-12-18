@@ -1,8 +1,8 @@
-import { injectable } from 'inversify'
+import { singleton } from 'tsyringe'
 import { Settings } from '~/model/settings'
 import { Floor } from './'
 
-@injectable()
+@singleton()
 export class FloorFactory {
   constructor (private readonly _settings: Settings) {}
 

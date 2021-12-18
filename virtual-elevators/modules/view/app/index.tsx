@@ -1,44 +1,45 @@
 import 'antd/dist/antd.css'
-import { Col, Row } from 'antd'
-import { PropsWithChildren, useContext } from 'react'
-import styled from 'styled-components'
-import { Cfg } from '../config'
-import { Elevator } from '../elevator'
-import { ElevatorCallers } from '../elevator/callers'
-import { StateCtx } from '../state'
+import { createContext, useContext } from 'react'
+import { NestedCSSProperties } from 'typestyle/lib/types'
+import { ElevatorCallersCtx } from '../elevator/callers'
+import { ElevatorHubCtx } from '../elevator/hub'
+import { AntdColCtx } from '../pkg/antd/col'
+import { AntdRowCtx } from '../pkg/antd/row'
+import { useObserver } from '../util/useObserver'
+import { useStyle } from '../util/useStyle'
 
-const AppContainer = styled.div`
-  padding: 20px;
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-  max-width: 650px;
-  min-width: 500px;
-`
+const container = (): NestedCSSProperties => ({
+  $debugName: 'app-container',
+  padding: 20,
+  height: '100%',
+  width: '100%',
+  margin: '0 auto',
+  maxWidth: 650,
+  minWidth: 500
+})
 
-const ContainerRow = styled(Row)`
-  border-top: ${Cfg.border};
-  border-right: ${Cfg.border};
-`
+const row = (): NestedCSSProperties => ({
+  $debugName: 'app-row',
+  borderTopWidth: 1,
+  borderRightWidth: 1
+})
 
-function Column (props: PropsWithChildren<{}>): JSX.Element {
-  return <Col span={6}>{props.children}</Col>
-}
+function App (): JSX.Element {
+  const Col = useContext(AntdColCtx)
+  const ElevatorCallers = useObserver(ElevatorCallersCtx)
+  const ElevatorHub = useObserver(ElevatorHubCtx)
+  const Row = useContext(AntdRowCtx)
 
-export function App (): JSX.Element {
-  const state = useContext(StateCtx)
   return (
-    <AppContainer>
-      <ContainerRow>
-        <Column>
+    <div className={useStyle(container)}>
+      <Row className={useStyle(row)}>
+        <Col span={6}>
           <ElevatorCallers />
-        </Column>
-        {state.elevatorController.elevators.map((elevator) => (
-          <Column key={elevator.id}>
-            <Elevator />
-          </Column>
-        ))}
-      </ContainerRow>
-    </AppContainer>
+        </Col>
+        <ElevatorHub />
+      </Row>
+    </div>
   )
 }
+
+export const AppCtx = createContext(App)

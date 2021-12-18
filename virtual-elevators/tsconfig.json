@@ -31,7 +31,8 @@
     "node_modules"
   ],
   "include": [
-    "**/*.ts",
-    "**/*.tsx"
+    "./index.d.ts",
+    "./**/*.ts",
+    "./**/*.tsx"
   ]
 }

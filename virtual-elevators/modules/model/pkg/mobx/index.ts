@@ -1,7 +1,7 @@
-import { injectable } from 'inversify'
 import { makeAutoObservable } from 'mobx'
+import { singleton } from 'tsyringe'
 
-@injectable()
+@singleton()
 export class MobX {
   makeAutoObservable = makeAutoObservable
 }

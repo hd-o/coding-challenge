@@ -1,6 +1,8 @@
-import { injectable } from 'inversify'
+import { singleton } from 'tsyringe'
 
-@injectable()
+@singleton()
 export class Settings {
-  floorHeight = 100
+  readonly elevatorCount = 3
+  readonly floorHeight = 100
+  readonly floorCount = 6
 }

@@ -1,8 +1,10 @@
 import 'reflect-metadata'
 import { useContext } from 'react'
+import { AppCtx } from '~/view/app'
 import { NextHeadCtx } from '~/view/pkg/next/head'
 
 export default function IndexPage (): JSX.Element {
+  const App = useContext(AppCtx)
   const Head = useContext(NextHeadCtx)
 
   return (
@@ -16,7 +18,7 @@ export default function IndexPage (): JSX.Element {
           Virtual Elevators
         </title>
       </Head>
-      Hello App
+      <App />
     </div>
   )
 }

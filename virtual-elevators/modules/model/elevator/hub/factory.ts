@@ -1,9 +1,9 @@
-import { injectable } from 'inversify'
-import { MobX } from '~/model/mobx'
+import { singleton } from 'tsyringe'
+import { MobX } from '~/model/pkg/mobx'
 import { Elevator } from '../'
 import { ElevatorHub } from './'
 
-@injectable()
+@singleton()
 export class ElevatorHubFactory {
   constructor (private readonly _mobx: MobX) {}
 
