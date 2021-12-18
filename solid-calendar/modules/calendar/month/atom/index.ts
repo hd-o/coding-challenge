@@ -5,10 +5,10 @@ import { NativeDateCtx } from '~/pkg/native/date'
 
 let calendarMonthAtom: WritableAtom<Date, Date>
 
-function useCalendaMonthAtom (): typeof calendarMonthAtom {
+function useCalendarMonthAtom (): typeof calendarMonthAtom {
   const atom = useContext(JotaiAtomCtx)
   const Date = useContext(NativeDateCtx)
   return calendarMonthAtom ?? (calendarMonthAtom = atom(new Date()))
 }
 
-export const CalendarMonthAtomCtx = createContext(useCalendaMonthAtom)
+export const CalendarMonthAtomCtx = createContext(useCalendarMonthAtom)
