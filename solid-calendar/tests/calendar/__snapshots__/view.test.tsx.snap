@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`calendar view (initial rendering) initial render snapshot: calendar-grid-cell-order 1`] = `
+exports[`initial calendar render snapshot: calendar-grid-cell-order 1`] = `
 Object {
   "gridKeys": Array [
     "0-blank",
@@ -43,7 +43,7 @@ Object {
 }
 `;
 
-exports[`calendar view (initial rendering) initial render snapshot: calendar-view 1`] = `
+exports[`initial calendar render snapshot: calendar-view 1`] = `
 <DocumentFragment>
   <div
     class="js-calendar-month-selector css-1gm041l-MuiStack-root"
