@@ -1,7 +1,7 @@
 import { useUpdateAtom } from 'jotai/utils'
 import { createContext, useContext } from 'react'
 import { SelectDateRemindersAtomCtx } from '~/date/atom/reminders'
-import { DateToYearMonthDayCtx } from '~/date/toYearMonthDay'
+import { DateMatchYearMonthDateCtx } from '~/date/matchYearMonthDate'
 import { LodashUniqueIdCtx } from '~/pkg/lodash/uniqueId'
 import { WriterAtomCtx } from '~/util/writerAtom'
 import { Reminder } from '../model'
@@ -17,8 +17,8 @@ interface Props {
 }
 
 function useReminderEditorHandleSave (props: Props): () => void {
-  const dateToYearMonthDay = useContext(DateToYearMonthDayCtx)()
   const handleClose = useContext(ReminderEditorHandleCloseCtx)()
+  const matchYearMonthDate = useContext(DateMatchYearMonthDateCtx)
   const selectDateRemindersAtom = useContext(SelectDateRemindersAtomCtx)()
   const write = useUpdateAtom(useContext(WriterAtomCtx)())
   const uniqueId = useContext(LodashUniqueIdCtx)
@@ -29,7 +29,7 @@ function useReminderEditorHandleSave (props: Props): () => void {
       const dateReminders = get(dateRemindersAtom)
       const reminderId = props.reminderState.id ?? uniqueId()
       // If reminder date changed to different day
-      if (dateToYearMonthDay(props.date) !== dateToYearMonthDay(props.reminderState.date)) {
+      if (!matchYearMonthDate(props.date, props.reminderState.date)) {
         dateReminders.delete(reminderId)
         const nextDateRemindersAtom = selectDateRemindersAtom(props.reminderState.date)
         const nextDateReminders = get(nextDateRemindersAtom)
