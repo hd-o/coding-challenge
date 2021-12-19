@@ -25,7 +25,7 @@ function ReminderListItemWeather (props: Props): JSX.Element {
   const weather = useContext(WeatherLocationDayCtx)(props)
   const toggleUnit = useContext(WeatherToggleUnitCtx)()
   const formatTemperatures = useContext(WeatherFormatTemperaturesCtx)()
-  const weatherEmoji = useContext(WeatherEmojiCtx)
+  const weatherEmoji = useContext(WeatherEmojiCtx)()
 
   if (weather === undefined) return <></>
 
