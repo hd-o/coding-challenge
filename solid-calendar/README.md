@@ -41,4 +41,4 @@ Research on coding a [SOLID][solid] and [functional][functional] front-end archi
 
 [react]: https://reactjs.org/
 
-[live_demo]: https://ynnpi.sse.codesandbox.io/
+[live_demo]: https://jtohp.sse.codesandbox.io/
