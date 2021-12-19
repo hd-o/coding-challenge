@@ -1,11 +1,12 @@
-import { createContext } from 'react'
+import { createContext, useContext } from 'react'
+import { CacheCtx } from './cache'
 
-let fetchJSON: <V> (path: RequestInfo) => Promise<V>
-
-function useFetchJSON (): typeof fetchJSON {
-  return fetchJSON ?? (fetchJSON =
-    async (path) => await fetch(path).then(async r => await r.json())
-  )
+function useFetchJSON (): <V> (path: RequestInfo) => Promise<V> {
+  return useContext(CacheCtx)(
+    'fetchJSON', [],
+    () => function fetchJSON (path) {
+      return fetch(path).then(r => r.json())
+    })
 }
 
 export const FetchJSONCtx = createContext(useFetchJSON)

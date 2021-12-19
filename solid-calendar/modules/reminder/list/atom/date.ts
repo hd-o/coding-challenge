@@ -1,14 +1,14 @@
 import { WritableAtom } from 'jotai'
 import { createContext, useContext } from 'react'
 import { JotaiAtomCtx } from '~/pkg/jotai/atom'
+import { CacheCtx } from '~/util/cache'
 
-type AtomValue = Date | null
+type AtomType = Date | null
 
-let reminderListDateAtom: WritableAtom<AtomValue, AtomValue>
-
-function useReminderListDateAtom (): typeof reminderListDateAtom {
+function useReminderListDateAtom (): WritableAtom<AtomType, AtomType> {
   const atom = useContext(JotaiAtomCtx)
-  return reminderListDateAtom ?? (reminderListDateAtom = atom<AtomValue>(null))
+  return useContext(CacheCtx)(
+    'reminderListDateAtom', [atom], () => atom<AtomType>(null))
 }
 
 export const ReminderListDateAtomCtx = createContext(useReminderListDateAtom)

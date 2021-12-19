@@ -11,12 +11,12 @@ function useWeatherLocationDay (props: Props): WeatherLocationDay | undefined {
   const useQuery = useContext(ReactQueryUseQueryCtx)
   const weatherLocationDay = useContext(WeatherApiLocationDayCtx)()
   const fetchJson = useContext(FetchJSONCtx)()
-  const weatherResults = useContext(WeatherLocationDayMapCtx)
+  const weatherResults = useContext(WeatherLocationDayMapCtx)()
   const weather = weatherResults.get(props)
 
   useQuery(
     ['reminder-location-weather', props.date, props.location],
-    async (): Promise<WeatherLocationDay[]> => await fetchJson(weatherLocationDay(props)),
+    () => fetchJson<WeatherLocationDay[]>(weatherLocationDay(props)),
     {
       enabled: weather === undefined,
       refetchOnMount: false,
@@ -24,8 +24,7 @@ function useWeatherLocationDay (props: Props): WeatherLocationDay | undefined {
       onSuccess (data: WeatherLocationDay[]) {
         weatherResults.set(props, data[0])
       }
-    }
-  )
+    })
 
   return weather
 }

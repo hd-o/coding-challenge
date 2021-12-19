@@ -1,4 +1,6 @@
-import { createContext } from 'react'
+import { createContext, useContext } from 'react'
+import { NativeMapCtx } from '~/pkg/native/map'
+import { CacheCtx } from '~/util/cache'
 import { WeatherLocation, WeatherLocationDay } from '~/weather/api/location/model'
 
 export interface WeatherLocationDatePair {
@@ -6,17 +8,27 @@ export interface WeatherLocationDatePair {
   location: WeatherLocation
 }
 
-const map = new Map<string, WeatherLocationDay>()
+interface CustomMap {
+  get: (props: WeatherLocationDatePair) => WeatherLocationDay | undefined
+  set: (props: WeatherLocationDatePair, locationDay: WeatherLocationDay) => void
+}
 
 function id (props: WeatherLocationDatePair): string {
   return `${props.date.getUTCDate()}${props.location.woeid}`
 }
 
-export const WeatherLocationDayMapCtx = createContext({
-  get (props: WeatherLocationDatePair) {
-    return map.get(id(props))
-  },
-  set (props: WeatherLocationDatePair, locationDay: WeatherLocationDay) {
-    map.set(id(props), locationDay)
-  }
-})
+function useWeatherLocationDayMap (): CustomMap {
+  const Map = useContext(NativeMapCtx)
+  return useContext(CacheCtx)(
+    'weatherLocationDayMap',
+    [Map],
+    (): CustomMap => {
+      const map = new Map<string, WeatherLocationDay>()
+      return {
+        get: (props) => map.get(id(props)),
+        set: (props, locationDay) => map.set(id(props), locationDay)
+      }
+    })
+}
+
+export const WeatherLocationDayMapCtx = createContext(useWeatherLocationDayMap)
