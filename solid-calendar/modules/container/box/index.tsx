@@ -7,7 +7,6 @@ function ContainerBox (props: BoxProps): JSX.Element {
   return <Box
     {...props}
     sx={{
-      maxWidth: 900,
       margin: '0 auto',
       minWidth: 600,
       padding: '20px 30px 0 30px',
