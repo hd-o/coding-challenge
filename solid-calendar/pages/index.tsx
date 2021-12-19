@@ -28,7 +28,7 @@ export default function IndexPage (): JSX.Element {
           { intl.formatMessage({ id: 'page-title' }) }
         </title>
       </Head>
-      <ContainerBox>
+      <ContainerBox sx={{ maxWidth: 'calc(100vh + 50px)' }}>
         <Typography variant='h5' component='h4'>
           📅 { intl.formatMessage({ id: 'calendar' }) }
         </Typography>
