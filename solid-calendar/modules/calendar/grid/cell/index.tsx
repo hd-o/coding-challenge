@@ -38,7 +38,7 @@ function CalendarGridCell (props: Props): JSX.Element {
             : (
                 <CalendarListItemButton
                   data-testid='calendar-cell-reminder-count'
-                  title='Open reminder list'
+                  title={intl.formatMessage({ id: 'open-reminder-list' })}
                   onClick={handleOpenReminders}
                 >
                   <ListItemText primary={

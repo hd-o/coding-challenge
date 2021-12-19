@@ -31,6 +31,7 @@
     "weather-c": "Clear",
     "weather-max-min-title": "Max: {max}, Min: {min}. Click to toggle between °C and °F",
     "error-loading": "Error loading",
-    "no-results": "No results"
+    "no-results": "No results",
+    "open-reminder-list": "Open reminder list"
   }
 }
