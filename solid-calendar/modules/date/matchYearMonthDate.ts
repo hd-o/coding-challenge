@@ -8,4 +8,4 @@ function matchYearMonthDate (a: Date, b: Date): boolean {
   )
 }
 
-export const DateMatchYearMonthDate = createContext(matchYearMonthDate)
+export const DateMatchYearMonthDateCtx = createContext(matchYearMonthDate)
