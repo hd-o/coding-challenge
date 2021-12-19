@@ -2,13 +2,13 @@ import { WritableAtom } from 'jotai'
 import { createContext, useContext } from 'react'
 import { JotaiAtomCtx } from '~/pkg/jotai/atom'
 import { NativeDateCtx } from '~/pkg/native/date'
+import { CacheCtx } from '~/util/cache'
 
-let calendarMonthAtom: WritableAtom<Date, Date>
-
-function useCalendarMonthAtom (): typeof calendarMonthAtom {
-  const atom = useContext(JotaiAtomCtx)
+function useCalendarMonthAtom (): WritableAtom<Date, Date> {
   const Date = useContext(NativeDateCtx)
-  return calendarMonthAtom ?? (calendarMonthAtom = atom(new Date()))
+  const atom = useContext(JotaiAtomCtx)
+  return useContext(CacheCtx)(
+    'calendarMonthAtom', [atom, Date], () => atom(new Date()))
 }
 
 export const CalendarMonthAtomCtx = createContext(useCalendarMonthAtom)

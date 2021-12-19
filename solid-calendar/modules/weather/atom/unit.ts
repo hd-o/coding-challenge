@@ -1,14 +1,14 @@
 import { WritableAtom } from 'jotai'
 import { createContext, useContext } from 'react'
 import { JotaiAtomCtx } from '~/pkg/jotai/atom'
+import { CacheCtx } from '~/util/cache'
 
 type WeatherUnit = '°C' | '°F'
 
-let weatherUnitAtom: WritableAtom<WeatherUnit, WeatherUnit>
-
-function useWeatherUnitAtom (): typeof weatherUnitAtom {
+function useWeatherUnitAtom (): WritableAtom<WeatherUnit, WeatherUnit> {
   const atom = useContext(JotaiAtomCtx)
-  return weatherUnitAtom ?? (weatherUnitAtom = atom<WeatherUnit>('°C'))
+  return useContext(CacheCtx)(
+    'weatherUnitAtom', [atom], () => atom<WeatherUnit>('°C'))
 }
 
 export const WeatherUnitAtomCtx = createContext(useWeatherUnitAtom)

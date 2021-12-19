@@ -1,17 +1,17 @@
-import { atom, WritableAtom } from 'jotai'
-import { createContext } from 'react'
+import { WritableAtom } from 'jotai'
+import { createContext, useContext } from 'react'
+import { JotaiAtomCtx } from '~/pkg/jotai/atom'
+import { CacheCtx } from '~/util/cache'
 
-export interface ReminderEditorState {
+type State = null | {
   date: Date
   reminderId?: string
 }
 
-let reminderEditorStateAtom: WritableAtom<ReminderEditorState|null, ReminderEditorState|null>
-
-function useRemindereEditorStateAtom (): typeof reminderEditorStateAtom {
-  return reminderEditorStateAtom ?? (reminderEditorStateAtom = (
-    atom<ReminderEditorState|null>(null)
-  ))
+function useRemindereEditorStateAtom (): WritableAtom<State, State> {
+  const atom = useContext(JotaiAtomCtx)
+  return useContext(CacheCtx)(
+    'reminderEditorStateAtom', [atom], () => atom<State>(null))
 }
 
 export const ReminderEditorStateAtomCtx = createContext(useRemindereEditorStateAtom)

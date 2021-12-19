@@ -1,14 +1,15 @@
 import { Getter, Setter, WritableAtom } from 'jotai'
 import { createContext, useContext } from 'react'
 import { JotaiAtomCtx } from '~/pkg/jotai/atom'
+import { CacheCtx } from './cache'
 
-let writerAtom: WritableAtom<null, (get: Getter, set: Setter) => void>
+type AtomType = WritableAtom<null, (get: Getter, set: Setter) => void>
 
-function useWriterAtom (): typeof writerAtom {
+function useWriterAtom (): AtomType {
   const atom = useContext(JotaiAtomCtx)
-  return writerAtom ?? (writerAtom =
-    atom(null, (getter, setter, write) => write(getter, setter))
-  )
+  return useContext(CacheCtx)(
+    'writerAtom', [atom],
+    () => atom(null, (get, set, write) => write(get, set)))
 }
 
 export const WriterAtomCtx = createContext(useWriterAtom)

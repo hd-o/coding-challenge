@@ -1,7 +1,6 @@
 import { createContext, useContext } from 'react'
 import { NativeDateCtx } from '~/pkg/native/date'
-
-let referenceDate: Date
+import { CacheCtx } from '~/util/cache'
 
 /**
  * Used by date utils, like date-fns parse
@@ -9,7 +8,7 @@ let referenceDate: Date
  */
 function useReferenceDate (): Date {
   const Date = useContext(NativeDateCtx)
-  return referenceDate ?? (referenceDate = new Date())
+  return useContext(CacheCtx)('referenceDate', [Date], () => new Date())
 }
 
 export const ReferenceDateCtx = createContext(useReferenceDate)
