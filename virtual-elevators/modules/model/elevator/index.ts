@@ -1,9 +1,12 @@
 import { uniqueId } from 'lodash'
 import { Settings } from '~/model/settings'
 import { Floor } from '../floor'
-import { Processor } from '../processor'
+import { Immutable } from '../pkg/immutable'
+import { PromiseFactory } from '../pkg/native/promise'
+import { ProcessorFactory } from '../processor/factory'
 import { Resolvable } from '../resolvable'
-import { timer } from '../timer/timer'
+import { ResolvableFactory } from '../resolvable/factory'
+import { TimerFactory } from '../timer/factory'
 
 /**
  * If, or to which direction, thre is movement.
@@ -45,7 +48,7 @@ export class Elevator {
   /**
    * Time in milliseconds for doors to close
    */
-  static readonly CLOSE_DURATION = 1500
+  static readonly closeDuration = 1500
   /**
    * Elevator position in height unit, not floor.
    * A height unit is the unit used for ctx.floorHeight
@@ -55,47 +58,47 @@ export class Elevator {
    * Map<Floor.id, Resolvable>
    * Stores promises for external code to await
    * on elevator arrival at floor.
-   * @see Elevator.onArrival
-   * @see Elevator.arrivedAt
+   * @see Elevator._onArrival
+   * @see Elevator._arrivedAt
    */
-  private readonly _arrivalMap = new Map<string, Resolvable>()
+  private readonly _arrivalMap = this._immutable.Map<string, Resolvable>()
   /**
    * Processor managing door closing
    */
-  private readonly _doorCloseProcessor = new Processor<undefined>({
+  private readonly _doorCloseProcessor = this._processorFactory.create<undefined>({
     before: () => {
       this.doorState = DoorState.Closing
       // Doors should stay open for a short period
       // so passangers can block its close if needed
-      return timer(3000)
+      return this._timerFactory.create(3000)
     },
     after: () => (this.doorState = DoorState.Closed),
-    process: () => timer(Elevator.CLOSE_DURATION),
-    onPause: () => this.openDoors()
+    process: () => this._timerFactory.create(Elevator.closeDuration),
+    onPause: () => this._openDoors()
   })
 
   /**
    * Where elevator is currently moving to
    */
-  private moveToFloor: Floor | null = null
+  private _moveToFloor: Floor | null = null
   /**
    * Manages elevator movement, including pause/resume
    */
-  private readonly moveProcess = new Processor<{ interval: number }>({
+  private readonly _moveProcess = this._processorFactory.create<{ interval: number }>({
     // A setInterval timer enables pausing the movement
     initialState: { interval: -1 },
-    before: async () => await this._doorCloseProcessor.run(),
+    before: () => this._doorCloseProcessor.run(),
     always: (state) => clearInterval(state.interval),
-    process: async (state) => await new Promise<void>(resolve => {
+    process: (state) => this._promiseFactory.create(resolve => {
       const move = (): void => {
         if (
-          (this.moveToFloor == null) ||
+          (this._moveToFloor == null) ||
           // Process ends when elevator arrives at floor
-          this._position === this.moveToFloor.bottomPosition
+          this._position === this._moveToFloor.bottomPosition
         ) {
-          return resolve()
+          return resolve(undefined)
         }
-        switch (this.moveState) {
+        switch (this._moveState) {
           case MoveState.MovingUp:
             this._position++
             return
@@ -103,7 +106,7 @@ export class Elevator {
             this._position--
             return
           default:
-            resolve()
+            resolve(undefined)
         }
       }
       // TODO: Add easing for arrival
@@ -115,30 +118,31 @@ export class Elevator {
    * Stores floors where elevator will move to next.
    * First item, index 0, is the next floor in queue
    */
-  private readonly queue: Floor[] = []
+  private _queue = this._immutable.List<Floor>()
   /**
    * Manage processing queued floor requests
    */
-  private readonly queueProcess = new Processor({
+  private readonly _queueProcess = this._processorFactory.create({
     process: async () => {
-      const floor = this.queue[0]
-      await this.moveProcess.end
-      this.moveToFloor = floor
+      const floor = this._queue.get(0)
+      if (floor === undefined) return
+      await this._moveProcess.end
+      this._moveToFloor = floor
       // Only serviced floors will be in queue, and
       // moveProcess only ends on serviced floor arrival
-      const currentFloor = this.currentFloor as Floor
-      this.moveState = floor.number > currentFloor.number
+      const currentFloor = this._currentFloor as Floor
+      this._moveState = floor.number > currentFloor.number
         ? MoveState.MovingUp
         : MoveState.MovingDown
-      return await this.moveProcess.run()
+      return await this._moveProcess.run()
     },
     after: () => {
-      this.queue.shift()
-      this.moveState = MoveState.Idle
+      this._queue = this._queue.shift()
+      this._moveState = MoveState.Idle
       // Same as moveProcess, a queue process
       // only ends on serviced floor arrival
-      this.arrivedAt(this.currentFloor as Floor)
-      if (this.queue.length > 0) void (this.queueProcess.run())
+      this._arrivedAt(this._currentFloor as Floor)
+      if (this._queue.size > 0) void (this._queueProcess.run())
     }
   })
 
@@ -147,22 +151,22 @@ export class Elevator {
    * Elevator is Idle only when not moving
    * and positioned at a serviced floor.
    */
-  private moveState = MoveState.Idle
+  private _moveState = MoveState.Idle
   /**
    * Which floor the elevator is at.
    * Result depends on current MoveState.
    * The elevator can be positioned at a floor which
    * it does not service, this will then return undefined
   */
-  private get currentFloor (): Floor | undefined {
-    return this.floors.find((floor) => {
-      switch (this.moveState) {
+  private get _currentFloor (): Floor | undefined {
+    return this._floors.find((floor) => {
+      switch (this._moveState) {
         case MoveState.Idle:
           return this.position === floor.bottomPosition
         case MoveState.MovingDown:
           return this.position < floor.topPosition
         case MoveState.MovingUp:
-          return this.topPosition > floor.bottomPosition
+          return this._topPosition > floor.bottomPosition
         default:
           return false
       }
@@ -172,15 +176,15 @@ export class Elevator {
   /**
    * Position of this elevator's ceiling
    */
-  private get topPosition (): number {
-    return this.position + this.ctx.floorHeight
+  private get _topPosition (): number {
+    return this.position + this._ctx.floorHeight
   }
 
   /**
    * After elevator has arrived at given floor.
    * Resolve the floor's arrivalMap promise
    */
-  private arrivedAt (floor: Floor): void {
+  private _arrivedAt (floor: Floor): void {
     if (this._arrivalMap.get(floor.id)?.resolve() === true) {
       this._arrivalMap.delete(floor.id)
     }
@@ -194,12 +198,12 @@ export class Elevator {
    * it returns false only if elevator has not entered the
    * floor's space (position, topPosition)
    */
-  private isPast (floor: Floor): boolean {
-    switch (this.moveState) {
+  private _isPast (floor: Floor): boolean {
+    switch (this._moveState) {
       case MoveState.MovingDown:
         return this.position < floor.topPosition
       case MoveState.MovingUp:
-        return this.topPosition > floor.bottomPosition
+        return this._topPosition > floor.bottomPosition
       default:
         return this.isIdleAt(floor)
     }
@@ -208,31 +212,36 @@ export class Elevator {
   /**
    * Subscribe to elevator arrival at given floor
    */
-  private async onArrival (floor: Floor): Promise<void> {
+  private async _onArrival (floor: Floor): Promise<void> {
     const promisedArrival = this._arrivalMap.get(floor.id)
     if (promisedArrival != null) return await promisedArrival
-    const arrivalPromise = new Resolvable()
+    const arrivalPromise = this._resolvableFactory.create()
     this._arrivalMap.set(floor.id, arrivalPromise)
     return await arrivalPromise
   }
 
-  private async openDoors (): Promise<void> {
+  private async _openDoors (): Promise<void> {
     // Only open doors when elevator is idle
-    if (this.moveState === MoveState.Idle || this.moveProcess.isPaused) {
+    if (this._moveState === MoveState.Idle || this._moveProcess.isPaused) {
       this.doorState = DoorState.Open
       // Simulate doors opening duration
       // TODO: Refactor this to Doors class
-      return await timer(Elevator.CLOSE_DURATION)
+      return await this._timerFactory.create(Elevator.closeDuration)
     }
   }
 
   /**
-   * @param floors Floors serviced by this elevator
+   * @param _floors Floors serviced by this elevator
    */
   constructor (
-    private readonly floors: Floor[],
-    private readonly ctx: Settings
-  ) { }
+    private readonly _floors: Floor[],
+    private readonly _ctx: Settings,
+    private readonly _immutable: Immutable,
+    private readonly _processorFactory: ProcessorFactory,
+    private readonly _resolvableFactory: ResolvableFactory,
+    private readonly _timerFactory: TimerFactory,
+    private readonly _promiseFactory: PromiseFactory
+  ) {}
 
   /**
    * @see {@link DoorState}
@@ -269,44 +278,50 @@ export class Elevator {
    * or distance in height units
    */
   distanceTo (floor: Floor): false | number {
-    if (!this.floors.includes(floor)) return false
+    if (!this._floors.includes(floor)) return false
     // If queue is empty, floor can be next
-    if (this.queue.length === 0) {
+    if (this._queue.size === 0) {
       // Return distance from elevator to floor
       return Math.abs(this._position - floor.bottomPosition)
     }
     // Find where floor would be in the current queue
     let positionIndex = 0
-    if (this.isPast(floor)) {
-      positionIndex = this.queue.findIndex(queuedFloor =>
-        this.moveState === MoveState.MovingUp
+    if (this._isPast(floor)) {
+      positionIndex = this._queue.findIndex(queuedFloor =>
+        this._moveState === MoveState.MovingUp
           ? queuedFloor < floor
           : queuedFloor > floor
       )
     } else {
-      const canGoToNext = this.moveState === MoveState.MovingUp
-        ? this.queue[0].number > floor.number
-        : this.queue[0].number < floor.number
+      const nextFloor = this._queue.get(0)
+      if (nextFloor === undefined) return false
+      const canGoToNext = this._moveState === MoveState.MovingUp
+        ? nextFloor.number > floor.number
+        : nextFloor.number < floor.number
       if (canGoToNext) {
         // Return distance from elevator to floor
         return Math.abs(this._position - floor.bottomPosition)
       } else {
         // Otherwise find floor's next queue index
-        positionIndex = this.queue.findIndex(queuedFloor =>
-          this.moveState === MoveState.MovingUp
+        positionIndex = this._queue.findIndex(queuedFloor =>
+          this._moveState === MoveState.MovingUp
             ? queuedFloor > floor
             : queuedFloor < floor
         )
       }
     }
     if (positionIndex === -1) {
-      positionIndex = this.queue.length
+      positionIndex = this._queue.size
     }
+    const nextFloor = this._queue.get(0)
+    if (nextFloor === undefined) return 0
     // Calculate distance between queued floors
-    let distance = Math.abs(this.position - this.queue[0].bottomPosition)
+    let distance = Math.abs(this.position - nextFloor.bottomPosition)
     for (let i = 0; i < positionIndex; i++) {
-      const queuedFloor = this.queue[i]
-      const nextQueuedFloor = this.queue[i + 1]
+      const queuedFloor = this._queue.get(i)
+      if (queuedFloor === undefined) break
+      const nextQueuedFloor = this._queue.get(i + 1)
+      if (nextQueuedFloor === undefined) break
       distance += nextQueuedFloor === undefined
         ? Math.abs(queuedFloor.bottomPosition - floor.bottomPosition)
         : Math.abs(queuedFloor.bottomPosition - nextQueuedFloor.bottomPosition)
@@ -320,58 +335,69 @@ export class Elevator {
    */
   async goTo (floor: Floor): Promise<void> {
     // If floor is awaiting elevator, return queue promise
-    if (this.queue.includes(floor)) return await this.onArrival(floor)
+    if (this._queue.includes(floor)) return await this._onArrival(floor)
     // Only go to serviced floors
-    if (!this.floors.includes(floor)) return
+    if (!this._floors.includes(floor)) return
     // If queue is empty, no need to find insert position
-    if (this.queue.length === 0) this.queue.push(floor)
+    if (this._queue.size === 0) this._queue.push(floor)
     // Otherwise, find optimal position to queue floor.
-    else if (this.isPast(floor)) {
+    else if (this._isPast(floor)) {
       // If elevator is past floor, find best position to
       // queue the floor based on elevators move direction
-      const positionIndex = this.queue.findIndex(queuedFloor =>
-        this.moveState === MoveState.MovingUp
+      const positionIndex = this._queue.findIndex(queuedFloor =>
+        this._moveState === MoveState.MovingUp
           ? queuedFloor < floor
           : queuedFloor > floor
       )
       // Floor should be queued last
-      if (positionIndex === -1) this.queue.push(floor)
-      // Floor should be placed before positionIndex
-      else this.queue.splice(positionIndex, 0, floor)
+      if (positionIndex === -1) {
+        this._queue = this._queue.push(floor)
+      } else {
+        // Floor should be placed before positionIndex
+        this._queue = this._queue.splice(positionIndex, 0, floor)
+      }
     } else {
+      const nextFloor = this._queue.get(0)
+      if (nextFloor === undefined) {
+        this._queue = this._queue.push(floor)
+        return
+      }
       // If elevator is not past floor
       // Check if floor can be next in queue
-      const canGoToNext = this.moveState === MoveState.MovingUp
-        ? this.queue[0].number > floor.number
-        : this.queue[0].number < floor.number
+      const canGoToNext = this._moveState === MoveState.MovingUp
+        ? nextFloor.number > floor.number
+        : nextFloor.number < floor.number
       if (canGoToNext) {
         // Jump the queue
-        this.moveToFloor = floor
-        this.queue.unshift(floor)
+        this._moveToFloor = floor
+        this._queue.unshift(floor)
       } else {
         // Otherwise find floor's next queue index
-        const positionIndex = this.queue.findIndex(queuedFloor =>
-          this.moveState === MoveState.MovingUp
+        const positionIndex = this._queue.findIndex(queuedFloor =>
+          this._moveState === MoveState.MovingUp
             ? queuedFloor > floor
             : queuedFloor < floor
         )
         // Floor should be queued last
-        if (positionIndex === -1) this.queue.push(floor)
-        // Floor should be placed before positionIndex
-        else this.queue.splice(positionIndex, 0, floor)
+        if (positionIndex === -1) {
+          this._queue = this._queue.push(floor)
+        } else {
+          // Floor should be placed before positionIndex
+          this._queue = this._queue.splice(positionIndex, 0, floor)
+        }
       }
     }
     // Assure queue process is running
-    void (this.queueProcess.run())
+    void (this._queueProcess.run())
     // Return queue promise for caller await
-    return await this.onArrival(floor)
+    return await this._onArrival(floor)
   }
 
   /**
    * Given floor should be one serviced by this elevator
    */
   isIdleAt (floor: Floor): boolean {
-    const currentFloor = this.currentFloor?.number ?? -1
+    const currentFloor = this._currentFloor?.number ?? -1
     return currentFloor > -1 && currentFloor === floor.number
   }
 
@@ -390,7 +416,7 @@ export class Elevator {
     if (this._doorCloseProcessor.isRunning) {
       await this.blockClose()
     } else {
-      await this.openDoors()
+      await this._openDoors()
     }
     return await this.releaseClose()
   }
@@ -401,7 +427,7 @@ export class Elevator {
   toggleStop (): void {
     // Currently, elevator movement can only
     // be pause by the toggleStop method
-    if (this.moveProcess.isPaused) void (this.moveProcess.run())
-    else void (this.moveProcess.pause())
+    if (this._moveProcess.isPaused) void (this._moveProcess.run())
+    else void (this._moveProcess.pause())
   }
 }

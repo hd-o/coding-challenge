@@ -3,6 +3,7 @@
  */
 import { boundMethod } from 'autobind-decorator'
 import { cloneDeep } from 'lodash'
+import { PromiseFactory } from '../pkg/native/promise'
 import { Resolvable } from '../resolvable'
 
  /**
@@ -82,10 +83,11 @@ enum ProcessState {
 
 /**
   * Pausable process manager
+  * TODO: Replace examples with unit tests
   * @example
   * const moveProcess = new Processor<{ timer: -1 }>({
   *   before: () => this.text = 'Train is leaving',
-  *   process: async (state) => new Promise(resolve => {
+  *   process: async (state) => this._promiseFactory.create(resolve => {
   *     this.text = 'Train is moving'
   *     state.timer = setInterval(this.move(resolve), 1)
   *   }),
@@ -100,94 +102,97 @@ export class Processor<LifecycleState> {
   /**
     * Tracks current process execution
     */
-  private promise?: Resolvable
+  private _promise?: Resolvable
   /**
     * Passed to lifecycle hooks
     */
-  private lifecycleState?: LifecycleState
+  private _lifecycleState?: LifecycleState
   /**
     * Current process lifecycle hook
     */
-  private currentHook: Hook<LifecycleState> = 'before'
+  private _currentHook: Hook<LifecycleState> = 'before'
   /**
     * Current process execution state
     */
-  private state = ProcessState.Idle
+  private _state = ProcessState.Idle
   /**
     * Reset internal state, prepare for run
     */
-  private clear (): void {
-    this.promise = undefined
-    this.lifecycleState = cloneDeep(this.config.initialState)
+  private _clear (): void {
+    this._promise = undefined
+    this._lifecycleState = cloneDeep(this._config.initialState)
   }
 
   /**
     * Run if given hook was set in this.config,
     * otherwise return a resolved promised
     */
-  private async runHook (hook: keyof LifecycleHooks<LifecycleState>): Promise<unknown> {
+  private async _runHook (hook: keyof LifecycleHooks<LifecycleState>): Promise<unknown> {
     switch (hook) {
       case 'onPause':
       case 'after':
-        await this.runHook('always')
+        await this._runHook('always')
     }
-    const fn = this.config[hook]
+    const fn = this._config[hook]
     // this.clear sets this.lifecycleState
-    const lifecycleState = this.lifecycleState as LifecycleState
+    const lifecycleState = this._lifecycleState as LifecycleState
     const result = (fn != null) ? fn(lifecycleState) : undefined
     // Always return a promise so caller can await
-    return result instanceof Promise
+    return result instanceof this._promiseFactory.type
       ? await result
-      : await Promise.resolve(result)
+      : await this._promiseFactory.resolve(result)
   }
 
   /**
     * Run, or resume, lifecycle hooks
     */
-  private async runLifecycleHooks (): Promise<void> {
+  private async _runLifecycleHooks (): Promise<void> {
     // Clear internals before new run
-    if (this.state === ProcessState.Idle) this.clear()
+    if (this._state === ProcessState.Idle) this._clear()
     // Otherwise, resume process if paused
-    if (this.isPaused) this.state = ProcessState.Running
+    if (this.isPaused) this._state = ProcessState.Running
     // Process can be paused, so check state on loop
-    while (this.state === ProcessState.Running) {
-      switch (this.currentHook) {
+    while (this._state === ProcessState.Running) {
+      switch (this._currentHook) {
         case 'before':
-          await this.runHook('before')
-          this.currentHook = 'process'
+          await this._runHook('before')
+          this._currentHook = 'process'
           continue
         case 'process':
-          await this.runHook('process')
-          this.state = ProcessState.Idle
-          await this.runHook('after')
+          await this._runHook('process')
+          this._state = ProcessState.Idle
+          await this._runHook('after')
       }
     }
   }
 
   /**
-    * @param config State, and lifecycle hook configuration
+    * @param _config State, and lifecycle hook configuration
     */
-  constructor (private readonly config: Config<LifecycleState>) {}
+  constructor (
+    private readonly _config: Config<LifecycleState>,
+    private readonly _promiseFactory: PromiseFactory
+  ) {}
 
   /**
     * Await process end
     */
   get end (): Promise<void> {
-    return this.promise ?? Promise.resolve()
+    return this._promise ?? Promise.resolve()
   }
 
   /**
     * Process is processing, or paused
     */
   get isRunning (): boolean {
-    return this.state !== ProcessState.Idle
+    return this._state !== ProcessState.Idle
   }
 
   /**
     * Process has started, but is not processing
     */
   get isPaused (): boolean {
-    return this.state === ProcessState.Paused
+    return this._state === ProcessState.Paused
   }
 
   /**
@@ -196,10 +201,10 @@ export class Processor<LifecycleState> {
     */
   @boundMethod
   async pause (): Promise<unknown> {
-    if (this.state !== ProcessState.Paused) {
-      this.state = ProcessState.Paused
+    if (this._state !== ProcessState.Paused) {
+      this._state = ProcessState.Paused
     }
-    return await this.runHook('onPause')
+    return await this._runHook('onPause')
   }
 
   /**
@@ -207,9 +212,9 @@ export class Processor<LifecycleState> {
     */
   @boundMethod
   run (): Resolvable {
-    const promise = this.promise ?? (this.promise = new Resolvable())
+    const promise = this._promise ?? (this._promise = new Resolvable())
     if (this.isRunning) return promise
-    void (this.runLifecycleHooks())
+    void (this._runLifecycleHooks())
     return promise
   }
 
@@ -218,7 +223,7 @@ export class Processor<LifecycleState> {
     */
   @boundMethod
   reset (): Resolvable {
-    this.clear()
+    this._clear()
     return this.run()
   }
 }

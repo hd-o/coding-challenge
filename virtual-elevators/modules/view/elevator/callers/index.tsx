@@ -25,7 +25,7 @@ function ElevatorCallers (): JSX.Element {
 
   return (
     <>
-      {state.floors.map((floor) => (
+      {state.floors.slice().reverse().map((floor) => (
         <Row className={cellClass} key={floor.id}>
           <Button shape="circle">{floor.number}</Button>
         </Row>
