@@ -11,7 +11,7 @@ export class Floor {
     this.id = String(number)
   }
 
-  public readonly id: string
+  readonly id: string
 
   get bottomPosition (): number {
     return this.number * this._settings.floorHeight

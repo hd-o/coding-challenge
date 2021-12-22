@@ -1,4 +1,5 @@
 import { Floor } from '~/model/floor'
+import { Immutable } from '~/model/pkg/immutable'
 import { Elevator } from '../'
 
 type FloorRequest = Promise<void>
@@ -16,9 +17,10 @@ type FloorRequest = Promise<void>
  */
 export class ElevatorHub {
   /**
-   * Track floors awaiting an elevator
+   * Floors awaiting an elevator
    */
-  private readonly _requests = new Map<Floor['id'], FloorRequest>()
+  private _requests = this._immutable.Map<Floor['id'], FloorRequest>()
+
   /**
    * Decide which elevator is nearest to the floor.
    * Either the elevator that's Idle at the floor,
@@ -53,26 +55,26 @@ export class ElevatorHub {
    * @param elevators Elevators controlled by this controller
    */
   constructor (
-    /**
-     * Elevators available for this controller
-     */
-    public elevators: Elevator[]
+    public elevators: Elevator[],
+    private readonly _immutable: Immutable
   ) {}
 
-  /**
-   * Requests nearest Elevator to given floor
-   */
-  requestElevator (floor: Floor): false | Promise<void> {
+  get requests (): ElevatorHub['_requests'] {
+    return this._requests
+  }
+
+  requestElevator (floor: Floor): boolean {
     const currentRequest = this._requests.get(floor.id)
-    if (currentRequest != null) return currentRequest
+    if (currentRequest !== undefined) return true
     // Request elevator, and store promise
     const request = this._callNearestElevator(floor)
     if (request === false) return false
-    this._requests.set(floor.id, request)
+    this._requests = this._requests.set(floor.id,
+      request.then(() => {
+        // Remove floor from queue when elevator arrives
+        this._requests = this._requests.delete(floor.id)
+      }))
     // Return promise for caller to await
-    return request.then(() => {
-      // Remove floor from queue when elevator arrives
-      this._requests.delete(floor.id)
-    })
+    return true
   }
 }
