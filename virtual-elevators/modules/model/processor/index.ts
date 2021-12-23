@@ -5,6 +5,7 @@ import { boundMethod } from 'autobind-decorator'
 import { cloneDeep } from 'lodash'
 import { PromiseFactory } from '../pkg/native/promise'
 import { Resolvable } from '../resolvable'
+import { ResolvableFactory } from '../resolvable/factory'
 
  /**
   * @see {@link LifecycleHooks}
@@ -171,7 +172,8 @@ export class Processor<LifecycleState> {
     */
   constructor (
     private readonly _config: Config<LifecycleState>,
-    private readonly _promiseFactory: PromiseFactory
+    private readonly _promiseFactory: PromiseFactory,
+    private readonly _resolvableFactory: ResolvableFactory
   ) {}
 
   /**
@@ -212,7 +214,7 @@ export class Processor<LifecycleState> {
     */
   @boundMethod
   run (): Resolvable {
-    const promise = this._promise ?? (this._promise = new Resolvable())
+    const promise = this._promise ?? (this._promise = this._resolvableFactory.create())
     if (this.isRunning) return promise
     void (this._runLifecycleHooks())
     return promise
