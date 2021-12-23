@@ -55,14 +55,6 @@ export class Elevator {
    */
   private _position: number = 0
   /**
-   * Map<Floor.id, Resolvable>
-   * Stores promises for external code to await
-   * on elevator arrival at floor.
-   * @see Elevator._onArrival
-   * @see Elevator._arrivedAt
-   */
-  private readonly _arrivalMap = this._immutable.Map<string, Resolvable>()
-  /**
    * Processor managing door closing
    */
   private readonly _doorCloseProcessor = this._processorFactory.create<undefined>({
@@ -141,7 +133,6 @@ export class Elevator {
       this._moveState = MoveState.Idle
       // Same as moveProcess, a queue process
       // only ends on serviced floor arrival
-      this._arrivedAt(this._currentFloor as Floor)
       if (this._queue.size > 0) void (this._queueProcess.run())
     }
   })
@@ -181,16 +172,6 @@ export class Elevator {
   }
 
   /**
-   * After elevator has arrived at given floor.
-   * Resolve the floor's arrivalMap promise
-   */
-  private _arrivedAt (floor: Floor): void {
-    if (this._arrivalMap.get(floor.id)?.resolve() === true) {
-      this._arrivalMap.delete(floor.id)
-    }
-  }
-
-  /**
    * If elevator is past the given floor.
    * Result depends on current MoveState.
    * Result is later used to decide if elevator can
@@ -207,17 +188,6 @@ export class Elevator {
       default:
         return this.isIdleAt(floor)
     }
-  }
-
-  /**
-   * Subscribe to elevator arrival at given floor
-   */
-  private async _onArrival (floor: Floor): Promise<void> {
-    const promisedArrival = this._arrivalMap.get(floor.id)
-    if (promisedArrival != null) return await promisedArrival
-    const arrivalPromise = this._resolvableFactory.create()
-    this._arrivalMap.set(floor.id, arrivalPromise)
-    return await arrivalPromise
   }
 
   private async _openDoors (): Promise<void> {
@@ -259,6 +229,10 @@ export class Elevator {
    */
   get position (): number {
     return this._position
+  }
+
+  get queue (): Elevator['_queue'] {
+    return this._queue
   }
 
   /**
@@ -329,25 +303,22 @@ export class Elevator {
     return distance
   }
 
-  /**
-   * Efficiently positions floor in queue,
-   * and returns "on floor arrival" promise
-   */
-  async goTo (floor: Floor): Promise<void> {
+  goTo (floor: Floor): boolean {
     // If floor is awaiting elevator, return queue promise
-    if (this._queue.includes(floor)) return await this._onArrival(floor)
+    if (this._queue.includes(floor)) return true
     // Only go to serviced floors
-    if (!this._floors.includes(floor)) return
+    if (!this._floors.includes(floor)) return false
     // If queue is empty, no need to find insert position
-    if (this._queue.size === 0) this._queue.push(floor)
-    // Otherwise, find optimal position to queue floor.
-    else if (this._isPast(floor)) {
+    if (this._queue.size === 0) {
+      this._queue = this._queue.push(floor)
+    } else if (this._isPast(floor)) {
+      // Otherwise, find optimal position to queue floor.
       // If elevator is past floor, find best position to
       // queue the floor based on elevators move direction
       const positionIndex = this._queue.findIndex(queuedFloor =>
-        this._moveState === MoveState.MovingUp
-          ? queuedFloor < floor
-          : queuedFloor > floor
+        this._moveState === MoveState.MovingDown
+          ? queuedFloor > floor
+          : queuedFloor < floor
       )
       // Floor should be queued last
       if (positionIndex === -1) {
@@ -360,23 +331,23 @@ export class Elevator {
       const nextFloor = this._queue.get(0)
       if (nextFloor === undefined) {
         this._queue = this._queue.push(floor)
-        return
+        return true
       }
       // If elevator is not past floor
       // Check if floor can be next in queue
-      const canGoToNext = this._moveState === MoveState.MovingUp
-        ? nextFloor.number > floor.number
-        : nextFloor.number < floor.number
+      const canGoToNext = this._moveState === MoveState.MovingDown
+        ? nextFloor.number < floor.number
+        : nextFloor.number > floor.number
       if (canGoToNext) {
         // Jump the queue
         this._moveToFloor = floor
-        this._queue.unshift(floor)
+        this._queue = this._queue.unshift(floor)
       } else {
         // Otherwise find floor's next queue index
         const positionIndex = this._queue.findIndex(queuedFloor =>
-          this._moveState === MoveState.MovingUp
-            ? queuedFloor > floor
-            : queuedFloor < floor
+          this._moveState === MoveState.MovingDown
+            ? queuedFloor < floor
+            : queuedFloor > floor
         )
         // Floor should be queued last
         if (positionIndex === -1) {
@@ -389,8 +360,7 @@ export class Elevator {
     }
     // Assure queue process is running
     void (this._queueProcess.run())
-    // Return queue promise for caller await
-    return await this._onArrival(floor)
+    return true
   }
 
   /**

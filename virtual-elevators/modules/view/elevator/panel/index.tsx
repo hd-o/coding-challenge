@@ -1,6 +1,8 @@
 import { Button } from 'antd'
 import { createContext, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
+import { Elevator } from '~/model/elevator'
+import { Floor } from '~/model/floor'
 import { AntdRowCtx } from '~/view/pkg/antd/row'
 import { TypeStyleClassesCtx } from '~/view/pkg/typestyle/classes'
 import { StateCtx } from '~/view/state'
@@ -14,8 +16,13 @@ const row = (): NestedCSSProperties => ({
   padding: '0 30px 2px'
 })
 
+interface Props {
+  queue: Elevator['queue']
+  onClick: (floor: Floor) => void
+}
+
 /** Internal elevator buttons */
-function ElevatorPanel (): JSX.Element {
+function ElevatorPanel (props: Props): JSX.Element {
   const Row = useContext(AntdRowCtx)
 
   const state = useContext(StateCtx)
@@ -28,7 +35,12 @@ function ElevatorPanel (): JSX.Element {
   return (
     <Row className={rowClass}>
       {state.floors.map((floor) => (
-        <Button shape="circle" key={floor.id}>
+        <Button
+          key={floor.id}
+          onClick={() => props.onClick(floor)}
+          shape="circle"
+          type={props.queue.includes(floor) ? 'primary' : 'default'}
+        >
           {floor.number}
         </Button>
       ))}

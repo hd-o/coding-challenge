@@ -43,11 +43,18 @@ const interior = (): NestedCSSProperties => ({
   zIndex: 0
 })
 
-function ElevatorCar (): JSX.Element {
+interface Props {
+  position: number
+}
+
+function ElevatorCar (props: Props): JSX.Element {
   const Col = useContext(AntdColCtx)
   const { settings } = useContext(StateCtx)
   return (
-    <Col className={useStyle(container, settings)}>
+    <Col
+      className={useStyle(container, settings)}
+      style={{ bottom: props.position }}
+    >
       <div className={useStyle(interior)} />
       <div className={useStyle(door)} />
       <div className={useStyle(door)} />

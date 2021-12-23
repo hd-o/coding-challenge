@@ -1,8 +1,10 @@
 import { createContext, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
+import { Elevator } from '~/model/elevator'
 import { AntdRowCtx } from '../pkg/antd/row'
 import { TypeStyleClassesCtx } from '../pkg/typestyle/classes'
 import { StateCtx } from '../state'
+import { useObserver } from '../util/useObserver'
 import { useStyle } from '../util/useStyle'
 import { ElevatorCarCtx } from './car'
 import { ElevatorPanelCtx } from './panel'
@@ -18,9 +20,13 @@ const container = (props: {
   position: 'relative'
 })
 
-function Elevator (): JSX.Element {
-  const ElevatorCar = useContext(ElevatorCarCtx)
-  const ElevatorPanel = useContext(ElevatorPanelCtx)
+interface Props {
+  elevator: Elevator
+}
+
+function ElevatorView (props: Props): JSX.Element {
+  const ElevatorCar = useObserver(ElevatorCarCtx)
+  const ElevatorPanel = useObserver(ElevatorPanelCtx)
   const Row = useContext(AntdRowCtx)
   const state = useContext(StateCtx)
   const classes = useContext(TypeStyleClassesCtx)
@@ -33,11 +39,14 @@ function Elevator (): JSX.Element {
   return (
     <>
       <Row className={containerClass}>
-        <ElevatorCar />
+        <ElevatorCar position={props.elevator.position} />
       </Row>
-      <ElevatorPanel />
+      <ElevatorPanel
+        queue={props.elevator.queue}
+        onClick={props.elevator.goTo}
+      />
     </>
   )
 }
 
-export const ElevatorCtx = createContext(Elevator)
+export const ElevatorCtx = createContext(ElevatorView)
