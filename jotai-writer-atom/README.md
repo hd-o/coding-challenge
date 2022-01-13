@@ -4,4 +4,8 @@ A context-friendly write-only atom, allowing dependency injection for atom sette
 
 [🖥️ Live Demo @ CodeSandbox][live_demo]
 
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/writer-atom
+---
+
+![screenshot of file writerAtom.ts](./thumbnail.png)
+
+[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/jotai-writer-atom
