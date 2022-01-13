@@ -1,3 +1,4 @@
+import { RecordOf } from 'immutable'
 import { inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { IElevator } from './model'
@@ -13,7 +14,7 @@ export class ElevatorFactory {
     })
   ) {}
 
-  create (state: ConstructorParameters<typeof this._ElevatorRecord>[0]): IElevator {
-    return new this._ElevatorRecord(state)
+  create (state: Partial<IElevator>): RecordOf<IElevator> {
+    return this._ElevatorRecord(state)
   }
 }
