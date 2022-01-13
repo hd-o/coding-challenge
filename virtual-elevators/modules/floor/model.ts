@@ -1,7 +1,5 @@
-import { RecordOf } from 'immutable'
-
-export type IFloor = RecordOf<{
+export interface IFloor {
   number: number
-  getBottomPosition: () => number
-  getTopPosition: () => number
-}>
+  getBottomPosition: (this: IFloor) => number
+  getTopPosition: (this: IFloor) => number
+}

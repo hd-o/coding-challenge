@@ -1,3 +1,4 @@
+import { RecordOf } from 'immutable'
 import { inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { Lodash } from '~/pkg/lodash'
@@ -11,7 +12,7 @@ export class FloorFactory {
     @inject(Settings$) settings$: Settings$,
     @inject(Lodash) lodash: Lodash,
     @inject(Immutable) immutable: Immutable,
-    private readonly _FloorRecord = immutable.Record({
+    private readonly _FloorRecord = immutable.Record<IFloor>({
       number: 0,
       getBottomPosition: lodash.memoize(function (this: IFloor): number {
         return this.number * settings$.value.floorHeight
@@ -22,7 +23,7 @@ export class FloorFactory {
     })
   ) {}
 
-  create (state: ConstructorParameters<typeof this._FloorRecord>[0]): IFloor {
-    return new this._FloorRecord(state)
+  create (state: Partial<IFloor>): RecordOf<IFloor> {
+    return this._FloorRecord(state)
   }
 }

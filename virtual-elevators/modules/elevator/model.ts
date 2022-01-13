@@ -1,6 +1,4 @@
-import { RecordOf } from 'immutable'
-
-export type IElevator = RecordOf<{
+export interface IElevator {
   id: string
   position: number
-}>
+}
