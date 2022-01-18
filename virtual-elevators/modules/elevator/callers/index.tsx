@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import { createContext, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
-import { Floors$Ctx } from '~/floors/stream'
+import { Floor$Ctx } from '~/floor/stream'
 import { AntdRowCtx } from '~/pkg/antd/row'
 import { TypeStyleClassesCtx } from '~/pkg/typestyle/classes'
 import { Settings$Ctx } from '~/settings/stream'
@@ -18,7 +18,7 @@ const cell = (): NestedCSSProperties => ({
 function ElevatorCallers (): JSX.Element {
   const Row = useContext(AntdRowCtx)
 
-  const floors = useStreamCtx(Floors$Ctx)
+  const floors = useStreamCtx(Floor$Ctx)
   const settings = useStreamCtx(Settings$Ctx)
   const classes = useContext(TypeStyleClassesCtx)
 

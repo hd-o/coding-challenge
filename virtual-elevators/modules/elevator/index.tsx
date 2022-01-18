@@ -9,7 +9,7 @@ import { useStyle } from '../util/useStyle'
 import { ElevatorCarCtx } from './car'
 import { ElevatorPanelCtx } from './panel'
 import { elevatorRowStyle } from './row/style'
-import { Elevator$ } from './stream'
+import { ElevatorUnit$ } from './stream/unit'
 
 const container = (props: {
   floorCount: number
@@ -22,7 +22,7 @@ const container = (props: {
 })
 
 interface Props {
-  elevator$: Elevator$
+  elevatorUnit$: ElevatorUnit$
 }
 
 function Elevator (props: Props): JSX.Element {
@@ -30,7 +30,7 @@ function Elevator (props: Props): JSX.Element {
   const ElevatorPanel = useContext(ElevatorPanelCtx)
   const Row = useContext(AntdRowCtx)
 
-  const elevator = useStream(props.elevator$)
+  const elevator = useStream(props.elevatorUnit$)
   const settings = useStreamCtx(Settings$Ctx)
   const classes = useContext(TypeStyleClassesCtx)
 

@@ -245,8 +245,9 @@ export class Elevator {
   /**
    * Elevator's distance to a given floor =
    * Distance between stops until floor +
-   * Distance from last stop to floor. Or
-   * If floor is next, distance from elevator
+   * Distance from last stop to floor.
+   * Or, if floor is next, distance
+   * from elevator to floor
    * @returns
    * False if floor is not serviced,
    * or distance in height units

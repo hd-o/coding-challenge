@@ -8,22 +8,15 @@ import { IFloor } from './model'
 @singleton()
 export class FloorFactory {
   constructor (
-    _: any,
-    @inject(Settings$) settings$: Settings$,
-    @inject(Lodash) lodash: Lodash,
-    @inject(Immutable) immutable: Immutable,
+    @inject(Settings$) readonly settings$: Settings$,
+    @inject(Lodash) readonly lodash: Lodash,
+    @inject(Immutable) readonly immutable: Immutable,
     private readonly _FloorRecord = immutable.Record<IFloor>({
-      number: 0,
-      getBottomPosition: lodash.memoize(function (this: IFloor): number {
-        return this.number * settings$.value.floorHeight
-      }),
-      getTopPosition: lodash.memoize(function (this: IFloor): number {
-        return this.getBottomPosition() + settings$.value.floorHeight
-      })
+      number: 0
     })
   ) {}
 
-  create (state: Partial<IFloor>): RecordOf<IFloor> {
+  create (state: IFloor): RecordOf<IFloor> {
     return this._FloorRecord(state)
   }
 }
