@@ -9,7 +9,7 @@ type GetPosition = (floor: IFloor) => number
 
 @singleton()
 export class FloorCtrl {
-  private readonly _getBottomPosition: MemoizedFunction & GetPosition
+  private readonly _getPosition: MemoizedFunction & GetPosition
   private readonly _getTopPosition: MemoizedFunction & GetPosition
 
   constructor (
@@ -17,18 +17,18 @@ export class FloorCtrl {
     @inject(Settings$) readonly settings$: Settings$,
     @inject(Lodash) readonly lodash: Lodash
   ) {
-    this._getBottomPosition = lodash.memoize((floor: IFloor): number => {
+    this._getPosition = lodash.memoize((floor: IFloor): number => {
       return floor.number * settings$.value.floorHeight
     })
     this._getTopPosition = lodash.memoize((floor: IFloor): number => {
       return this.getPosition(floor) + settings$.value.floorHeight
     })
     floor$.subscribe(() => {
-      this._getBottomPosition.cache.clear?.()
+      this._getPosition.cache.clear?.()
       this._getTopPosition.cache.clear?.()
     })
   }
 
-  getPosition: GetPosition = (floor) => this._getBottomPosition(floor)
+  getPosition: GetPosition = (floor) => this._getPosition(floor)
   getTopPosition: GetPosition = (floor) => this._getTopPosition(floor)
 }

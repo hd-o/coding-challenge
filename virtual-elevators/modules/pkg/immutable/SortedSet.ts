@@ -40,4 +40,6 @@ export class SortedSet<V> implements Iterable<V> {
   }
 
   get = this._orderedSet.get.bind(this._orderedSet)
+
+  toArray = this._orderedSet.toArray.bind(this._orderedSet)
 }

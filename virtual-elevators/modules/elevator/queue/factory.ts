@@ -1,9 +1,10 @@
+import { RecordOf } from 'immutable'
 import { inject, singleton } from 'tsyringe'
 import { IFloor } from '~/floor/model'
 import { Immutable } from '~/pkg/immutable'
 import { ComparatorResult } from '~/pkg/immutable/SortedSet'
 import { IElevatorQueue } from './model'
-import { elevatorQueueState } from './moveState'
+import { elevatorQueueState } from './model/moveState'
 
 function floorComparator (a: IFloor, b: IFloor): ComparatorResult {
   if (a.number === b.number) return 0
@@ -17,12 +18,12 @@ export class ElevatorQueueFactory {
     @inject(Immutable) readonly immutable: Immutable,
     private readonly _ElevatorQueueRecord = immutable.Record<IElevatorQueue>({
       state: elevatorQueueState.Idle,
-      movingDown: new immutable.SortedSet<IFloor>([], (a, b) => floorComparator(b, a)),
-      movingUp: new immutable.SortedSet([], floorComparator)
+      MovingDown: new immutable.SortedSet<IFloor>([], (a, b) => floorComparator(b, a)),
+      MovingUp: new immutable.SortedSet([], floorComparator)
     })
   ) {}
 
-  create (queue?: Partial<IElevatorQueue>): IElevatorQueue {
+  create (queue?: Partial<IElevatorQueue>): RecordOf<IElevatorQueue> {
     return this._ElevatorQueueRecord(queue)
   }
 }

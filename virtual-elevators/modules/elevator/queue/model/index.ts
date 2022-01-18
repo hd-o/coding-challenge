@@ -6,6 +6,6 @@ export type ElevatorQueueSet = SortedSet<IFloor>
 
 export interface IElevatorQueue {
   state: ElevatorQueueState
-  movingUp: ElevatorQueueSet
-  movingDown: ElevatorQueueSet
+  MovingUp: ElevatorQueueSet
+  MovingDown: ElevatorQueueSet
 }
