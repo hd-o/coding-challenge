@@ -1,21 +1,26 @@
-import { Map } from 'immutable'
+import { List, Map } from 'immutable'
 import { BehaviorSubject } from 'rxjs'
 import { inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { IFloor } from '../model'
+import { Floor$ } from '../stream'
 
-type HasFloorRequested = boolean
-type FloorRequests = Map<IFloor['number'], HasFloorRequested>
+type HasRequestedElevator = boolean
+type HasFloorRequestedElevator$ = BehaviorSubject<HasRequestedElevator>
+type FloorRequestMap = Map<IFloor, HasFloorRequestedElevator$>
 
 @singleton()
-export class FloorRequests$ extends BehaviorSubject<FloorRequests> {
+export class FloorRequest$ extends BehaviorSubject<FloorRequestMap> {
   constructor (
-    @inject(Immutable) readonly immutable: Immutable
+    @inject(Immutable) readonly immutable: Immutable,
+    @inject(Floor$) readonly floor$: Floor$
   ) {
-    super(immutable.Map())
-  }
-
-  hasRequest (number: IFloor['number']): boolean {
-    return this.value.get(number) === true
+    super(createFloorRequestMap(floor$.value))
+    floor$.subscribe(floor => this.next(createFloorRequestMap(floor)))
+    function createFloorRequestMap (floors: List<IFloor>): FloorRequestMap {
+      return immutable.Map(floors.map((floor) => {
+        return [floor, new BehaviorSubject(false)] as [IFloor, HasFloorRequestedElevator$]
+      }))
+    }
   }
 }
