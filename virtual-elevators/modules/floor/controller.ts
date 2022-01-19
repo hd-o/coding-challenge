@@ -11,6 +11,7 @@ type GetPosition = (floor: IFloor) => number
 @singleton()
 export class FloorCtrl {
   private readonly _getPosition: MemoizedFunction & GetPosition
+
   private readonly _getTopPosition: MemoizedFunction & GetPosition
 
   constructor (

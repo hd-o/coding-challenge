@@ -36,7 +36,7 @@ export class ElevatorQueueCtrl {
     const queueSet = isPastFloor
       ? this._getInactiveQueueSet(elevator)
       : this._getActiveQueueSet(elevator)
-    const setType = this._getQueueState(elevator) === elevatorQueueState.MovingUp
+    const setType = this._getQueueState(elevator) !== elevatorQueueState.MovingUp
       ? (isPastFloor ? elevatorDirectionType.MovingDown : elevatorDirectionType.MovingUp)
       : (isPastFloor ? elevatorDirectionType.MovingUp : elevatorDirectionType.MovingDown)
     if (queueSet.size === 0) return { directionType: setType, index: 0 }
@@ -46,7 +46,7 @@ export class ElevatorQueueCtrl {
 
   private _getQueueUnit$ (elevator: IElevator): IElevatorQueueUnit$ {
     /** @see {ElevatorQueue$} - Creates queues for all elevators */
-    return this._elevatorsQueue$.value.get(elevator.id) as IElevatorQueueUnit$
+    return this._elevatorsQueue$.value.get(elevator) as IElevatorQueueUnit$
   }
 
   private _getQueue (elevator: IElevator): IElevatorQueueUnitRecord {
@@ -68,7 +68,7 @@ export class ElevatorQueueCtrl {
       case elevatorQueueState.MovingUp:
         return this._elevatorPositionCtrl.getTopPosition(elevator) > this._floorCtrl.getPosition(floor)
       default:
-        return this._elevatorPositionCtrl.isAtFloor(elevator, floor)
+        return this._elevatorPositionCtrl.isOverFloor(elevator, floor)
     }
   }
 
@@ -122,7 +122,9 @@ export class ElevatorQueueCtrl {
     const { directionType } = this._getFloorInsertIndex(elevator, floor)
     const queue = this._getQueue(elevator)
     const directionSetUpdate = queue[directionType].add(floor)
-    const queueUpdate = queue.set(directionType, directionSetUpdate)
+    const queueUpdate = queue
+      .set(directionType, directionSetUpdate)
+      .set('state', directionType)
     this._getQueueUnit$(elevator).next(queueUpdate)
     this._floorCtrl.setHasRequestedElevator(floor, true)
   }

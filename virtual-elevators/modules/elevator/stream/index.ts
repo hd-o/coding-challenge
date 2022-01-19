@@ -4,13 +4,15 @@ import { BehaviorSubject, combineLatest } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { ElevatorFactory } from '~/elevator/factory'
 import { Lodash } from '~/pkg/lodash'
-import { ElevatorUnit$ } from './unit'
 import { Immutable } from '../../pkg/immutable'
 import { ISettings } from '../../settings/model'
 import { Settings$ } from '../../settings/stream'
+import { ElevatorUnit$ } from './unit'
+
+export type ElevatorUnit$List = List<ElevatorUnit$>
 
 @singleton()
-export class Elevator$ extends BehaviorSubject<List<ElevatorUnit$>> {
+export class Elevator$ extends BehaviorSubject<ElevatorUnit$List> {
   constructor (
     @inject(Settings$) readonly settings$: Settings$,
     @inject(Lodash) readonly lodash: Lodash,

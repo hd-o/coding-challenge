@@ -5,11 +5,12 @@ import { IElevatorDoor } from './model'
 
 @singleton()
 export class ElevatorDoorFactory {
+  private readonly _ElevatorDoorRecord = this._immutable.Record<IElevatorDoor>({
+    open: false
+  })
+
   constructor (
-    @inject(Immutable) readonly immutable: Immutable,
-    private readonly _ElevatorDoorRecord = immutable.Record<IElevatorDoor>({
-      open: false
-    })
+    @inject(Immutable) private readonly _immutable: Immutable
   ) {}
 
   create (): RecordOf<IElevatorDoor> {

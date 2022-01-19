@@ -5,18 +5,21 @@ import { container, inject, singleton } from 'tsyringe'
 import { Immutable } from '../pkg/immutable'
 import { ISettings } from './model'
 
+// TODO: Handle settings update (unmounts, and subscriptions)
+
 @singleton()
 export class Settings$ extends BehaviorSubject<RecordOf<ISettings>> {
   constructor (
-    @inject(Immutable) readonly immutable: Immutable,
-    readonly _SettingsRecord = immutable.Record<ISettings>({
-      elevatorCount: 3,
-      floorHeight: 100,
-      floorCount: 6
-    })
+    @inject(Immutable) readonly immutable: Immutable
   ) {
-    super(_SettingsRecord())
-    // TODO: Handle settings update (unmounts, and subscriptions)
+    super(SettingsRecord())
+    function SettingsRecord (): RecordOf<ISettings> {
+      return immutable.Record<ISettings>({
+        elevatorCount: 3,
+        floorHeight: 100,
+        floorCount: 6
+      })()
+    }
   }
 }
 
