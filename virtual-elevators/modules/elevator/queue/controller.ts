@@ -124,5 +124,6 @@ export class ElevatorQueueCtrl {
     const directionSetUpdate = queue[directionType].add(floor)
     const queueUpdate = queue.set(directionType, directionSetUpdate)
     this._getQueueUnit$(elevator).next(queueUpdate)
+    this._floorCtrl.setHasRequestedElevator(floor, true)
   }
 }

@@ -7,6 +7,7 @@ import { TypeStyleClassesCtx } from '~/pkg/typestyle/classes'
 import { Settings$Ctx } from '~/settings/stream'
 import { useStreamCtx } from '~/util/useStreamCtx'
 import { useStyle } from '~/util/useStyle'
+import { ElevatorCtrlCtx } from '../controller'
 import { elevatorRowStyle } from '../row/style'
 
 const cell = (): NestedCSSProperties => ({
@@ -18,6 +19,7 @@ const cell = (): NestedCSSProperties => ({
 function ElevatorCallers (): JSX.Element {
   const Row = useContext(AntdRowCtx)
 
+  const elevatorCtrl = useContext(ElevatorCtrlCtx)
   const floors = useStreamCtx(Floor$Ctx)
   const settings = useStreamCtx(Settings$Ctx)
   const classes = useContext(TypeStyleClassesCtx)
@@ -30,7 +32,12 @@ function ElevatorCallers (): JSX.Element {
     <>
       {floors.slice().reverse().map((floor) => (
         <Row className={cellClass} key={floor.number}>
-          <Button shape="circle">{floor.number}</Button>
+          <Button
+            onClick={() => elevatorCtrl.requestElevatorTo(floor)}
+            shape="circle"
+          >
+            {floor.number}
+          </Button>
         </Row>
       ))}
     </>
