@@ -1,5 +1,5 @@
 import { List, Map } from 'immutable'
-import { BehaviorSubject, combineLatest } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { IElevator } from '../../model'
@@ -8,7 +8,7 @@ import { ElevatorUnit$ } from '../../stream/unit'
 import { ElevatorQueueFactory } from '../factory'
 import { IElevatorQueueUnit$ } from './unit'
 
-type ElevatorQueueUnit$Map = Map<IElevator['id'], IElevatorQueueUnit$>
+type ElevatorQueueUnit$Map = Map<IElevator, IElevatorQueueUnit$>
 
 @singleton()
 export class ElevatorQueue$ extends BehaviorSubject<ElevatorQueueUnit$Map> {
@@ -18,12 +18,14 @@ export class ElevatorQueue$ extends BehaviorSubject<ElevatorQueueUnit$Map> {
     @inject(ElevatorQueueFactory) readonly elevatorQueueFactory: ElevatorQueueFactory
   ) {
     super(createElevatorQueues(elevator$.value))
-    function createElevatorQueues (elevators: List<ElevatorUnit$>): ElevatorQueueUnit$Map {
-      return immutable.Map(elevators.map(elevator => [
-        elevator.value.id,
+    function createElevatorQueues (elevatorUnit$s: List<ElevatorUnit$>): ElevatorQueueUnit$Map {
+      return immutable.Map(elevatorUnit$s.map(elevator => [
+        elevator.value,
         new BehaviorSubject(elevatorQueueFactory.create())
       ]))
     }
-    combineLatest([elevator$]).subscribe(args => this.next(createElevatorQueues(...args)))
+    elevator$.subscribe(elevatorUnit$s => {
+      this.next(createElevatorQueues(elevatorUnit$s))
+    })
   }
 }

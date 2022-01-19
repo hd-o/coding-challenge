@@ -7,13 +7,14 @@ import { IFloor } from './model'
 
 @singleton()
 export class FloorFactory {
+  private readonly _FloorRecord = this._immutable.Record<IFloor>({
+    number: 0
+  })
+
   constructor (
     @inject(Settings$) readonly settings$: Settings$,
     @inject(Lodash) readonly lodash: Lodash,
-    @inject(Immutable) readonly immutable: Immutable,
-    private readonly _FloorRecord = immutable.Record<IFloor>({
-      number: 0
-    })
+    @inject(Immutable) private readonly _immutable: Immutable
   ) {}
 
   create (state: IFloor): RecordOf<IFloor> {

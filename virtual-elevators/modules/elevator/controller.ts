@@ -11,7 +11,7 @@ import { ElevatorPositionCtrl } from './position/controller'
 
 @singleton()
 export class ElevatorCtrl {
-  private _requestNearestElevator (floor: IFloor): void {
+  private _requestNearestElevator (floor: IFloor): IElevator | undefined {
     const elevatorUnit$s = this._elevator$.value.toArray()
     // Show alert if no elevator available
     if (elevatorUnit$s.length === 0) return
@@ -19,7 +19,8 @@ export class ElevatorCtrl {
     let nearestElevator = elevatorUnit$s[0].value
     // Open doors if idle at floor
     if (this._isIdleAtFloor(nearestElevator, floor)) {
-      return this._elevatorDoorCtrl.open(nearestElevator)
+      this._elevatorDoorCtrl.open(nearestElevator)
+      return
     }
     // Cache current nearestDistance
     let nearestDistance = this._elevatorQueueCtrl.getDistance(nearestElevator, floor)
@@ -28,7 +29,8 @@ export class ElevatorCtrl {
       const elevator = elevatorUnit$.value
       // Early exit if elevator is Idle at floor
       if (this._isIdleAtFloor(elevator, floor)) {
-        return this._elevatorDoorCtrl.open(elevator)
+        this._elevatorDoorCtrl.open(elevator)
+        return
       }
       const distance = this._elevatorQueueCtrl.getDistance(elevator, floor)
       if (
@@ -43,6 +45,7 @@ export class ElevatorCtrl {
     if (nearestDistance === false) return
     // Else request nearest elevator
     this._elevatorQueueCtrl.insert(nearestElevator, floor)
+    return nearestElevator
   }
 
   private _isIdleAtFloor (elevator: IElevator, floor: IFloor): boolean {
@@ -60,9 +63,9 @@ export class ElevatorCtrl {
     @inject(ElevatorPositionCtrl) private readonly _elevatorPositionCtrl: ElevatorPositionCtrl
   ) {}
 
-  requestElevatorTo (floor: IFloor): void {
+  requestElevatorTo (floor: IFloor): IElevator | undefined {
     if (this._floorCtrl.hasRequestedElevator(floor)) return
-    this._requestNearestElevator(floor)
+    return this._requestNearestElevator(floor)
   }
 }
 

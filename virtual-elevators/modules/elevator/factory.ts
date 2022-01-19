@@ -2,24 +2,23 @@ import { RecordOf } from 'immutable'
 import { inject, singleton } from 'tsyringe'
 import { Floor$ } from '~/floor/stream'
 import { Immutable } from '~/pkg/immutable'
-import { Settings$ } from '~/settings/stream'
 import { IElevator } from './model'
 import { ElevatorMoveState } from './moveState'
 
 @singleton()
 export class ElevatorFactory {
+  private readonly _ElevatorRecord = this._immutable.Record<IElevator>({
+    id: '',
+    floors: this._floors$.value,
+    moveState: ElevatorMoveState.Idle
+  })
+
   constructor (
-    @inject(Immutable) readonly immutable: Immutable,
-    @inject(Floor$) readonly floors$: Floor$,
-    @inject(Settings$) readonly settings$: Settings$,
-    private readonly _ElevatorRecord = immutable.Record<IElevator>({
-      id: '',
-      floors: floors$.value,
-      moveState: ElevatorMoveState.Idle
-    })
+    @inject(Immutable) private readonly _immutable: Immutable,
+    @inject(Floor$) private readonly _floors$: Floor$
   ) {}
 
-  create (state: Partial<IElevator>): RecordOf<IElevator> {
+  create (state?: Partial<IElevator>): RecordOf<IElevator> {
     return this._ElevatorRecord(state)
   }
 }

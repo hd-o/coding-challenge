@@ -14,7 +14,7 @@ export class ElevatorPositionCtrl {
   ) { }
 
   getPosition (elevator: IElevator): number {
-    return this._elevatorPosition$.value.get(elevator.id)?.value ?? 0
+    return this._elevatorPosition$.value.get(elevator)?.value as number
   }
 
   getTopPosition (elevator: IElevator): number {
@@ -23,5 +23,9 @@ export class ElevatorPositionCtrl {
 
   isAtFloor (elevator: IElevator, floor: IFloor): boolean {
     return this.getPosition(elevator) === this._floorCtrl.getPosition(floor)
+  }
+
+  isOverFloor (elevator: IElevator, floor: IFloor): boolean {
+    return this.getPosition(elevator) > this._floorCtrl.getPosition(floor)
   }
 }

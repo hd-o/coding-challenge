@@ -14,13 +14,14 @@ function floorComparator (a: IFloor, b: IFloor): ComparatorResult {
 
 @singleton()
 export class ElevatorQueueFactory {
+  private readonly _ElevatorQueueRecord = this._immutable.Record<IElevatorQueue>({
+    state: elevatorQueueState.Idle,
+    MovingDown: new this._immutable.SortedSet<IFloor>([], (a, b) => floorComparator(b, a)),
+    MovingUp: new this._immutable.SortedSet([], floorComparator)
+  })
+
   constructor (
-    @inject(Immutable) readonly immutable: Immutable,
-    private readonly _ElevatorQueueRecord = immutable.Record<IElevatorQueue>({
-      state: elevatorQueueState.Idle,
-      MovingDown: new immutable.SortedSet<IFloor>([], (a, b) => floorComparator(b, a)),
-      MovingUp: new immutable.SortedSet([], floorComparator)
-    })
+    @inject(Immutable) private readonly _immutable: Immutable
   ) {}
 
   create (queue?: Partial<IElevatorQueue>): RecordOf<IElevatorQueue> {
