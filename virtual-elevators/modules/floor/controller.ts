@@ -1,9 +1,10 @@
 import { MemoizedFunction } from 'lodash'
-import { inject, singleton } from 'tsyringe'
+import { createContext } from 'react'
+import { container, inject, singleton } from 'tsyringe'
 import { Lodash } from '~/pkg/lodash'
 import { Settings$ } from '~/settings/stream'
 import { IFloor } from './model'
-import { FloorRequest$ } from './requests/stream'
+import { FloorRequest$, FloorRequestUnit$ } from './requests/stream'
 import { Floor$ } from './stream'
 
 type GetPosition = (floor: IFloor) => number
@@ -34,6 +35,10 @@ export class FloorCtrl {
 
   getPosition: GetPosition = (floor) => this._getPosition(floor)
 
+  getRequestUnit$ = (floor: IFloor): FloorRequestUnit$ => {
+    return this._floorRequest$.value.get(floor) as FloorRequestUnit$
+  }
+
   getTopPosition: GetPosition = (floor) => this._getTopPosition(floor)
 
   hasRequestedElevator (floor: IFloor): boolean {
@@ -44,3 +49,5 @@ export class FloorCtrl {
     this._floorRequest$.value.get(floor)?.next(hasRequested)
   }
 }
+
+export const FloorCtrlCtx = createContext(container.resolve(FloorCtrl))

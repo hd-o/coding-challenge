@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css'
 import { createContext, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
-import { ElevatorCallersCtx } from '../elevator/callers'
+import { ElevatorCallerRowsCtx } from '../elevator/caller/rows'
 import { ElevatorContainerCtx } from '../elevator/container'
 import { AntdColCtx } from '../pkg/antd/col'
 import { AntdRowCtx } from '../pkg/antd/row'
@@ -25,7 +25,7 @@ const row = (): NestedCSSProperties => ({
 
 function App (): JSX.Element {
   const Col = useContext(AntdColCtx)
-  const ElevatorCallers = useContext(ElevatorCallersCtx)
+  const ElevatorCallers = useContext(ElevatorCallerRowsCtx)
   const ElevatorContainer = useContext(ElevatorContainerCtx)
   const Row = useContext(AntdRowCtx)
 

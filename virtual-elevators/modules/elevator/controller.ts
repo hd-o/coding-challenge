@@ -63,7 +63,7 @@ export class ElevatorCtrl {
     @inject(ElevatorPositionCtrl) private readonly _elevatorPositionCtrl: ElevatorPositionCtrl
   ) {}
 
-  requestElevatorTo (floor: IFloor): IElevator | undefined {
+  requestElevator (floor: IFloor): IElevator | undefined {
     if (this._floorCtrl.hasRequestedElevator(floor)) return
     return this._requestNearestElevator(floor)
   }

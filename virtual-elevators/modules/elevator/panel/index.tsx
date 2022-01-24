@@ -1,13 +1,16 @@
-import { Button } from 'antd'
 import { createContext, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
-import { IFloor } from '~/floor/model'
 import { Floor$Ctx } from '~/floor/stream'
 import { AntdRowCtx } from '~/pkg/antd/row'
 import { TypeStyleClassesCtx } from '~/pkg/typestyle/classes'
 import { Settings$Ctx } from '~/settings/stream'
+import { useStream } from '~/util/useStream'
 import { useStreamCtx } from '~/util/useStreamCtx'
 import { useStyle } from '~/util/useStyle'
+import { ElevatorCallerCtx } from '../caller'
+import { ElevatorCallerProps } from '../caller/props'
+import { IElevator } from '../model'
+import { ElevatorQueueCtrlCtx } from '../queue/controller'
 import { elevatorRowStyle } from '../row/style'
 
 const row = (): NestedCSSProperties => ({
@@ -17,9 +20,26 @@ const row = (): NestedCSSProperties => ({
   padding: '0 30px 2px'
 })
 
+interface CustomElevatorCallerProps
+  extends Omit<ElevatorCallerProps, 'floorHasRequested' | 'onClick'> {
+  elevator: IElevator
+}
+
+function CustomElevatorCaller (props: CustomElevatorCallerProps): JSX.Element {
+  const ElevatorCaller = useContext(ElevatorCallerCtx)
+  const elevatorQueueCtrl = useContext(ElevatorQueueCtrlCtx)
+
+  useStream(elevatorQueueCtrl.getQueueUnit$(props.elevator))
+
+  return <ElevatorCaller
+    {...props}
+    floorHasRequested={elevatorQueueCtrl.isGoingToFloor(props.elevator, props.floor)}
+    onClick={() => elevatorQueueCtrl.insert(props.elevator, props.floor)}
+  />
+}
+
 interface Props {
-  // queue: Elevator['queue']
-  onClick: (floor: IFloor) => void
+  elevator: IElevator
 }
 
 /** Internal elevator buttons */
@@ -37,14 +57,11 @@ function ElevatorPanel (props: Props): JSX.Element {
   return (
     <Row className={rowClass}>
       {floors.map((floor) => (
-        <Button
+        <CustomElevatorCaller
+          elevator={props.elevator}
+          floor={floor}
           key={floor.number}
-          onClick={() => props.onClick(floor)}
-          shape="circle"
-          // type={props.queue.includes(floor) ? 'primary' : 'default'}
-        >
-          {floor.number}
-        </Button>
+        />
       ))}
     </Row>
   )
