@@ -44,5 +44,15 @@ export namespace get {
 
   export const settings = (): ISettings => settings$().value
 
-  export const typeAndMethodName = <C extends NewableFunction> (c: C, k: keyof C['prototype']): string => `${c.prototype.constructor.name as string}.${String(k)}`
+  export const describe_ = <C extends NewableFunction> (c: C, k: keyof C['prototype']): string => `${c.prototype.constructor.name as string}.${String(k)}`
+
+  type PropMap <C extends NewableFunction> = {[K in keyof C['prototype']]: string}
+  type Describe = <C extends NewableFunction> (c: C) => PropMap<typeof c>
+
+  /**
+   * Get string with type and method name for test titles (arg for jest describe())
+   * @example
+   * get.describe(MyClass).myMethod // => 'MyClass.method'
+   */
+  export const describe: Describe = (c) => new Proxy({}, { get: (t, p) => `${c.name}.${String(p)}` }) as PropMap<typeof c>
 }
