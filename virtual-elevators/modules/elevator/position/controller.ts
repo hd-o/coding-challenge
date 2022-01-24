@@ -1,4 +1,5 @@
-import { inject, singleton } from 'tsyringe'
+import { createContext } from 'react'
+import { container, inject, singleton } from 'tsyringe'
 import { FloorCtrl } from '~/floor/controller'
 import { IFloor } from '~/floor/model'
 import { Settings$ } from '~/settings/stream'
@@ -29,3 +30,5 @@ export class ElevatorPositionCtrl {
     return this.getPosition(elevator) > this._floorCtrl.getPosition(floor)
   }
 }
+
+export const ElevatorPositionCtrlCtx = createContext(container.resolve(ElevatorPositionCtrl))

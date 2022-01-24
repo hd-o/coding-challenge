@@ -1,6 +1,7 @@
 import { List, Map } from 'immutable'
+import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
-import { inject, singleton } from 'tsyringe'
+import { container, inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { IElevator } from '../../model'
 import { Elevator$ } from '../../stream'
@@ -29,3 +30,5 @@ export class ElevatorQueue$ extends BehaviorSubject<ElevatorQueueUnit$Map> {
     })
   }
 }
+
+export const ElevatorQueue$Ctx = createContext(container.resolve(ElevatorQueue$))

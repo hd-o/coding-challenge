@@ -1,4 +1,5 @@
-import { inject, singleton } from 'tsyringe'
+import { createContext } from 'react'
+import { container, inject, singleton } from 'tsyringe'
 import { FloorCtrl } from '~/floor/controller'
 import { IFloor } from '~/floor/model'
 import { Settings$ } from '~/settings/stream'
@@ -118,7 +119,12 @@ export class ElevatorQueueCtrl {
     return distance
   }
 
+  getQueueUnit$ (elevator: IElevator): IElevatorQueueUnit$ {
+    return this._getQueueUnit$(elevator)
+  }
+
   insert (elevator: IElevator, floor: IFloor): void {
+    if (this.isGoingToFloor(elevator, floor)) return
     const { directionType } = this._getFloorInsertIndex(elevator, floor)
     const queue = this._getQueue(elevator)
     const directionSetUpdate = queue[directionType].add(floor)
@@ -128,4 +134,11 @@ export class ElevatorQueueCtrl {
     this._getQueueUnit$(elevator).next(queueUpdate)
     this._floorCtrl.setHasRequestedElevator(floor, true)
   }
+
+  isGoingToFloor (elevator: IElevator, floor: IFloor): boolean {
+    const queue = this._getQueue(elevator)
+    return queue.MovingUp.has(floor) || queue.MovingDown.has(floor)
+  }
 }
+
+export const ElevatorQueueCtrlCtx = createContext(container.resolve(ElevatorQueueCtrl))

@@ -39,6 +39,8 @@ export class SortedSet<V> implements Iterable<V> {
     return new SortedSet(this._orderedSet.concat(values))
   }
 
+  has = this._orderedSet.has.bind(this._orderedSet)
+
   get = this._orderedSet.get.bind(this._orderedSet)
 
   toArray = this._orderedSet.toArray.bind(this._orderedSet)

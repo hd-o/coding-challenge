@@ -5,11 +5,11 @@ import { elevatorQueueState } from './queue/model/moveState'
 
 function requestElevator (floorIndex: number = 0): IFloor {
   const floor = get.floors()[floorIndex]
-  get.elevatorCtrl().requestElevatorTo(floor)
+  get.elevatorCtrl().requestElevator(floor)
   return floor
 }
 
-describe(`${get.describe(ElevatorCtrl).requestElevatorTo}`, () => {
+describe(`${get.describe(ElevatorCtrl).requestElevator}`, () => {
   test('Open door when elevator idle at floor', () => {
     const floor = requestElevator()
     expect(get.floorCtrl().hasRequestedElevator(floor)).toBe(false)

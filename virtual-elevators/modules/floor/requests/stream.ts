@@ -1,13 +1,14 @@
 import { List, Map } from 'immutable'
+import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
-import { inject, singleton } from 'tsyringe'
+import { container, inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { IFloor } from '../model'
 import { Floor$ } from '../stream'
 
-type HasRequestedElevator = boolean
-type HasFloorRequestedElevator$ = BehaviorSubject<HasRequestedElevator>
-type FloorRequestMap = Map<IFloor, HasFloorRequestedElevator$>
+type FloorRequest = boolean
+export type FloorRequestUnit$ = BehaviorSubject<FloorRequest>
+type FloorRequestMap = Map<IFloor, FloorRequestUnit$>
 
 @singleton()
 export class FloorRequest$ extends BehaviorSubject<FloorRequestMap> {
@@ -19,8 +20,10 @@ export class FloorRequest$ extends BehaviorSubject<FloorRequestMap> {
     floor$.subscribe(floor => this.next(createFloorRequestMap(floor)))
     function createFloorRequestMap (floors: List<IFloor>): FloorRequestMap {
       return immutable.Map(floors.map((floor) => {
-        return [floor, new BehaviorSubject(false)] as [IFloor, HasFloorRequestedElevator$]
+        return [floor, new BehaviorSubject(false)] as [IFloor, FloorRequestUnit$]
       }))
     }
   }
 }
+
+export const FloorRequest$Ctx = createContext(container.resolve(FloorRequest$))
