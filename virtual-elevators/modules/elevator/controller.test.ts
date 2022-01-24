@@ -9,7 +9,7 @@ function requestElevator (floorIndex: number = 0): IFloor {
   return floor
 }
 
-describe(`${get.typeAndMethodName(ElevatorCtrl, 'requestElevatorTo')}`, () => {
+describe(`${get.describe(ElevatorCtrl).requestElevatorTo}`, () => {
   test('Open door when elevator idle at floor', () => {
     const floor = requestElevator()
     expect(get.floorCtrl().hasRequestedElevator(floor)).toBe(false)
