@@ -1,6 +1,8 @@
+import { firstValueFrom, skip } from 'rxjs'
 import { IFloor } from '~/floor/model'
 import { get } from '@/tests/util/getters'
 import { ElevatorCtrl } from './controller'
+import { elevatorDoorStatus } from './door/model/status'
 import { elevatorQueueState } from './queue/model/moveState'
 
 function requestElevator (floorIndex: number = 0): IFloor {
@@ -10,10 +12,11 @@ function requestElevator (floorIndex: number = 0): IFloor {
 }
 
 describe(`${get.describe(ElevatorCtrl).requestElevator}`, () => {
-  test('Open door when elevator idle at floor', () => {
+  test('Open door when elevator idle at floor', async () => {
     const floor = requestElevator()
     expect(get.floorCtrl().hasRequestedElevator(floor)).toBe(false)
-    expect(get.elevatorDoor().open).toBe(true)
+    const door = await firstValueFrom(get.elevatorDoorUnit$().pipe(skip(1)))
+    expect(door.status).toBe(elevatorDoorStatus.Opening)
   })
   test('Set floor request when elevator is available', () => {
     const floor = requestElevator(1)

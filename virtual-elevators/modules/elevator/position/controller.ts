@@ -4,7 +4,7 @@ import { FloorCtrl } from '~/floor/controller'
 import { IFloor } from '~/floor/model'
 import { Settings$ } from '~/settings/stream'
 import { IElevator } from '../model'
-import { ElevatorPosition$ } from './stream'
+import { ElevatorPosition$, ElevatorPositionUnit$ } from './stream'
 
 @singleton()
 export class ElevatorPositionCtrl {
@@ -15,7 +15,11 @@ export class ElevatorPositionCtrl {
   ) { }
 
   getPosition (elevator: IElevator): number {
-    return this._elevatorPosition$.value.get(elevator)?.value as number
+    return this.getPositionUnit$(elevator).value
+  }
+
+  getPositionUnit$ (elevator: IElevator): ElevatorPositionUnit$ {
+    return this._elevatorPosition$.value.get(elevator) as ElevatorPositionUnit$
   }
 
   getTopPosition (elevator: IElevator): number {

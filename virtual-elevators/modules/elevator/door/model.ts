@@ -1,3 +1,7 @@
+import { ElevatorDoorPosition } from './model/position'
+import { ElevatorDoorStatus } from './model/status'
+
 export interface IElevatorDoor {
-  open: boolean
+  status: ElevatorDoorStatus
+  position: ElevatorDoorPosition
 }
