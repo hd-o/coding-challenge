@@ -2,8 +2,12 @@ import { createContext, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
 import { AntdColCtx } from '~/pkg/antd/col'
 import { Settings$Ctx } from '~/settings/stream'
+import { useStream } from '~/util/useStream'
 import { useStreamCtx } from '~/util/useStreamCtx'
 import { useStyle } from '~/util/useStyle'
+import { ElevatorDoorCtx } from '../door'
+import { IElevator } from '../model'
+import { ElevatorPositionCtrlCtx } from '../position/controller'
 
 const enum CarPadding {
   top = 8,
@@ -24,17 +28,6 @@ const container = (props: {
   width: '100%'
 })
 
-const door = (props = {
-  open: false
-}): NestedCSSProperties => ({
-  $debugName: 'elevator-door',
-  background: '#555',
-  height: '100%',
-  transition: 'width 2s',
-  width: `calc(${props.open ? 25 : 50}% - 0.5px)`,
-  zIndex: 1
-})
-
 const interior = (): NestedCSSProperties => ({
   $debugName: 'elevator-interior',
   background: '#ccc',
@@ -45,20 +38,24 @@ const interior = (): NestedCSSProperties => ({
 })
 
 interface Props {
-  position: number
+  elevator: IElevator
 }
 
 function ElevatorCar (props: Props): JSX.Element {
   const Col = useContext(AntdColCtx)
+  const ElevatorDoor = useContext(ElevatorDoorCtx)
+
   const settings = useStreamCtx(Settings$Ctx)
+  const elevatorPositionCtrl = useContext(ElevatorPositionCtrlCtx)
+  const position = useStream(elevatorPositionCtrl.getPositionUnit$(props.elevator))
+
   return (
     <Col
       className={useStyle(container, settings)}
-      style={{ bottom: props.position }}
+      style={{ bottom: position }}
     >
       <div className={useStyle(interior)} />
-      <div className={useStyle(door)} />
-      <div className={useStyle(door)} />
+      <ElevatorDoor elevator={props.elevator} />
     </Col>
   )
 }

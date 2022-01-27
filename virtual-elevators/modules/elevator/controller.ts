@@ -11,6 +11,7 @@ import { ElevatorPositionCtrl } from './position/controller'
 
 @singleton()
 export class ElevatorCtrl {
+  /** @returns Nearest elevator, or undefined if no elevator services floor */
   private _requestNearestElevator (floor: IFloor): IElevator | undefined {
     const elevatorUnit$s = this._elevator$.value.toArray()
     // Show alert if no elevator available
@@ -20,7 +21,7 @@ export class ElevatorCtrl {
     // Open doors if idle at floor
     if (this._isIdleAtFloor(nearestElevator, floor)) {
       this._elevatorDoorCtrl.open(nearestElevator)
-      return
+      return nearestElevator
     }
     // Cache current nearestDistance
     let nearestDistance = this._elevatorQueueCtrl.getDistance(nearestElevator, floor)
@@ -30,7 +31,7 @@ export class ElevatorCtrl {
       // Early exit if elevator is Idle at floor
       if (this._isIdleAtFloor(elevator, floor)) {
         this._elevatorDoorCtrl.open(elevator)
-        return
+        return elevator
       }
       const distance = this._elevatorQueueCtrl.getDistance(elevator, floor)
       if (

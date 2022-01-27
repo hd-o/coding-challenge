@@ -8,7 +8,6 @@ import { useStreamCtx } from '../util/useStreamCtx'
 import { useStyle } from '../util/useStyle'
 import { ElevatorCarCtx } from './car'
 import { ElevatorPanelCtx } from './panel'
-import { ElevatorPositionCtrlCtx } from './position/controller'
 import { elevatorRowStyle } from './row/style'
 import { ElevatorUnit$ } from './stream/unit'
 
@@ -31,7 +30,6 @@ function Elevator (props: Props): JSX.Element {
   const ElevatorPanel = useContext(ElevatorPanelCtx)
   const Row = useContext(AntdRowCtx)
 
-  const elevatorPositionCtrl = useContext(ElevatorPositionCtrlCtx)
   const elevator = useStream(props.elevatorUnit$)
   const settings = useStreamCtx(Settings$Ctx)
   const classes = useContext(TypeStyleClassesCtx)
@@ -44,7 +42,7 @@ function Elevator (props: Props): JSX.Element {
   return (
     <>
       <Row className={containerClass}>
-        <ElevatorCar position={elevatorPositionCtrl.getPosition(elevator)} />
+        <ElevatorCar elevator={elevator} />
       </Row>
       <ElevatorPanel elevator={elevator} />
     </>
