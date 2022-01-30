@@ -21,6 +21,9 @@ export class ProcessLoop {
       this._runProcesses(entries)
       requestAnimationFrame(runLoop)
     }
+    if (typeof requestAnimationFrame === 'undefined') {
+      return console.warn('undefined requestAnimationFrame')
+    }
     requestAnimationFrame(runLoop)
     this._loopIsRunning = true
   }

@@ -1,5 +1,4 @@
-import { RecordOf } from 'immutable'
 import { BehaviorSubject } from 'rxjs'
-import { IElevator } from '../model'
+import { ElevatorRecord } from '../model'
 
-export type ElevatorUnit$ = BehaviorSubject<RecordOf<IElevator>>
+export type ElevatorUnit$ = BehaviorSubject<ElevatorRecord>

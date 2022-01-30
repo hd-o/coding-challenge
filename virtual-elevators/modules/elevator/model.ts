@@ -1,11 +1,11 @@
-import { List } from 'immutable'
+import { List, RecordOf } from 'immutable'
 import { IFloor } from '~/floor/model'
 import { ElevatorMoveState } from './moveState'
 
-type ElevatorId = string | {}
-
 export interface IElevator {
-  id: ElevatorId
+  id: string
   floors: List<IFloor>
   moveState: ElevatorMoveState
 }
+
+export type ElevatorRecord = RecordOf<IElevator>

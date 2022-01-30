@@ -8,5 +8,10 @@ export const elevatorRowStyle = (props: {
   background: '#eee',
   alignItems: 'center',
   justifyContent: 'center',
-  zoom: 0.9
+  zoom: 0.9,
+  $nest: {
+    '&:nth-child(odd)': {
+      background: '#ddd'
+    }
+  }
 })
