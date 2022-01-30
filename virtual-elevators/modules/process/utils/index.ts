@@ -3,7 +3,7 @@ import { Process } from '../loop'
 
 @singleton()
 export class ProcessUtils {
-  createWaitProcess (waitMs = 5000): Process {
+  createWaitProcess (waitMs: number): Process {
     let startTime: number
     let process: Process = () => {
       startTime = Date.now()

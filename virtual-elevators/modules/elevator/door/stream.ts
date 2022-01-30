@@ -9,7 +9,7 @@ import { ElevatorDoorFactory } from './factory'
 import { IElevatorDoor } from './model'
 
 export type ElevatorDoorUnit$ = BehaviorSubject<RecordOf<IElevatorDoor>>
-type ElevatorDoorMap = Map<IElevator, ElevatorDoorUnit$>
+type ElevatorDoorMap = Map<IElevator['id'], ElevatorDoorUnit$>
 
 @singleton()
 export class ElevatorDoor$ extends BehaviorSubject<ElevatorDoorMap> {
@@ -22,7 +22,7 @@ export class ElevatorDoor$ extends BehaviorSubject<ElevatorDoorMap> {
     elevator$.subscribe((elevatorUnit$s) => this.next(createDoorMap(elevatorUnit$s)))
     function createDoorMap (elevatorUnit$s: List<ElevatorUnit$>): ElevatorDoorMap {
       return immutable.Map(elevatorUnit$s.map(elevatorUnit$ => ([
-        elevatorUnit$.value,
+        elevatorUnit$.value.id,
         new BehaviorSubject(doorFactory.create())
       ])))
     }

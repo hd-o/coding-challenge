@@ -9,7 +9,7 @@ import { ElevatorUnit$ } from '../../stream/unit'
 import { ElevatorQueueFactory } from '../factory'
 import { IElevatorQueueUnit$ } from './unit'
 
-type ElevatorQueueUnit$Map = Map<IElevator, IElevatorQueueUnit$>
+type ElevatorQueueUnit$Map = Map<IElevator['id'], IElevatorQueueUnit$>
 
 @singleton()
 export class ElevatorQueue$ extends BehaviorSubject<ElevatorQueueUnit$Map> {
@@ -19,15 +19,13 @@ export class ElevatorQueue$ extends BehaviorSubject<ElevatorQueueUnit$Map> {
     @inject(ElevatorQueueFactory) readonly elevatorQueueFactory: ElevatorQueueFactory
   ) {
     super(createElevatorQueues(elevator$.value))
-    function createElevatorQueues (elevatorUnit$s: List<ElevatorUnit$>): ElevatorQueueUnit$Map {
-      return immutable.Map(elevatorUnit$s.map(elevator => [
-        elevator.value,
+    elevator$.subscribe(elevatorUnit$s => this.next(createElevatorQueues(elevatorUnit$s)))
+    function createElevatorQueues (elevatorUnit$List: List<ElevatorUnit$>): ElevatorQueueUnit$Map {
+      return immutable.Map(elevatorUnit$List.map(elevatorUnit$ => [
+        elevatorUnit$.value.id,
         new BehaviorSubject(elevatorQueueFactory.create())
       ]))
     }
-    elevator$.subscribe(elevatorUnit$s => {
-      this.next(createElevatorQueues(elevatorUnit$s))
-    })
   }
 }
 

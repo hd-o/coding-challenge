@@ -6,7 +6,7 @@ import { useStream } from '~/util/useStream'
 import { useStreamCtx } from '~/util/useStreamCtx'
 import { useStyle } from '~/util/useStyle'
 import { ElevatorDoorCtx } from '../door'
-import { IElevator } from '../model'
+import { ElevatorRecord } from '../model'
 import { ElevatorPositionCtrlCtx } from '../position/controller'
 
 const enum CarPadding {
@@ -38,7 +38,7 @@ const interior = (): NestedCSSProperties => ({
 })
 
 interface Props {
-  elevator: IElevator
+  elevator: ElevatorRecord
 }
 
 function ElevatorCar (props: Props): JSX.Element {

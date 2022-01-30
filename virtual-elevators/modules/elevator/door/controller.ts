@@ -3,7 +3,7 @@ import { container, inject, singleton } from 'tsyringe'
 import { Lodash } from '~/pkg/lodash'
 import { Process, ProcessLoop } from '~/process/loop'
 import { ProcessUtils } from '~/process/utils'
-import { IElevator } from '../model'
+import { ElevatorRecord } from '../model'
 import { ElevatorMoveState } from '../moveState'
 import { IElevatorDoor } from './model'
 import { elevatorDoorPosition } from './model/position'
@@ -44,21 +44,25 @@ export class ElevatorDoorCtrl {
     @inject(Lodash) private readonly _lodash: Lodash
   ) {}
 
-  getDoorUnit$ (elevator: IElevator): ElevatorDoorUnit$ {
-    return this._elevatorDoors$.value.get(elevator) as ElevatorDoorUnit$
+  getDoorUnit$ (elevator: ElevatorRecord): ElevatorDoorUnit$ {
+    return this._elevatorDoors$.value.get(elevator.id) as ElevatorDoorUnit$
   }
 
-  open (elevator: IElevator): void {
+  isDoorClosed (elevator: ElevatorRecord): boolean {
+    return this.getDoorUnit$(elevator).value.position === elevatorDoorPosition.Closed
+  }
+
+  open (elevator: ElevatorRecord): void {
     if (elevator.moveState !== ElevatorMoveState.Idle) return
     const doorUnit$ = this.getDoorUnit$(elevator)
     this._processLoop.reset(doorUnit$, [
       this._createDoorMovementProcess(doorUnit$, elevatorDoorStatus.Opening),
-      this._processUtils.createWaitProcess(),
+      this._processUtils.createWaitProcess(1000),
       this._createDoorMovementProcess(doorUnit$, elevatorDoorStatus.Closing)
     ])
   }
 
-  close (elevator: IElevator): void {
+  close (elevator: ElevatorRecord): void {
     const doorUnit$ = this.getDoorUnit$(elevator)
     this._processLoop.reset(doorUnit$, [
       this._createDoorMovementProcess(doorUnit$, elevatorDoorStatus.Closing)

@@ -21,11 +21,11 @@ export class Elevator$ extends BehaviorSubject<ElevatorUnit$List> {
   ) {
     super(createElevators(settings$.value))
     function createElevators (settings: ISettings): List<ElevatorUnit$> {
-      const elevators = lodash.rangeMap(settings.elevatorCount, () => {
+      const elevatorUnit$Array = lodash.rangeMap(settings.elevatorCount, () => {
         const elevator = elevatorFactory.create({ id: lodash.uniqueId() })
         return new BehaviorSubject(elevator)
       })
-      return immutable.List(elevators)
+      return immutable.List(elevatorUnit$Array)
     }
     combineLatest([settings$]).subscribe((args) => {
       this.next(createElevators(...args))

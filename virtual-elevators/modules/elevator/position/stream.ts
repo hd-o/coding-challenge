@@ -7,7 +7,7 @@ import { IElevator } from '../model'
 import { Elevator$ } from '../stream'
 
 export type ElevatorPositionUnit$ = BehaviorSubject<number>
-export type ElevatorPositionUnit$Map = Map<IElevator, ElevatorPositionUnit$>
+export type ElevatorPositionUnit$Map = Map<IElevator['id'], ElevatorPositionUnit$>
 
 @singleton()
 export class ElevatorPosition$ extends BehaviorSubject<ElevatorPositionUnit$Map> {
@@ -20,7 +20,7 @@ export class ElevatorPosition$ extends BehaviorSubject<ElevatorPositionUnit$Map>
     elevator$.subscribe(() => this.next(createPosition$()))
     function createPosition$ (): ElevatorPositionUnit$Map {
       return immutable.Map(elevator$.value.map((elevatorUnit$) => {
-        return [elevatorUnit$.value, new BehaviorSubject(0)]
+        return [elevatorUnit$.value.id, new BehaviorSubject(0)]
       }))
     }
   }
