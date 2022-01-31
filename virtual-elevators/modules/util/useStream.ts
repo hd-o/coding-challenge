@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import { BehaviorSubject } from 'rxjs'
+import { Observable, ObservedValueOf } from 'rxjs'
 import { UseObservableEagerStateCtx } from '../pkg/observable-hooks/useObservableEagerState'
 
-export function useStream <B extends BehaviorSubject<any>> (stream: B): B['value'] {
+export function useStream <B extends Observable<any>> (stream: B): ObservedValueOf<typeof stream> {
   return useContext(UseObservableEagerStateCtx)(stream)
 }

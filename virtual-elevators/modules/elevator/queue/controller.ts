@@ -46,6 +46,8 @@ export class ElevatorQueueCtrl {
   }
 
   private _getQueueUnit$ (elevator: ElevatorRecord): IElevatorQueueUnit$ {
+    // TODO: Stop using .value for BehaviorSubject access
+    // TODO: Use $ for click handlers, and merge value with other $s
     /** @see {ElevatorQueue$} - Creates queues for all elevators */
     return this._elevatorQueue$.value.get(elevator.id) as IElevatorQueueUnit$
   }
@@ -137,7 +139,6 @@ export class ElevatorQueueCtrl {
   insert (elevator: ElevatorRecord, floor: IFloor): void {
     if (this.isGoingToFloor(elevator, floor)) return
     const { directionType } = this._getFloorInsertIndex(elevator, floor)
-    console.log({ directionType })
     const queue = this._getQueue(elevator)
     const directionSetUpdate = queue[directionType].add(floor)
     let queueUpdate = queue.set(directionType, directionSetUpdate)
