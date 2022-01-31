@@ -1,7 +1,7 @@
 import { Context, ContextType, useContext } from 'react'
-import { BehaviorSubject } from 'rxjs'
+import { Observable, ObservedValueOf } from 'rxjs'
 import { useStream } from './useStream'
 
-export function useStreamCtx <B extends BehaviorSubject<any>> (ctx: Context<B>): ContextType<typeof ctx>['value'] {
+export function useStreamCtx <B extends Observable<any>> (ctx: Context<B>): ObservedValueOf<ContextType<typeof ctx>> {
   return useStream(useContext(ctx))
 }

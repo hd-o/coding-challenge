@@ -84,18 +84,17 @@ export class ElevatorCtrl {
   }
 
   createMovementProcess (elevatorId: IElevator['id'], queueUnit$: IElevatorQueueUnit$): Process {
+    // TODO: Make ProcessLoop into a $, then subscribe for elevator/door movement
     return () => {
       let elevator = this.getElevatorUnit$(elevatorId).value
-      if (!this._doorCtrl.isDoorClosed(elevator)) return
-      if (this._queueCtrl.isQueueEmpty(elevator)) return
-      if (queueUnit$.value.state === elevatorQueueState.Idle) return
-      const state = queueUnit$.value.state as ElevatorDirectionType
-      // console.log({ queue: queueUnit$.value.toObject() })
-      // console.log({ state })
-      const nextFloor = queueUnit$.value[state].first as IFloor
+      if (!this._doorCtrl.isDoorClosed(elevator)) return undefined
+      if (this._queueCtrl.isQueueEmpty(elevator)) return undefined
+      if (queueUnit$.value.state === elevatorQueueState.Idle) return undefined
+      const currentDirection = queueUnit$.value.state as ElevatorDirectionType
+      const nextFloor = queueUnit$.value[currentDirection].first as IFloor
       if (this._positionCtrl.isAtFloor(elevator, nextFloor)) {
         elevator = this.setElevatorMoveState(elevator, ElevatorMoveState.Idle)
-        this._queueCtrl.remove(elevator, state, nextFloor)
+        this._queueCtrl.remove(elevator, currentDirection, nextFloor)
         this._floorCtrl.setHasRequestedElevator(nextFloor, false)
         this._doorCtrl.open(elevator)
       } else {
@@ -103,7 +102,7 @@ export class ElevatorCtrl {
           elevator = this.setElevatorMoveState(elevator, ElevatorMoveState.Moving)
         }
         const position = this._positionCtrl.getPosition(elevator)
-        const increment = state === elevatorDirectionType.MovingUp ? 1 : -1
+        const increment = currentDirection === elevatorDirectionType.MovingUp ? 1 : -1
         this._positionCtrl.setPosition(elevator, position + increment)
       }
     }

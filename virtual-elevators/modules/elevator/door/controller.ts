@@ -49,12 +49,16 @@ export class ElevatorDoorCtrl {
   }
 
   isDoorClosed (elevator: ElevatorRecord): boolean {
-    return this.getDoorUnit$(elevator).value.position === elevatorDoorPosition.Closed
+    return this.getDoorUnit$(elevator).value.status === elevatorDoorStatus.Closed
   }
 
   open (elevator: ElevatorRecord): void {
     if (elevator.moveState !== ElevatorMoveState.Idle) return
     const doorUnit$ = this.getDoorUnit$(elevator)
+    // #door-status: Assure status is set before process loop.
+    // Prevents other process reading that door is still closed
+    // if that process runs before this doorUnit$ process
+    this._setDoorStatus(doorUnit$, elevatorDoorStatus.Opening)
     this._processLoop.reset(doorUnit$, [
       this._createDoorMovementProcess(doorUnit$, elevatorDoorStatus.Opening),
       this._processUtils.createWaitProcess(1000),
@@ -64,6 +68,8 @@ export class ElevatorDoorCtrl {
 
   close (elevator: ElevatorRecord): void {
     const doorUnit$ = this.getDoorUnit$(elevator)
+    /** @see ElevatorDoorCtrl.open #door-status  */
+    this._setDoorStatus(doorUnit$, elevatorDoorStatus.Closing)
     this._processLoop.reset(doorUnit$, [
       this._createDoorMovementProcess(doorUnit$, elevatorDoorStatus.Closing)
     ])
