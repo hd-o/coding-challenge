@@ -1,9 +1,6 @@
-import { RecordOf } from 'immutable'
 import { inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
-import { Lodash } from '~/pkg/lodash'
-import { Settings$ } from '~/settings/stream'
-import { IFloor } from './model'
+import { IFloor, IFloorRecord } from './model'
 
 @singleton()
 export class FloorFactory {
@@ -12,12 +9,10 @@ export class FloorFactory {
   })
 
   constructor (
-    @inject(Settings$) readonly settings$: Settings$,
-    @inject(Lodash) readonly lodash: Lodash,
     @inject(Immutable) private readonly _immutable: Immutable
   ) {}
 
-  create (state: IFloor): RecordOf<IFloor> {
+  create (state: Partial<IFloor>): IFloorRecord {
     return this._FloorRecord(state)
   }
 }

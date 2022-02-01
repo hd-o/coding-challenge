@@ -11,7 +11,7 @@ import { IElevatorQueueUnit$ } from '~/elevator/queue/stream/unit'
 import { Elevator$, IElevatorUnit$List } from '~/elevator/stream'
 import { IElevatorUnit$ } from '~/elevator/stream/unit'
 import { FloorCtrl } from '~/floor/controller'
-import { IFloor } from '~/floor/model'
+import { IFloorRecord } from '~/floor/model'
 import { Floor$ } from '~/floor/stream'
 import { ISettings } from '~/settings/model'
 import { Settings$ } from '~/settings/stream'
@@ -40,7 +40,7 @@ export namespace get {
   export const elevatorQueue = (elevator: IElevatorRecord): IElevatorQueue => elevatorQueueUnit$(elevator).value
   export const elevatorQueueState = (): IElevatorQueueState => elevatorQueue(get.elevator()).state
 
-  export const floors = (): IFloor[] => [...floor$().value]
+  export const floors = (): IFloorRecord[] => [...floor$().value]
 
   export const settings = (): ISettings => settings$().value
 

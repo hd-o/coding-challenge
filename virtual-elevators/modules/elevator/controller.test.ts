@@ -1,11 +1,11 @@
 import { firstValueFrom, skip } from 'rxjs'
-import { IFloor } from '~/floor/model'
+import { IFloorRecord } from '~/floor/model'
 import { get } from '@/tests/util/getters'
 import { ElevatorCtrl } from './controller'
 import { elevatorDoorStatus } from './door/model/status'
 import { elevatorQueueState } from './queue/model/moveState'
 
-function requestElevator (floorIndex: number = 0): IFloor {
+function requestElevator (floorIndex: number = 0): IFloorRecord {
   const floor = get.floors()[floorIndex]
   get.elevatorCtrl().requestElevator(floor)
   return floor

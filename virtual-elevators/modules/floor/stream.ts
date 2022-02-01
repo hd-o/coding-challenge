@@ -5,12 +5,12 @@ import { container, inject, singleton } from 'tsyringe'
 import { FloorFactory } from '~/floor/factory'
 import { Lodash } from '~/pkg/lodash'
 import { ISettings } from '~/settings/model'
-import { IFloor } from './model'
 import { Immutable } from '../pkg/immutable'
 import { Settings$ } from '../settings/stream'
+import { IFloorRecord } from './model'
 
 @singleton()
-export class Floor$ extends BehaviorSubject<List<IFloor>> {
+export class Floor$ extends BehaviorSubject<List<IFloorRecord>> {
   constructor (
     @inject(Settings$) readonly settings$: Settings$,
     @inject(Lodash) readonly lodash: Lodash,
@@ -18,7 +18,7 @@ export class Floor$ extends BehaviorSubject<List<IFloor>> {
     @inject(FloorFactory) readonly floorFactory: FloorFactory
   ) {
     super(createFloors(settings$.value))
-    function createFloors (settings: ISettings): List<IFloor> {
+    function createFloors (settings: ISettings): List<IFloorRecord> {
       const floors = lodash
         .range(settings.floorCount)
         .map(number => floorFactory.create({ number }))

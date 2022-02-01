@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 import { container, inject, singleton } from 'tsyringe'
 import { FloorCtrl } from '~/floor/controller'
-import { IFloor } from '~/floor/model'
+import { IFloorRecord } from '~/floor/model'
 import { Settings$ } from '~/settings/stream'
 import { IElevatorRecord } from '../model'
 import { ElevatorPositionCtrl } from '../position/controller'
@@ -32,7 +32,7 @@ export class ElevatorQueueCtrl {
       : queue.MovingUp
   }
 
-  private _getFloorInsertIndex (elevator: IElevatorRecord, floor: IFloor): QueueIndex {
+  private _getFloorInsertIndex (elevator: IElevatorRecord, floor: IFloorRecord): QueueIndex {
     const isPastFloor = this._isPastFloor(elevator, floor)
     const queueSet = isPastFloor
       ? this._getInactiveQueueSet(elevator)
@@ -69,7 +69,7 @@ export class ElevatorQueueCtrl {
    * Result is later used to decide if elevator can stop at given floor
    * @returns False only if elevator has not entered the floor's area
    */
-  private _isPastFloor (elevator: IElevatorRecord, floor: IFloor): boolean {
+  private _isPastFloor (elevator: IElevatorRecord, floor: IFloorRecord): boolean {
     switch (this._getQueueState(elevator)) {
       case elevatorQueueState.MovingDown:
         return this._elevatorPositionCtrl.getPosition(elevator) < this._floorCtrl.getTopPosition(floor)
@@ -93,7 +93,7 @@ export class ElevatorQueueCtrl {
    * Or, if floor is next, distance from elevator to floor
    * @returns False if floor is not serviced, or distance in floor height unit
    */
-  getDistance (elevator: IElevatorRecord, floor: IFloor): number | false {
+  getDistance (elevator: IElevatorRecord, floor: IFloorRecord): number | false {
     // Check if floor is serviced by elevator
     if (!elevator.floors.includes(floor)) return false
     // Start with distance from elevator to next floor
@@ -136,7 +136,7 @@ export class ElevatorQueueCtrl {
     return this._getQueueUnit$(elevator)
   }
 
-  insert (elevator: IElevatorRecord, floor: IFloor): void {
+  insert (elevator: IElevatorRecord, floor: IFloorRecord): void {
     if (this.isGoingToFloor(elevator, floor)) return
     const { directionType } = this._getFloorInsertIndex(elevator, floor)
     const queue = this._getQueue(elevator)
@@ -149,7 +149,7 @@ export class ElevatorQueueCtrl {
     this._floorCtrl.setHasRequestedElevator(floor, true)
   }
 
-  isGoingToFloor (elevator: IElevatorRecord, floor: IFloor): boolean {
+  isGoingToFloor (elevator: IElevatorRecord, floor: IFloorRecord): boolean {
     const queue = this._getQueue(elevator)
     return queue.MovingUp.has(floor) || queue.MovingDown.has(floor)
   }
@@ -158,7 +158,7 @@ export class ElevatorQueueCtrl {
     return this._getTotalQueueSize(elevator) === 0
   }
 
-  remove (elevator: IElevatorRecord, directionType: IElevatorDirectionType, floor: IFloor): void {
+  remove (elevator: IElevatorRecord, directionType: IElevatorDirectionType, floor: IFloorRecord): void {
     const queueUnit$ = this.getQueueUnit$(elevator)
     const queueSetUpdate = queueUnit$.value[directionType].delete(floor)
     let queueUpdate = queueUnit$.value.set(directionType, queueSetUpdate)
