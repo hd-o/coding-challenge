@@ -1,7 +1,6 @@
-import { RecordOf } from 'immutable'
 import { inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
-import { IElevatorDoor } from './model'
+import { IElevatorDoor, IElevatorDoorRecord } from './model'
 import { elevatorDoorPosition } from './model/position'
 import { elevatorDoorStatus } from './model/status'
 
@@ -16,7 +15,7 @@ export class ElevatorDoorFactory {
     @inject(Immutable) private readonly _immutable: Immutable
   ) {}
 
-  create (): RecordOf<IElevatorDoor> {
-    return this._ElevatorDoorRecord()
+  create (state?: Partial<IElevatorDoor>): IElevatorDoorRecord {
+    return this._ElevatorDoorRecord(state)
   }
 }
