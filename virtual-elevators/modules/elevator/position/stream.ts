@@ -4,7 +4,7 @@ import { inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { Lodash } from '~/pkg/lodash'
 import { IElevator } from '../model'
-import { Elevator$ } from '../stream'
+import { Elevator$Map$ } from '../stream'
 
 export type IElevatorPositionUnit$ = BehaviorSubject<number>
 
@@ -13,7 +13,7 @@ export type IElevatorPositionUnit$Map = Map<IElevator['id'], IElevatorPositionUn
 @singleton()
 export class ElevatorPosition$ extends BehaviorSubject<IElevatorPositionUnit$Map> {
   constructor (
-    @inject(Elevator$) readonly elevator$: Elevator$,
+    @inject(Elevator$Map$) readonly elevator$: Elevator$Map$,
     @inject(Lodash) readonly lodash: Lodash,
     @inject(Immutable) readonly immutable: Immutable
   ) {
