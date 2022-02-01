@@ -2,7 +2,7 @@ import { createContext } from 'react'
 import { container, inject, singleton } from 'tsyringe'
 import { ElevatorDoorCtrl } from '~/elevator/door/controller'
 import { ElevatorQueueCtrl } from '~/elevator/queue/controller'
-import { Elevator$ } from '~/elevator/stream'
+import { Elevator$Map$, IElevator$ } from '~/elevator/stream'
 import { FloorCtrl } from '~/floor/controller'
 import { IFloorRecord } from '~/floor/model'
 import { Message } from '~/message'
@@ -16,12 +16,11 @@ import { elevatorDirectionType, IElevatorDirectionType } from './queue/model/dir
 import { elevatorQueueState } from './queue/model/moveState'
 import { ElevatorQueue$ } from './queue/stream'
 import { IElevatorQueueUnit$ } from './queue/stream/unit'
-import { IElevatorUnit$ } from './stream/unit'
 
 @singleton()
 export class ElevatorCtrl {
   constructor (
-    @inject(Elevator$) private readonly _elevator$: Elevator$,
+    @inject(Elevator$Map$) private readonly _elevator$: Elevator$Map$,
     @inject(ElevatorQueueCtrl) private readonly _queueCtrl: ElevatorQueueCtrl,
     @inject(FloorCtrl) private readonly _floorCtrl: FloorCtrl,
     @inject(ElevatorDoorCtrl) private readonly _doorCtrl: ElevatorDoorCtrl,
@@ -74,8 +73,8 @@ export class ElevatorCtrl {
     }
   }
 
-  getElevatorUnit$ (elevatorId: IElevator['id']): IElevatorUnit$ {
-    return this._elevator$.value.get(elevatorId) as IElevatorUnit$
+  getElevatorUnit$ (elevatorId: IElevator['id']): IElevator$ {
+    return this._elevator$.value.get(elevatorId) as IElevator$
   }
 
   getMovementProcessId (elevatorId: IElevator['id']): IProcessId {
