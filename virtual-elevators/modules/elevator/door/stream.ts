@@ -1,10 +1,9 @@
-import { List, Map, RecordOf } from 'immutable'
+import { Map, RecordOf } from 'immutable'
 import { BehaviorSubject } from 'rxjs'
 import { inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { IElevator } from '../model'
-import { Elevator$ } from '../stream'
-import { IElevatorUnit$ } from '../stream/unit'
+import { Elevator$, IElevatorUnit$Map } from '../stream'
 import { ElevatorDoorFactory } from './factory'
 import { IElevatorDoor } from './model'
 
@@ -21,8 +20,8 @@ export class ElevatorDoor$ extends BehaviorSubject<IElevatorDoorMap> {
   ) {
     super(createDoorMap(elevator$.value))
     elevator$.subscribe((elevatorUnit$s) => this.next(createDoorMap(elevatorUnit$s)))
-    function createDoorMap (elevatorUnit$s: List<IElevatorUnit$>): IElevatorDoorMap {
-      return immutable.Map(elevatorUnit$s.map(elevatorUnit$ => ([
+    function createDoorMap (elevatorUnit$s: IElevatorUnit$Map): IElevatorDoorMap {
+      return immutable.Map(elevatorUnit$s.valueSeq().map(elevatorUnit$ => ([
         elevatorUnit$.value.id,
         new BehaviorSubject(doorFactory.create())
       ])))

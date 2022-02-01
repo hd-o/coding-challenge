@@ -75,7 +75,7 @@ export class ElevatorCtrl {
   }
 
   getElevatorUnit$ (elevatorId: IElevator['id']): IElevatorUnit$ {
-    return this._elevator$.value.find(elevatorUnit$ => elevatorUnit$.value.id === elevatorId) as IElevatorUnit$
+    return this._elevator$.value.get(elevatorId) as IElevatorUnit$
   }
 
   getMovementProcessId (elevatorId: IElevator['id']): IProcessId {
@@ -95,7 +95,7 @@ export class ElevatorCtrl {
   }
 
   requestNearestElevator (floor: IFloorRecord): IElevatorRecord | NoElevatorServicesFloor {
-    const elevatorUnit$s = this._elevator$.value.toArray()
+    const elevatorUnit$s = this._elevator$.value.valueSeq().toArray()
     // Show alert if no elevator available
     if (elevatorUnit$s.length === 0) return this._msg.noElevatorServicesFloor
     // Start with first elevator

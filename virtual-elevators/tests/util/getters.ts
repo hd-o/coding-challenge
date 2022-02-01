@@ -8,7 +8,7 @@ import { IElevatorQueue } from '~/elevator/queue/model'
 import { IElevatorQueueState } from '~/elevator/queue/model/moveState'
 import { ElevatorQueue$ } from '~/elevator/queue/stream'
 import { IElevatorQueueUnit$ } from '~/elevator/queue/stream/unit'
-import { Elevator$, IElevatorUnit$List } from '~/elevator/stream'
+import { Elevator$, IElevatorUnit$Map } from '~/elevator/stream'
 import { IElevatorUnit$ } from '~/elevator/stream/unit'
 import { FloorCtrl } from '~/floor/controller'
 import { IFloorRecord } from '~/floor/model'
@@ -27,7 +27,7 @@ export namespace get {
   export const elevatorDoor$ = (): ElevatorDoor$ => container.resolve(ElevatorDoor$)
   export const settings$ = (): Settings$ => container.resolve(Settings$)
 
-  export const elevatorUnit$List = (): IElevatorUnit$List => elevator$().value
+  export const elevatorUnit$List = (): IElevatorUnit$Map => elevator$().value
   export const elevatorUnit$ = (): IElevatorUnit$ => elevatorUnit$List().first()
   export const elevator = (): IElevatorRecord => elevatorUnit$().value
 
