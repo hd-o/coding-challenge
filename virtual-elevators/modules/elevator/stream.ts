@@ -4,9 +4,9 @@ import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { ElevatorFactory } from '~/elevator/factory'
 import { Lodash } from '~/pkg/lodash'
-import { Immutable } from '../../pkg/immutable'
-import { Settings$ } from '../../settings/stream'
-import { IElevator, IElevatorRecord } from '../model'
+import { Immutable } from '../pkg/immutable'
+import { Settings$ } from '../settings/stream'
+import { IElevator, IElevatorRecord } from './model'
 
 export type IElevator$Map = Map<IElevator['id'], IElevator$>
 

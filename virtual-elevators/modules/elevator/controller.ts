@@ -5,10 +5,10 @@ import { ElevatorQueueCtrl } from '~/elevator/queue/controller'
 import { Elevator$Map$, IElevator$ } from '~/elevator/stream'
 import { FloorCtrl } from '~/floor/controller'
 import { IFloorRecord } from '~/floor/model'
-import { Message } from '~/message'
-import { NoElevatorServicesFloor } from '~/message/NoElevatorServicesFloor'
 import { Lodash } from '~/pkg/lodash'
 import { IProcess, IProcessId, ProcessLoop } from '~/process/loop'
+import { Symbol } from '~/symbol'
+import { NoElevatorServicesFloor } from '~/symbol/NoElevatorServicesFloor'
 import { IElevator, IElevatorRecord } from './model'
 import { ElevatorMoveState } from './moveState'
 import { ElevatorPositionCtrl } from './position/controller'
@@ -27,7 +27,7 @@ export class ElevatorCtrl {
     @inject(ElevatorQueue$Map$) private readonly _queue$: ElevatorQueue$Map$,
     @inject(ProcessLoop) private readonly _processLoop: ProcessLoop,
     @inject(Lodash) private readonly _lodash: Lodash,
-    @inject(Message) private readonly _msg: Message
+    @inject(Symbol) private readonly _sym: Symbol
   ) {}
 
   readonly queue$Sub = this._queue$.subscribe((queue$Map) => {
@@ -88,14 +88,14 @@ export class ElevatorCtrl {
   }
 
   requestElevator (floor: IFloorRecord): IElevatorRecord | NoElevatorServicesFloor {
-    if (this._floorCtrl.hasRequestedElevator(floor)) return this._msg.noElevatorServicesFloor
+    if (this._floorCtrl.hasRequestedElevator(floor)) return this._sym.noElevatorServicesFloor
     return this.requestNearestElevator(floor)
   }
 
   requestNearestElevator (floor: IFloorRecord): IElevatorRecord | NoElevatorServicesFloor {
     const elevator$Array = this._elevator$.value.valueSeq().toArray()
     // Show alert if no elevator available
-    if (elevator$Array.length === 0) return this._msg.noElevatorServicesFloor
+    if (elevator$Array.length === 0) return this._sym.noElevatorServicesFloor
     // Start with first elevator
     let nearestElevator = elevator$Array[0].value
     // Open doors if idle at floor
@@ -123,7 +123,7 @@ export class ElevatorCtrl {
       }
     }
     // If no elevator services floor
-    if (nearestDistance === false) return this._msg.noElevatorServicesFloor
+    if (nearestDistance === false) return this._sym.noElevatorServicesFloor
     // Else request nearest elevator
     this._queueCtrl.insert(nearestElevator, floor)
     return nearestElevator
