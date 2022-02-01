@@ -1,10 +1,9 @@
 import { List } from 'immutable'
 import { createContext } from 'react'
-import { BehaviorSubject, combineLatest } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { FloorFactory } from '~/floor/factory'
 import { Lodash } from '~/pkg/lodash'
-import { ISettings } from '~/settings/model'
 import { Immutable } from '../pkg/immutable'
 import { Settings$ } from '../settings/stream'
 import { IFloorRecord } from './model'
@@ -19,14 +18,14 @@ export class FloorList$ extends BehaviorSubject<IFloorRecordList> {
     @inject(Immutable) readonly immutable: Immutable,
     @inject(FloorFactory) readonly floorFactory: FloorFactory
   ) {
-    super(createFloors(settings$.value))
-    function createFloors (settings: ISettings): IFloorRecordList {
+    super(createFloors())
+    settings$.subscribe(() => this.next(createFloors()))
+    function createFloors (): IFloorRecordList {
       const floors = lodash
-        .range(settings.floorCount)
+        .range(settings$.value.floorCount)
         .map(number => floorFactory.create({ number }))
       return immutable.List(floors)
     }
-    combineLatest([settings$]).subscribe(args => this.next(createFloors(...args)))
   }
 }
 

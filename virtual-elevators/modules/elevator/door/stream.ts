@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs'
 import { inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { IElevator } from '../model'
-import { Elevator$Map$, IElevator$Map } from '../stream'
+import { Elevator$Map$ } from '../stream'
 import { ElevatorDoorFactory } from './factory'
 import { IElevatorDoor } from './model'
 
@@ -21,13 +21,14 @@ export class ElevatorDoor$Map$ extends BehaviorSubject<IElevatorDoor$Map> {
     @inject(Elevator$Map$) readonly elevator$Map$: Elevator$Map$,
     @inject(ElevatorDoorFactory) readonly doorFactory: ElevatorDoorFactory
   ) {
-    super(createDoorMap(elevator$Map$.value))
-    elevator$Map$.subscribe((elevator$Map) => this.next(createDoorMap(elevator$Map)))
-    function createDoorMap (elevator$Map: IElevator$Map): IElevatorDoor$Map {
-      return immutable.Map(elevator$Map.valueSeq().map(elevator$ => ([
+    super(createDoorMap())
+    elevator$Map$.subscribe(() => this.next(createDoorMap()))
+    function createDoorMap (): IElevatorDoor$Map {
+      const elevator$Seq = elevator$Map$.value.valueSeq()
+      return immutable.Map(elevator$Seq.map(elevator$ => [
         elevator$.value.id,
         new BehaviorSubject(doorFactory.create())
-      ])))
+      ]))
     }
   }
 }

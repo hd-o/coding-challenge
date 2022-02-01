@@ -15,7 +15,7 @@ export class Settings$ extends BehaviorSubject<ISettingsRecord> {
     @inject(Immutable) readonly immutable: Immutable
   ) {
     super(SettingsRecord())
-    function SettingsRecord (): RecordOf<ISettings> {
+    function SettingsRecord (): ISettingsRecord {
       return immutable.Record<ISettings>({
         elevatorCount: 3,
         floorHeight: 100,
