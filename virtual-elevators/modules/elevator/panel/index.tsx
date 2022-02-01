@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
-import { Floor$Ctx } from '~/floor/stream'
+import { FloorList$Ctx } from '~/floor/stream'
 import { AntdRowCtx } from '~/pkg/antd/row'
 import { TypeStyleClassesCtx } from '~/pkg/typestyle/classes'
 import { Settings$Ctx } from '~/settings/stream'
@@ -29,7 +29,7 @@ function CustomElevatorCaller (props: CustomElevatorCallerProps): JSX.Element {
   const ElevatorCaller = useContext(ElevatorCallerCtx)
   const elevatorQueueCtrl = useContext(ElevatorQueueCtrlCtx)
 
-  useStream(elevatorQueueCtrl.getQueueUnit$(props.elevator))
+  useStream(elevatorQueueCtrl.getQueue$(props.elevator))
 
   return <ElevatorCaller
     {...props}
@@ -47,7 +47,7 @@ function ElevatorPanel (props: Props): JSX.Element {
   const Row = useContext(AntdRowCtx)
 
   const settings = useStreamCtx(Settings$Ctx)
-  const floors = useStreamCtx(Floor$Ctx)
+  const floors = useStreamCtx(FloorList$Ctx)
   const classes = useContext(TypeStyleClassesCtx)
 
   const rowClass = classes(

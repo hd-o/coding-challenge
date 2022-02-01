@@ -15,7 +15,7 @@ describe(`${get.describe(ElevatorCtrl).requestElevator}`, () => {
   test('Open door when elevator idle', async () => {
     const floor = requestElevator()
     expect(get.floorCtrl().hasRequestedElevator(floor)).toBe(false)
-    const door = await firstValueFrom(get.elevatorDoorUnit$().pipe(skip(1)))
+    const door = await firstValueFrom(get.elevatorDoor$().pipe(skip(1)))
     expect(door.status).toBe(elevatorDoorStatus.Opening)
   })
   test('Set floor request when elevator is available', () => {
@@ -37,7 +37,7 @@ describe(`${get.describe(ElevatorCtrl).requestElevator}`, () => {
     test(`${elevatorQueueState.MovingDown}`, () => {
       // Place all elevators at first floor
       const { floorHeight } = get.settings()
-      get.elevatorPositionUnit$Map().forEach(positionUnit$ => positionUnit$.next(floorHeight))
+      get.elevatorPosition$Map().forEach(position$ => position$.next(floorHeight))
       // Request elevator to ground floor
       requestElevator(0)
       expect(get.elevatorQueueState()).toBe(elevatorQueueState.MovingDown)

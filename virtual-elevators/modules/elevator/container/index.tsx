@@ -10,9 +10,9 @@ function ElevatorContainer (): JSX.Element {
   const elevators = useStreamCtx(Elevator$Ctx)
   return (
     <>
-      {elevators.valueSeq().map((elevatorUnit$) => (
-        <Col key={elevatorUnit$.value.id} span={6}>
-          <Elevator elevatorUnit$={elevatorUnit$} />
+      {elevators.valueSeq().map((elevator$) => (
+        <Col key={elevator$.value.id} span={6}>
+          <Elevator elevator$={elevator$} />
         </Col>
       ))}
     </>

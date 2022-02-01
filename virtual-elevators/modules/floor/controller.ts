@@ -4,8 +4,8 @@ import { container, inject, singleton } from 'tsyringe'
 import { Lodash } from '~/pkg/lodash'
 import { Settings$ } from '~/settings/stream'
 import { IFloorRecord } from './model'
-import { FloorRequest$, IFloorRequestUnit$ } from './requests/stream'
-import { Floor$ } from './stream'
+import { FloorRequest$, IFloorRequest$ } from './requests/stream'
+import { FloorList$ } from './stream'
 
 type IGetPosition = (floor: IFloorRecord) => number
 
@@ -16,7 +16,7 @@ export class FloorCtrl {
   private readonly _getTopPosition: MemoizedFunction & IGetPosition
 
   constructor (
-    @inject(Floor$) readonly floor$: Floor$,
+    @inject(FloorList$) readonly floor$: FloorList$,
     @inject(Settings$) readonly settings$: Settings$,
     @inject(Lodash) readonly lodash: Lodash,
     @inject(FloorRequest$) private readonly _floorRequest$: FloorRequest$
@@ -35,8 +35,8 @@ export class FloorCtrl {
 
   getPosition: IGetPosition = (floor) => this._getPosition(floor)
 
-  getRequestUnit$ = (floor: IFloorRecord): IFloorRequestUnit$ => {
-    return this._floorRequest$.value.get(floor) as IFloorRequestUnit$
+  getRequest$ = (floor: IFloorRecord): IFloorRequest$ => {
+    return this._floorRequest$.value.get(floor) as IFloorRequest$
   }
 
   getTopPosition: IGetPosition = (floor) => this._getTopPosition(floor)

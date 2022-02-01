@@ -1,4 +1,4 @@
-import { Map } from 'immutable'
+import { Map, RecordOf } from 'immutable'
 import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
@@ -6,26 +6,30 @@ import { Immutable } from '~/pkg/immutable'
 import { IElevator } from '../../model'
 import { Elevator$Map$, IElevator$Map } from '../../stream'
 import { ElevatorQueueFactory } from '../factory'
-import { IElevatorQueueUnit$ } from './unit'
+import { IElevatorQueue } from '../model'
 
-type IElevatorQueueUnit$Map = Map<IElevator['id'], IElevatorQueueUnit$>
+export type IElevatorQueueRecord = RecordOf<IElevatorQueue>
+
+export type IElevatorQueue$ = BehaviorSubject<IElevatorQueueRecord>
+
+type IElevatorQueue$Map = Map<IElevator['id'], IElevatorQueue$>
 
 @singleton()
-export class ElevatorQueue$ extends BehaviorSubject<IElevatorQueueUnit$Map> {
+export class ElevatorQueue$Map$ extends BehaviorSubject<IElevatorQueue$Map> {
   constructor (
     @inject(Elevator$Map$) readonly elevator$: Elevator$Map$,
     @inject(Immutable) readonly immutable: Immutable,
     @inject(ElevatorQueueFactory) readonly elevatorQueueFactory: ElevatorQueueFactory
   ) {
     super(createElevatorQueues(elevator$.value))
-    elevator$.subscribe(elevatorUnit$s => this.next(createElevatorQueues(elevatorUnit$s)))
-    function createElevatorQueues (elevatorUnit$Map: IElevator$Map): IElevatorQueueUnit$Map {
-      return immutable.Map(elevatorUnit$Map.valueSeq().map(elevatorUnit$ => [
-        elevatorUnit$.value.id,
+    elevator$.subscribe(elevator$Map => this.next(createElevatorQueues(elevator$Map)))
+    function createElevatorQueues (elevator$Map: IElevator$Map): IElevatorQueue$Map {
+      return immutable.Map(elevator$Map.valueSeq().map(elevator$ => [
+        elevator$.value.id,
         new BehaviorSubject(elevatorQueueFactory.create())
       ]))
     }
   }
 }
 
-export const ElevatorQueue$Ctx = createContext(container.resolve(ElevatorQueue$))
+export const ElevatorQueue$Ctx = createContext(container.resolve(ElevatorQueue$Map$))

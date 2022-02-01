@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
 import { FloorCtrlCtx } from '~/floor/controller'
-import { Floor$Ctx } from '~/floor/stream'
+import { FloorList$Ctx } from '~/floor/stream'
 import { AntdRowCtx } from '~/pkg/antd/row'
 import { TypeStyleClassesCtx } from '~/pkg/typestyle/classes'
 import { Settings$Ctx } from '~/settings/stream'
@@ -24,7 +24,7 @@ interface CustomElevatorCallerProps extends Omit<ElevatorCallerProps, 'floorHasR
 function CustomElevatorCaller (props: CustomElevatorCallerProps): JSX.Element {
   const ElevatorCaller = useContext(ElevatorCallerCtx)
   const floorCtrl = useContext(FloorCtrlCtx)
-  const floorHasRequested = useStream(floorCtrl.getRequestUnit$(props.floor))
+  const floorHasRequested = useStream(floorCtrl.getRequest$(props.floor))
   return <ElevatorCaller {...props} floorHasRequested={floorHasRequested} />
 }
 
@@ -32,7 +32,7 @@ function ElevatorCallerRows (): JSX.Element {
   const Row = useContext(AntdRowCtx)
 
   const elevatorCtrl = useContext(ElevatorCtrlCtx)
-  const floors = useStreamCtx(Floor$Ctx)
+  const floors = useStreamCtx(FloorList$Ctx)
 
   const settings = useStreamCtx(Settings$Ctx)
   const classes = useContext(TypeStyleClassesCtx)

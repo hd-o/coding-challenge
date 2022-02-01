@@ -1,5 +1,5 @@
 import { inject, singleton } from 'tsyringe'
-import { Floor$ } from '~/floor/stream'
+import { FloorList$ } from '~/floor/stream'
 import { Immutable } from '~/pkg/immutable'
 import { IElevator, IElevatorRecord } from './model'
 import { ElevatorMoveState } from './moveState'
@@ -14,7 +14,7 @@ export class ElevatorFactory {
 
   constructor (
     @inject(Immutable) private readonly _immutable: Immutable,
-    @inject(Floor$) private readonly _floors$: Floor$
+    @inject(FloorList$) private readonly _floors$: FloorList$
   ) {}
 
   create (state?: Partial<IElevator>): IElevatorRecord {
