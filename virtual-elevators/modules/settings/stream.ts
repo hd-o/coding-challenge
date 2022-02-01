@@ -1,13 +1,8 @@
-import { RecordOf } from 'immutable'
 import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { Immutable } from '../pkg/immutable'
-import { ISettings } from './model'
-
-// TODO: Handle settings update (unmounts, and subscriptions)
-// TODO: use ISettingsRecord
-type ISettingsRecord = RecordOf<ISettings>
+import { ISettings, ISettingsRecord } from './model'
 
 @singleton()
 export class Settings$ extends BehaviorSubject<ISettingsRecord> {
