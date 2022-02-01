@@ -3,10 +3,10 @@ import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
-import { IElevator } from '../../model'
-import { Elevator$Map$ } from '../../stream'
-import { ElevatorQueueFactory } from '../factory'
-import { IElevatorQueue } from '../model'
+import { IElevator } from '../model'
+import { Elevator$Map$ } from '../stream'
+import { ElevatorQueueFactory } from './factory'
+import { IElevatorQueue } from './model'
 
 export type IElevatorQueueRecord = RecordOf<IElevatorQueue>
 
