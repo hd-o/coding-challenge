@@ -14,8 +14,7 @@ import { ElevatorMoveState } from './moveState'
 import { ElevatorPositionCtrl } from './position/controller'
 import { elevatorDirectionType, IElevatorDirectionType } from './queue/model/directionType'
 import { elevatorQueueState } from './queue/model/moveState'
-import { ElevatorQueue$ } from './queue/stream'
-import { IElevatorQueueUnit$ } from './queue/stream/unit'
+import { ElevatorQueue$Map$, IElevatorQueue$ } from './queue/stream'
 
 @singleton()
 export class ElevatorCtrl {
@@ -25,37 +24,37 @@ export class ElevatorCtrl {
     @inject(FloorCtrl) private readonly _floorCtrl: FloorCtrl,
     @inject(ElevatorDoorCtrl) private readonly _doorCtrl: ElevatorDoorCtrl,
     @inject(ElevatorPositionCtrl) private readonly _positionCtrl: ElevatorPositionCtrl,
-    @inject(ElevatorQueue$) private readonly _queue$: ElevatorQueue$,
+    @inject(ElevatorQueue$Map$) private readonly _queue$: ElevatorQueue$Map$,
     @inject(ProcessLoop) private readonly _processLoop: ProcessLoop,
     @inject(Lodash) private readonly _lodash: Lodash,
     @inject(Message) private readonly _msg: Message
   ) {}
 
-  readonly queue$Sub = this._queue$.subscribe((queueUnit$Map) => {
-    for (const [elevatorId, queueUnit$] of queueUnit$Map.entries()) {
-      const process = this.createMovementProcess(elevatorId, queueUnit$)
+  readonly queue$Sub = this._queue$.subscribe((queue$Map) => {
+    for (const [elevatorId, queue$] of queue$Map.entries()) {
+      const process = this.createMovementProcess(elevatorId, queue$)
       this._processLoop.reset(this.getMovementProcessId(elevatorId), [
         this._lodash.throttle(process, 10)
       ])
     }
   })
 
-  canElevatorMove (elevator: IElevatorRecord, queueUnit$: IElevatorQueueUnit$): boolean {
+  canElevatorMove (elevator: IElevatorRecord, queue$: IElevatorQueue$): boolean {
     return (
       this._doorCtrl.isDoorClosed(elevator) &&
       !this._queueCtrl.isQueueEmpty(elevator) &&
-      queueUnit$.value.state !== elevatorQueueState.Idle
+      queue$.value.state !== elevatorQueueState.Idle
     )
   }
 
   // TODO: Make ProcessLoop into a $, then subscribe for elevator/door movement
-  createMovementProcess (elevatorId: IElevator['id'], queueUnit$: IElevatorQueueUnit$): IProcess {
+  createMovementProcess (elevatorId: IElevator['id'], queue$: IElevatorQueue$): IProcess {
     return () => {
-      let elevator = this.getElevatorUnit$(elevatorId).value
-      if (!this.canElevatorMove(elevator, queueUnit$)) return
+      let elevator = this.getElevator$(elevatorId).value
+      if (!this.canElevatorMove(elevator, queue$)) return
 
-      const currentDirection = queueUnit$.value.state as IElevatorDirectionType
-      const nextFloor = queueUnit$.value[currentDirection].first as IFloorRecord
+      const currentDirection = queue$.value.state as IElevatorDirectionType
+      const nextFloor = queue$.value[currentDirection].first as IFloorRecord
 
       if (this._positionCtrl.isAtFloor(elevator, nextFloor)) {
         elevator = this.setElevatorMoveState(elevator, ElevatorMoveState.Idle)
@@ -73,7 +72,7 @@ export class ElevatorCtrl {
     }
   }
 
-  getElevatorUnit$ (elevatorId: IElevator['id']): IElevator$ {
+  getElevator$ (elevatorId: IElevator['id']): IElevator$ {
     return this._elevator$.value.get(elevatorId) as IElevator$
   }
 
@@ -94,11 +93,11 @@ export class ElevatorCtrl {
   }
 
   requestNearestElevator (floor: IFloorRecord): IElevatorRecord | NoElevatorServicesFloor {
-    const elevatorUnit$s = this._elevator$.value.valueSeq().toArray()
+    const elevator$Array = this._elevator$.value.valueSeq().toArray()
     // Show alert if no elevator available
-    if (elevatorUnit$s.length === 0) return this._msg.noElevatorServicesFloor
+    if (elevator$Array.length === 0) return this._msg.noElevatorServicesFloor
     // Start with first elevator
-    let nearestElevator = elevatorUnit$s[0].value
+    let nearestElevator = elevator$Array[0].value
     // Open doors if idle at floor
     if (this.isIdleAtFloor(nearestElevator, floor)) {
       this._doorCtrl.open(nearestElevator)
@@ -107,8 +106,8 @@ export class ElevatorCtrl {
     // Cache current nearestDistance
     let nearestDistance = this._queueCtrl.getDistance(nearestElevator, floor)
     // Loop from second elevator onward
-    for (const elevatorUnit$ of elevatorUnit$s.slice(1)) {
-      const elevator = elevatorUnit$.value
+    for (const elevator$ of elevator$Array.slice(1)) {
+      const elevator = elevator$.value
       // Early exit if elevator is Idle at floor
       if (this.isIdleAtFloor(elevator, floor)) {
         this._doorCtrl.open(elevator)
@@ -131,9 +130,9 @@ export class ElevatorCtrl {
   }
 
   setElevatorMoveState (elevator: IElevatorRecord, moveState: ElevatorMoveState): IElevatorRecord {
-    const elevatorUnit$ = this.getElevatorUnit$(elevator.id)
+    const elevator$ = this.getElevator$(elevator.id)
     const elevatorUpdate = elevator.set('moveState', moveState)
-    elevatorUnit$.next(elevatorUpdate)
+    elevator$.next(elevatorUpdate)
     return elevatorUpdate
   }
 }

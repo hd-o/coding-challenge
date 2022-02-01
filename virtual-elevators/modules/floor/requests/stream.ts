@@ -4,25 +4,25 @@ import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { IFloorRecord } from '../model'
-import { Floor$ } from '../stream'
+import { FloorList$ } from '../stream'
 
-type IFloorRequest = boolean
+type IFloorRequested = true | false
 
-export type IFloorRequestUnit$ = BehaviorSubject<IFloorRequest>
+export type IFloorRequest$ = BehaviorSubject<IFloorRequested>
 
-type IFloorRequestMap = Map<IFloorRecord, IFloorRequestUnit$>
+type IFloorRequestMap = Map<IFloorRecord, IFloorRequest$>
 
 @singleton()
 export class FloorRequest$ extends BehaviorSubject<IFloorRequestMap> {
   constructor (
     @inject(Immutable) readonly immutable: Immutable,
-    @inject(Floor$) readonly floor$: Floor$
+    @inject(FloorList$) readonly floor$: FloorList$
   ) {
     super(createFloorRequestMap(floor$.value))
     floor$.subscribe(floor => this.next(createFloorRequestMap(floor)))
     function createFloorRequestMap (floors: List<IFloorRecord>): IFloorRequestMap {
       return immutable.Map(floors.map((floor) => {
-        return [floor, new BehaviorSubject(false)] as [IFloorRecord, IFloorRequestUnit$]
+        return [floor, new BehaviorSubject(false)] as [IFloorRecord, IFloorRequest$]
       }))
     }
   }

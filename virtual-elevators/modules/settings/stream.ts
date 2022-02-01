@@ -6,9 +6,11 @@ import { Immutable } from '../pkg/immutable'
 import { ISettings } from './model'
 
 // TODO: Handle settings update (unmounts, and subscriptions)
+// TODO: use ISettingsRecord
+type ISettingsRecord = RecordOf<ISettings>
 
 @singleton()
-export class Settings$ extends BehaviorSubject<RecordOf<ISettings>> {
+export class Settings$ extends BehaviorSubject<ISettingsRecord> {
   constructor (
     @inject(Immutable) readonly immutable: Immutable
   ) {

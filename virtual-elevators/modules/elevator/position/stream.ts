@@ -6,12 +6,12 @@ import { Lodash } from '~/pkg/lodash'
 import { IElevator } from '../model'
 import { Elevator$Map$ } from '../stream'
 
-export type IElevatorPositionUnit$ = BehaviorSubject<number>
+export type IElevatorPosition$ = BehaviorSubject<number>
 
-export type IElevatorPositionUnit$Map = Map<IElevator['id'], IElevatorPositionUnit$>
+export type IElevatorPosition$Map = Map<IElevator['id'], IElevatorPosition$>
 
 @singleton()
-export class ElevatorPosition$ extends BehaviorSubject<IElevatorPositionUnit$Map> {
+export class ElevatorPosition$Map$ extends BehaviorSubject<IElevatorPosition$Map> {
   constructor (
     @inject(Elevator$Map$) readonly elevator$: Elevator$Map$,
     @inject(Lodash) readonly lodash: Lodash,
@@ -19,9 +19,9 @@ export class ElevatorPosition$ extends BehaviorSubject<IElevatorPositionUnit$Map
   ) {
     super(createPosition$())
     elevator$.subscribe(() => this.next(createPosition$()))
-    function createPosition$ (): IElevatorPositionUnit$Map {
-      return immutable.Map(elevator$.value.valueSeq().map((elevatorUnit$) => {
-        return [elevatorUnit$.value.id, new BehaviorSubject(0)]
+    function createPosition$ (): IElevatorPosition$Map {
+      return immutable.Map(elevator$.value.valueSeq().map((elevator$) => {
+        return [elevator$.value.id, new BehaviorSubject(0)]
       }))
     }
   }

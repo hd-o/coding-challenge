@@ -7,22 +7,25 @@ import { Elevator$Map$, IElevator$Map } from '../stream'
 import { ElevatorDoorFactory } from './factory'
 import { IElevatorDoor } from './model'
 
-export type IElevatorDoorUnit$ = BehaviorSubject<RecordOf<IElevatorDoor>>
+// TODO: use IElevatorDoorRecord
+type IElevatorDoorRecord = RecordOf<IElevatorDoor>
 
-type IElevatorDoorMap = Map<IElevator['id'], IElevatorDoorUnit$>
+export type IElevatorDoor$ = BehaviorSubject<IElevatorDoorRecord>
+
+type IElevatorDoor$Map = Map<IElevator['id'], IElevatorDoor$>
 
 @singleton()
-export class ElevatorDoor$ extends BehaviorSubject<IElevatorDoorMap> {
+export class ElevatorDoor$Map$ extends BehaviorSubject<IElevatorDoor$Map> {
   constructor (
     @inject(Immutable) readonly immutable: Immutable,
-    @inject(Elevator$Map$) readonly elevator$: Elevator$Map$,
+    @inject(Elevator$Map$) readonly elevator$Map$: Elevator$Map$,
     @inject(ElevatorDoorFactory) readonly doorFactory: ElevatorDoorFactory
   ) {
-    super(createDoorMap(elevator$.value))
-    elevator$.subscribe((elevatorUnit$s) => this.next(createDoorMap(elevatorUnit$s)))
-    function createDoorMap (elevatorUnit$s: IElevator$Map): IElevatorDoorMap {
-      return immutable.Map(elevatorUnit$s.valueSeq().map(elevatorUnit$ => ([
-        elevatorUnit$.value.id,
+    super(createDoorMap(elevator$Map$.value))
+    elevator$Map$.subscribe((elevator$Map) => this.next(createDoorMap(elevator$Map)))
+    function createDoorMap (elevator$Map: IElevator$Map): IElevatorDoor$Map {
+      return immutable.Map(elevator$Map.valueSeq().map(elevator$ => ([
+        elevator$.value.id,
         new BehaviorSubject(doorFactory.create())
       ])))
     }

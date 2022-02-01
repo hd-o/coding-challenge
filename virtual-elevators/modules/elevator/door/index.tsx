@@ -31,8 +31,8 @@ function Door (props: DoorProps): JSX.Element {
 
 function ElevatorDoor (props: Props): JSX.Element {
   const elevatorDoorCtrl = useContext(ElevatorDoorCtrlCtx)
-  const doorUnit$ = elevatorDoorCtrl.getDoorUnit$(props.elevator)
-  const { position } = useStream(doorUnit$)
+  const door$ = elevatorDoorCtrl.getDoor$(props.elevator)
+  const { position } = useStream(door$)
   const width = `max(calc(${position * 5}% - 0.5px), 0px)`
   return (
     <>

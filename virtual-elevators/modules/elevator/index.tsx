@@ -22,7 +22,7 @@ const container = (props: {
 })
 
 interface Props {
-  elevatorUnit$: IElevator$
+  elevator$: IElevator$
 }
 
 function Elevator (props: Props): JSX.Element {
@@ -30,7 +30,7 @@ function Elevator (props: Props): JSX.Element {
   const ElevatorPanel = useContext(ElevatorPanelCtx)
   const Row = useContext(AntdRowCtx)
 
-  const elevator = useStream(props.elevatorUnit$)
+  const elevator = useStream(props.elevator$)
   const settings = useStreamCtx(Settings$Ctx)
   const classes = useContext(TypeStyleClassesCtx)
 

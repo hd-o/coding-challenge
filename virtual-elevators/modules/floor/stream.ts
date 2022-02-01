@@ -9,8 +9,10 @@ import { Immutable } from '../pkg/immutable'
 import { Settings$ } from '../settings/stream'
 import { IFloorRecord } from './model'
 
+type IFloorRecordList = List<IFloorRecord>
+
 @singleton()
-export class Floor$ extends BehaviorSubject<List<IFloorRecord>> {
+export class FloorList$ extends BehaviorSubject<IFloorRecordList> {
   constructor (
     @inject(Settings$) readonly settings$: Settings$,
     @inject(Lodash) readonly lodash: Lodash,
@@ -18,7 +20,7 @@ export class Floor$ extends BehaviorSubject<List<IFloorRecord>> {
     @inject(FloorFactory) readonly floorFactory: FloorFactory
   ) {
     super(createFloors(settings$.value))
-    function createFloors (settings: ISettings): List<IFloorRecord> {
+    function createFloors (settings: ISettings): IFloorRecordList {
       const floors = lodash
         .range(settings.floorCount)
         .map(number => floorFactory.create({ number }))
@@ -28,4 +30,4 @@ export class Floor$ extends BehaviorSubject<List<IFloorRecord>> {
   }
 }
 
-export const Floor$Ctx = createContext(container.resolve(Floor$))
+export const FloorList$Ctx = createContext(container.resolve(FloorList$))

@@ -47,7 +47,7 @@ function ElevatorCar (props: Props): JSX.Element {
 
   const settings = useStreamCtx(Settings$Ctx)
   const elevatorPositionCtrl = useContext(ElevatorPositionCtrlCtx)
-  const position = useStream(elevatorPositionCtrl.getPositionUnit$(props.elevator))
+  const position = useStream(elevatorPositionCtrl.getPosition$(props.elevator))
 
   return (
     <Col

@@ -1,45 +1,45 @@
 import { container } from 'tsyringe'
 import { ElevatorCtrl } from '~/elevator/controller'
 import { IElevatorDoor } from '~/elevator/door/model'
-import { ElevatorDoor$, IElevatorDoorUnit$ } from '~/elevator/door/stream'
+import { ElevatorDoor$Map$, IElevatorDoor$ } from '~/elevator/door/stream'
 import { IElevatorRecord } from '~/elevator/model'
-import { ElevatorPosition$, IElevatorPositionUnit$Map } from '~/elevator/position/stream'
+import { ElevatorPosition$Map$, IElevatorPosition$Map } from '~/elevator/position/stream'
 import { IElevatorQueue } from '~/elevator/queue/model'
 import { IElevatorQueueState } from '~/elevator/queue/model/moveState'
-import { ElevatorQueue$ } from '~/elevator/queue/stream'
-import { IElevatorQueueUnit$ } from '~/elevator/queue/stream/unit'
+import { ElevatorQueue$Map$, IElevatorQueue$ } from '~/elevator/queue/stream'
 import { Elevator$Map$, IElevator$, IElevator$Map } from '~/elevator/stream'
 import { FloorCtrl } from '~/floor/controller'
 import { IFloorRecord } from '~/floor/model'
-import { Floor$ } from '~/floor/stream'
+import { FloorList$ } from '~/floor/stream'
 import { ISettings } from '~/settings/model'
 import { Settings$ } from '~/settings/stream'
 
 /* eslint-disable-next-line @typescript-eslint/no-namespace */
 export namespace get {
   export const floorCtrl = (): FloorCtrl => container.resolve(FloorCtrl)
-  export const floor$ = (): Floor$ => container.resolve(Floor$)
+  export const floorList$ = (): FloorList$ => container.resolve(FloorList$)
+
   export const elevatorCtrl = (): ElevatorCtrl => container.resolve(ElevatorCtrl)
-  export const elevator$ = (): Elevator$Map$ => container.resolve(Elevator$Map$)
-  export const elevatorQueue$ = (): ElevatorQueue$ => container.resolve(ElevatorQueue$)
-  export const elevatorPosition$ = (): ElevatorPosition$ => container.resolve(ElevatorPosition$)
-  export const elevatorDoor$ = (): ElevatorDoor$ => container.resolve(ElevatorDoor$)
+  export const elevator$Map$ = (): Elevator$Map$ => container.resolve(Elevator$Map$)
+  export const elevatorQueue$Map$ = (): ElevatorQueue$Map$ => container.resolve(ElevatorQueue$Map$)
+  export const elevatorPosition$Map$ = (): ElevatorPosition$Map$ => container.resolve(ElevatorPosition$Map$)
+  export const elevatorDoor$Map$ = (): ElevatorDoor$Map$ => container.resolve(ElevatorDoor$Map$)
   export const settings$ = (): Settings$ => container.resolve(Settings$)
 
-  export const elevatorUnit$List = (): IElevator$Map => elevator$().value
-  export const elevatorUnit$ = (): IElevator$ => elevatorUnit$List().first()
-  export const elevator = (): IElevatorRecord => elevatorUnit$().value
+  export const elevator$Map = (): IElevator$Map => elevator$Map$().value
+  export const elevator$ = (): IElevator$ => elevator$Map().first()
+  export const elevator = (): IElevatorRecord => elevator$().value
 
-  export const elevatorDoorUnit$ = (): IElevatorDoorUnit$ => elevatorDoor$().value.get(elevator().id) as IElevatorDoorUnit$
-  export const elevatorDoor = (): IElevatorDoor => elevatorDoorUnit$().value
+  export const elevatorDoor$ = (): IElevatorDoor$ => elevatorDoor$Map$().value.get(elevator().id) as IElevatorDoor$
+  export const elevatorDoor = (): IElevatorDoor => elevatorDoor$().value
 
-  export const elevatorPositionUnit$Map = (): IElevatorPositionUnit$Map => elevatorPosition$().value
+  export const elevatorPosition$Map = (): IElevatorPosition$Map => elevatorPosition$Map$().value
 
-  export const elevatorQueueUnit$ = (elevator: IElevatorRecord): IElevatorQueueUnit$ => elevatorQueue$().value.get(elevator.id) as IElevatorQueueUnit$
-  export const elevatorQueue = (elevator: IElevatorRecord): IElevatorQueue => elevatorQueueUnit$(elevator).value
+  export const elevatorQueue$ = (elevator: IElevatorRecord): IElevatorQueue$ => elevatorQueue$Map$().value.get(elevator.id) as IElevatorQueue$
+  export const elevatorQueue = (elevator: IElevatorRecord): IElevatorQueue => elevatorQueue$(elevator).value
   export const elevatorQueueState = (): IElevatorQueueState => elevatorQueue(get.elevator()).state
 
-  export const floors = (): IFloorRecord[] => [...floor$().value]
+  export const floors = (): IFloorRecord[] => [...floorList$().value]
 
   export const settings = (): ISettings => settings$().value
 

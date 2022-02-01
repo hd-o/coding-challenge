@@ -8,8 +8,7 @@ import { ElevatorPositionCtrl } from '../position/controller'
 import { IElevatorQueueSet } from './model'
 import { elevatorDirectionType, IElevatorDirectionType } from './model/directionType'
 import { elevatorQueueState, IElevatorQueueState } from './model/moveState'
-import { ElevatorQueue$ } from './stream'
-import { IElevatorQueueUnit$, IElevatorQueueUnitRecord } from './stream/unit'
+import { ElevatorQueue$Map$, IElevatorQueue$, IElevatorQueueRecord } from './stream'
 
 interface QueueIndex {
   directionType: IElevatorDirectionType
@@ -45,15 +44,15 @@ export class ElevatorQueueCtrl {
     return { directionType: setType, index }
   }
 
-  private _getQueueUnit$ (elevator: IElevatorRecord): IElevatorQueueUnit$ {
+  private _getQueue$ (elevator: IElevatorRecord): IElevatorQueue$ {
     // TODO: Stop using .value for BehaviorSubject access
     // TODO: Use $ for click handlers, and merge value with other $s
     /** @see {ElevatorQueue$} - Creates queues for all elevators */
-    return this._elevatorQueue$.value.get(elevator.id) as IElevatorQueueUnit$
+    return this._elevatorQueue$.value.get(elevator.id) as IElevatorQueue$
   }
 
-  private _getQueue (elevator: IElevatorRecord): IElevatorQueueUnitRecord {
-    return this._getQueueUnit$(elevator).value
+  private _getQueue (elevator: IElevatorRecord): IElevatorQueueRecord {
+    return this._getQueue$(elevator).value
   }
 
   private _getQueueState (elevator: IElevatorRecord): IElevatorQueueState {
@@ -81,7 +80,7 @@ export class ElevatorQueueCtrl {
   }
 
   constructor (
-    @inject(ElevatorQueue$) private readonly _elevatorQueue$: ElevatorQueue$,
+    @inject(ElevatorQueue$Map$) private readonly _elevatorQueue$: ElevatorQueue$Map$,
     @inject(FloorCtrl) private readonly _floorCtrl: FloorCtrl,
     @inject(ElevatorPositionCtrl) private readonly _elevatorPositionCtrl: ElevatorPositionCtrl,
     @inject(Settings$) private readonly _settings$: Settings$
@@ -132,8 +131,8 @@ export class ElevatorQueueCtrl {
       : elevatorDirectionType.MovingDown
   }
 
-  getQueueUnit$ (elevator: IElevatorRecord): IElevatorQueueUnit$ {
-    return this._getQueueUnit$(elevator)
+  getQueue$ (elevator: IElevatorRecord): IElevatorQueue$ {
+    return this._getQueue$(elevator)
   }
 
   insert (elevator: IElevatorRecord, floor: IFloorRecord): void {
@@ -145,7 +144,7 @@ export class ElevatorQueueCtrl {
     if (queue.state === elevatorQueueState.Idle) {
       queueUpdate = queueUpdate.set('state', directionType)
     }
-    this._getQueueUnit$(elevator).next(queueUpdate)
+    this._getQueue$(elevator).next(queueUpdate)
     this._floorCtrl.setHasRequestedElevator(floor, true)
   }
 
@@ -159,9 +158,9 @@ export class ElevatorQueueCtrl {
   }
 
   remove (elevator: IElevatorRecord, directionType: IElevatorDirectionType, floor: IFloorRecord): void {
-    const queueUnit$ = this.getQueueUnit$(elevator)
-    const queueSetUpdate = queueUnit$.value[directionType].delete(floor)
-    let queueUpdate = queueUnit$.value.set(directionType, queueSetUpdate)
+    const queue$ = this.getQueue$(elevator)
+    const queueSetUpdate = queue$.value[directionType].delete(floor)
+    let queueUpdate = queue$.value.set(directionType, queueSetUpdate)
     if (queueUpdate.state === directionType && queueSetUpdate.size === 0) {
       const oppositeDirection = this.getOppositeDirection(directionType)
       const stateUpdate = queueUpdate[oppositeDirection].size > 0
@@ -169,7 +168,7 @@ export class ElevatorQueueCtrl {
         : elevatorQueueState.Idle
       queueUpdate = queueUpdate.set('state', stateUpdate)
     }
-    queueUnit$.next(queueUpdate)
+    queue$.next(queueUpdate)
   }
 }
 
