@@ -61,7 +61,7 @@ export class ElevatorDoorCtrl {
     this._setDoorStatus(door$, elevatorDoorStatus.Opening)
     this._processLoop.reset(door$, [
       this._createDoorMovementProcess(door$, elevatorDoorStatus.Opening),
-      this._processUtils.createWaitProcess(1000),
+      this._processUtils.createWaitProcess(2000),
       this._createDoorMovementProcess(door$, elevatorDoorStatus.Closing)
     ])
   }

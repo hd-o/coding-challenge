@@ -1,4 +1,5 @@
 import { createContext } from 'react'
+import { skip, takeUntil } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { ElevatorDoorCtrl } from '~/elevator/door/controller'
 import { ElevatorQueueCtrl } from '~/elevator/queue/controller'
@@ -24,18 +25,22 @@ export class ElevatorCtrl {
     @inject(FloorCtrl) private readonly _floorCtrl: FloorCtrl,
     @inject(ElevatorDoorCtrl) private readonly _doorCtrl: ElevatorDoorCtrl,
     @inject(ElevatorPositionCtrl) private readonly _positionCtrl: ElevatorPositionCtrl,
-    @inject(ElevatorQueue$Map$) private readonly _queue$: ElevatorQueue$Map$,
+    @inject(ElevatorQueue$Map$) private readonly _queue$Map$: ElevatorQueue$Map$,
     @inject(ProcessLoop) private readonly _processLoop: ProcessLoop,
     @inject(Lodash) private readonly _lodash: Lodash,
     @inject(Symbol) private readonly _sym: Symbol
   ) {}
 
-  readonly queue$Sub = this._queue$.subscribe((queue$Map) => {
+  readonly queue$Sub = this._queue$Map$.subscribe((queue$Map) => {
     for (const [elevatorId, queue$] of queue$Map.entries()) {
-      const process = this.createMovementProcess(elevatorId, queue$)
-      this._processLoop.reset(this.getMovementProcessId(elevatorId), [
-        this._lodash.throttle(process, 10)
-      ])
+      queue$
+        .pipe(takeUntil(this._queue$Map$.pipe(skip(1))))
+        .subscribe(() => {
+          const process = this.createMovementProcess(elevatorId, queue$)
+          this._processLoop.reset(this.getMovementProcessId(elevatorId), [
+            this._lodash.throttle(process, 10)
+          ])
+        })
     }
   })
 
@@ -47,11 +52,12 @@ export class ElevatorCtrl {
     )
   }
 
-  // TODO: Make ProcessLoop into a $, then subscribe for elevator/door movement
   createMovementProcess (elevatorId: IElevator['id'], queue$: IElevatorQueue$): IProcess {
     return () => {
       let elevator = this.getElevator$(elevatorId).value
-      if (!this.canElevatorMove(elevator, queue$)) return
+
+      if (this._queueCtrl.isQueueEmpty(elevator)) return true
+      if (!this.canElevatorMove(elevator, queue$)) return undefined
 
       const currentDirection = queue$.value.state as IElevatorDirectionType
       const nextFloor = queue$.value[currentDirection].first as IFloorRecord
