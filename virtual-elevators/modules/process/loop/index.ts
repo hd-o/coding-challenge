@@ -1,54 +1,92 @@
-import { singleton } from 'tsyringe'
+import { animationFrameScheduler, BehaviorSubject, Observable } from 'rxjs'
+import { inject, singleton } from 'tsyringe'
+import { Rx } from '~/pkg/rxjs'
+import { runningInServer } from '~/util/runningInServer'
 
 export type IProcessId = string | {}
 
 export type IProcess = (() => void) | (() => true)
 
+type ProcessMap = Map<IProcessId, IProcess[]>
+
 @singleton()
 export class ProcessLoop {
-  private readonly _processMap = new Map<IProcessId, IProcess[]>()
+  private _interval$: Observable<any>
 
-  private _loopIsRunning = false
+  private readonly _processMap: ProcessMap = new Map()
 
-  private _cancelLoop (): void {
-    this._loopIsRunning = false
+  private readonly _processMap$: BehaviorSubject<ProcessMap>
+
+  private _add (id: IProcessId, processes: IProcess[]): void {
+    const _callbacks = this._processMap.get(id) ?? []
+    this._processMap.set(id, _callbacks.concat(processes))
   }
 
-  private _runLoop (): void {
-    if (this._loopIsRunning) return
-    const runLoop = (): void => {
-      const entries = [...this._processMap.entries()]
-      if (entries.length === 0) return this._cancelLoop()
-      this._runProcesses(entries)
-      requestAnimationFrame(runLoop)
+  private _clear (id: IProcessId): void {
+    this._processMap.delete(id)
+  }
+
+  private _next (processMap = this._processMap): void {
+    this._processMap$.next(processMap)
+  }
+
+  private _runProcessMap (processMap: ProcessMap): void {
+    let modified = false
+    for (const [id, processArray] of processMap.entries()) {
+      const nextProcess = processArray[0]
+      if (nextProcess() === true) {
+        processArray.shift()
+        processMap.set(id, processArray)
+        modified = true
+      }
+      if (processArray.length === 0) {
+        processMap.delete(id)
+        modified = true
+      }
     }
-    if (typeof requestAnimationFrame === 'undefined') {
-      return console.warn('undefined requestAnimationFrame')
+    if (modified) this._processMap$.next(processMap)
+  }
+
+  constructor (
+    @inject(Rx) readonly rx: Rx
+  ) {
+    this._interval$ = rx.interval(0, animationFrameScheduler)
+    this._processMap$ = new rx.BehaviorSubject<ProcessMap>(this._processMap)
+    if (!runningInServer) {
+      this._processMap$
+        .pipe(
+          rx.switchMap((processMap) =>
+            rx.iif(() => processMap.size === 0,
+              rx.of(),
+              this._interval$.pipe(
+                rx.share(),
+                rx.tap(() => this._runProcessMap(processMap)))
+            )))
+        .subscribe()
     }
-    requestAnimationFrame(runLoop)
-    this._loopIsRunning = true
   }
 
-  private _runProcesses (entries: Array<[IProcessId, IProcess[]]>): void {
-    for (const [key, processes] of entries) {
-      const nextProcess = processes[0]
-      if (processes.length === 0) this._processMap.delete(key)
-      else if (nextProcess() === true) processes.shift()
-    }
+  add (id: IProcessId, processes: IProcess[]): void {
+    this._add(id, processes)
+    this._next()
   }
 
-  add (key: IProcessId, processes: IProcess[]): void {
-    const _callbacks = this._processMap.get(key) ?? []
-    this._processMap.set(key, _callbacks.concat(processes))
-    this._runLoop()
+  clear (id: IProcessId): void {
+    this._clear(id)
+    this._next()
   }
 
-  clear (key: IProcessId): void {
-    this._processMap.delete(key)
+  reset (id: IProcessId, processes: IProcess[]): void {
+    this._clear(id)
+    this._add(id, processes)
+    this._next()
   }
 
-  reset (key: IProcessId, processes: IProcess[]): void {
-    this.clear(key)
-    this.add(key, processes)
+  resetAll (): void {
+    this._next(new Map())
+  }
+
+  setInterval$ ($: Observable<any>): void {
+    this._interval$ = $
   }
 }

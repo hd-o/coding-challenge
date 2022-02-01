@@ -1,22 +1,23 @@
+import { range } from 'lodash'
+import { Subject } from 'rxjs'
 import { container } from 'tsyringe'
 import { get } from '@/tests/util/getters'
-import { createRequestAnimationFrameMock } from '@/tests/util/mock/requestAnimationFrame'
 import { ProcessLoop } from './'
 
 describe(`${ProcessLoop.name}`, () => {
   const keyA = 'A'
   const keyB = 'B'
-  const requestAnimationFrameMock = createRequestAnimationFrameMock()
-  let processLoop = container.resolve(ProcessLoop)
-  afterAll(() => {
-    requestAnimationFrameMock.afterAll()
-  })
+  const interval$ = new Subject<void>()
+  const processLoop = container.resolve(ProcessLoop)
+
+  function tickInterval (times: number): void {
+    range(times).map(() => interval$.next())
+  }
   beforeAll(() => {
-    requestAnimationFrameMock.beforeAll()
+    processLoop.setInterval$(interval$)
   })
   beforeEach(() => {
-    requestAnimationFrameMock.reset()
-    processLoop = container.resolve(ProcessLoop)
+    processLoop.resetAll()
   })
   test(`${get.describe(ProcessLoop).add}`, () => {
     let counter = 0
@@ -25,9 +26,7 @@ describe(`${ProcessLoop.name}`, () => {
     const processC = jest.fn(() => true)
     processLoop.add(keyA, [processA, processB])
     processLoop.add(keyB, [processC])
-    requestAnimationFrameMock.tick()
-    requestAnimationFrameMock.tick()
-    requestAnimationFrameMock.tick()
+    tickInterval(3)
     expect(processA.mock.calls.length).toBe(2)
     expect(processB.mock.calls.length).toBe(1)
     expect(processC.mock.calls.length).toBe(1)
@@ -40,8 +39,7 @@ describe(`${ProcessLoop.name}`, () => {
     processLoop.add(keyB, [processC])
     processLoop.clear(keyA)
     processLoop.add(keyA, [processB])
-    requestAnimationFrameMock.tick()
-    requestAnimationFrameMock.tick()
+    tickInterval(2)
     expect(processA.mock.calls.length).toBe(0)
     expect(processB.mock.calls.length).toBe(1)
     expect(processC.mock.calls.length).toBe(1)
@@ -52,7 +50,7 @@ describe(`${ProcessLoop.name}`, () => {
     const processC = jest.fn(() => true)
     processLoop.add(keyA, [processA, processB])
     processLoop.reset(keyA, [processC])
-    requestAnimationFrameMock.tick()
+    tickInterval(1)
     expect(processA.mock.calls.length).toBe(0)
     expect(processB.mock.calls.length).toBe(0)
     expect(processC.mock.calls.length).toBe(1)
