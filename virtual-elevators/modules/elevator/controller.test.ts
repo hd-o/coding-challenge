@@ -12,7 +12,7 @@ function requestElevator (floorIndex: number = 0): IFloor {
 }
 
 describe(`${get.describe(ElevatorCtrl).requestElevator}`, () => {
-  test('Open door when elevator idle at floor', async () => {
+  test('Open door when elevator idle', async () => {
     const floor = requestElevator()
     expect(get.floorCtrl().hasRequestedElevator(floor)).toBe(false)
     const door = await firstValueFrom(get.elevatorDoorUnit$().pipe(skip(1)))

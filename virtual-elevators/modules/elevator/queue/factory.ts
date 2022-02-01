@@ -2,11 +2,11 @@ import { RecordOf } from 'immutable'
 import { inject, singleton } from 'tsyringe'
 import { IFloor } from '~/floor/model'
 import { Immutable } from '~/pkg/immutable'
-import { Comparator } from '~/pkg/immutable/SortedSet'
+import { IComparator } from '~/pkg/immutable/SortedSet'
 import { IElevatorQueue } from './model'
 import { elevatorQueueState } from './model/moveState'
 
-const floorComparator: Comparator<IFloor> = (a, b) => {
+const floorComparator: IComparator<IFloor> = (a, b) => {
   if (a.number === b.number) return 0
   if (a.number < b.number) return -1
   return 1

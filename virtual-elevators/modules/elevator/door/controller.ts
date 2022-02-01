@@ -1,22 +1,22 @@
 import { createContext } from 'react'
 import { container, inject, singleton } from 'tsyringe'
 import { Lodash } from '~/pkg/lodash'
-import { Process, ProcessLoop } from '~/process/loop'
+import { IProcess, ProcessLoop } from '~/process/loop'
 import { ProcessUtils } from '~/process/utils'
-import { ElevatorRecord } from '../model'
+import { IElevatorRecord } from '../model'
 import { ElevatorMoveState } from '../moveState'
 import { IElevatorDoor } from './model'
 import { elevatorDoorPosition } from './model/position'
-import { ElevatorDoorStatus, elevatorDoorStatus } from './model/status'
-import { ElevatorDoor$, ElevatorDoorUnit$ } from './stream'
+import { elevatorDoorStatus, IElevatorDoorStatus } from './model/status'
+import { ElevatorDoor$, IElevatorDoorUnit$ } from './stream'
 
 @singleton()
 export class ElevatorDoorCtrl {
-  private _createDoorMovementProcess (doorUnit$: ElevatorDoorUnit$, doorStatus: ElevatorDoorStatus): Process {
+  private _createDoorMovementProcess (doorUnit$: IElevatorDoorUnit$, doorStatus: IElevatorDoorStatus): IProcess {
     const isOpening = doorStatus === elevatorDoorStatus.Opening
     const incrementValue = isOpening ? -1 : 1
     const targetPosition = isOpening ? elevatorDoorPosition.Opened : elevatorDoorPosition.Closed
-    let process: Process = () => {
+    let process: IProcess = () => {
       this._setDoorStatus(doorUnit$, doorStatus)
       process = () => {
         const { position } = doorUnit$.value
@@ -28,12 +28,12 @@ export class ElevatorDoorCtrl {
     return this._lodash.throttle(() => process(), 250)
   }
 
-  private _setDoorPosition (doorUnit$: ElevatorDoorUnit$, position: number): void {
+  private _setDoorPosition (doorUnit$: IElevatorDoorUnit$, position: number): void {
     if (position < elevatorDoorPosition.Opened || position > elevatorDoorPosition.Closed) return
     doorUnit$.next(doorUnit$.value.set('position', position as IElevatorDoor['position']))
   }
 
-  private _setDoorStatus (doorUnit$: ElevatorDoorUnit$, status: ElevatorDoorStatus): void {
+  private _setDoorStatus (doorUnit$: IElevatorDoorUnit$, status: IElevatorDoorStatus): void {
     doorUnit$.next(doorUnit$.value.set('status', status))
   }
 
@@ -44,15 +44,15 @@ export class ElevatorDoorCtrl {
     @inject(Lodash) private readonly _lodash: Lodash
   ) {}
 
-  getDoorUnit$ (elevator: ElevatorRecord): ElevatorDoorUnit$ {
-    return this._elevatorDoors$.value.get(elevator.id) as ElevatorDoorUnit$
+  getDoorUnit$ (elevator: IElevatorRecord): IElevatorDoorUnit$ {
+    return this._elevatorDoors$.value.get(elevator.id) as IElevatorDoorUnit$
   }
 
-  isDoorClosed (elevator: ElevatorRecord): boolean {
+  isDoorClosed (elevator: IElevatorRecord): boolean {
     return this.getDoorUnit$(elevator).value.status === elevatorDoorStatus.Closed
   }
 
-  open (elevator: ElevatorRecord): void {
+  open (elevator: IElevatorRecord): void {
     if (elevator.moveState !== ElevatorMoveState.Idle) return
     const doorUnit$ = this.getDoorUnit$(elevator)
     // #door-status: Assure status is set before process loop.
@@ -66,7 +66,7 @@ export class ElevatorDoorCtrl {
     ])
   }
 
-  close (elevator: ElevatorRecord): void {
+  close (elevator: IElevatorRecord): void {
     const doorUnit$ = this.getDoorUnit$(elevator)
     /** @see ElevatorDoorCtrl.open #door-status  */
     this._setDoorStatus(doorUnit$, elevatorDoorStatus.Closing)

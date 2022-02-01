@@ -8,7 +8,7 @@ import { OrderedSet } from 'immutable'
  *   return 1
  * }
  */
-export type Comparator<V> = (a: V, b: V) => 0 | 1 | -1
+export type IComparator<V> = (a: V, b: V) => 0 | 1 | -1
 
 export class SortedSet<V> implements Iterable<V> {
   private _create (orderedSet: OrderedSet<V>): SortedSet<V> {
@@ -17,7 +17,7 @@ export class SortedSet<V> implements Iterable<V> {
 
   constructor (
     readonly values: Iterable<V> = [],
-    private readonly _comparator: Comparator<V>,
+    private readonly _comparator: IComparator<V>,
     private readonly _orderedSet = OrderedSet(values).sort(_comparator)
   ) {}
 

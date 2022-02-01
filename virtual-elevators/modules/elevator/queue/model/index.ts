@@ -1,12 +1,12 @@
 import { IFloor } from '~/floor/model'
 import { SortedSet } from '~/pkg/immutable/SortedSet'
-import { ElevatorQueueState } from './moveState'
+import { IElevatorQueueState } from './moveState'
 
 // TODO: IFloor -> FloorRecord
-export type ElevatorQueueSet = SortedSet<IFloor>
+export type IElevatorQueueSet = SortedSet<IFloor>
 
 export interface IElevatorQueue {
-  state: ElevatorQueueState
-  MovingUp: ElevatorQueueSet
-  MovingDown: ElevatorQueueSet
+  state: IElevatorQueueState
+  MovingUp: IElevatorQueueSet
+  MovingDown: IElevatorQueueSet
 }

@@ -6,21 +6,23 @@ import { Immutable } from '~/pkg/immutable'
 import { IFloor } from '../model'
 import { Floor$ } from '../stream'
 
-type FloorRequest = boolean
-export type FloorRequestUnit$ = BehaviorSubject<FloorRequest>
-type FloorRequestMap = Map<IFloor, FloorRequestUnit$>
+type IFloorRequest = boolean
+
+export type IFloorRequestUnit$ = BehaviorSubject<IFloorRequest>
+
+type IFloorRequestMap = Map<IFloor, IFloorRequestUnit$>
 
 @singleton()
-export class FloorRequest$ extends BehaviorSubject<FloorRequestMap> {
+export class FloorRequest$ extends BehaviorSubject<IFloorRequestMap> {
   constructor (
     @inject(Immutable) readonly immutable: Immutable,
     @inject(Floor$) readonly floor$: Floor$
   ) {
     super(createFloorRequestMap(floor$.value))
     floor$.subscribe(floor => this.next(createFloorRequestMap(floor)))
-    function createFloorRequestMap (floors: List<IFloor>): FloorRequestMap {
+    function createFloorRequestMap (floors: List<IFloor>): IFloorRequestMap {
       return immutable.Map(floors.map((floor) => {
-        return [floor, new BehaviorSubject(false)] as [IFloor, FloorRequestUnit$]
+        return [floor, new BehaviorSubject(false)] as [IFloor, IFloorRequestUnit$]
       }))
     }
   }

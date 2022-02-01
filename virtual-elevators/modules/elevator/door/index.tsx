@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
 import { useStream } from '~/util/useStream'
 import { useStyle } from '~/util/useStyle'
-import { ElevatorRecord } from '../model'
+import { IElevatorRecord } from '../model'
 import { ElevatorDoorCtrlCtx } from './controller'
 
 const door = (): NestedCSSProperties => ({
@@ -15,7 +15,7 @@ const door = (): NestedCSSProperties => ({
 })
 
 interface Props {
-  elevator: ElevatorRecord
+  elevator: IElevatorRecord
 }
 
 interface DoorProps {

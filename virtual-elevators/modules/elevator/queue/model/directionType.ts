@@ -1,8 +1,8 @@
-export type ElevatorDirectionType = 'MovingUp' | 'MovingDown'
+export type IElevatorDirectionType = 'MovingUp' | 'MovingDown'
 
-type ElevatorDirectionTypeMap = Record<ElevatorDirectionType, ElevatorDirectionType>
+type IElevatorDirectionTypeMap = Record<IElevatorDirectionType, IElevatorDirectionType>
 
-export const elevatorDirectionType: ElevatorDirectionTypeMap = {
+export const elevatorDirectionType: IElevatorDirectionTypeMap = {
   MovingUp: 'MovingUp',
   MovingDown: 'MovingDown'
 }

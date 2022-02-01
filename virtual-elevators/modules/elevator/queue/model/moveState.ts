@@ -1,13 +1,12 @@
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-import type { IElevatorQueue } from '.'
-import { ElevatorDirectionType, elevatorDirectionType } from './directionType'
+import { elevatorDirectionType, IElevatorDirectionType } from './directionType'
 
-export type ElevatorQueueState = ElevatorDirectionType | 'Idle'
+export type IElevatorQueueState = IElevatorDirectionType | 'Idle'
 
-type ElevatorQueueStateMap = Record<ElevatorQueueState, ElevatorQueueState>
+type IElevatorQueueStateMap = Record<IElevatorQueueState, IElevatorQueueState>
 
 /** @see IElevatorQueue.state */
-export const elevatorQueueState: ElevatorQueueStateMap = {
+export const elevatorQueueState: IElevatorQueueStateMap = {
   ...elevatorDirectionType,
   Idle: 'Idle'
 }

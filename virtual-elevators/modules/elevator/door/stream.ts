@@ -4,15 +4,16 @@ import { inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { IElevator } from '../model'
 import { Elevator$ } from '../stream'
-import { ElevatorUnit$ } from '../stream/unit'
+import { IElevatorUnit$ } from '../stream/unit'
 import { ElevatorDoorFactory } from './factory'
 import { IElevatorDoor } from './model'
 
-export type ElevatorDoorUnit$ = BehaviorSubject<RecordOf<IElevatorDoor>>
-type ElevatorDoorMap = Map<IElevator['id'], ElevatorDoorUnit$>
+export type IElevatorDoorUnit$ = BehaviorSubject<RecordOf<IElevatorDoor>>
+
+type IElevatorDoorMap = Map<IElevator['id'], IElevatorDoorUnit$>
 
 @singleton()
-export class ElevatorDoor$ extends BehaviorSubject<ElevatorDoorMap> {
+export class ElevatorDoor$ extends BehaviorSubject<IElevatorDoorMap> {
   constructor (
     @inject(Immutable) readonly immutable: Immutable,
     @inject(Elevator$) readonly elevator$: Elevator$,
@@ -20,7 +21,7 @@ export class ElevatorDoor$ extends BehaviorSubject<ElevatorDoorMap> {
   ) {
     super(createDoorMap(elevator$.value))
     elevator$.subscribe((elevatorUnit$s) => this.next(createDoorMap(elevatorUnit$s)))
-    function createDoorMap (elevatorUnit$s: List<ElevatorUnit$>): ElevatorDoorMap {
+    function createDoorMap (elevatorUnit$s: List<IElevatorUnit$>): IElevatorDoorMap {
       return immutable.Map(elevatorUnit$s.map(elevatorUnit$ => ([
         elevatorUnit$.value.id,
         new BehaviorSubject(doorFactory.create())
