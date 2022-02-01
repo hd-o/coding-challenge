@@ -1,6 +1,6 @@
 import { container } from 'tsyringe'
 import { ElevatorCtrl } from '~/elevator/controller'
-import { IElevatorDoor } from '~/elevator/door/model'
+import { IElevatorDoorRecord } from '~/elevator/door/model'
 import { ElevatorDoor$Map$, IElevatorDoor$ } from '~/elevator/door/stream'
 import { IElevatorRecord } from '~/elevator/model'
 import { ElevatorPosition$Map$, IElevatorPosition$Map } from '~/elevator/position/stream'
@@ -31,7 +31,7 @@ export namespace get {
   export const elevator = (): IElevatorRecord => elevator$().value
 
   export const elevatorDoor$ = (): IElevatorDoor$ => elevatorDoor$Map$().value.get(elevator().id) as IElevatorDoor$
-  export const elevatorDoor = (): IElevatorDoor => elevatorDoor$().value
+  export const elevatorDoor = (): IElevatorDoorRecord => elevatorDoor$().value
 
   export const elevatorPosition$Map = (): IElevatorPosition$Map => elevatorPosition$Map$().value
 

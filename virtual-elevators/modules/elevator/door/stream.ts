@@ -1,14 +1,11 @@
-import { Map, RecordOf } from 'immutable'
+import { Map } from 'immutable'
 import { BehaviorSubject } from 'rxjs'
 import { inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { IElevator } from '../model'
 import { Elevator$Map$ } from '../stream'
 import { ElevatorDoorFactory } from './factory'
-import { IElevatorDoor } from './model'
-
-// TODO: use IElevatorDoorRecord
-type IElevatorDoorRecord = RecordOf<IElevatorDoor>
+import { IElevatorDoorRecord } from './model'
 
 export type IElevatorDoor$ = BehaviorSubject<IElevatorDoorRecord>
 
