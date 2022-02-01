@@ -20,9 +20,9 @@ export class ElevatorPosition$Map$ extends BehaviorSubject<IElevatorPosition$Map
     super(createPosition$())
     elevator$.subscribe(() => this.next(createPosition$()))
     function createPosition$ (): IElevatorPosition$Map {
-      return immutable.Map(elevator$.value.valueSeq().map((elevator$) => {
-        return [elevator$.value.id, new BehaviorSubject(0)]
-      }))
+      return immutable.Map(elevator$.value.valueSeq().map((elevator$) =>
+        [elevator$.value.id, new BehaviorSubject(0)]
+      ))
     }
   }
 }

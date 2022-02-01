@@ -1,11 +1,10 @@
 import { Map } from 'immutable'
 import { createContext } from 'react'
-import { BehaviorSubject, combineLatest } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { ElevatorFactory } from '~/elevator/factory'
 import { Lodash } from '~/pkg/lodash'
 import { Immutable } from '../../pkg/immutable'
-import { ISettings } from '../../settings/model'
 import { Settings$ } from '../../settings/stream'
 import { IElevator, IElevatorRecord } from '../model'
 
@@ -21,17 +20,14 @@ export class Elevator$Map$ extends BehaviorSubject<IElevator$Map> {
     @inject(Immutable) readonly immutable: Immutable,
     @inject(ElevatorFactory) readonly elevatorFactory: ElevatorFactory
   ) {
-    super(createElevators(settings$.value))
-    function createElevators (settings: ISettings): IElevator$Map {
-      const elevator$Array = lodash.rangeMap(settings.elevatorCount, () => {
+    super(createElevators())
+    settings$.subscribe(() => this.next(createElevators()))
+    function createElevators (): IElevator$Map {
+      return immutable.Map(lodash.rangeMap(settings$.value.elevatorCount, () => {
         const elevator = elevatorFactory.create({ id: lodash.uniqueId() })
         return [elevator.id, new BehaviorSubject(elevator)] as [IElevator['id'], IElevator$]
-      })
-      return immutable.Map(elevator$Array)
+      }))
     }
-    combineLatest([settings$]).subscribe((args) => {
-      this.next(createElevators(...args))
-    })
   }
 }
 
