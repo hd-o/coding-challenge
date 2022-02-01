@@ -9,7 +9,7 @@ import { useStreamCtx } from '~/util/useStreamCtx'
 import { useStyle } from '~/util/useStyle'
 import { ElevatorCallerCtx } from '../caller'
 import { ElevatorCallerProps } from '../caller/props'
-import { ElevatorRecord } from '../model'
+import { IElevatorRecord } from '../model'
 import { ElevatorQueueCtrlCtx } from '../queue/controller'
 import { elevatorRowStyle } from '../row/style'
 
@@ -22,7 +22,7 @@ const row = (): NestedCSSProperties => ({
 
 interface CustomElevatorCallerProps
   extends Omit<ElevatorCallerProps, 'floorHasRequested' | 'onClick'> {
-  elevator: ElevatorRecord
+  elevator: IElevatorRecord
 }
 
 function CustomElevatorCaller (props: CustomElevatorCallerProps): JSX.Element {
@@ -39,7 +39,7 @@ function CustomElevatorCaller (props: CustomElevatorCallerProps): JSX.Element {
 }
 
 interface Props {
-  elevator: ElevatorRecord
+  elevator: IElevatorRecord
 }
 
 /** Internal elevator buttons */

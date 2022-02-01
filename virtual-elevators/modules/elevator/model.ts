@@ -8,4 +8,4 @@ export interface IElevator {
   moveState: ElevatorMoveState
 }
 
-export type ElevatorRecord = RecordOf<IElevator>
+export type IElevatorRecord = RecordOf<IElevator>

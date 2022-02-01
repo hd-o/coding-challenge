@@ -9,7 +9,7 @@ import { useStyle } from '../util/useStyle'
 import { ElevatorCarCtx } from './car'
 import { ElevatorPanelCtx } from './panel'
 import { elevatorRowStyle } from './row/style'
-import { ElevatorUnit$ } from './stream/unit'
+import { IElevatorUnit$ } from './stream/unit'
 
 const container = (props: {
   floorCount: number
@@ -22,7 +22,7 @@ const container = (props: {
 })
 
 interface Props {
-  elevatorUnit$: ElevatorUnit$
+  elevatorUnit$: IElevatorUnit$
 }
 
 function Elevator (props: Props): JSX.Element {

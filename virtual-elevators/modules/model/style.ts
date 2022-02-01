@@ -1,3 +1,3 @@
 import { HTMLAttributes } from 'react'
 
-export type Style = HTMLAttributes<HTMLDivElement>['style']
+export type IStyle = HTMLAttributes<HTMLDivElement>['style']

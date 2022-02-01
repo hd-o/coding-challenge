@@ -1,4 +1,4 @@
 import { BehaviorSubject } from 'rxjs'
-import { ElevatorRecord } from '../model'
+import { IElevatorRecord } from '../model'
 
-export type ElevatorUnit$ = BehaviorSubject<ElevatorRecord>
+export type IElevatorUnit$ = BehaviorSubject<IElevatorRecord>

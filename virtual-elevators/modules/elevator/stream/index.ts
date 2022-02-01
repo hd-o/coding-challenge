@@ -7,12 +7,12 @@ import { Lodash } from '~/pkg/lodash'
 import { Immutable } from '../../pkg/immutable'
 import { ISettings } from '../../settings/model'
 import { Settings$ } from '../../settings/stream'
-import { ElevatorUnit$ } from './unit'
+import { IElevatorUnit$ } from './unit'
 
-export type ElevatorUnit$List = List<ElevatorUnit$>
+export type IElevatorUnit$List = List<IElevatorUnit$>
 
 @singleton()
-export class Elevator$ extends BehaviorSubject<ElevatorUnit$List> {
+export class Elevator$ extends BehaviorSubject<IElevatorUnit$List> {
   constructor (
     @inject(Settings$) readonly settings$: Settings$,
     @inject(Lodash) readonly lodash: Lodash,
@@ -20,7 +20,7 @@ export class Elevator$ extends BehaviorSubject<ElevatorUnit$List> {
     @inject(ElevatorFactory) readonly elevatorFactory: ElevatorFactory
   ) {
     super(createElevators(settings$.value))
-    function createElevators (settings: ISettings): List<ElevatorUnit$> {
+    function createElevators (settings: ISettings): List<IElevatorUnit$> {
       const elevatorUnit$Array = lodash.rangeMap(settings.elevatorCount, () => {
         const elevator = elevatorFactory.create({ id: lodash.uniqueId() })
         return new BehaviorSubject(elevator)

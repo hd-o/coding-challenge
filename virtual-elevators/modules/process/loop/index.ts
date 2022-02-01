@@ -1,11 +1,12 @@
 import { singleton } from 'tsyringe'
 
-type Key = any
-export type Process = (() => void) | (() => true)
+export type IProcessId = string | {}
+
+export type IProcess = (() => void) | (() => true)
 
 @singleton()
 export class ProcessLoop {
-  private readonly _processMap = new Map<Key, Process[]>()
+  private readonly _processMap = new Map<IProcessId, IProcess[]>()
 
   private _loopIsRunning = false
 
@@ -28,7 +29,7 @@ export class ProcessLoop {
     this._loopIsRunning = true
   }
 
-  private _runProcesses (entries: Array<[Key, Process[]]>): void {
+  private _runProcesses (entries: Array<[IProcessId, IProcess[]]>): void {
     for (const [key, processes] of entries) {
       const nextProcess = processes[0]
       if (processes.length === 0) this._processMap.delete(key)
@@ -36,17 +37,17 @@ export class ProcessLoop {
     }
   }
 
-  add (key: Key, processes: Process[]): void {
+  add (key: IProcessId, processes: IProcess[]): void {
     const _callbacks = this._processMap.get(key) ?? []
     this._processMap.set(key, _callbacks.concat(processes))
     this._runLoop()
   }
 
-  clear (key: Key): void {
+  clear (key: IProcessId): void {
     this._processMap.delete(key)
   }
 
-  reset (key: Key, processes: Process[]): void {
+  reset (key: IProcessId, processes: IProcess[]): void {
     this.clear(key)
     this.add(key, processes)
   }

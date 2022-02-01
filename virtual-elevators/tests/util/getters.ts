@@ -1,15 +1,15 @@
 import { container } from 'tsyringe'
 import { ElevatorCtrl } from '~/elevator/controller'
 import { IElevatorDoor } from '~/elevator/door/model'
-import { ElevatorDoor$, ElevatorDoorUnit$ } from '~/elevator/door/stream'
-import { ElevatorRecord } from '~/elevator/model'
-import { ElevatorPosition$, ElevatorPositionUnit$Map } from '~/elevator/position/stream'
+import { ElevatorDoor$, IElevatorDoorUnit$ } from '~/elevator/door/stream'
+import { IElevatorRecord } from '~/elevator/model'
+import { ElevatorPosition$, IElevatorPositionUnit$Map } from '~/elevator/position/stream'
 import { IElevatorQueue } from '~/elevator/queue/model'
-import { ElevatorQueueState } from '~/elevator/queue/model/moveState'
+import { IElevatorQueueState } from '~/elevator/queue/model/moveState'
 import { ElevatorQueue$ } from '~/elevator/queue/stream'
 import { IElevatorQueueUnit$ } from '~/elevator/queue/stream/unit'
-import { Elevator$, ElevatorUnit$List } from '~/elevator/stream'
-import { ElevatorUnit$ } from '~/elevator/stream/unit'
+import { Elevator$, IElevatorUnit$List } from '~/elevator/stream'
+import { IElevatorUnit$ } from '~/elevator/stream/unit'
 import { FloorCtrl } from '~/floor/controller'
 import { IFloor } from '~/floor/model'
 import { Floor$ } from '~/floor/stream'
@@ -27,18 +27,18 @@ export namespace get {
   export const elevatorDoor$ = (): ElevatorDoor$ => container.resolve(ElevatorDoor$)
   export const settings$ = (): Settings$ => container.resolve(Settings$)
 
-  export const elevatorUnit$List = (): ElevatorUnit$List => elevator$().value
-  export const elevatorUnit$ = (): ElevatorUnit$ => elevatorUnit$List().first()
-  export const elevator = (): ElevatorRecord => elevatorUnit$().value
+  export const elevatorUnit$List = (): IElevatorUnit$List => elevator$().value
+  export const elevatorUnit$ = (): IElevatorUnit$ => elevatorUnit$List().first()
+  export const elevator = (): IElevatorRecord => elevatorUnit$().value
 
-  export const elevatorDoorUnit$ = (): ElevatorDoorUnit$ => elevatorDoor$().value.get(elevator().id) as ElevatorDoorUnit$
+  export const elevatorDoorUnit$ = (): IElevatorDoorUnit$ => elevatorDoor$().value.get(elevator().id) as IElevatorDoorUnit$
   export const elevatorDoor = (): IElevatorDoor => elevatorDoorUnit$().value
 
-  export const elevatorPositionUnit$Map = (): ElevatorPositionUnit$Map => elevatorPosition$().value
+  export const elevatorPositionUnit$Map = (): IElevatorPositionUnit$Map => elevatorPosition$().value
 
-  export const elevatorQueueUnit$ = (elevator: ElevatorRecord): IElevatorQueueUnit$ => elevatorQueue$().value.get(elevator.id) as IElevatorQueueUnit$
-  export const elevatorQueue = (elevator: ElevatorRecord): IElevatorQueue => elevatorQueueUnit$(elevator).value
-  export const elevatorQueueState = (): ElevatorQueueState => elevatorQueue(get.elevator()).state
+  export const elevatorQueueUnit$ = (elevator: IElevatorRecord): IElevatorQueueUnit$ => elevatorQueue$().value.get(elevator.id) as IElevatorQueueUnit$
+  export const elevatorQueue = (elevator: IElevatorRecord): IElevatorQueue => elevatorQueueUnit$(elevator).value
+  export const elevatorQueueState = (): IElevatorQueueState => elevatorQueue(get.elevator()).state
 
   export const floors = (): IFloor[] => [...floor$().value]
 
@@ -46,13 +46,13 @@ export namespace get {
 
   export const describe_ = <C extends NewableFunction> (c: C, k: keyof C['prototype']): string => `${c.prototype.constructor.name as string}.${String(k)}`
 
-  type PropMap <C extends NewableFunction> = {[K in keyof C['prototype']]: string}
-  type Describe = <C extends NewableFunction> (c: C) => PropMap<typeof c>
+  type IPropMap <C extends NewableFunction> = {[K in keyof C['prototype']]: string}
+  type IDescribe = <C extends NewableFunction> (c: C) => IPropMap<typeof c>
 
   /**
    * Get string with type and method name for test titles (arg for jest describe())
    * @example
    * get.describe(MyClass).myMethod // => 'MyClass.method'
    */
-  export const describe: Describe = (c) => new Proxy({}, { get: (t, p) => `${c.name}.${String(p)}` }) as PropMap<typeof c>
+  export const describe: IDescribe = (c) => new Proxy({}, { get: (t, p) => `${c.name}.${String(p)}` }) as IPropMap<typeof c>
 }

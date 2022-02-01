@@ -4,16 +4,16 @@ import { container, inject, singleton } from 'tsyringe'
 import { Lodash } from '~/pkg/lodash'
 import { Settings$ } from '~/settings/stream'
 import { IFloor } from './model'
-import { FloorRequest$, FloorRequestUnit$ } from './requests/stream'
+import { FloorRequest$, IFloorRequestUnit$ } from './requests/stream'
 import { Floor$ } from './stream'
 
-type GetPosition = (floor: IFloor) => number
+type IGetPosition = (floor: IFloor) => number
 
 @singleton()
 export class FloorCtrl {
-  private readonly _getPosition: MemoizedFunction & GetPosition
+  private readonly _getPosition: MemoizedFunction & IGetPosition
 
-  private readonly _getTopPosition: MemoizedFunction & GetPosition
+  private readonly _getTopPosition: MemoizedFunction & IGetPosition
 
   constructor (
     @inject(Floor$) readonly floor$: Floor$,
@@ -33,13 +33,13 @@ export class FloorCtrl {
     })
   }
 
-  getPosition: GetPosition = (floor) => this._getPosition(floor)
+  getPosition: IGetPosition = (floor) => this._getPosition(floor)
 
-  getRequestUnit$ = (floor: IFloor): FloorRequestUnit$ => {
-    return this._floorRequest$.value.get(floor) as FloorRequestUnit$
+  getRequestUnit$ = (floor: IFloor): IFloorRequestUnit$ => {
+    return this._floorRequest$.value.get(floor) as IFloorRequestUnit$
   }
 
-  getTopPosition: GetPosition = (floor) => this._getTopPosition(floor)
+  getTopPosition: IGetPosition = (floor) => this._getTopPosition(floor)
 
   hasRequestedElevator (floor: IFloor): boolean {
     return this._floorRequest$.value.get(floor)?.value === true

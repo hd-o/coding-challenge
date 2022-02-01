@@ -1,8 +1,8 @@
-export type ElevatorDoorStatus = 'Open' | 'Opening' | 'Closed' | 'Closing'
+export type IElevatorDoorStatus = 'Open' | 'Opening' | 'Closed' | 'Closing'
 
-type ElevatorDoorStatusMap = Readonly<{[S in ElevatorDoorStatus]: S}>
+type IElevatorDoorStatusMap = Readonly<{[S in IElevatorDoorStatus]: S}>
 
-export const elevatorDoorStatus: ElevatorDoorStatusMap = {
+export const elevatorDoorStatus: IElevatorDoorStatusMap = {
   Closed: 'Closed',
   Closing: 'Closing',
   Open: 'Open',
