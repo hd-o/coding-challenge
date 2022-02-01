@@ -11,7 +11,7 @@ import { Elevator$Map$, IElevator$, IElevator$Map } from '~/elevator/stream'
 import { FloorCtrl } from '~/floor/controller'
 import { IFloorRecord } from '~/floor/model'
 import { FloorList$ } from '~/floor/stream'
-import { ISettings } from '~/settings/model'
+import { ISettingsRecord } from '~/settings/model'
 import { Settings$ } from '~/settings/stream'
 
 /* eslint-disable-next-line @typescript-eslint/no-namespace */
@@ -41,7 +41,7 @@ export namespace get {
 
   export const floors = (): IFloorRecord[] => [...floorList$().value]
 
-  export const settings = (): ISettings => settings$().value
+  export const settings = (): ISettingsRecord => settings$().value
 
   export const describe_ = <C extends NewableFunction> (c: C, k: keyof C['prototype']): string => `${c.prototype.constructor.name as string}.${String(k)}`
 
