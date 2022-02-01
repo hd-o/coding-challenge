@@ -1,7 +1,7 @@
-import { IFloor } from '~/floor/model'
+import { IFloorRecord } from '~/floor/model'
 
 export interface ElevatorCallerProps {
-  floor: IFloor
+  floor: IFloorRecord
   floorHasRequested: boolean
   onClick: () => unknown
 }

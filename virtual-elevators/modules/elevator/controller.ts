@@ -4,7 +4,7 @@ import { ElevatorDoorCtrl } from '~/elevator/door/controller'
 import { ElevatorQueueCtrl } from '~/elevator/queue/controller'
 import { Elevator$ } from '~/elevator/stream'
 import { FloorCtrl } from '~/floor/controller'
-import { IFloor } from '~/floor/model'
+import { IFloorRecord } from '~/floor/model'
 import { Message } from '~/message'
 import { NoElevatorServicesFloor } from '~/message/NoElevatorServicesFloor'
 import { Lodash } from '~/pkg/lodash'
@@ -41,15 +41,23 @@ export class ElevatorCtrl {
     }
   })
 
+  canElevatorMove (elevator: IElevatorRecord, queueUnit$: IElevatorQueueUnit$): boolean {
+    return (
+      this._doorCtrl.isDoorClosed(elevator) &&
+      !this._queueCtrl.isQueueEmpty(elevator) &&
+      queueUnit$.value.state !== elevatorQueueState.Idle
+    )
+  }
+
+  // TODO: Make ProcessLoop into a $, then subscribe for elevator/door movement
   createMovementProcess (elevatorId: IElevator['id'], queueUnit$: IElevatorQueueUnit$): IProcess {
-    // TODO: Make ProcessLoop into a $, then subscribe for elevator/door movement
     return () => {
       let elevator = this.getElevatorUnit$(elevatorId).value
-      if (!this._doorCtrl.isDoorClosed(elevator)) return undefined
-      if (this._queueCtrl.isQueueEmpty(elevator)) return undefined
-      if (queueUnit$.value.state === elevatorQueueState.Idle) return undefined
+      if (!this.canElevatorMove(elevator, queueUnit$)) return
+
       const currentDirection = queueUnit$.value.state as IElevatorDirectionType
-      const nextFloor = queueUnit$.value[currentDirection].first as IFloor
+      const nextFloor = queueUnit$.value[currentDirection].first as IFloorRecord
+
       if (this._positionCtrl.isAtFloor(elevator, nextFloor)) {
         elevator = this.setElevatorMoveState(elevator, ElevatorMoveState.Idle)
         this._queueCtrl.remove(elevator, currentDirection, nextFloor)
@@ -74,19 +82,19 @@ export class ElevatorCtrl {
     return `MovementCtrl.${String(elevatorId)}`
   }
 
-  isIdleAtFloor (elevator: IElevatorRecord, floor: IFloor): boolean {
+  isIdleAtFloor (elevator: IElevatorRecord, floor: IFloorRecord): boolean {
     return (
       elevator.moveState === ElevatorMoveState.Idle &&
       this._positionCtrl.isAtFloor(elevator, floor)
     )
   }
 
-  requestElevator (floor: IFloor): IElevatorRecord | NoElevatorServicesFloor {
+  requestElevator (floor: IFloorRecord): IElevatorRecord | NoElevatorServicesFloor {
     if (this._floorCtrl.hasRequestedElevator(floor)) return this._msg.noElevatorServicesFloor
     return this.requestNearestElevator(floor)
   }
 
-  requestNearestElevator (floor: IFloor): IElevatorRecord | NoElevatorServicesFloor {
+  requestNearestElevator (floor: IFloorRecord): IElevatorRecord | NoElevatorServicesFloor {
     const elevatorUnit$s = this._elevator$.value.toArray()
     // Show alert if no elevator available
     if (elevatorUnit$s.length === 0) return this._msg.noElevatorServicesFloor

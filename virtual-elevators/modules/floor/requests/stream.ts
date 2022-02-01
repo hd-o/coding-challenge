@@ -3,14 +3,14 @@ import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
-import { IFloor } from '../model'
+import { IFloorRecord } from '../model'
 import { Floor$ } from '../stream'
 
 type IFloorRequest = boolean
 
 export type IFloorRequestUnit$ = BehaviorSubject<IFloorRequest>
 
-type IFloorRequestMap = Map<IFloor, IFloorRequestUnit$>
+type IFloorRequestMap = Map<IFloorRecord, IFloorRequestUnit$>
 
 @singleton()
 export class FloorRequest$ extends BehaviorSubject<IFloorRequestMap> {
@@ -20,9 +20,9 @@ export class FloorRequest$ extends BehaviorSubject<IFloorRequestMap> {
   ) {
     super(createFloorRequestMap(floor$.value))
     floor$.subscribe(floor => this.next(createFloorRequestMap(floor)))
-    function createFloorRequestMap (floors: List<IFloor>): IFloorRequestMap {
+    function createFloorRequestMap (floors: List<IFloorRecord>): IFloorRequestMap {
       return immutable.Map(floors.map((floor) => {
-        return [floor, new BehaviorSubject(false)] as [IFloor, IFloorRequestUnit$]
+        return [floor, new BehaviorSubject(false)] as [IFloorRecord, IFloorRequestUnit$]
       }))
     }
   }

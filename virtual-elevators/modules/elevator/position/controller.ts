@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 import { container, inject, singleton } from 'tsyringe'
 import { FloorCtrl } from '~/floor/controller'
-import { IFloor } from '~/floor/model'
+import { IFloorRecord } from '~/floor/model'
 import { Settings$ } from '~/settings/stream'
 import { IElevatorRecord } from '../model'
 import { ElevatorPosition$, IElevatorPositionUnit$ } from './stream'
@@ -26,11 +26,11 @@ export class ElevatorPositionCtrl {
     return this.getPosition(elevator) + this._settings$.value.floorHeight
   }
 
-  isAtFloor (elevator: IElevatorRecord, floor: IFloor): boolean {
+  isAtFloor (elevator: IElevatorRecord, floor: IFloorRecord): boolean {
     return this.getPosition(elevator) === this._floorCtrl.getPosition(floor)
   }
 
-  isOverFloor (elevator: IElevatorRecord, floor: IFloor): boolean {
+  isOverFloor (elevator: IElevatorRecord, floor: IFloorRecord): boolean {
     return this.getPosition(elevator) > this._floorCtrl.getPosition(floor)
   }
 
