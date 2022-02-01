@@ -1,11 +1,10 @@
-import { List, Map } from 'immutable'
+import { Map } from 'immutable'
 import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { Immutable } from '~/pkg/immutable'
 import { IElevator } from '../../model'
-import { Elevator$ } from '../../stream'
-import { IElevatorUnit$ } from '../../stream/unit'
+import { Elevator$, IElevatorUnit$Map } from '../../stream'
 import { ElevatorQueueFactory } from '../factory'
 import { IElevatorQueueUnit$ } from './unit'
 
@@ -20,8 +19,8 @@ export class ElevatorQueue$ extends BehaviorSubject<IElevatorQueueUnit$Map> {
   ) {
     super(createElevatorQueues(elevator$.value))
     elevator$.subscribe(elevatorUnit$s => this.next(createElevatorQueues(elevatorUnit$s)))
-    function createElevatorQueues (elevatorUnit$List: List<IElevatorUnit$>): IElevatorQueueUnit$Map {
-      return immutable.Map(elevatorUnit$List.map(elevatorUnit$ => [
+    function createElevatorQueues (elevatorUnit$Map: IElevatorUnit$Map): IElevatorQueueUnit$Map {
+      return immutable.Map(elevatorUnit$Map.valueSeq().map(elevatorUnit$ => [
         elevatorUnit$.value.id,
         new BehaviorSubject(elevatorQueueFactory.create())
       ]))
