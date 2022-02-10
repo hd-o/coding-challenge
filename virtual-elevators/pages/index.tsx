@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { useContext } from 'react'
-import { AppCtx } from '~/view/app'
-import { NextHeadCtx } from '~/view/pkg/next/head'
+import { AppCtx } from '~/app'
+import { NextHeadCtx } from '~/pkg/next/head'
 
 export default function IndexPage (): JSX.Element {
   const App = useContext(AppCtx)

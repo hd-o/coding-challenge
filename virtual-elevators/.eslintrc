@@ -1,25 +1,39 @@
 {
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
   "extends": [
     "standard-with-typescript",
     "next/core-web-vitals",
     "plugin:jest/recommended",
     "plugin:react-hooks/recommended"
   ],
-  "rules": {
-    "@typescript-eslint/promise-function-async": 0
-  },
+  "ignorePatterns": [
+    "next.config.js"
+  ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "plugins": [
     "react",
     "@typescript-eslint",
-    "jest"
+    "jest",
+    "unused-imports"
   ],
-  "env": {
-    "browser": true,
-    "es6": true,
-    "jest": true
-  },
-  "parser": "@typescript-eslint/parser"
+  "rules": {
+    "@typescript-eslint/promise-function-async": 0,
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "args": "after-used",
+        "argsIgnorePattern": "^_",
+        "vars": "all",
+        "varsIgnorePattern": "^_"
+      }
+    ]
+  }
 }
