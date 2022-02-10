@@ -20,7 +20,13 @@
     "unused-imports"
   ],
   "rules": {
-    "comma-dangle": ["error", "always-multiline"],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "ignore",
+      "exports": "always-multiline",
+      "functions": "ignore"
+  }],
     "@typescript-eslint/promise-function-async": 0,
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [

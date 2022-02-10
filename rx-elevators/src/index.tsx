@@ -75,7 +75,7 @@ const ElevatorDoor: FC<ElevatorDoorProps> = (props) => {
       background: '#e5e5e5',
       height: '100%',
       // Open door to 25%
-      width: `${(props.position / 4) * 10 + 25}%`
+      width: `${(props.position / 4) * 10 + 25}%`,
     }}
   />
   return (
@@ -83,7 +83,7 @@ const ElevatorDoor: FC<ElevatorDoorProps> = (props) => {
       display: 'flex',
       height: '100%',
       width: '100%',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
     }}>
       {panel}
       {panel}
@@ -105,7 +105,7 @@ const ElevatorCar: FC<ElevatorCarProps> = (props) => {
       background: '#bbb',
       position: 'absolute',
       bottom: height + Number(props.position),
-      left: 0
+      left: 0,
     }}>
       <ElevatorDoor position={props.doorPosition} />
     </div>
@@ -148,8 +148,11 @@ const ElevatorApp: FC<{}> = () => {
   })
 
   const newTableCell = (i: number): JSX.Element => <Table.Cell key={i} />
+
   const elevatorFloorCells = times(newTableCell)(ids.length)
-  const handleFloorCall = (number: m.FloorNumber) => () => model.floorRequestEvent$.next(number)
+
+  const handleFloorCall = (number: m.FloorNumber) =>
+    () => model.floorRequestEvent$.next(number)
 
   const floors =
     reverse(floorNumbers).map(number => {

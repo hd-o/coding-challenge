@@ -21,11 +21,7 @@ export const useStream =
 // #region Constructors
 
 export const newImmutableMap =
-  <
-    Key extends string,
-    Value extends any,
-    KVPair extends [Key, Value]
-  >
+  <Key extends string, Value extends any, KVPair extends [Key, Value]>
   (kvp: KVPair[]): iMap<typeof kvp[0][0], typeof kvp[0][1]> => iMap(kvp)
 
 // #endregion
