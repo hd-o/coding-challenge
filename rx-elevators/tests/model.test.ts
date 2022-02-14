@@ -31,6 +31,8 @@ let doorAtMovementState: ReturnType<typeof u.doorAtMovementState>
 
 beforeEach(async () => {
   model = m.createModel()
+  // TODO Start door streams (e.g for testing elevator movement)
+  // modelSub.add(elevatorDoorPair$.subscribe(() => {}))
   modelSub = model.startup()
   model.interval$.next(interval$)
   model.elevatorCount$.next(elevatorCount)
