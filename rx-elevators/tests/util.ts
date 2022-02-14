@@ -75,6 +75,9 @@ export const doorAtMovementState =
         tapInterval$(interval$)(),
         x.filter(state => state.movementState === movementState)))
 
+export const defer = async (): Promise<void> =>
+  await new Promise(resolve => { setTimeout(resolve, 0) })
+
 // #endregion
 // --------------------------------------------------------------------------------
 // #region Data
