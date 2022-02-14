@@ -21,12 +21,13 @@
   ],
   "rules": {
     "comma-dangle": ["error", {
-      "arrays": "always-multiline",
-      "objects": "always-multiline",
-      "imports": "ignore",
-      "exports": "always-multiline",
-      "functions": "ignore"
-  }],
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "ignore",
+        "exports": "always-multiline",
+        "functions": "ignore"
+    }],
+    "@typescript-eslint/consistent-type-definitions": 0,
     "@typescript-eslint/promise-function-async": 0,
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [

@@ -1,5 +1,3 @@
-import { Map as iMap } from 'immutable'
-import { defer } from 'lodash'
 import { equals, map as rmap, prop } from 'ramda'
 import { filter, firstValueFrom, of, Subject, Subscription } from 'rxjs'
 import * as m from '../src/model'
@@ -43,12 +41,12 @@ beforeEach(async () => {
   getFloorArrivals = u.getFloorArrivals(interval$, model)
   getElevatorDoorState$ = u.getElevatorDoorState$(model)
   doorAtMovementState = u.doorAtMovementState(interval$, model)
-  await new Promise(defer)
+  await u.defer()
 })
 
 afterEach(async () => {
   modelSub.unsubscribe()
-  await new Promise(defer)
+  await u.defer()
 })
 
 jest.setTimeout(10_000)
@@ -72,16 +70,9 @@ describe('elevator utils', () => {
     const values = elevator$Map.valueSeq().filter(equals(mockValue$))
     expect(values.toArray()).toHaveLength(elevatorCount)
   })
-  test(`${modelKeys.getMapEntries$}`, async () => {
-    const mockEntries: Array<[string, number]> = [['a', 1], ['b', 2]]
-    const map$ = of(iMap(mockEntries))
-    const mapEntries = await firstValueFrom(model.getMapEntries$(map$))
-    expect(mapEntries).toEqual(mockEntries)
-  })
   test(`${modelKeys.newElevatorPair$}`, async () => {
     const elevator$Map$ = model.newElevator$Map$(() => mockValue$)
-    const entries$ = model.getMapEntries$(elevator$Map$)
-    const elevatorPair$ = model.newElevatorPair$<TestElevatorPair>(entries$, mockKey)
+    const elevatorPair$ = model.newElevatorPair$<TestElevatorPair>(elevator$Map$, mockKey)
     const elevatorPairs = await firstValueFrom(elevatorPair$)
     expect(elevatorPairs).toHaveLength(elevatorCount)
     expect(elevatorPairs[0].mockKey).toEqual(mockValue)

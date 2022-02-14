@@ -3,8 +3,8 @@ import KeyMirror from 'keymirror'
 import { memoize, round, uniqueId } from 'lodash'
 import { identity, map as rmap, not, pipe, times } from 'ramda'
 import {
-  animationFrames, BehaviorSubject, combineLatest, filter, map, merge, Observable, ObservedValueOf,
-  of, scan, share, skipWhile, startWith, Subject, Subscription, switchMap, tap, withLatestFrom
+  animationFrames, BehaviorSubject, combineLatest, filter, map, merge, Observable, of, scan, share,
+  skipWhile, startWith, Subject, Subscription, switchMap, tap, withLatestFrom
 } from 'rxjs'
 import * as u from './util'
 
@@ -40,7 +40,6 @@ type DoorState = RecordOf<{
 export type ElevatorDoorState$ = Observable<DoorState>
 export type ElevatorPosition$ = Observable<Position>
 
-type ElevatorPosition$Tuple = [ElevatorId, ElevatorPosition$]
 type ElevatorDoorState$Tuple = [ElevatorId, ElevatorDoorState$]
 
 type DoorActionType = keyof typeof doorActionType
@@ -89,7 +88,6 @@ type ElevatorDoorStatePair = RecordOf<{
 export type ElevatorQueueItem = QueueFloorItem | QueueDoorItem
 type ElevatorQueue = OrderedSet<ElevatorQueueItem>
 type ElevatorQueue$ = Observable<ElevatorQueue>
-type ElevatorQueue$Tuple = [ElevatorId, ElevatorQueue$]
 
 // #endregion
 // --------------------------------------------------------------------------------
@@ -155,28 +153,21 @@ export const createModel = () => {
         map(u.newImmutableMap))
 
   /**
-   * map$ -> iMap<K,V> -> Array<[K, V]>
-   * @returns Stream of entries from Maps emitted by map$
-   */
-  const newMapEntries$ =
-    <TupleType extends [any, any], Key = TupleType[0], Value = TupleType[1]>
-    (map$: Map$<Key, Value>): Observable<Array<[Key, Value]>> =>
-      map$.pipe(map(map => map.entrySeq().toArray()))
-
-  /**
    * @param entries$ Stream of map entries
    * @param recordKey Key to be used in emitted records
    * @returns Stream of records containing the ElevatorId as "elevator",
    * and the emitted value from the entry's value stream as [recordKey]
    */
   const newElevatorPair$ =
-    <PairType extends { elevator: ElevatorId }>
+    <
+      PairType extends { elevator: ElevatorId }
+    >
     (
-      entries$: Observable<Array<[ElevatorId, Observable<any>]>>,
+      map$: Map$<ElevatorId, Observable<any>>,
       recordKey: Exclude<keyof PairType, 'elevator'>,
     //
     ): Observable<PairType[]> => {
-      type Elevator$Tuple = ObservedValueOf<typeof entries$>[0]
+      type Elevator$Tuple = [ElevatorId, Observable<PairType[typeof recordKey]>]
 
       const newElevatorValuePair =
         (elevator: ElevatorId, value: any): RecordOf<PairType> =>
@@ -186,12 +177,12 @@ export const createModel = () => {
         (tuples: Elevator$Tuple[]): Array<Observable<PairType>> =>
           tuples.map(([elevator, $]) => $.pipe(map(value => newElevatorValuePair(elevator, value))))
 
-      return entries$.pipe(
+      return map$.pipe(
+        map(map => map.entrySeq().toArray()),
         switchMap((entries) => combineLatest(toElevatorValuePair$s(entries))),
         share())
     }
 
-  // TODO itemIsCategory (category) => <ItemType> (item): item is ItemType =>
   const queueItemIsCategoryFloor = (item: ElevatorQueueItem): item is QueueFloorItem =>
     item.category === queueItemCategory.Floor
 
@@ -246,7 +237,7 @@ export const createModel = () => {
     return availablePair === undefined ? of() : of(newElevatorFloorPair(availablePair.elevator, floor))
   }
 
-  const floorRequestInsert$ = floorRequestEvent$.pipe(
+  const floorRequest$ = floorRequestEvent$.pipe(
     withLatestFrom(elevatorQueuePair$Proxy, elevatorPositionPair$Proxy),
     skipWhile(([, queuePairs]) => queuePairs.length === 0),
     switchMap(floorRequestMapper))
@@ -292,7 +283,7 @@ export const createModel = () => {
   const elevatorQueueAction$: Observable<QueueAction> = merge(
     elevatorQueueDoorClosedEvent$.pipe(map(mapQueueDoorItem(doorActionType.Closed))),
     elevatorQueueDoorOpenEvent$.pipe(map(mapQueueDoorItem(doorActionType.Open))),
-    floorRequestInsert$.pipe(map(mapFloorAction(floorActionType.Add))),
+    floorRequest$.pipe(map(mapFloorAction(floorActionType.Add))),
     elevatorQueueInsert$.pipe(map(mapFloorAction(floorActionType.Add))),
     elevatorQueueRemoveEvent$.pipe(map(mapFloorAction(floorActionType.Remove))),
   ).pipe(
@@ -343,8 +334,7 @@ export const createModel = () => {
   }
 
   const elevatorQueue$Map$ = newElevator$Map$(newElevatorQueue$)
-  const elevatorQueue$MapEntries$ = newMapEntries$<ElevatorQueue$Tuple>(elevatorQueue$Map$)
-  const elevatorQueuePair$ = newElevatorPair$<ElevatorQueuePair>(elevatorQueue$MapEntries$, 'queue')
+  const elevatorQueuePair$ = newElevatorPair$<ElevatorQueuePair>(elevatorQueue$Map$, 'queue')
 
   type FloorRequested$ = (f: FloorNumber) => Observable<boolean>
   const floorRequested$: FloorRequested$ = (floor) =>
@@ -365,11 +355,10 @@ export const createModel = () => {
 
   const animationFrame$ = interval$.pipe(switchMap(identity))
 
-  type GetElevatorQueue$ = (e: ElevatorId) => Observable<ElevatorQueue>
-  const getElevatorQueue$Interval: GetElevatorQueue$ = memoize((elevator) =>
-    elevatorQueue$MapEntries$.pipe(
-      map(entries => entries.find(([elevatorId]) => elevatorId === elevator) ?? []),
-      switchMap(([, queue$]) => queue$ ?? of()),
+  type NewElevatorQueueInterval$ = (e: ElevatorId) => Observable<ElevatorQueue>
+  const newElevatorQueueInterval$: NewElevatorQueueInterval$ = memoize((elevator) =>
+    elevatorQueue$Map$.pipe(
+      switchMap(map => map.get(elevator) ?? of()),
       // If queue is not empty: subscribe to interval$ for processing queued items
       switchMap(queue => queue.isEmpty() ? of(queue) : animationFrame$.pipe(map(() => queue))),
       share()))
@@ -392,14 +381,13 @@ export const createModel = () => {
 
   type NewElevatorPosition$ = (e: ElevatorId) => ElevatorPosition$
   const newElevatorPosition$: NewElevatorPosition$ = memoize((elevator) =>
-    getElevatorQueue$Interval(elevator).pipe(
+    newElevatorQueueInterval$(elevator).pipe(
       scan(elevatorPositionScan(elevator), 0),
       share(),
       startWith(0)))
 
   const elevatorPosition$Map$ = newElevator$Map$(newElevatorPosition$)
-  const elevatorPosition$MapEntries$ = newMapEntries$<ElevatorPosition$Tuple>(elevatorPosition$Map$)
-  const elevatorPositionPair$ = newElevatorPair$<ElevatorPositionPair>(elevatorPosition$MapEntries$, 'position')
+  const elevatorPositionPair$ = newElevatorPair$<ElevatorPositionPair>(elevatorPosition$Map$, 'position')
 
   // #endregion
   // --------------------------------------------------------------------------------
@@ -455,7 +443,7 @@ export const createModel = () => {
 
   type NewElevatorDoorState$ = (e: ElevatorId, s?: DoorState) => ElevatorDoorState$
   const newElevatorDoorState$: NewElevatorDoorState$ = memoize(
-    (elevator, initialState = newDoorState()) => getElevatorQueue$Interval(elevator).pipe(
+    (elevator, initialState = newDoorState()) => newElevatorQueueInterval$(elevator).pipe(
       scan(doorPositionScan(elevator), initialState),
       share(),
       startWith(initialState)))
@@ -468,8 +456,7 @@ export const createModel = () => {
     map(rmap(newElevatorDoorState$Tuple)),
     map(u.newImmutableMap))
 
-  const elevatorDoor$MapEntries$ = newMapEntries$<ElevatorDoorState$Tuple>(elevatorDoorState$Map$)
-  const elevatorDoorPair$ = newElevatorPair$<ElevatorDoorStatePair>(elevatorDoor$MapEntries$, 'door')
+  const elevatorDoorPair$ = newElevatorPair$<ElevatorDoorStatePair>(elevatorDoorState$Map$, 'door')
 
   // #endregion
   // --------------------------------------------------------------------------------
@@ -498,7 +485,6 @@ export const createModel = () => {
     floorRequested$,
     floorRequestEvent$,
     getElevatorQueueItems$,
-    getMapEntries$: newMapEntries$,
     interval$,
     newElevator$Map$,
     newElevatorFloorPair,
