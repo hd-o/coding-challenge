@@ -1,12 +1,12 @@
 import { FC, useContext, useEffect } from 'react'
-import { ElevatorContainerCtx } from '../elevator/container'
+import { BuildingCtx } from '../building'
 import { SemanticUiContainerCtx } from '../pkg/semantic-ui/Container'
 import { useStartup } from '../startup'
 import { useResolve } from '../util/useResolve'
 
 export const App: FC<{}> = () => {
   const Container = useContext(SemanticUiContainerCtx)
-  const ElevatorContainer = useContext(ElevatorContainerCtx)
+  const Building = useContext(BuildingCtx)
   const startup = useResolve(useStartup)
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export const App: FC<{}> = () => {
   return (
     <div style={{ paddingTop: 20, minWidth: 600 }}>
       <Container>
-        <ElevatorContainer />
+        <Building />
       </Container>
     </div>
   )
