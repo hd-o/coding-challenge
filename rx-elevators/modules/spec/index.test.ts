@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import { equals, map as rmap, prop } from 'ramda'
 import { filter, firstValueFrom, of, Subscription } from 'rxjs'
 import { useElevatorCount$ } from '../elevator/count/stream'
