@@ -5,6 +5,8 @@ type FunctionContainerValueConstructor <V = any> = (c: FunctionContainer) => V
 
 export type FnCtor <V = any> = FunctionContainerValueConstructor<V>
 
+// TODO Investigate using WeakMap for token/fn registration
+
 class FunctionContainer {
   private readonly _container: DC
 

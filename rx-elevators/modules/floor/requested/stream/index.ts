@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs'
 import { useElevatorQueuePair$ } from '../../../elevator/queue/pair/stream'
 import { FnCtor } from '../../../function/container'
-import { useRamdaMemoizeWith } from '../../../pkg/ramda/memoizeWith'
 import { useRxMap } from '../../../pkg/rxjs/map'
 import { useRxStartWith } from '../../../pkg/rxjs/startWith'
 import { FloorNumber } from '../../number'
@@ -11,7 +10,6 @@ type NewFloorRequested$ = (f: FloorNumber) => Observable<boolean>
 export const useNewFloorRequested$: FnCtor<NewFloorRequested$> = (container) => {
   const elevatorQueuePair$ = container.resolve(useElevatorQueuePair$)
   const map = container.resolve(useRxMap)
-  const memoizeWith = container.resolve(useRamdaMemoizeWith)
   const startsWith = container.resolve(useRxStartWith)
 
   const newFloorRequested$: NewFloorRequested$ = (floor) =>
@@ -21,5 +19,5 @@ export const useNewFloorRequested$: FnCtor<NewFloorRequested$> = (container) => 
       map(pair => pair !== undefined),
       startsWith(false))
 
-  return memoizeWith(String, newFloorRequested$)
+  return newFloorRequested$
 }

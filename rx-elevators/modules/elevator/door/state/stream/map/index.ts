@@ -1,3 +1,4 @@
+import { shareReplay } from 'rxjs'
 import { ElevatorDoorState$, useNewElevatorDoorState$ } from '../'
 import { FnCtor } from '../../../../../function/container'
 import { useNewMapFromTuple } from '../../../../../map/from/tuple'
@@ -15,7 +16,7 @@ type ElevatorDoorState$Map$ = Map$<ElevatorId, ElevatorDoorState$>
 export const useElevatorDoorState$Map$: FnCtor<ElevatorDoorState$Map$> = (container) => {
   const elevatorId$ = container.resolve(useElevatorId$)
   const map = container.resolve(useRxMap)
-  const newElevatorDoorState$ = container.resolve(useNewElevatorDoorState$)()
+  const newElevatorDoorState$ = container.resolve(useNewElevatorDoorState$)
   const newMapFromTuple = container.resolve(useNewMapFromTuple)
 
   const newElevatorDoorState$Tuple: NewElevatorDoorState$Tuple =
@@ -23,7 +24,8 @@ export const useElevatorDoorState$Map$: FnCtor<ElevatorDoorState$Map$> = (contai
 
   const elevatorDoorState$Map$ = elevatorId$.pipe(
     map(ids => ids.map(newElevatorDoorState$Tuple)),
-    map(newMapFromTuple))
+    map(newMapFromTuple),
+    shareReplay(1))
 
   return elevatorDoorState$Map$
 }

@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs'
 import { ElevatorQueueItem } from '../..'
 import { FnCtor } from '../../../../function/container'
-import { useRamdaMemoizeWith } from '../../../../pkg/ramda/memoizeWith'
 import { useRxMap } from '../../../../pkg/rxjs/map'
 import { useRxShare } from '../../../../pkg/rxjs/share'
 import { useRxStartWith } from '../../../../pkg/rxjs/startWith'
@@ -13,7 +12,6 @@ type NewElevatorQueueItems$ = (e: ElevatorId) => Observable<ElevatorQueueItem[]>
 export const useNewElevatorQueueItem$: FnCtor<NewElevatorQueueItems$> = (container) => {
   const elevatorQueuePair$ = container.resolve(useElevatorQueuePair$)
   const map = container.resolve(useRxMap)
-  const memoizeWith = container.resolve(useRamdaMemoizeWith)
   const share = container.resolve(useRxShare)
   const startWith = container.resolve(useRxStartWith)
 
@@ -25,5 +23,5 @@ export const useNewElevatorQueueItem$: FnCtor<NewElevatorQueueItems$> = (contain
       startWith([]),
     )
 
-  return memoizeWith(String, newElevatorQueueItems$)
+  return newElevatorQueueItems$
 }
