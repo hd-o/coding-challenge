@@ -1,7 +1,8 @@
-import { RefSubject, useRefSubject } from '../../class/ref/subject'
+import { BehaviorSubject } from 'rxjs'
 import { FnC } from '../../function/container'
+import { useRxBehaviorSubject } from '../../pkg/rxjs/BehaviorSubject'
 
-export const useFloorCount$ = (container: FnC): RefSubject<number> => {
-  const RefSubject = container.resolve(useRefSubject)
-  return new RefSubject(5)
+export const useFloorCount$ = (container: FnC): BehaviorSubject<number> => {
+  const BehaviorSubject = container.resolve(useRxBehaviorSubject)
+  return new BehaviorSubject(5)
 }

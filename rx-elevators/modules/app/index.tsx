@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect } from 'react'
+import { FC, useContext, useEffect, useMemo } from 'react'
 import { BuildingCtx } from '../building'
 import { SemanticUiContainerCtx } from '../pkg/semantic-ui/Container'
 import { useStartup } from '../startup'
@@ -9,10 +9,14 @@ export const App: FC<{}> = () => {
   const Building = useContext(BuildingCtx)
   const startup = useResolve(useStartup)
 
-  useEffect(() => {
-    const subscription = startup()
-    return () => subscription.unsubscribe()
-  })
+  /**
+   * Startup subscription needs to happen before rendering
+   * child components, so subscribers to shared observables
+   * receive the first emitted value
+   */
+  const subscription = useMemo(() => startup(), [startup])
+
+  useEffect(() => () => subscription.unsubscribe())
 
   return (
     <div style={{ paddingTop: 20, minWidth: 600 }}>

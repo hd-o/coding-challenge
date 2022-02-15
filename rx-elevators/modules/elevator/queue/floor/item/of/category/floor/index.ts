@@ -7,6 +7,5 @@ type ElevatorQueueItemOfCategoryFloor = (item: ElevatorQueueItem) => item is Ele
 export const useElevatorQueueItemOfCategoryFloor = (): ElevatorQueueItemOfCategoryFloor => {
   const queueItemIsCategoryFloor: ElevatorQueueItemOfCategoryFloor =
     (item): item is ElevatorQueueFloorItem => item.category === elevatorQueueItemCategories.Floor
-
   return queueItemIsCategoryFloor
 }

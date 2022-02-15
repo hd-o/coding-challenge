@@ -13,7 +13,7 @@
   "scripts": {
     "start": "parcel index.html --open",
     "build": "parcel build index.html",
-    "test": "jest tests/model.test.ts --maxWorkers=1"
+    "test": "jest spec/index.test.ts --maxWorkers=1"
   },
   "dependencies": {
     "@types/jest": "^27.4.0",
