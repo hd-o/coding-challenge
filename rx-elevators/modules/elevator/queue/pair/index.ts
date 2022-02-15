@@ -2,7 +2,7 @@ import { RecordOf } from 'immutable'
 import { ElevatorQueue } from '../'
 import { ElevatorId } from '../../id'
 
-type ElevatorQueuePairModel = {
+interface ElevatorQueuePairModel {
   elevator: ElevatorId
   queue: ElevatorQueue
 }

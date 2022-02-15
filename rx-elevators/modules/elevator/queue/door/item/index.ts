@@ -7,7 +7,7 @@ import { ElevatorId } from '../../../id'
 import { elevatorQueueItemCategories, ElevatorQueueItemCategory } from '../../item/category'
 import { ElevatorQueueDoorActionType } from '../action/type'
 
-export type ElevatorQueueDoorItemModel = {
+export interface ElevatorQueueDoorItemModel {
   actionId: ElevatorDoorActionId
   category: ElevatorQueueItemCategory['Door']
   type: ElevatorQueueDoorActionType

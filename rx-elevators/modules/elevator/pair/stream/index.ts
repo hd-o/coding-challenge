@@ -31,20 +31,21 @@ export const useNewElevatorPair$: FnCtor<NewElevatorPair$> = (container) => {
    * and the emitted value from the entry's value stream as [recordKey]
    */
   const newElevatorPair$: NewElevatorPair$ = (map$, recordKey) => {
-  type Elevator$Tuple = [ElevatorId, Observable<any>]
+    type Elevator$Tuple = [ElevatorId, Observable<any>]
 
-  const newElevatorValuePair =
-    (elevator: ElevatorId, value: any): RecordOf<any> =>
-      Record({ elevator, [recordKey]: value })()
+    const newElevatorValuePair =
+      (elevator: ElevatorId, value: any): RecordOf<any> =>
+        Record({ elevator, [recordKey]: value })()
 
-  const toElevatorValuePair$s =
-    (tuples: Elevator$Tuple[]): Array<Observable<any>> =>
-      tuples.map(([elevator, $]) => $.pipe(map(value => newElevatorValuePair(elevator, value))))
+    const toElevatorValuePair$s =
+      (tuples: Elevator$Tuple[]): Array<Observable<any>> =>
+        tuples.map(([elevator, $]) => $.pipe(map(value => newElevatorValuePair(elevator, value))))
 
-  return map$.pipe(
-    map(map => map.entrySeq().toArray()),
-    switchMap((entries) => combineLatest(toElevatorValuePair$s(entries))),
-    share())
+    return map$.pipe(
+      map(map => map.entrySeq().toArray()),
+      switchMap((entries) => combineLatest(toElevatorValuePair$s(entries))),
+      share(),
+    )
   }
 
   return newElevatorPair$

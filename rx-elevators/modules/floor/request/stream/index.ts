@@ -9,18 +9,18 @@ import { useRxWithLatestFrom } from '../../../pkg/rxjs/withLatestFrom'
 import { useFloorRequestEvent$ } from '../event/stream'
 import { useFloorRequestMapper } from '../mapper'
 
-type FloorRequest$ = Observable<ElevatorFloorPair>
+export type FloorRequest$ = Observable<ElevatorFloorPair>
 
 export const useFloorRequest$: FnCtor<FloorRequest$> = (container) => {
   const elevatorPositionPair$Proxy = container.resolve(useElevatorPositionPair$Proxy)
   const elevatorQueuePair$Proxy = container.resolve(useElevatorQueuePair$Proxy)
-  const event$ = container.resolve(useFloorRequestEvent$)
+  const floorRequestEvent$ = container.resolve(useFloorRequestEvent$)
   const floorRequestMapper = container.resolve(useFloorRequestMapper)
   const skipWhile = container.resolve(useRxSkipWhile)
   const switchMap = container.resolve(useRxSwitchMap)
   const withLatestFrom = container.resolve(useRxWithLatestFrom)
 
-  const floorRequest$ = event$.pipe(
+  const floorRequest$ = floorRequestEvent$.pipe(
     withLatestFrom(elevatorQueuePair$Proxy, elevatorPositionPair$Proxy),
     skipWhile(([, queuePairs]) => queuePairs.length === 0),
     switchMap(floorRequestMapper))
