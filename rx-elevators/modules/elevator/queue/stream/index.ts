@@ -3,7 +3,6 @@ import { ElevatorQueue } from '../'
 import { FnCtor } from '../../../function/container'
 import { useFunctionTapLog } from '../../../function/tapLog'
 import { useImmutableOrderedSet } from '../../../pkg/immutable/OrderedSet'
-import { useRamdaMemoizeWith } from '../../../pkg/ramda/memoizeWith'
 import { useRxFilter } from '../../../pkg/rxjs/filter'
 import { useRxScan } from '../../../pkg/rxjs/scan'
 import { useRxShare } from '../../../pkg/rxjs/share'
@@ -20,7 +19,6 @@ type NewElevatorQueue$ = (e: ElevatorId, initQ?: ElevatorQueue) => ElevatorQueue
 export const useNewElevatorQueue$: FnCtor<NewElevatorQueue$> = (container) => {
   const elevatorQueueAction$ = container.resolve(useElevatorQueueAction$)
   const filter = container.resolve(useRxFilter)
-  const memoizeWith = container.resolve(useRamdaMemoizeWith)
   const OrderedSet = container.resolve(useImmutableOrderedSet)
   const queueScan = container.resolve(useElevatorQueueScan)
   const scan = container.resolve(useRxScan)
@@ -38,5 +36,5 @@ export const useNewElevatorQueue$: FnCtor<NewElevatorQueue$> = (container) => {
       tap(tapLog('elevatorQueue$')),
     )
 
-  return memoizeWith((e) => e, newElevatorQueue$)
+  return newElevatorQueue$
 }

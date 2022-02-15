@@ -1,4 +1,4 @@
-import { createContext, FC, useContext } from 'react'
+import { createContext, FC, useContext, useMemo } from 'react'
 import { FloorCallerCtx } from '../../floor/caller'
 import { FloorNumber } from '../../floor/number'
 import { useFloorNumber$ } from '../../floor/number/stream'
@@ -21,7 +21,13 @@ const ElevatorPanel: FC<ElevatorPanelProps> = (props) => {
   const newElevatorFloorPair = useResolve(useNewElevatorFloorPair)
   const newElevatorQueueItems$ = useResolve(useNewElevatorQueueItem$)
   const floorNumbers = useStreamFn(useFloorNumber$)
-  const queueItems = useStream(newElevatorQueueItems$(props.elevator))
+
+  const elevatorQueueItem$ = useMemo(
+    () => newElevatorQueueItems$(props.elevator),
+    [newElevatorQueueItems$, props.elevator],
+  )
+
+  const queueItems = useStream(elevatorQueueItem$)
 
   const handleClick = (floor: FloorNumber) => () =>
     elevatorQueueInsertEvent$.next(newElevatorFloorPair(props.elevator, floor))

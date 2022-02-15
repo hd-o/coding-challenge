@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs'
 import { ElevatorDoorState, useNewElevatorDoorState } from '../'
 import { FnCtor } from '../../../../function/container'
-import { useRamdaMemoizeWith } from '../../../../pkg/ramda/memoizeWith'
 import { useRxScan } from '../../../../pkg/rxjs/scan'
 import { useRxShare } from '../../../../pkg/rxjs/share'
 import { useRxStartWith } from '../../../../pkg/rxjs/startWith'
@@ -13,8 +12,7 @@ export type ElevatorDoorState$ = Observable<ElevatorDoorState>
 
 type NewElevatorDoorState$ = (e: ElevatorId, s?: ElevatorDoorState) => ElevatorDoorState$
 
-export const useNewElevatorDoorState$: FnCtor<() => NewElevatorDoorState$> = (container) => {
-  const memoizeWith = container.resolve(useRamdaMemoizeWith)
+export const useNewElevatorDoorState$: FnCtor<NewElevatorDoorState$> = (container) => {
   const newDoorState = container.resolve(useNewElevatorDoorState)
   const scan = container.resolve(useRxScan)
   const share = container.resolve(useRxShare)
@@ -31,5 +29,5 @@ export const useNewElevatorDoorState$: FnCtor<() => NewElevatorDoorState$> = (co
       startWith(initialState),
     )
 
-  return () => memoizeWith(String, newElevatorDoorState$)
+  return newElevatorDoorState$
 }
