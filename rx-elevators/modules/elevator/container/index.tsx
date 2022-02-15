@@ -23,7 +23,8 @@ const ElevatorContainer: FC<{}> = () => {
           doorState$={doorState$}
           id={id}
           key={String(id)}
-          position$={position$} />
+          position$={position$}
+        />
       })
     }
   </>
