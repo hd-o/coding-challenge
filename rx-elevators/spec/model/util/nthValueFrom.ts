@@ -1,7 +1,7 @@
+import { FnCtor } from '/src/function/container'
+import { useRxFirstValueFrom } from '/src/pkg/rxjs/firstValueFrom'
+import { useRxSkip } from '/src/pkg/rxjs/skip'
 import { Observable } from 'rxjs'
-import { FnCtor } from '../../../modules/function/container'
-import { useRxFirstValueFrom } from '../../../modules/pkg/rxjs/firstValueFrom'
-import { useRxSkip } from '../../../modules/pkg/rxjs/skip'
 import { $ValuePromise } from './$ValuePromise'
 
 type NthValueFrom = <O extends Observable<any>> (nth: number, $: O) => $ValuePromise<typeof $>

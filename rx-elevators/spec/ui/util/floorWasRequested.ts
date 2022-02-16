@@ -1,6 +1,6 @@
-import { FloorNumber } from '../../../modules/floor/number'
-import { FnCtor } from '../../../modules/function/container'
-import { useTestingLibraryReactWaitFor } from '../../../modules/pkg/@testing-library/react/waitFor'
+import { FloorNumber } from '/src/floor/number'
+import { FnCtor } from '/src/function/container'
+import { useTestingLibraryReactWaitFor } from '/src/pkg/@testing-library/react/waitFor'
 import { useGetFloorCaller } from './getFloorCaller'
 
 type FloorWasRequested = (f: FloorNumber, elevatorTestId?: string) => Promise<true>

@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom'
+import { App } from '/src/app'
+import { fnContainer } from '/src/function/container'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { App } from '../../modules/app'
-import { fnContainer } from '../../modules/function/container'
 import { useFloorWasRequested } from './util/floorWasRequested'
 import { useGetFloorCaller } from './util/getFloorCaller'
 
