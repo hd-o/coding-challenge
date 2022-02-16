@@ -3,10 +3,10 @@
  */
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { App } from '../app'
-import { fnContainer } from '../function/container'
-import { useFloorWasRequested } from './util/ui/floorWasRequested'
-import { useGetFloorCaller } from './util/ui/getFloorCaller'
+import { App } from '../../modules/app'
+import { fnContainer } from '../../modules/function/container'
+import { useFloorWasRequested } from './util/floorWasRequested'
+import { useGetFloorCaller } from './util/getFloorCaller'
 
 let floorWasRequested: ReturnType<typeof useFloorWasRequested>
 let getFloorCaller: ReturnType<typeof useGetFloorCaller>

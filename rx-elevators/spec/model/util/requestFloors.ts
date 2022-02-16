@@ -1,8 +1,8 @@
-import { useNewElevatorFloorPair } from '../../../elevator/floor/pair'
-import { ElevatorId } from '../../../elevator/id'
-import { useEelevatorQueueInsertEvent$ } from '../../../elevator/queue/insert/event'
-import { FloorNumber } from '../../../floor/number'
-import { FnCtor } from '../../../function/container'
+import { useNewElevatorFloorPair } from '../../../modules/elevator/floor/pair'
+import { ElevatorId } from '../../../modules/elevator/id'
+import { useEelevatorQueueInsertEvent$ } from '../../../modules/elevator/queue/insert/event'
+import { FloorNumber } from '../../../modules/floor/number'
+import { FnCtor } from '../../../modules/function/container'
 import { useMockInterval$ } from './interval$'
 
 export type RequestFloors = (elevator: ElevatorId, floors: FloorNumber[]) => void
