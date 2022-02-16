@@ -1,8 +1,8 @@
-import { ElevatorPosition } from '../../../elevator/position'
-import { floorHeight } from '../../../floor/height'
-import { FloorNumber } from '../../../floor/number'
-import { FnCtor } from '../../../function/container'
-import { useRamdaMemoizeWith } from '../../../pkg/ramda/memoizeWith'
+import { ElevatorPosition } from '../../../modules/elevator/position'
+import { floorHeight } from '../../../modules/floor/height'
+import { FloorNumber } from '../../../modules/floor/number'
+import { FnCtor } from '../../../modules/function/container'
+import { useRamdaMemoizeWith } from '../../../modules/pkg/ramda/memoizeWith'
 
 type GetFloorPositions = (floors: FloorNumber[]) => ElevatorPosition[]
 

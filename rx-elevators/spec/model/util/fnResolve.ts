@@ -1,4 +1,4 @@
-import { FnCtor } from '../../../function/container'
+import { FnCtor } from '../../../modules/function/container'
 
 type FnResolve = <F extends FnCtor> (fn: F) => ReturnType<F>
 
