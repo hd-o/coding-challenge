@@ -8,21 +8,21 @@
     "jsx": "react-jsx",
     "lib": [
       "es6",
-      "dom",
+      "dom"
     ],
     "module": "commonjs",
     "moduleResolution": "node",
     "paths": {
       "/*": [
-        "*",
-      ],
+        "*"
+      ]
     },
     "sourceMap": true,
-    "strict": true,
+    "strict": true
   },
   "exclude": [
     ".cache",
     ".vscode",
-    "dist",
-  ],
+    "dist"
+  ]
 }
