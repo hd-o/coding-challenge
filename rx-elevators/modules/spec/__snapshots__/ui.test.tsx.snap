@@ -1,0 +1,295 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UI render App snapshot: app-render 1`] = `
+<DocumentFragment>
+  <div
+    style="padding-top: 20px; width: 800px; margin: 0px auto;"
+  >
+    <div
+      class="ui container"
+    >
+      <table
+        class="ui compact celled definition unstackable table"
+      >
+        <tbody>
+          <tr
+            style="height: 100px;"
+          >
+            <td
+              class="two wide"
+              style="text-align: center;"
+            >
+              <button
+                class="ui button info"
+                data-testid="floor-panel__floor-caller-4"
+                style="padding: 10px; margin-top: 5px;"
+              >
+                4
+              </button>
+            </td>
+            <td />
+            <td />
+            <td />
+          </tr>
+          <tr
+            style="height: 100px;"
+          >
+            <td
+              class="two wide"
+              style="text-align: center;"
+            >
+              <button
+                class="ui button info"
+                data-testid="floor-panel__floor-caller-3"
+                style="padding: 10px; margin-top: 5px;"
+              >
+                3
+              </button>
+            </td>
+            <td />
+            <td />
+            <td />
+          </tr>
+          <tr
+            style="height: 100px;"
+          >
+            <td
+              class="two wide"
+              style="text-align: center;"
+            >
+              <button
+                class="ui button info"
+                data-testid="floor-panel__floor-caller-2"
+                style="padding: 10px; margin-top: 5px;"
+              >
+                2
+              </button>
+            </td>
+            <td />
+            <td />
+            <td />
+          </tr>
+          <tr
+            style="height: 100px;"
+          >
+            <td
+              class="two wide"
+              style="text-align: center;"
+            >
+              <button
+                class="ui button info"
+                data-testid="floor-panel__floor-caller-1"
+                style="padding: 10px; margin-top: 5px;"
+              >
+                1
+              </button>
+            </td>
+            <td />
+            <td />
+            <td />
+          </tr>
+          <tr
+            style="height: 100px;"
+          >
+            <td
+              class="two wide"
+              style="text-align: center;"
+            >
+              <button
+                class="ui button info"
+                data-testid="floor-panel__floor-caller-0"
+                style="padding: 10px; margin-top: 5px;"
+              >
+                0
+              </button>
+            </td>
+            <td />
+            <td />
+            <td />
+          </tr>
+        </tbody>
+        <tfoot
+          class="full-width"
+        >
+          <tr
+            style="height: 100px;"
+          >
+            <th />
+            <th
+              style="text-align: center; position: relative; overflow: visible;"
+            >
+              <div
+                data-testid="elevator-1-panel"
+              >
+                <button
+                  class="ui button info"
+                  data-testid="elevator-1-panel__floor-caller-0"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  0
+                </button>
+                <button
+                  class="ui button info"
+                  data-testid="elevator-1-panel__floor-caller-1"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  1
+                </button>
+                <button
+                  class="ui button info"
+                  data-testid="elevator-1-panel__floor-caller-2"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  2
+                </button>
+                <button
+                  class="ui button info"
+                  data-testid="elevator-1-panel__floor-caller-3"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  3
+                </button>
+                <button
+                  class="ui button info"
+                  data-testid="elevator-1-panel__floor-caller-4"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  4
+                </button>
+              </div>
+              <div
+                style="height: 100px; width: 100%; background: rgb(187, 187, 187); position: absolute; bottom: 100px; left: 0px;"
+              >
+                <div
+                  style="display: flex; height: 100%; width: 100%; justify-content: space-between;"
+                >
+                  <div
+                    style="background: rgb(229, 229, 229); height: 100%; width: 50%;"
+                  />
+                  <div
+                    style="background: rgb(229, 229, 229); height: 100%; width: 50%;"
+                  />
+                </div>
+              </div>
+            </th>
+            <th
+              style="text-align: center; position: relative; overflow: visible;"
+            >
+              <div
+                data-testid="elevator-2-panel"
+              >
+                <button
+                  class="ui button info"
+                  data-testid="elevator-2-panel__floor-caller-0"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  0
+                </button>
+                <button
+                  class="ui button info"
+                  data-testid="elevator-2-panel__floor-caller-1"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  1
+                </button>
+                <button
+                  class="ui button info"
+                  data-testid="elevator-2-panel__floor-caller-2"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  2
+                </button>
+                <button
+                  class="ui button info"
+                  data-testid="elevator-2-panel__floor-caller-3"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  3
+                </button>
+                <button
+                  class="ui button info"
+                  data-testid="elevator-2-panel__floor-caller-4"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  4
+                </button>
+              </div>
+              <div
+                style="height: 100px; width: 100%; background: rgb(187, 187, 187); position: absolute; bottom: 100px; left: 0px;"
+              >
+                <div
+                  style="display: flex; height: 100%; width: 100%; justify-content: space-between;"
+                >
+                  <div
+                    style="background: rgb(229, 229, 229); height: 100%; width: 50%;"
+                  />
+                  <div
+                    style="background: rgb(229, 229, 229); height: 100%; width: 50%;"
+                  />
+                </div>
+              </div>
+            </th>
+            <th
+              style="text-align: center; position: relative; overflow: visible;"
+            >
+              <div
+                data-testid="elevator-3-panel"
+              >
+                <button
+                  class="ui button info"
+                  data-testid="elevator-3-panel__floor-caller-0"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  0
+                </button>
+                <button
+                  class="ui button info"
+                  data-testid="elevator-3-panel__floor-caller-1"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  1
+                </button>
+                <button
+                  class="ui button info"
+                  data-testid="elevator-3-panel__floor-caller-2"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  2
+                </button>
+                <button
+                  class="ui button info"
+                  data-testid="elevator-3-panel__floor-caller-3"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  3
+                </button>
+                <button
+                  class="ui button info"
+                  data-testid="elevator-3-panel__floor-caller-4"
+                  style="padding: 10px; margin-top: 5px;"
+                >
+                  4
+                </button>
+              </div>
+              <div
+                style="height: 100px; width: 100%; background: rgb(187, 187, 187); position: absolute; bottom: 100px; left: 0px;"
+              >
+                <div
+                  style="display: flex; height: 100%; width: 100%; justify-content: space-between;"
+                >
+                  <div
+                    style="background: rgb(229, 229, 229); height: 100%; width: 50%;"
+                  />
+                  <div
+                    style="background: rgb(229, 229, 229); height: 100%; width: 50%;"
+                  />
+                </div>
+              </div>
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -4,7 +4,7 @@ module.exports = {
   testEnvironment: 'node',
   globals: {
     'ts-jest': {
-        isolatedModules: true
-    }
-  }
+      isolatedModules: true,
+    },
+  },
 }

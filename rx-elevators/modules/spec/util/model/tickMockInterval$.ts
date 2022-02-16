@@ -1,7 +1,7 @@
 import { tap } from 'rxjs'
-import { FnCtor } from '../../function/container'
-import { useLodashDefer } from '../../pkg/lodash/defer'
-import { useRxTap } from '../../pkg/rxjs/tap'
+import { FnCtor } from '../../../function/container'
+import { useLodashDefer } from '../../../pkg/lodash/defer'
+import { useRxTap } from '../../../pkg/rxjs/tap'
 import { useMockInterval$ } from './interval$'
 
 type TickMockInterval$ = typeof tap
