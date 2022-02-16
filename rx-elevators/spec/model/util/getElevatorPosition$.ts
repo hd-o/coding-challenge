@@ -1,8 +1,8 @@
-import { ElevatorId } from '../../../modules/elevator/id'
-import { useElevatorPositionPair$ } from '../../../modules/elevator/position/pair/stream'
-import { ElevatorPosition$ } from '../../../modules/elevator/position/stream'
-import { FnCtor } from '../../../modules/function/container'
-import { useRxMap } from '../../../modules/pkg/rxjs/map'
+import { ElevatorId } from '/src/elevator/id'
+import { useElevatorPositionPair$ } from '/src/elevator/position/pair/stream'
+import { ElevatorPosition$ } from '/src/elevator/position/stream'
+import { FnCtor } from '/src/function/container'
+import { useRxMap } from '/src/pkg/rxjs/map'
 
 type GetElevatorPosition$ = (elevator: ElevatorId) => ElevatorPosition$
 

@@ -1,6 +1,6 @@
-import { FloorNumber } from '../../../modules/floor/number'
-import { FnCtor } from '../../../modules/function/container'
-import { useTestingLibraryReactScreen } from '../../../modules/pkg/@testing-library/react/screen'
+import { FloorNumber } from '/src/floor/number'
+import { FnCtor } from '/src/function/container'
+import { useTestingLibraryReactScreen } from '/src/pkg/@testing-library/react/screen'
 
 type GetFloorCaller = (panel: string, f: FloorNumber, requested?: true) => HTMLElement
 

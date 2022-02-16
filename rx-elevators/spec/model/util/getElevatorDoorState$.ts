@@ -1,8 +1,8 @@
+import { ElevatorDoorState } from '/src/elevator/door/state'
+import { ElevatorId } from '/src/elevator/id'
+import { FnCtor } from '/src/function/container'
+import { useRxMap } from '/src/pkg/rxjs/map'
 import { Observable } from 'rxjs'
-import { ElevatorDoorState } from '../../../modules/elevator/door/state'
-import { ElevatorId } from '../../../modules/elevator/id'
-import { FnCtor } from '../../../modules/function/container'
-import { useRxMap } from '../../../modules/pkg/rxjs/map'
 import { useElevatorDoorPair$ } from './elevatorDoorPair$'
 
 type GetElevatorDoorState$ = (e: ElevatorId) => Observable<ElevatorDoorState>

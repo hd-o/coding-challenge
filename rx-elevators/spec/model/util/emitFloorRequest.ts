@@ -1,6 +1,6 @@
-import { FloorNumber } from '../../../modules/floor/number'
-import { useFloorRequestEvent$ } from '../../../modules/floor/request/event/stream'
-import { FnCtor } from '../../../modules/function/container'
+import { FloorNumber } from '/src/floor/number'
+import { useFloorRequestEvent$ } from '/src/floor/request/event/stream'
+import { FnCtor } from '/src/function/container'
 import { useMockInterval$ } from './interval$'
 
 type EmitFloorRequest = (f: FloorNumber[]) => void
