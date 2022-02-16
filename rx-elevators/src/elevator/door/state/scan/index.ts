@@ -9,7 +9,7 @@ import { useElevatorDoorStateScanHandleOpen } from './handle/open'
 
 const actionTypes = elevatorQueueDoorActionTypes
 const movementTypes = elevatorDoorMovementTypes
-const queueItemCategory = elevatorQueueItemCategories
+const itemCategories = elevatorQueueItemCategories
 
 type Scan = (e: ElevatorId) => (s: ElevatorDoorState, q: ElevatorQueue) => ElevatorDoorState
 
@@ -19,7 +19,7 @@ export const useElevatorDoorStateScan: FnCtor<Scan> = (container) => {
   const doorStateScan: Scan = (elevator) => (state, queue) => {
     const nextItem = queue.first()
     if (nextItem === undefined) return state
-    if (nextItem.category !== queueItemCategory.Door) return state
+    if (nextItem.category !== itemCategories.Door) return state
     if (nextItem.actionId !== state.currentActionId) {
       state = state
         .set('currentActionId', nextItem.actionId)
