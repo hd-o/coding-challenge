@@ -2,9 +2,9 @@ import { Observable } from 'rxjs'
 import { FnCtor } from '../../../function/container'
 import { useRxFirstValueFrom } from '../../../pkg/rxjs/firstValueFrom'
 import { useRxSkip } from '../../../pkg/rxjs/skip'
-import { $Promise } from './$Promise'
+import { $ValuePromise } from './$ValuePromise'
 
-type NthValueFrom = <O extends Observable<any>> (nth: number, $: O) => $Promise<typeof $>
+type NthValueFrom = <O extends Observable<any>> (nth: number, $: O) => $ValuePromise<typeof $>
 
 export const useNthValueFrom: FnCtor<NthValueFrom> = (container) => {
   const firstValueFrom = container.resolve(useRxFirstValueFrom)
