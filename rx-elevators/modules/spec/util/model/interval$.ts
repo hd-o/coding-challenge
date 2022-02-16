@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs'
-import { FnCtor } from '../../function/container'
-import { useRxSubject } from '../../pkg/rxjs/Subject'
+import { FnCtor } from '../../../function/container'
+import { useRxSubject } from '../../../pkg/rxjs/Subject'
 
 export type MockInterval$ = Subject<any>
 

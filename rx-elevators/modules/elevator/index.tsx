@@ -1,5 +1,4 @@
 import { createContext, FC, useContext } from 'react'
-import { SemanticUiTableCtx } from '../pkg/semantic-ui/Table'
 import { useStream } from '../util/useStream'
 import { ElevatorCarCtx } from './car'
 import { ElevatorDoorState$ } from './door/state/stream'
@@ -16,16 +15,15 @@ interface Props {
 const Elevator: FC<Props> = (props) => {
   const ElevatorCar = useContext(ElevatorCarCtx)
   const ElevatorPanel = useContext(ElevatorPanelCtx)
-  const Table = useContext(SemanticUiTableCtx)
 
   const doorState = useStream(props.doorState$)
   const position = useStream(props.position$)
 
   return (
-    <Table.HeaderCell textAlign='center' style={{ position: 'relative', overflow: 'visible' }}>
+    <th style={{ textAlign: 'center', position: 'relative', overflow: 'visible' }}>
       <ElevatorPanel elevator={props.id} />
       <ElevatorCar doorPosition={doorState.position} position={position} />
-    </Table.HeaderCell>
+    </th>
   )
 }
 

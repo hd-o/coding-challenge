@@ -3,7 +3,6 @@ import { useElevatorId$ } from '../../elevator/id/stream'
 import { FloorPanelCallerCtx } from '../../floor/panel/caller'
 import { useRamdaReverse } from '../../pkg/ramda/reverse'
 import { useRamdaTimes } from '../../pkg/ramda/times'
-import { SemanticUiTableCtx } from '../../pkg/semantic-ui/Table'
 import { useResolve } from '../../util/useResolve'
 import { useStreamFn } from '../../util/useStreamFn'
 import { floorHeight } from '../height'
@@ -13,7 +12,6 @@ import { useFloorRequestEvent$ } from '../request/event/stream'
 
 const FloorContainer: FC<{}> = () => {
   const FloorPanelCaller = useContext(FloorPanelCallerCtx)
-  const Table = useContext(SemanticUiTableCtx)
 
   const floorRequestEvent$ = useResolve(useFloorRequestEvent$)
   const reverse = useResolve(useRamdaReverse)
@@ -22,7 +20,7 @@ const FloorContainer: FC<{}> = () => {
   const elevatorIds = useStreamFn(useElevatorId$)
   const floorNumbers = useStreamFn(useFloorNumber$)
 
-  const floorCells = times(i => <Table.Cell key={i} />, elevatorIds.length)
+  const floorCells = times(i => <td key={i} />, elevatorIds.length)
 
   const handleFloorCall = (number: FloorNumber) =>
     () => floorRequestEvent$.next(number)
@@ -30,15 +28,16 @@ const FloorContainer: FC<{}> = () => {
   return <>
     {
       reverse(floorNumbers).map(number => (
-        <Table.Row key={number} style={{ height: floorHeight }}>
-          <Table.Cell width='2' textAlign='center'>
+        <tr key={number} style={{ height: floorHeight }}>
+          <td className='two wide' style={{ textAlign: 'center' }}>
             <FloorPanelCaller
               floor={number}
               onClick={handleFloorCall(number)}
+              testidPrefix='floor-panel'
             />
-          </Table.Cell>
+          </td>
           {floorCells}
-        </Table.Row>
+        </tr>
       ))
     }
   </>

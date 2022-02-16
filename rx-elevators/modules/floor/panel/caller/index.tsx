@@ -17,8 +17,8 @@ const FloorPanelCaller: FC<FloorCallerProps> = (props) => {
 
   return <FloorCaller
     {...props}
-    active={floorRequested}
     disabled={false}
+    requested={floorRequested}
   />
 }
 

@@ -35,16 +35,24 @@ const ElevatorPanel: FC<ElevatorPanelProps> = (props) => {
   const isFloorInQueue = (floor: FloorNumber): boolean =>
     queueItems.find(item => 'floor' in item && item.floor === floor) !== undefined
 
-  return <>
-    {floorNumbers.map(floor =>
-      <FloorCaller
-        key={floor}
-        floor={floor}
-        onClick={handleClick(floor)}
-        active={isFloorInQueue(floor)}
-      />
-    )}
-  </>
+  const testId = `elevator-${props.elevator}-panel`
+
+  return (
+    <div data-testid={testId}>
+      {
+        floorNumbers.map(floor => {
+          const requested = isFloorInQueue(floor)
+          return <FloorCaller
+            key={floor}
+            floor={floor}
+            onClick={handleClick(floor)}
+            requested={requested}
+            testidPrefix={testId}
+          />
+        })
+      }
+    </div>
+  )
 }
 
 export const ElevatorPanelCtx = createContext(ElevatorPanel)

@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs'
-import { ElevatorDoorState } from '../../elevator/door/state'
-import { useElevatorDoorState$Map$ } from '../../elevator/door/state/stream/map'
-import { ElevatorId } from '../../elevator/id'
-import { useNewElevatorPair$ } from '../../elevator/pair/stream'
-import { FnCtor } from '../../function/container'
+import { ElevatorDoorState } from '../../../elevator/door/state'
+import { useElevatorDoorState$Map$ } from '../../../elevator/door/state/stream/map'
+import { ElevatorId } from '../../../elevator/id'
+import { useNewElevatorPair$ } from '../../../elevator/pair/stream'
+import { FnCtor } from '../../../function/container'
 
 interface ElevatorDoorPair {
   elevator: ElevatorId
