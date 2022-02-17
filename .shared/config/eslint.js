@@ -1,26 +1,30 @@
 // @ts-check
 
-/** @type {import('eslint').Linter.Config} */
-const config = {
+const { writeConfig } = require('./writeConfig')
+
+/**
+ * @type {import('eslint').Linter.Config}
+ */
+const eslintrc = {
   env: {
     "browser": true,
     "es6": true,
-    "jest": true
+    "jest": true,
   },
   extends: [
     "standard-with-typescript",
     "plugin:jest/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.json",
   },
   plugins: [
     "react",
     "@typescript-eslint",
     "jest",
-    "unused-imports"
+    "unused-imports",
   ],
   rules: {
     "comma-dangle": ["error", {
@@ -28,7 +32,7 @@ const config = {
         "objects": "always-multiline",
         "imports": "ignore",
         "exports": "always-multiline",
-        "functions": "ignore"
+        "functions": "ignore",
     }],
     "@typescript-eslint/promise-function-async": 0,
     "unused-imports/no-unused-imports": "error",
@@ -38,11 +42,12 @@ const config = {
         "args": "after-used",
         "argsIgnorePattern": "^_",
         "vars": "all",
-        "varsIgnorePattern": "^_"
-      }
-    ]
-  },
-  ignorePatterns: [".eslintrc.js"]
+        "varsIgnorePattern": "^_",
+      },
+    ],
+  }
 }
 
-module.exports = config
+const writeEslintrc = () => writeConfig(eslintrc, './.eslintrc')
+
+module.exports = { eslintrc, writeEslintrc }
