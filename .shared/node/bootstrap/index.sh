@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cp ../.shared/node/bootstrap/index.html ./index.html
+
 yarn add \
   @babel/preset-env \
   @types/jest \
