@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cp ../.shared/node/bootstrap/index.html ./index.html
+bash ../.shared/node/bootstrap/html/index.sh
 
 yarn add \
   @babel/preset-env \
