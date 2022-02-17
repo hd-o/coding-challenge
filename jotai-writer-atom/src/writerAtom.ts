@@ -1,6 +1,7 @@
 import { atom } from 'jotai'
 import { createContext } from 'react'
 
+// TODO add tests
 const writerAtom = atom(
   null,
   (_get, _set, write: (get: typeof _get, set: typeof _set) => void) => {
