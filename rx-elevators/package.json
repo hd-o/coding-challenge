@@ -15,7 +15,7 @@
     "setup:eslint": "node .config/eslint",
     "setup:typescript": "node .config/typescript",
     "start": "run-s setup:* start:*",
-    "start:parcel": "parcel index.html --open",
+    "start:parcel": "parcel index.html",
     "test": "jest spec --maxWorkers=2"
   },
   "dependencies": {
