@@ -14,10 +14,10 @@
     "project": "./tsconfig.json"
   },
   "plugins": [
-    "react",
     "@typescript-eslint",
     "jest",
-    "unused-imports"
+    "unused-imports",
+    "react"
   ],
   "rules": {
     "comma-dangle": [
