@@ -1,6 +1,6 @@
 // @ts-check
 
-const { writeConfig } = require('./writeConfig')
+const { writeConfig } = require('../write')
 
 /**
  * @type {import('eslint').Linter.Config}
@@ -14,14 +14,12 @@ const eslintrc = {
   extends: [
     "standard-with-typescript",
     "plugin:jest/recommended",
-    "plugin:react-hooks/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     "project": "./tsconfig.json",
   },
   plugins: [
-    "react",
     "@typescript-eslint",
     "jest",
     "unused-imports",
@@ -45,7 +43,7 @@ const eslintrc = {
         "varsIgnorePattern": "^_",
       },
     ],
-  }
+  },
 }
 
 const writeEslintrc = () => writeConfig(eslintrc, './.eslintrc')

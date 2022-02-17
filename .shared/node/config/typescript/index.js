@@ -1,9 +1,9 @@
 // @ts-check
 
-const { writeConfig } = require('./writeConfig')
+const { writeConfig } = require('../write')
 
 /**
- * @type {import('../type/tsconfig').TsConfig}
+ * @type {import('../../type/tsconfig').TsConfig}
  */
 const tsconfig = {
   compilerOptions: {
