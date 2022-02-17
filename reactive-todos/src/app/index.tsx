@@ -1,8 +1,8 @@
-import { createContext, useContext } from 'react'
+import { FC, useContext } from 'react'
 import { TodoInputCtx } from '../todo/input'
 import { TodoListCtx } from '../todo/list'
 
-function App() {
+export const App: FC<{}> = () => {
   const TodoInput = useContext(TodoInputCtx)
   const TodoList = useContext(TodoListCtx)
   return (
@@ -13,5 +13,3 @@ function App() {
     </div>
   )
 }
-
-export const AppCtx = createContext(App)

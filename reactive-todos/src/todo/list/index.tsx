@@ -1,10 +1,10 @@
-import { createContext, useContext } from 'react'
+import { FC, createContext, useContext } from 'react'
 import { Todo$Ctx } from '../stream'
 import { useObservableEagerState } from 'observable-hooks'
 import { ITodo } from '../model'
 import { TodoCtrlCtx } from '../controller'
 
-function TodoList() {
+const TodoList: FC<{}> = () => {
   const todoCtrl = useContext(TodoCtrlCtx)
   const todo$ = useContext(Todo$Ctx)
   const todos = useObservableEagerState(todo$)
