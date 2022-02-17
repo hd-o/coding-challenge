@@ -1,3 +1,3 @@
 // @ts-check
 
-require('../../.shared/config/typescript').writeTsConfig()
+require('../../.shared/node/config/typescript').writeTsConfig()

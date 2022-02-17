@@ -1,0 +1,16 @@
+{
+  "name": "package-name",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "keywords": [],
+  "scripts": {
+    "setup": "run-p setup:*",
+    "setup:eslint": "node .config/eslint",
+    "setup:typescript": "node .config/typescript",
+    "start": "run-s setup:* start:*",
+    "start:parcel": "parcel index.html",
+    "test": "jest spec --maxWorkers=2"
+  }
+}

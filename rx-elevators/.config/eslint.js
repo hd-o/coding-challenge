@@ -1,3 +1,3 @@
 // @ts-check
 
-require('../../.shared/config/eslint').writeEslintrc()
+require('../../.shared/node/config/eslint').writeEslintrc()
