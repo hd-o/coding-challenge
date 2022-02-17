@@ -1,7 +1,7 @@
-import { createContext, FormEvent, useContext, useState } from 'react'
+import { FC, createContext, FormEvent, useContext, useState } from 'react'
 import { TodoCtrlCtx } from '../controller'
 
-function TodoInput() {
+const TodoInput: FC<{}> = () => {
   const todoCtrl = useContext(TodoCtrlCtx)
   const [todo, setTodo] = useState('')
 
