@@ -8,7 +8,7 @@ const { writeConfig } = require('./writeConfig')
 const tsconfig = {
   compilerOptions: {
     allowJs: true,
-    baseUrl: './',
+    baseUrl: '.',
     downlevelIteration: true,
     emitDecoratorMetadata: true,
     esModuleInterop: true,
@@ -17,16 +17,21 @@ const tsconfig = {
     incremental: true,
     isolatedModules: true,
     jsx: 'react-jsx',
-    module: 'ESNext',
+    lib: [
+      'ES6',
+      'DOM'
+    ],
+    module: 'CommonJS',
     moduleResolution: 'Node',
     noEmit: true,
     paths: {
       '/*': [
-        './src/*',
+        '*',
       ],
     },
     resolveJsonModule: true,
     skipLibCheck: true,
+    sourceMap: true,
     strict: true,
     target: 'ES2020',
   },
@@ -34,10 +39,6 @@ const tsconfig = {
     '.cache',
     'dist',
     'node_modules',
-  ],
-  include: [
-    '/**/*.ts',
-    '/**/*.tsx',
   ],
 }
 
