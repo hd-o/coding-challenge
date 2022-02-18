@@ -25,6 +25,7 @@ const eslintrc = {
     "unused-imports",
   ],
   rules: {
+    "@typescript-eslint/promise-function-async": 0,
     "comma-dangle": ["error", {
         "arrays": "always-multiline",
         "objects": "always-multiline",
@@ -32,7 +33,7 @@ const eslintrc = {
         "exports": "always-multiline",
         "functions": "ignore",
     }],
-    "@typescript-eslint/promise-function-async": 0,
+    "import/no-absolute-path": 0,
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",

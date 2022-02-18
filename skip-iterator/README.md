@@ -2,7 +2,7 @@
 
 Iterator implementing skipping through `.skip()`
 
-🖥️ [Live Demo @ Deno Playground][denoplayground]
+🖥️ [Live Demo @ CodeSandbox][codesandbox]
 
 ```typescript
 const myIter = new SkipIterator([1,3,4,3,5])
@@ -21,11 +21,4 @@ class SkipIterator<Value> {
 }
 ```
 
-## Development
-
-1. Install [Deno]
-2. Run test file: `deno run SkipIterator.test.ts`
-
-[denoplayground]: https://deno-playground.mahardi.me?id=YjUwOGFkNDY
-
-[Deno]: https://deno.land/#installation
+[codesandbox]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/skip-iterator

@@ -10,40 +10,45 @@
  */
 export class SkipIterator {
   /**
+   * @param _iterator Values to be looped by next()
+   */
+  constructor (private readonly _iterator: number[]) {}
+
+  /**
    * Track current value for next() call
    */
-  private currentIndex = 0
+  private _currentIndex = 0
+
   /**
    * Values to be skipped.
    * First in, first out
    */
-  private skipQueue: number[] = []
-  /**
-   * @param iterator Values to be looped by next()
-   */
-  constructor(private iterator: number[]) {}
+  private readonly _skipQueue: number[] = []
+
   /**
    * Returns next value to be skipped, or false
    */
-  get nextToSkip(): number | false {
+  get nextToSkip (): number | false {
     // If there's no value to skip
-    if (!this.skipQueue.length) return false
+    if (this._skipQueue.length === 0) return false
     // else return the value to skip
-    return this.skipQueue[0]
+    return this._skipQueue[0]
   }
+
   /**
    * There are values to be looped by next ()
    */
-  get hasNext(): boolean {
-    return this.iterator[this.currentIndex] !== undefined
+  get hasNext (): boolean {
+    return this._iterator[this._currentIndex] !== undefined
   }
+
   /**
    * Returns next not skipped value, or undefined
    */
-  next(): number | undefined {
-    const currentValue = this.iterator[this.currentIndex]
+  next (): number | undefined {
+    const currentValue = this._iterator[this._currentIndex]
     // Increment for upcoming next() calls
-    this.currentIndex++
+    this._currentIndex++
     // Check if there's a value to be skipped
     const nextToSkip = this.nextToSkip
     // Return current value if it should not be skipped
@@ -51,14 +56,15 @@ export class SkipIterator {
     // If current value should be skipped,
     // remove it from the queue, and
     // run the following next() call
-    this.skipQueue.shift()
+    this._skipQueue.shift()
     // Call to get the next iterator value
     return this.next()
   }
+
   /**
    * Adds value to the end of the skip queue
    */
-  skip(value: number) {
-    this.skipQueue.push(value)
+  skip (value: number): void {
+    this._skipQueue.push(value)
   }
 }

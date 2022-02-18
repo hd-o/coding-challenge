@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-bash ../.shared/node/bootstrap/html/index.sh
+bash ../.shared/node/bootstrap/config/index.sh
 
 yarn add \
   @babel/preset-env \
@@ -16,6 +16,5 @@ yarn add \
   eslint-plugin-unused-imports \
   jest \
   npm-run-all \
-  parcel-bundler \
   ts-jest \
   typescript
