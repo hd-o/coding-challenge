@@ -1,6 +1,6 @@
 {
   "presets": [
-    "next/babel"
+    "@babel/preset-env"
   ],
   "plugins": [
     "babel-plugin-transform-typescript-metadata",

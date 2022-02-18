@@ -6,25 +6,32 @@
   },
   "extends": [
     "standard-with-typescript",
-    "next/core-web-vitals",
     "plugin:jest/recommended",
     "plugin:react-hooks/recommended"
-  ],
-  "ignorePatterns": [
-    "next.config.js"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "plugins": [
-    "react",
     "@typescript-eslint",
     "jest",
-    "unused-imports"
+    "unused-imports",
+    "react"
   ],
   "rules": {
     "@typescript-eslint/promise-function-async": 0,
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "ignore",
+        "exports": "always-multiline",
+        "functions": "ignore"
+      }
+    ],
+    "import/no-absolute-path": 0,
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",
