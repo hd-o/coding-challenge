@@ -12,7 +12,8 @@ const useIncrementCount = () => {
   // at any point higher up in the render tree.
   // See App component below
   const countAtom = useContext(CountAtomCtx)
-  const write = useAtom(useContext(WriterAtomCtx))[1]
+  const writerAtom = useContext(WriterAtomCtx)
+  const write = useAtom(writerAtom)[1]
   const incrementCount = () => {
     // Atom setter allows components like IncrementButton
     // to get/set the value of countAtom without re-rendering
@@ -58,4 +59,5 @@ const App: FC<{}> = () => {
   )
 }
 
+// TODO add test
 render(<App />, document.getElementById('app'))
