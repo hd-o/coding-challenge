@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "downlevelIteration": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
@@ -9,34 +9,28 @@
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "ES6",
+      "DOM"
     ],
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "noEmit": true,
     "paths": {
-      "~/*": [
-        "modules/*"
-      ],
-      "@/*": [
-        "./*"
+      "/*": [
+        "*"
       ]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "sourceMap": true,
     "strict": true,
-    "target": "es5"
+    "target": "ES2020"
   },
   "exclude": [
+    ".cache",
+    "dist",
     "node_modules"
-  ],
-  "include": [
-    "./index.d.ts",
-    "./**/*.ts",
-    "./**/*.tsx"
   ]
 }
