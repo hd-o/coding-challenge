@@ -45,8 +45,6 @@ export class ElevatorQueueCtrl {
   }
 
   private _getQueue$ (elevator: IElevatorRecord): IElevatorQueue$ {
-    // TODO: Stop using .value for BehaviorSubject access
-    // TODO: Use $ for click handlers, and merge value with other $s
     /** @see {ElevatorQueue$} - Creates queues for all elevators */
     return this._elevatorQueue$.value.get(elevator.id) as IElevatorQueue$
   }
