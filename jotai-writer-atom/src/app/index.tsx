@@ -26,18 +26,18 @@ const useIncrementCount = (): IncrementCount => {
   return incrementCount
 }
 
-const Count: FC<{}> = () => {
+const Count: FC = () => {
   const countAtom = useContext(CountAtomCtx)
   const count = useAtom(countAtom)[0]
   return <p>Count: {count}</p>
 }
 
-const IncrementButton: FC<{}> = () => {
+const IncrementButton: FC = () => {
   const handleClick = useIncrementCount()
   return <button onClick={handleClick}>Increment</button>
 }
 
-const Counter: FC<{}> = () => {
+const Counter: FC = () => {
   return (
     <div>
       <Count />
@@ -46,7 +46,7 @@ const Counter: FC<{}> = () => {
   )
 }
 
-export const App: FC<{}> = () => {
+export const App: FC = () => {
   const customCountAtom = useMemo(() => atom(0), [atom])
   return (
     <div>
