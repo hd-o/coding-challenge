@@ -1,4 +1,4 @@
-# SkipIterator
+# ⏭️ SkipIterator
 
 Iterator implementing skipping through `.skip()`
 
