@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`To-Do App App snapshot: app 1`] = `
+<DocumentFragment>
+  <div
+    style="padding: 5px 0px 0px 20px;"
+  >
+    <h2>
+      To-Dos
+    </h2>
+    <form>
+      <input
+        data-testid="todo-input"
+        type="input"
+        value=""
+      />
+       
+      <button
+        data-testid="add-todo-button"
+        style="cursor: pointer;"
+        type="submit"
+      >
+        +
+      </button>
+    </form>
+    <p>
+      <code>
+        Insert a To-Do through the input above
+      </code>
+    </p>
+  </div>
+</DocumentFragment>
+`;
