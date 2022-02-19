@@ -6,11 +6,12 @@ import { Todo$ } from './stream'
 
 @singleton()
 export class TodoCtrl {
-  constructor(
-    @inject(Todo$) private _todoStream: Todo$,
-    @inject(Lodash) private _lodash: Lodash,
+  constructor (
+    @inject(Todo$) private readonly _todoStream: Todo$,
+    @inject(Lodash) private readonly _lodash: Lodash,
   ) {}
-  create(todoText: string): void {
+
+  create (todoText: string): void {
     const todos = this._todoStream.value.concat({
       done: false,
       id: this._lodash.uniqueId('todo_'),
@@ -18,11 +19,13 @@ export class TodoCtrl {
     })
     this._todoStream.next(todos)
   }
-  delete(todoId: ITodo['id']): void {
+
+  delete (todoId: ITodo['id']): void {
     const todos = this._todoStream.value.filter((todo) => todo.id !== todoId)
     this._todoStream.next(todos)
   }
-  toggleComplete(todoId: ITodo['id']): void {
+
+  toggleComplete (todoId: ITodo['id']): void {
     const todos = this._todoStream.value.map((todo) =>
       todo.id !== todoId ? todo : { ...todo, done: !todo.done },
     )
@@ -30,4 +33,4 @@ export class TodoCtrl {
   }
 }
 
-export const TodoCtrlCtx = createContext(container.resolve(TodoCtrl))
+export const TodoCtrlCtx = createContext(() => container.resolve(TodoCtrl))

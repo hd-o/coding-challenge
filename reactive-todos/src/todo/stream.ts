@@ -5,9 +5,9 @@ import { ITodo } from './model'
 
 @singleton()
 export class Todo$ extends BehaviorSubject<ITodo[]> {
-  constructor() {
+  constructor () {
     super([])
   }
 }
 
-export const Todo$Ctx = createContext(container.resolve(Todo$))
+export const Todo$Ctx = createContext(() => container.resolve(Todo$))

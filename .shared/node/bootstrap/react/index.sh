@@ -7,6 +7,7 @@ cp ../.shared/node/bootstrap/react/config/eslint.js.txt ./.config/eslint.js
 yarn add \
   @testing-library/jest-dom \
   @testing-library/react \
+  @testing-library/user-event \
   @types/react \
   @types/react-dom \
   eslint-plugin-react \
