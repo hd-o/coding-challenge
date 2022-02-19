@@ -9,7 +9,7 @@ MVC React architecture with injected state observables, and isolated controller 
 <p align="center">
   <img
     src="./screenshot.png"
-    width="300px"
+    width="400px"
   />
 </p>
 
