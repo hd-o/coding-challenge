@@ -9,6 +9,6 @@ interface CalendarState {
 export function getCalendarState (): CalendarState {
   return {
     month: getCalendarMonth(),
-    gridKeys: getCalendarGridKeys()
+    gridKeys: getCalendarGridKeys(),
   }
 }

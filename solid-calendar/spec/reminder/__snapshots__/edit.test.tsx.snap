@@ -52,7 +52,7 @@ Array [
 
 exports[`reminder list item click opens filled reminder editor: list-item-open 1`] = `
 Object {
-  "date": "2021-12-01",
+  "date": "12/01/2021 01:00 am",
   "location": "",
   "title": "Test",
   "weather": "",

@@ -46,7 +46,7 @@ Object {
     "40-blank",
     "41-blank",
   ],
-  "month": "2021-10",
+  "month": "October 2021",
 }
 `;
 
@@ -96,7 +96,7 @@ Object {
     "40-blank",
     "41-blank",
   ],
-  "month": "2022-01",
+  "month": "January 2022",
 }
 `;
 
@@ -139,7 +139,7 @@ Object {
     "33-blank",
     "34-blank",
   ],
-  "month": "2021-11",
+  "month": "November 2021",
 }
 `;
 
@@ -182,6 +182,6 @@ Object {
     "33-day",
     "34-blank",
   ],
-  "month": "2021-12",
+  "month": "December 2021",
 }
 `;

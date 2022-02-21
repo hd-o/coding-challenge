@@ -1,11 +1,9 @@
-import { DateToISOStringCtx } from '/src/date/toISOString'
 import { addDays } from 'date-fns'
 import { cleanup, screen } from '@testing-library/react'
 import { date } from '../calendar/util/date'
 import { renderCalendar } from '../calendar/util/render'
 import { renderAddReminderReminderEditor } from '../calendar/util/render/addReminderReminderEditor'
-import { fireChange } from '../util/fire/change'
-import { getContext } from '../util/get/context'
+import { dateTimePickerChange } from '../util/fire/change'
 import { getReminderEditorState } from './util/get/reminderEditorState'
 import { renderAddedReminder } from './util/render/addedReminder'
 import { renderReminderEditorLocation } from './util/render/reminderEditorLocation'
@@ -46,8 +44,7 @@ test('updating reminder location', async () => {
 test('changing reminder date to other day', async () => {
   await renderReminderListItem()
   // Increment reminder date by one day
-  const toISOString = getContext(DateToISOStringCtx)
-  fireChange(screen.getByTestId('reminder-editor-date'), toISOString(addDays(date, 1)))
+  await dateTimePickerChange('reminder-editor-date', addDays(date, 1))
   await renderSavedReminder()
   // Snapshot reminder list with 1 item
   expect(screen.getAllByTestId('reminder-list-item')).toMatchSnapshot('list-after-date-edit')

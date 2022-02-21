@@ -1,8 +1,7 @@
 {
   "globals": {
     "ts-jest": {
-      "isolatedModules": true,
-      "tsconfig": "./spec/tsconfig.json"
+      "isolatedModules": true
     }
   },
   "moduleNameMapper": {

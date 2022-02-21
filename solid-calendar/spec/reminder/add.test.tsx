@@ -1,12 +1,10 @@
-import { DateToISOStringCtx } from '/src/date/toISOString'
 import { subMonths } from 'date-fns'
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { date } from '../calendar/util/date'
 import { renderCalendar } from '../calendar/util/render'
 import { renderAddReminderReminderEditor } from '../calendar/util/render/addReminderReminderEditor'
-import { fireChange } from '../util/fire/change'
-import { getContext } from '../util/get/context'
+import { dateTimePickerChange } from '../util/fire/change'
 import { getReminderEditorState } from './util/get/reminderEditorState'
 import { renderAddedReminder } from './util/render/addedReminder'
 import { renderReminderEditorLocation } from './util/render/reminderEditorLocation'
@@ -79,11 +77,11 @@ describe('reminder list "add reminder" button', () => {
   test('added reminder with other date is not shown on list', async () => {
     await renderReminderListAddReminder()
     // Insert date of previous month
-    const toISOString = getContext(DateToISOStringCtx)
-    const dateInput: HTMLInputElement = screen.getByTestId('reminder-editor-date')
-    fireChange(dateInput, toISOString(subMonths(date, 1)))
+    await dateTimePickerChange('reminder-editor-date', subMonths(date, 1))
     // Save reminder, and compare snapshot
     await renderAddedReminder()
-    expect(screen.getByTestId('reminder-list-item').textContent).toMatchSnapshot('list-add-other-date')
+    // Assert only one reminder is visible
+    const reminder = screen.getByTestId('reminder-list-item')
+    expect(reminder.textContent).toMatchSnapshot('list-add-other-date')
   })
 })
