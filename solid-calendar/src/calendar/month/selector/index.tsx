@@ -1,12 +1,10 @@
-import { YearMonthFormatCtx } from '/src/date/format/yearMonth'
-import { DateFnsFormatCtx } from '/src/pkg/date-fns/format'
 import { JotaiUseAtomCtx } from '/src/pkg/jotai/useAtom'
 import { MuiIconArrowLeftCtx } from '/src/pkg/mui/icon/ArrowLeft'
 import { MuiIconArrowRightCtx } from '/src/pkg/mui/icon/ArrowRight'
 import { MuiIconButtonCtx } from '/src/pkg/mui/IconButton'
+import { MuiMobileDatePickerCtx } from '/src/pkg/mui/MobileDatePicker'
 import { MuiStackCtx } from '/src/pkg/mui/Stack'
 import { MuiTextFieldCtx } from '/src/pkg/mui/TextField'
-import { ValueHandlerCtx } from '/src/util/valueHandler'
 import { createContext, useContext } from 'react'
 import { CSSObject } from '@emotion/serialize'
 import { Theme, useTheme } from '@mui/system'
@@ -17,8 +15,8 @@ import { HandlePreviousMonthCtx } from './handlePreviousMonth'
 
 const iconButtonStyles: CSSObject = {
   '& .MuiTouchRipple-root': {
-    margin: 0
-  }
+    margin: 0,
+  },
 }
 
 const textFieldStyles = (theme: Theme): CSSObject => ({
@@ -26,30 +24,28 @@ const textFieldStyles = (theme: Theme): CSSObject => ({
   [`& .MuiFilledInput-root:before,
     & .MuiFilledInput-root:after`
   ]: {
-    border: 'none'
+    border: 'none',
   },
   '& > div': {
     background: 'transparent',
-    marginLeft: theme.spacing(1.5)
+    marginLeft: theme.spacing(1.5),
   },
   '& input': {
-    padding: '0 10px'
-  }
+    padding: '0 10px',
+  },
 })
 
 function CalendarMonthSelector (): JSX.Element {
   const ArrowLeftIcon = useContext(MuiIconArrowLeftCtx)
   const ArrowRightIcon = useContext(MuiIconArrowRightCtx)
   const IconButton = useContext(MuiIconButtonCtx)
+  const MobileDatePicker = useContext(MuiMobileDatePickerCtx)
   const Stack = useContext(MuiStackCtx)
   const TextField = useContext(MuiTextFieldCtx)
 
-  const format = useContext(DateFnsFormatCtx)
   const handleDateChange = useContext(HandleDateChangeCtx)()
   const handleNextMonth = useContext(HandleNextMonthCtx)()
   const handlePreviousMonth = useContext(HandlePreviousMonthCtx)()
-  const useValueHandler = useContext(ValueHandlerCtx)
-  const yearMonthFormat = useContext(YearMonthFormatCtx)
   const useAtom = useContext(JotaiUseAtomCtx)
   const theme = useTheme()
   const calendarMonth = useAtom(useContext(CalendarMonthAtomCtx)())[0]
@@ -75,15 +71,22 @@ function CalendarMonthSelector (): JSX.Element {
       >
         <ArrowRightIcon />
       </IconButton>
-      <TextField
-        inputProps={{
-          'data-testid': 'calendar-month-selector-date'
+      <MobileDatePicker
+        value={calendarMonth}
+        onChange={date => {
+          if (date !== null) handleDateChange(date)
         }}
-        onChange={useValueHandler(handleDateChange)}
-        sx={textFieldStyles(theme)}
-        type="month"
-        variant='filled'
-        value={format(calendarMonth, yearMonthFormat)}
+        views={['year', 'month']}
+        renderInput={(params) =>
+          <TextField
+            {...params}
+            inputProps={{
+              ...params.inputProps,
+              'data-testid': 'calendar-month-selector-date',
+            }}
+            sx={textFieldStyles(theme)}
+          />
+        }
       />
     </Stack>
   )

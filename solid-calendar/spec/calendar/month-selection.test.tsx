@@ -1,6 +1,8 @@
+import { set } from 'date-fns'
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { fireChange } from '../util/fire/change'
+import { yearMonthPikerChange } from '../util/fire/change'
+import { date } from './util/date'
 import { getCalendarState } from './util/get/calendarState'
 import { renderCalendar } from './util/render'
 
@@ -23,7 +25,10 @@ test('previous month button', async () => {
 })
 
 test('month date input', async () => {
-  const dateInput: HTMLInputElement = screen.getByTestId('calendar-month-selector-date')
-  fireChange(dateInput, '2021-10')
+  const octoberDate = set(date, {
+    month: 9,
+    year: 2021,
+  })
+  await yearMonthPikerChange('calendar-month-selector-date', octoberDate)
   expect(getCalendarState()).toMatchSnapshot('date-input')
 })

@@ -1,11 +1,10 @@
 import { SelectDateRemindersAtomCtx } from '/src/date/atom/reminders'
 import { DateSetTimeToNowCtx } from '/src/date/setTimeToNow'
-import { DateToISOStringCtx } from '/src/date/toISOString'
 import { ModalBoxCtx } from '/src/modal/box'
-import { DateFnsParseISOCtx } from '/src/pkg/date-fns/parseISO'
 import { JotaiUseAtomCtx } from '/src/pkg/jotai/useAtom'
 import { MuiButtonCtx } from '/src/pkg/mui/Button'
 import { MuiGridCtx } from '/src/pkg/mui/Grid'
+import { MuiMobileDateTimePickerCtx } from '/src/pkg/mui/MobileDateTimePicker'
 import { MuiTextFieldCtx } from '/src/pkg/mui/TextField'
 import { ReactIntlUseIntlCtx } from '/src/pkg/react-intl/useIntl'
 import { ValueHandlerCtx } from '/src/util/valueHandler'
@@ -25,12 +24,11 @@ export function ReminderEditorForm (props: Props): JSX.Element {
   const Grid = useContext(MuiGridCtx)
   const LocationSearch = useContext(LocationSearchCtx)
   const LocationWeather = useContext(ReminderEditorFormLocationWeatherCtx)
+  const MobileDateTimePicker = useContext(MuiMobileDateTimePickerCtx)
   const ModalBox = useContext(ModalBoxCtx)
   const TextField = useContext(MuiTextFieldCtx)
 
   const intl = useContext(ReactIntlUseIntlCtx)()
-  const toISOString = useContext(DateToISOStringCtx)()
-  const parseISO = useContext(DateFnsParseISOCtx)
   const handleClose = useContext(ReminderEditorHandleCloseCtx)()
   const useValueHandler = useContext(ValueHandlerCtx)
   const useHandleSave = useContext(ReminderEditorHandleSaveCtx)
@@ -44,17 +42,16 @@ export function ReminderEditorForm (props: Props): JSX.Element {
   const [title, setTitle] = useState(reminder?.title ?? '')
   const [location, setLocation] = useState(reminder?.location)
 
-  const isoDate = toISOString(reminder?.date ?? setTimeToNow(props.date))
-  const [date, setDate] = useState(isoDate)
+  const [date, setDate] = useState(reminder?.date ?? setTimeToNow(props.date))
 
   const handleSave = useHandleSave({
     date: props.date,
     reminderState: {
-      date: parseISO(date),
+      date,
       id: props.reminderId,
+      location,
       title,
-      location
-    }
+    },
   })
 
   return (
@@ -64,7 +61,7 @@ export function ReminderEditorForm (props: Props): JSX.Element {
           <TextField
             fullWidth
             inputProps={{
-              'data-testid': 'reminder-editor-title'
+              'data-testid': 'reminder-editor-title',
             }}
             label={intl.formatMessage({ id: 'reminder-title' })}
             variant="standard"
@@ -73,15 +70,22 @@ export function ReminderEditorForm (props: Props): JSX.Element {
           />
         </Grid>
         <Grid item xs={6}>
-        <TextField
-          inputProps={{
-            'data-testid': 'reminder-editor-date'
-          }}
+        <MobileDateTimePicker
           label={intl.formatMessage({ id: 'reminder-date' })}
-          type="datetime-local"
+          onChange={date => {
+            if (date !== null) setDate(date)
+          }}
+          renderInput={(params) =>
+            <TextField
+              {...params}
+              inputProps={{
+                ...params.inputProps,
+                'data-testid': 'reminder-editor-date',
+              }}
+              variant='standard'
+            />
+          }
           value={date}
-          onChange={useValueHandler(setDate)}
-          variant="standard"
         />
         </Grid>
         <Grid item xs={6}>
@@ -91,7 +95,7 @@ export function ReminderEditorForm (props: Props): JSX.Element {
           location !== undefined &&
             <Suspense fallback={null}>
               <LocationWeather
-                date={parseISO(date)}
+                date={date}
                 location={location}
               />
             </Suspense>

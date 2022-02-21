@@ -39,7 +39,7 @@ Object {
     "33-day",
     "34-blank",
   ],
-  "month": "2021-12",
+  "month": "December 2021",
 }
 `;
 
@@ -94,16 +94,33 @@ exports[`initial calendar render snapshot: calendar-view 1`] = `
       class="MuiFormControl-root MuiTextField-root css-1i6u4pb-MuiFormControl-root-MuiTextField-root"
     >
       <div
-        class="MuiFilledInput-root MuiFilledInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-cio0x1-MuiInputBase-root-MuiFilledInput-root"
+        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <input
           aria-invalid="false"
-          class="MuiFilledInput-input MuiInputBase-input css-10botns-MuiInputBase-input-MuiFilledInput-input"
+          aria-label="Choose date, selected date is Dec 1, 2021"
+          aria-readonly="true"
+          class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
           data-testid="calendar-month-selector-date"
           id="mui-1"
-          type="month"
-          value="2021-12"
+          readonly=""
+          type="text"
+          value="December 2021"
         />
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-nnbavb"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
       </div>
     </div>
   </div>

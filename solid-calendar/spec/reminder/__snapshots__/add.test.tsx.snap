@@ -4,7 +4,7 @@ exports[`reminder editor adds reminder on save: editor-reminder-saved 1`] = `"Te
 
 exports[`reminder editor closes, and clears data on cancel: editor-cancel-reopen 1`] = `
 Object {
-  "date": "2021-12-01",
+  "date": "12/01/2021 01:00 am",
   "location": "",
   "title": "",
   "weather": "",
@@ -13,7 +13,7 @@ Object {
 
 exports[`reminder editor closes, and clears data on cancel: editor-cancel-title-input 1`] = `
 Object {
-  "date": "2021-12-01",
+  "date": "12/01/2021 01:00 am",
   "location": "",
   "title": "Test",
   "weather": "",
@@ -22,7 +22,7 @@ Object {
 
 exports[`reminder editor location search, and weather: editor-location 1`] = `
 Object {
-  "date": "2021-12-01",
+  "date": "12/01/2021 01:00 am",
   "location": "Barcelona",
   "title": "",
   "weather": "Barcelona • 🌦️ Showers 23°C / 23°C",
@@ -33,7 +33,7 @@ exports[`reminder editor location search, and weather: editor-location-weather 1
 
 exports[`reminder editor reminder editor is correctly filled when opened: editor-open-data 1`] = `
 Object {
-  "date": "2021-12-01",
+  "date": "12/01/2021 01:00 am",
   "location": "",
   "title": "",
   "weather": "",

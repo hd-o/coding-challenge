@@ -17,6 +17,6 @@ export async function getReminderEditorState (): Promise<ReminderEditorState> {
     date: date.value?.split('T')[0] ?? '',
     title: title.value ?? '',
     location: location.value ?? '',
-    weather: weather?.textContent ?? ''
+    weather: weather?.textContent ?? '',
   }
 }

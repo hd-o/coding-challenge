@@ -17,20 +17,20 @@ const barcelona: WeatherLocation = {
 const weatherLocationSearch: WeatherLocationSearch = {
   barcelona: [barcelona],
   london: [london],
-  lon: [london, barcelona]
+  lon: [london, barcelona],
 }
 
-const weatherLocationDay: WeatherLocationDayMap =  {
+const weatherLocationDay: WeatherLocationDayMap = {
   [barcelona.woeid]: [{
     weather_state_abbr: 's',
     min_temp: 15.469,
-    max_temp: 22.755
+    max_temp: 22.755,
   }],
   [london.woeid]: [{
     weather_state_abbr: 'hc',
     min_temp: 6.405,
-    max_temp: 12.99
-  }]
+    max_temp: 12.99,
+  }],
 }
 
 export const newWeatherServer = (): Pretender => {
@@ -38,10 +38,10 @@ export const newWeatherServer = (): Pretender => {
     this.get('/api/weather/location/day', (req) => {
       const woeid = req.queryParams.woeid ?? ''
       return jsonResponse(weatherLocationDay[woeid] ?? [])
-    }),
+    })
     this.get('/api/weather/location/search', (req) => {
       const query = req.queryParams.query ?? ''
       return jsonResponse(weatherLocationSearch[query] ?? [])
-    })  
-  })  
+    })
+  })
 }
