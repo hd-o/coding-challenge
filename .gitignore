@@ -1,8 +1,25 @@
+# Python
 __pycache__
+
+# Parcel Bundler
 .cache
 .parcel-cache
-.vscode
 dist
+
+# Node.js
 node_modules
+
+# VS Code
+.vscode
 *.code-workspace
+
+# Logs
 **/*.log
+
+# Next.js
+/.next/
+/out/
+
+# Misc
+.DS_Store
+*.pem

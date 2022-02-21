@@ -1,0 +1,16 @@
+{
+  "globals": {
+    "ts-jest": {
+      "isolatedModules": true,
+      "tsconfig": "./spec/tsconfig.json"
+    }
+  },
+  "moduleNameMapper": {
+    "^/(.*)$": "<rootDir>/$1"
+  },
+  "preset": "ts-jest",
+  "testEnvironment": "jsdom",
+  "setupFilesAfterEnv": [
+    "./spec/setup.ts"
+  ]
+}
