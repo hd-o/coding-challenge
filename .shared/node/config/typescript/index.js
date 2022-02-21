@@ -19,7 +19,8 @@ const tsconfig = {
     jsx: 'react-jsx',
     lib: [
       'ES6',
-      'DOM'
+      'DOM',
+      'DOM.Iterable'
     ],
     module: 'CommonJS',
     moduleResolution: 'Node',

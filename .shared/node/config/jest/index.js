@@ -16,6 +16,6 @@ const config = {
   testEnvironment: 'node',
 }
 
-const writeJestConfig = () => writeConfig(config, './jest.config.json')
+const writeJestConfig = (c = config) => writeConfig(c, './jest.config.json')
 
 module.exports = { config, writeJestConfig }

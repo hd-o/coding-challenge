@@ -1,9 +1,0 @@
-{
-  "extends": ["standard-with-typescript", "next/core-web-vitals"],
-  "rules": {
-    "@typescript-eslint/promise-function-async": 0
-  },
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  }
-}

@@ -1,40 +1,37 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "baseUrl": ".",
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
+    "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "ES6",
+      "DOM",
+      "DOM.Iterable"
     ],
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "noEmit": true,
-    "baseUrl": "./",
     "paths": {
-      "~/*": [
-        "./modules/*"
-      ],
-      "@/*": [
-        "./*"
+      "/*": [
+        "*"
       ]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "sourceMap": true,
     "strict": true,
-    "target": "es5"
+    "target": "ES2020"
   },
   "exclude": [
+    ".cache",
+    "dist",
     "node_modules"
-  ],
-  // 'next-env.d.ts' removed for better intellisense performance
-  "include": [
-    "index.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
   ]
 }
