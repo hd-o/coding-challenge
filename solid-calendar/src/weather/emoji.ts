@@ -18,7 +18,7 @@ function useWeatherEmoji (): Map<string, string> {
       ['lr', '🌧️'],
       ['s', '🌦️'],
       ['hc', '☁️'],
-      ['lc', '🌤️']
+      ['lc', '🌤️'],
     ]))
 }
 

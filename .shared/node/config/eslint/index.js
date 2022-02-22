@@ -45,6 +45,11 @@ const eslintrc = {
       },
     ],
   },
+  ignorePatterns: [
+    '.vscode/',
+    '.cache/',
+    'dist/',
+  ],
 }
 
 const writeEslintrc = () => writeConfig(eslintrc, './.eslintrc')

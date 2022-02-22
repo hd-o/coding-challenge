@@ -27,7 +27,7 @@ function ModalBox (props: Props): JSX.Element {
       backgroundColor: '#fff',
       border: '2px solid #444',
       padding: theme.spacing(2),
-      ...props.sx
+      ...props.sx,
     }}
   >
     {props.withCloseButton === true &&
@@ -38,7 +38,7 @@ function ModalBox (props: Props): JSX.Element {
           position: 'absolute',
           right: 20,
           top: 15,
-          zIndex: 1
+          zIndex: 1,
         }}
         title='Close'
       >

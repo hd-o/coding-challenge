@@ -12,7 +12,7 @@ function CalendarGridHeaderPaper (props: PaperProps): JSX.Element {
       textAlign: 'center',
       background: '#2f74b5',
       color: '#ffffff',
-      ...props.sx
+      ...props.sx,
     }}
   />
 }

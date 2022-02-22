@@ -8,15 +8,15 @@ import { WeatherServerCtx } from './weather/server'
 const Index: FC = () => {
   const AppProviders = useContext(AppProvidersCtx)
   const useWeatherServer = useContext(WeatherServerCtx)
-  
+
   const [intlValue, setIntl] = useState<typeof en | undefined>()
-  
+
   useMemo(() => useWeatherServer(), [useWeatherServer])
 
   useEffect(() => {
     // Can be substituted by:
     // https://nextjs.org/docs/advanced-features/i18n-routing
-    import('/src/lang/en.json').then((en) => {
+    void import('/src/lang/en.json').then((en) => {
       setIntl(en.default)
     })
   })

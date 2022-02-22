@@ -3,7 +3,7 @@ import { MuiLocalizationProviderCtx } from '/src/pkg/mui/LocalizationProvider'
 import { ReactIntlIntlProviderCtx } from '/src/pkg/react-intl/IntlProvider'
 import { ReactQueryQueryClientCtx } from '/src/pkg/react-query/QueryClient'
 import { ReactQueryQueryClientProviderCtx } from '/src/pkg/react-query/QueryClientProvider'
-import { createContext, FC, PropsWithChildren, useContext, useMemo } from 'react'
+import { createContext, FC, useContext, useMemo } from 'react'
 
 interface Props {
   intl: {

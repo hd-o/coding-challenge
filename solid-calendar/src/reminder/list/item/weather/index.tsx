@@ -39,7 +39,7 @@ function ReminderListItemWeather (props: Props): JSX.Element {
           toggleUnit
         }
         sx={{
-          cursor: 'pointer'
+          cursor: 'pointer',
         }}
         title={
           intl.formatMessage(

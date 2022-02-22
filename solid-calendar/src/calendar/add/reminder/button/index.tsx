@@ -32,8 +32,8 @@ function CalendarAddReminderButton (props: Props): JSX.Element {
         textAlign: 'center',
         opacity: props.visible === true ? 0.5 : 0,
         '&:hover': {
-          opacity: 1
-        }
+          opacity: 1,
+        },
       }}
     >
       <ListItemText primary="➕" />

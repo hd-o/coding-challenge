@@ -2,7 +2,7 @@ import { ReactQueryUseQueryCtx } from '/src/pkg/react-query/useQuery'
 import { FetchJSONCtx } from '/src/util/fetchJSON'
 import { WeatherApiLocationDayCtx } from '/src/weather/api/location/day'
 import { WeatherLocation, WeatherLocationDay } from '/src/weather/api/location/model'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext } from 'react'
 
 export interface WeatherLocationDatePair {
   date: Date
@@ -21,7 +21,7 @@ function useWeatherLocationDay (props: Props): WeatherLocationDay | undefined {
     () => fetchJson<WeatherLocationDay[]>(weatherLocationDay(props)),
     {
       refetchOnMount: false,
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
     })
 
   return query.data?.[0]

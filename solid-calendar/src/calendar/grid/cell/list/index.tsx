@@ -17,7 +17,7 @@ function DateGridCellList (props: ListProps): JSX.Element {
       padding: theme.spacing(3.6, 0.4, 0.4, 0.4),
       display: 'flex',
       flexDirection: 'column',
-      ...props.sx
+      ...props.sx,
     }}
   />
 }

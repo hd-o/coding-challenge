@@ -18,7 +18,7 @@ function useSetTimeToNow (): (date: Date) => Date {
       return set(new Date(), {
         date: getDate(date),
         month: getMonth(date),
-        year: getYear(date)
+        year: getYear(date),
       })
     })
 }
