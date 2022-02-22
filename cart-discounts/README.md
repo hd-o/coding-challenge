@@ -1,6 +1,9 @@
-# Shopping Cart Discounts
+# 🛒 Cart Discounts
+
+## Challenge
 
 ### Given the following product prices:
+
 
 ```python
 prices = {"apple": 100, "grapeBag": 450, "peach": 90}
@@ -14,6 +17,7 @@ prices = {"apple": 100, "grapeBag": 450, "peach": 90}
 
 ### Calculate the total price for the following carts:
 
+
 ```python
 carts = [
   {"apple": 0, "grapeBag": 0, "peach": 0}, # 0
@@ -26,11 +30,13 @@ carts = [
 
 ### The expected totals are:
 
+
 ```python
 expected_totals = [0, 640, 700, 790, 2380]
 ```
 
 ## Solution
+
 
 ```python
 Price = int
@@ -66,6 +72,7 @@ def calculate_total(prices: Prices, cart: Cart) -> Price:
 
 ## Test
 
+
 ```python
 calculated_totals = [calculate_total(prices, cart) for cart in carts]
 print("🟢 Passed" if calculated_totals == expected_totals else "🔴 Failed")
@@ -73,11 +80,10 @@ print("calculated_totals: ", calculated_totals)
 print("expected_totals: ", expected_totals)
 ```
 
-```
-🟢 Passed
-calculated_totals:  [0, 640, 700, 790, 2380]
-expected_totals:  [0, 640, 700, 790, 2380]
-```
+    🟢 Passed
+    calculated_totals:  [0, 640, 700, 790, 2380]
+    expected_totals:  [0, 640, 700, 790, 2380]
+
 
 ## Scaling a Shopping Cart
 
@@ -98,6 +104,7 @@ The following are my current ideas related to scaling a shopping cart architectu
 
 A product's final price can be influenced by several factors: Discount based on product quantity, discount based on a brand's products quantity, coupons, loyalty plans, premium plans, e.t.c. On all purchases, two value types are certain, the product ids, and their quantities. With this data, transformations can be applied to calculate the final cart price. My current solution is to have "price rules" defining the calculation for a product price, and discounts if any. Example:
 
+
 ```python
 from typing import Literal
 
@@ -115,6 +122,7 @@ class PriceRule:
 ```
 
 For each price rule there is a function which will calculate product price. This function can be saved in a database, or in storage like AWS S3.
+
 
 ```python
 # Price rule function examples
@@ -138,6 +146,3 @@ def coupon(cart: ShoppingCart) -> Optional[Price]: pass
 
 The class `ShoppingCart` could fetch the price rules for each selected product, and run the defined functions, receiving a list of prices, and knowing the type of the rule  (price, discount, coupon, e.t.c). This resulting data can be used to render UI copy/text, and inform the user on prices, and applied discounts. Some rules can return an `Optional` type, where the rule might not be applied, e.g: expired coupons, or a product quantity not enough for the discount, e.t.c.
 
-## Further Research
-
-> TODO
