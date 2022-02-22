@@ -2,8 +2,6 @@
 
 Iterator implementing skipping through `.skip()`
 
-🖥️ [Live Demo @ CodeSandbox][codesandbox]
-
 ```typescript
 const myIter = new SkipIterator([1,3,4,3,5])
 myIter.next() // 1
@@ -13,12 +11,14 @@ myIter.next() // 4
 myIter.next() // 5
 ```
 
-This implementation accepts an array of integers, but could accept any type through generics:
+## Development
 
-```typescript
-class SkipIterator<Value> {
-  constructor(values: Value[])
-}
-```
+Dependencies
 
-[codesandbox]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/skip-iterator
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/)
+
+Commands
+
+- [package.json](./package.json)
+- e.g: `yarn start`
