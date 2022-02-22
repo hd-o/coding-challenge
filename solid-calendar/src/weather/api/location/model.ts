@@ -15,4 +15,4 @@ type LocationSearchQuery = string
 
 export type WeatherLocationSearch = Record<LocationSearchQuery, WeatherLocation[]>
 
-export type WeatherLocationDayMap = Record<WOEId, WeatherLocationDay[]> 
+export type WeatherLocationDayMap = Record<WOEId, WeatherLocationDay[]>

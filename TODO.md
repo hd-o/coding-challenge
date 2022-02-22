@@ -1,4 +1,0 @@
-- husky
-  - pre-commit lint run
-  - pre-push test run
-- yarn pnp

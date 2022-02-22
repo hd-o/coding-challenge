@@ -10,7 +10,7 @@ function ContainerBox (props: BoxProps): JSX.Element {
       margin: '0 auto',
       minWidth: 600,
       padding: '20px 30px 0 30px',
-      ...props.sx
+      ...props.sx,
     }}
   />
 }

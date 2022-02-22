@@ -25,7 +25,7 @@ function CalendarGridHeader (): JSX.Element {
                 padding: theme.spacing(0.6),
                 textAlign: 'center',
                 background: '#2f74b5',
-                color: '#ffffff'
+                color: '#ffffff',
               }}
             >
               <Typography variant='body2'>

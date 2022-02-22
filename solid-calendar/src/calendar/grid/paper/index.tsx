@@ -9,7 +9,7 @@ function CalendarGridPaper (props: PaperProps): JSX.Element {
     sx={{
       boxShadow: 'none',
       borderRadius: 0,
-      ...props.sx
+      ...props.sx,
     }}
   />
 }

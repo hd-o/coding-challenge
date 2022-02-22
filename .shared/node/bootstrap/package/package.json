@@ -5,6 +5,8 @@
   "main": "index.html",
   "name": "package-name",
   "scripts": {
+    "lint": "run-p setup:eslint run:eslint",
+    "run:eslint": "eslint -c .eslintrc .",
     "setup": "run-p setup:*",
     "setup:eslint": "node .config/eslint",
     "setup:jest": "node .config/jest",

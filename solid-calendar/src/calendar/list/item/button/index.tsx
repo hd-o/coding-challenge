@@ -13,9 +13,9 @@ function CalendarListItemButton (props: ListItemButtonProps): JSX.Element {
       color: '#222',
       padding: theme.spacing(0.4, 0.4),
       '& .MuiTouchRipple-root': {
-        margin: 0
+        margin: 0,
       },
-      ...props.sx
+      ...props.sx,
     }}
   />
 }

@@ -52,9 +52,7 @@ function CalendarGrid (): JSX.Element {
       className='js-calendar-grid'
       // Grid width: 7 days / week
       gridTemplateColumns="repeat(7, 1fr)"
-      sx={{
-        marginTop: 0
-      }}
+      sx={{ marginTop: 0 }}
     >
       {
         gridCells.map((day, index) => {
@@ -73,7 +71,7 @@ function CalendarGrid (): JSX.Element {
                   : isWeekendDay(index) ? '#f2f2f2' : '#fefefe',
                 color: isWeekendDay(index) ? '#6194be' : '#222222',
                 border: '1px solid #dddddd',
-                position: 'relative'
+                position: 'relative',
               }}
             >
               <CalendarGridPaper
@@ -85,7 +83,7 @@ function CalendarGrid (): JSX.Element {
                   padding: theme.spacing(0.4),
                   position: 'absolute',
                   top: 0,
-                  left: 0
+                  left: 0,
                 }}
               >
                 { day !== null &&

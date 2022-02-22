@@ -40,5 +40,10 @@
         "varsIgnorePattern": "^_"
       }
     ]
-  }
+  },
+  "ignorePatterns": [
+    ".vscode/",
+    ".cache/",
+    "dist/"
+  ]
 }

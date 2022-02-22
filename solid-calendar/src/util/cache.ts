@@ -3,7 +3,7 @@ import { createContext, useContext } from 'react'
 
 export const CacheStateCtx = createContext({
   dependencies: new Map(),
-  values: new Map()
+  values: new Map(),
 })
 
 function hasEqualItems (a: any[], b: any[]): boolean {

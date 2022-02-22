@@ -19,7 +19,7 @@ function useWeatherFormatTemperatures (): WeatherFormatTemperature {
       unit === '°C' ? identity : c => c * 1.8 + 32
     return {
       max: `${multiplier(weather.max_temp).toFixed()}${unit}`,
-      min: `${multiplier(weather.max_temp).toFixed()}${unit}`
+      min: `${multiplier(weather.max_temp).toFixed()}${unit}`,
     }
   }
 }

@@ -3,7 +3,7 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import 'regenerator-runtime/runtime'
-import { FC, useContext, useEffect, useMemo, useState } from 'react'
+import { FC, useContext, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { CalendarCtx } from '../calendar'
 import { ContainerBoxCtx } from '../container/box'
@@ -17,7 +17,7 @@ export const App: FC = () => {
   const intl = useContext(ReactIntlUseIntlCtx)()
   const introStart = useContext(IntroStartCtx)()
   const Typography = useContext(MuiTypographyCtx)
-  
+
   useEffect(introStart)
 
   return (

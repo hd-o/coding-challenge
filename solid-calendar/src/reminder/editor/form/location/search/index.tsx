@@ -38,7 +38,7 @@ function LocationSearch (props: Props): JSX.Element {
       retry: 1,
       onSuccess (data: WeatherLocation[] = []) {
         searchResults.set(locationQuery, data)
-      }
+      },
     })
 
   return <Autocomplete
@@ -60,7 +60,7 @@ function LocationSearch (props: Props): JSX.Element {
     }
     noOptionsText={
       intl.formatMessage({
-        id: error !== null ? 'error-loading' : 'no-results'
+        id: error !== null ? 'error-loading' : 'no-results',
       })
     }
     open={
@@ -83,7 +83,7 @@ function LocationSearch (props: Props): JSX.Element {
         fullWidth
         inputProps={{
           ...params.inputProps,
-          'data-testid': 'reminder-editor-location'
+          'data-testid': 'reminder-editor-location',
         }}
         label={intl.formatMessage({ id: 'location-city' })}
         variant="standard"

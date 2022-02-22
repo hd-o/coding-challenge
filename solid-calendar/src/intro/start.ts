@@ -16,14 +16,14 @@ function useIntroStart (): () => void {
           {
             element: document.querySelector('.js-calendar-month-selector'),
             intro: 'Use the arrow buttons, and date selector, to change the calendar month',
-            title: '📆 Month Selector'
+            title: '📆 Month Selector',
           },
           {
             element: document.querySelector('.js-calendar-grid')?.parentNode,
             intro: 'Click on a date cell to add a Reminder',
-            title: '☑️ Add Reminder'
-          }
-        ]
+            title: '☑️ Add Reminder',
+          },
+        ],
       })
       .onbeforeexit(() => localStorage.setItem(key, 'true'))
       .start()
