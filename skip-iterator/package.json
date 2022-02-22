@@ -10,8 +10,8 @@
     "setup:eslint": "node .config/eslint",
     "setup:jest": "node .config/jest",
     "setup:typescript": "node .config/typescript",
-    "start": "run-s setup:* start:*",
-    "start:jest": "jest spec --maxWorkers=1"
+    "start": "run-s setup",
+    "test": "DEBUG_PRINT_LIMIT=0 jest spec --maxWorkers=1"
   },
   "dependencies": {
     "@babel/preset-env": "^7.16.11",

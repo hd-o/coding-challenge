@@ -8,11 +8,11 @@
  * myIter.next() // 4
  * myIter.next() // 5
  */
-export class SkipIterator {
+export class SkipIterator<V> {
   /**
    * @param _iterator Values to be looped by next()
    */
-  constructor (private readonly _iterator: number[]) {}
+  constructor (private readonly _iterator: V[]) {}
 
   /**
    * Track current value for next() call
@@ -23,12 +23,12 @@ export class SkipIterator {
    * Values to be skipped.
    * First in, first out
    */
-  private readonly _skipQueue: number[] = []
+  private readonly _skipQueue: V[] = []
 
   /**
    * Returns next value to be skipped, or false
    */
-  get nextToSkip (): number | false {
+  get nextToSkip (): V | false {
     // If there's no value to skip
     if (this._skipQueue.length === 0) return false
     // else return the value to skip
@@ -45,7 +45,7 @@ export class SkipIterator {
   /**
    * Returns next not skipped value, or undefined
    */
-  next (): number | undefined {
+  next (): V | undefined {
     const currentValue = this._iterator[this._currentIndex]
     // Increment for upcoming next() calls
     this._currentIndex++
@@ -64,7 +64,7 @@ export class SkipIterator {
   /**
    * Adds value to the end of the skip queue
    */
-  skip (value: number): void {
+  skip (value: V): void {
     this._skipQueue.push(value)
   }
 }
