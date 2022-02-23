@@ -14,10 +14,10 @@ export class Settings$ extends BehaviorSubject<ISettingsRecord> {
       return immutable.Record<ISettings>({
         elevatorCount: 3,
         floorHeight: 100,
-        floorCount: 6
+        floorCount: 6,
       })()
     }
   }
 }
 
-export const Settings$Ctx = createContext(container.resolve(Settings$))
+export const Settings$Ctx = createContext(() => container.resolve(Settings$))

@@ -1,9 +1,9 @@
+import { ElevatorFactory } from '/src/elevator/factory'
+import { Lodash } from '/src/pkg/lodash'
 import { Map } from 'immutable'
 import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
-import { ElevatorFactory } from '/src/elevator/factory'
-import { Lodash } from '/src/pkg/lodash'
 import { Immutable } from '../pkg/immutable'
 import { Settings$ } from '../settings/stream'
 import { IElevator, IElevatorRecord } from './model'
@@ -31,4 +31,4 @@ export class Elevator$Map$ extends BehaviorSubject<IElevator$Map> {
   }
 }
 
-export const Elevator$Ctx = createContext(container.resolve(Elevator$Map$))
+export const Elevator$Ctx = createContext(() => container.resolve(Elevator$Map$))

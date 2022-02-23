@@ -4,4 +4,5 @@ export interface ElevatorCallerProps {
   floor: IFloorRecord
   floorHasRequested: boolean
   onClick: () => unknown
+  'data-testid'?: string
 }

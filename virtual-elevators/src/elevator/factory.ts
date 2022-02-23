@@ -1,6 +1,6 @@
-import { inject, singleton } from 'tsyringe'
 import { FloorList$ } from '/src/floor/stream'
 import { Immutable } from '/src/pkg/immutable'
+import { inject, singleton } from 'tsyringe'
 import { IElevator, IElevatorRecord } from './model'
 import { ElevatorMoveState } from './moveState'
 
@@ -9,7 +9,7 @@ export class ElevatorFactory {
   private readonly _ElevatorRecord = this._immutable.Record<IElevator>({
     id: '',
     floors: this._floors$.value,
-    moveState: ElevatorMoveState.Idle
+    moveState: ElevatorMoveState.Idle,
   })
 
   constructor (

@@ -1,7 +1,7 @@
-import { animationFrameScheduler, BehaviorSubject, Observable } from 'rxjs'
-import { inject, singleton } from 'tsyringe'
 import { Rx } from '/src/pkg/rxjs'
 import { runningInServer } from '/src/util/runningInServer'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { inject, singleton } from 'tsyringe'
 
 export type IProcessId = string | {}
 
@@ -50,18 +50,20 @@ export class ProcessLoop {
   constructor (
     @inject(Rx) readonly rx: Rx
   ) {
-    this._interval$ = rx.interval(0, animationFrameScheduler)
+    this._interval$ = rx.animationFrames()
     this._processMap$ = new rx.BehaviorSubject<ProcessMap>(this._processMap)
     if (!runningInServer) {
-      this._processMap$
-        .pipe(
-          rx.switchMap((processMap) =>
-            rx.iif(() => processMap.size === 0,
-              rx.of(),
-              this._interval$.pipe(
-                rx.share(),
-                rx.tap(() => this._runProcessMap(processMap)))
-            )))
+      this._processMap$.pipe(
+        rx.switchMap((processMap) =>
+          rx.iif(
+            () => processMap.size === 0,
+            rx.of(),
+            this._interval$.pipe(
+              rx.share(),
+              rx.tap(() => this._runProcessMap(processMap)))
+          ),
+        ),
+      )
         .subscribe()
     }
   }

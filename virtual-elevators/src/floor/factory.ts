@@ -1,5 +1,5 @@
-import { inject, singleton } from 'tsyringe'
 import { Immutable } from '/src/pkg/immutable'
+import { inject, singleton } from 'tsyringe'
 import { IFloor, IFloorRecord } from './model'
 
 @singleton()

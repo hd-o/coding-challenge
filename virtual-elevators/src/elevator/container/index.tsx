@@ -1,7 +1,7 @@
-import { createContext, useContext } from 'react'
 import { Elevator$Ctx } from '/src/elevator/stream'
 import { AntdColCtx } from '/src/pkg/antd/col'
 import { useStreamCtx } from '/src/util/useStreamCtx'
+import { createContext, useContext } from 'react'
 import { ElevatorCtx } from '../'
 
 function ElevatorContainer (): JSX.Element {
@@ -10,9 +10,9 @@ function ElevatorContainer (): JSX.Element {
   const elevators = useStreamCtx(Elevator$Ctx)
   return (
     <>
-      {elevators.valueSeq().map((elevator$) => (
+      {elevators.valueSeq().map((elevator$, index) => (
         <Col key={elevator$.value.id} span={6}>
-          <Elevator elevator$={elevator$} />
+          <Elevator index={index} elevator$={elevator$} />
         </Col>
       ))}
     </>

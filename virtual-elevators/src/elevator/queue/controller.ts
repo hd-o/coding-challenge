@@ -1,8 +1,9 @@
-import { createContext } from 'react'
-import { container, inject, singleton } from 'tsyringe'
 import { FloorCtrl } from '/src/floor/controller'
 import { IFloorRecord } from '/src/floor/model'
 import { Settings$ } from '/src/settings/stream'
+import { createContext } from 'react'
+import { container, inject, singleton } from 'tsyringe'
+import { ElevatorDoorCtrl } from '../door/controller'
 import { IElevatorRecord } from '../model'
 import { ElevatorPositionCtrl } from '../position/controller'
 import { IElevatorQueueSet } from './model'
@@ -57,7 +58,7 @@ export class ElevatorQueueCtrl {
     return this._getQueue(elevator).state
   }
 
-  private _getTotalQueueSize (elevator: IElevatorRecord): number {
+  getTotalQueueSize (elevator: IElevatorRecord): number {
     const queue = this._getQueue(elevator)
     return queue.MovingDown.size + queue.MovingUp.size
   }
@@ -78,50 +79,12 @@ export class ElevatorQueueCtrl {
   }
 
   constructor (
+    @inject(ElevatorDoorCtrl) private readonly _doorCtrl: ElevatorDoorCtrl,
     @inject(ElevatorQueue$Map$) private readonly _elevatorQueue$: ElevatorQueue$Map$,
     @inject(FloorCtrl) private readonly _floorCtrl: FloorCtrl,
     @inject(ElevatorPositionCtrl) private readonly _elevatorPositionCtrl: ElevatorPositionCtrl,
     @inject(Settings$) private readonly _settings$: Settings$
   ) {}
-
-  /**
-   * Elevator's distance to a given floor =
-   * distance between stops until floor + distance from last stop to floor.
-   * Or, if floor is next, distance from elevator to floor
-   * @returns False if floor is not serviced, or distance in floor height unit
-   */
-  getDistance (elevator: IElevatorRecord, floor: IFloorRecord): number | false {
-    // Check if floor is serviced by elevator
-    if (!elevator.floors.includes(floor)) return false
-    // Start with distance from elevator to next floor
-    const activeQueuedFloors = this._getActiveQueueSet(elevator).toArray()
-    const nextFloor = activeQueuedFloors[0]
-    // If queue is empty, floor can be next
-    if (nextFloor === undefined) {
-      // Return distance from elevator to floor
-      return Math.abs(
-        this._elevatorPositionCtrl.getPosition(elevator) -
-        this._floorCtrl.getPosition(floor)
-      )
-    }
-    let distance = (
-      this._elevatorPositionCtrl.getPosition(elevator) +
-      this._floorCtrl.getPosition(nextFloor)
-    )
-    const floorInsertIndex = this._getFloorInsertIndex(elevator, floor)
-    const isPastFloor = this._isPastFloor(elevator, floor)
-    activeQueuedFloors
-      .slice(1, isPastFloor ? undefined : floorInsertIndex.index)
-      .forEach(() => { distance += this._settings$.value.floorHeight })
-    if (isPastFloor) {
-      this
-        ._getInactiveQueueSet(elevator)
-        .toArray()
-        .slice(0, floorInsertIndex.index)
-        .forEach(() => { distance += this._settings$.value.floorHeight })
-    }
-    return distance
-  }
 
   getOppositeDirection (direction: IElevatorDirectionType): IElevatorDirectionType {
     return direction === elevatorDirectionType.MovingDown
@@ -142,8 +105,12 @@ export class ElevatorQueueCtrl {
     if (queue.state === elevatorQueueState.Idle) {
       queueUpdate = queueUpdate.set('state', directionType)
     }
-    this._getQueue$(elevator).next(queueUpdate)
-    this._floorCtrl.setHasRequestedElevator(floor, true)
+    if (this._elevatorPositionCtrl.isAtFloor(elevator, floor)) {
+      this._doorCtrl.open(elevator)
+    } else {
+      this._getQueue$(elevator).next(queueUpdate)
+      this._floorCtrl.setHasRequestedElevator(floor, true)
+    }
   }
 
   isGoingToFloor (elevator: IElevatorRecord, floor: IFloorRecord): boolean {
@@ -152,7 +119,7 @@ export class ElevatorQueueCtrl {
   }
 
   isQueueEmpty (elevator: IElevatorRecord): boolean {
-    return this._getTotalQueueSize(elevator) === 0
+    return this.getTotalQueueSize(elevator) === 0
   }
 
   remove (elevator: IElevatorRecord, directionType: IElevatorDirectionType, floor: IFloorRecord): void {
@@ -170,4 +137,4 @@ export class ElevatorQueueCtrl {
   }
 }
 
-export const ElevatorQueueCtrlCtx = createContext(container.resolve(ElevatorQueueCtrl))
+export const ElevatorQueueCtrlCtx = createContext(() => container.resolve(ElevatorQueueCtrl))

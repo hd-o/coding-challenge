@@ -1,0 +1,303 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app snapshot: app 1`] = `
+<DocumentFragment>
+  <div
+    class="app-container_fwlde85"
+  >
+    <div
+      class="ant-row app-row_f4ybwdx"
+    >
+      <div
+        class="ant-col ant-col-6"
+      >
+        <div
+          class="ant-row elevator-row_f1vdzk7t elevator-caller-cell_f14w8qbu"
+        >
+          <button
+            class="ant-btn ant-btn-circle ant-btn-default"
+            data-testid="floor-5-caller"
+            type="button"
+          >
+            5
+          </button>
+        </div>
+        <div
+          class="ant-row elevator-row_f1vdzk7t elevator-caller-cell_f14w8qbu"
+        >
+          <button
+            class="ant-btn ant-btn-circle ant-btn-default"
+            data-testid="floor-4-caller"
+            type="button"
+          >
+            4
+          </button>
+        </div>
+        <div
+          class="ant-row elevator-row_f1vdzk7t elevator-caller-cell_f14w8qbu"
+        >
+          <button
+            class="ant-btn ant-btn-circle ant-btn-default"
+            data-testid="floor-3-caller"
+            type="button"
+          >
+            3
+          </button>
+        </div>
+        <div
+          class="ant-row elevator-row_f1vdzk7t elevator-caller-cell_f14w8qbu"
+        >
+          <button
+            class="ant-btn ant-btn-circle ant-btn-default"
+            data-testid="floor-2-caller"
+            type="button"
+          >
+            2
+          </button>
+        </div>
+        <div
+          class="ant-row elevator-row_f1vdzk7t elevator-caller-cell_f14w8qbu"
+        >
+          <button
+            class="ant-btn ant-btn-circle ant-btn-default"
+            data-testid="floor-1-caller"
+            type="button"
+          >
+            1
+          </button>
+        </div>
+        <div
+          class="ant-row elevator-row_f1vdzk7t elevator-caller-cell_f14w8qbu"
+        >
+          <button
+            class="ant-btn ant-btn-circle ant-btn-default"
+            data-testid="floor-0-caller"
+            type="button"
+          >
+            0
+          </button>
+        </div>
+      </div>
+      <div
+        class="ant-col ant-col-6"
+      >
+        <div
+          data-testid="elevator-0"
+        >
+          <div
+            class="ant-row elevator-row_f1vdzk7t elevator-panel_fhq5o4a"
+          >
+            <div
+              class="ant-col elevator-car-container_fgbm5to"
+              style="bottom: 0px;"
+            >
+              <div
+                class="elevator-interior_f8uxegp"
+              />
+              <div
+                class="elevator-door_fe0sndj"
+                data-testid="elevator-0-door-closed"
+              />
+              <div
+                class="elevator-door_fe0sndj"
+              />
+            </div>
+          </div>
+          <div
+            class="ant-row elevator-row_f1vdzk7t fbhzy9f"
+          >
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-0-button-floor-0"
+              type="button"
+            >
+              0
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-0-button-floor-1"
+              type="button"
+            >
+              1
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-0-button-floor-2"
+              type="button"
+            >
+              2
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-0-button-floor-3"
+              type="button"
+            >
+              3
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-0-button-floor-4"
+              type="button"
+            >
+              4
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-0-button-floor-5"
+              type="button"
+            >
+              5
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-col ant-col-6"
+      >
+        <div
+          data-testid="elevator-1"
+        >
+          <div
+            class="ant-row elevator-row_f1vdzk7t elevator-panel_fhq5o4a"
+          >
+            <div
+              class="ant-col elevator-car-container_fgbm5to"
+              style="bottom: 0px;"
+            >
+              <div
+                class="elevator-interior_f8uxegp"
+              />
+              <div
+                class="elevator-door_fe0sndj"
+                data-testid="elevator-1-door-closed"
+              />
+              <div
+                class="elevator-door_fe0sndj"
+              />
+            </div>
+          </div>
+          <div
+            class="ant-row elevator-row_f1vdzk7t fbhzy9f"
+          >
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-1-button-floor-0"
+              type="button"
+            >
+              0
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-1-button-floor-1"
+              type="button"
+            >
+              1
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-1-button-floor-2"
+              type="button"
+            >
+              2
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-1-button-floor-3"
+              type="button"
+            >
+              3
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-1-button-floor-4"
+              type="button"
+            >
+              4
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-1-button-floor-5"
+              type="button"
+            >
+              5
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-col ant-col-6"
+      >
+        <div
+          data-testid="elevator-2"
+        >
+          <div
+            class="ant-row elevator-row_f1vdzk7t elevator-panel_fhq5o4a"
+          >
+            <div
+              class="ant-col elevator-car-container_fgbm5to"
+              style="bottom: 0px;"
+            >
+              <div
+                class="elevator-interior_f8uxegp"
+              />
+              <div
+                class="elevator-door_fe0sndj"
+                data-testid="elevator-2-door-closed"
+              />
+              <div
+                class="elevator-door_fe0sndj"
+              />
+            </div>
+          </div>
+          <div
+            class="ant-row elevator-row_f1vdzk7t fbhzy9f"
+          >
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-2-button-floor-0"
+              type="button"
+            >
+              0
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-2-button-floor-1"
+              type="button"
+            >
+              1
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-2-button-floor-2"
+              type="button"
+            >
+              2
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-2-button-floor-3"
+              type="button"
+            >
+              3
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-2-button-floor-4"
+              type="button"
+            >
+              4
+            </button>
+            <button
+              class="ant-btn ant-btn-circle ant-btn-default"
+              data-testid="elevator-2-button-floor-5"
+              type="button"
+            >
+              5
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

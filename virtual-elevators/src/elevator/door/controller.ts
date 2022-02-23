@@ -1,8 +1,8 @@
-import { createContext } from 'react'
-import { container, inject, singleton } from 'tsyringe'
 import { Lodash } from '/src/pkg/lodash'
 import { IProcess, ProcessLoop } from '/src/process/loop'
 import { ProcessUtils } from '/src/process/utils'
+import { createContext } from 'react'
+import { container, inject, singleton } from 'tsyringe'
 import { IElevatorRecord } from '../model'
 import { ElevatorMoveState } from '../moveState'
 import { IElevatorDoor } from './model'
@@ -62,7 +62,7 @@ export class ElevatorDoorCtrl {
     this._processLoop.reset(door$, [
       this._createDoorMovementProcess(door$, elevatorDoorStatus.Opening),
       this._processUtils.createWaitProcess(2000),
-      this._createDoorMovementProcess(door$, elevatorDoorStatus.Closing)
+      this._createDoorMovementProcess(door$, elevatorDoorStatus.Closing),
     ])
   }
 
@@ -71,9 +71,9 @@ export class ElevatorDoorCtrl {
     /** @see ElevatorDoorCtrl.open #door-status  */
     this._setDoorStatus(door$, elevatorDoorStatus.Closing)
     this._processLoop.reset(door$, [
-      this._createDoorMovementProcess(door$, elevatorDoorStatus.Closing)
+      this._createDoorMovementProcess(door$, elevatorDoorStatus.Closing),
     ])
   }
 }
 
-export const ElevatorDoorCtrlCtx = createContext(container.resolve(ElevatorDoorCtrl))
+export const ElevatorDoorCtrlCtx = createContext(() => container.resolve(ElevatorDoorCtrl))
