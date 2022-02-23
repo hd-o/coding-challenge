@@ -1,4 +1,6 @@
-import { useContext } from 'react'
+import 'reflect-metadata'
+import 'regenerator-runtime/runtime'
+import { FC, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
 import { ElevatorCallerRowsCtx } from '../elevator/caller/rows'
 import { ElevatorContainerCtx } from '../elevator/container'
@@ -6,7 +8,7 @@ import { AntdColCtx } from '../pkg/antd/col'
 import { AntdRowCtx } from '../pkg/antd/row'
 import { useStyle } from '../util/useStyle'
 
-const container = (): NestedCSSProperties => ({
+const appContainer = (): NestedCSSProperties => ({
   $debugName: 'app-container',
   padding: 20,
   height: '100%',
@@ -22,20 +24,27 @@ const row = (): NestedCSSProperties => ({
   borderRightWidth: 1,
 })
 
-export function App (): JSX.Element {
+interface Props {
+  /** Elements required by UI tests */
+  TestCtrl?: FC
+}
+
+export function App (props: Props): JSX.Element {
+  const { TestCtrl = () => null } = props
   const Col = useContext(AntdColCtx)
   const ElevatorCallers = useContext(ElevatorCallerRowsCtx)
   const ElevatorContainer = useContext(ElevatorContainerCtx)
   const Row = useContext(AntdRowCtx)
 
   return (
-    <div className={useStyle(container)}>
+    <div className={useStyle(appContainer)}>
       <Row className={useStyle(row)}>
         <Col span={6}>
           <ElevatorCallers />
         </Col>
         <ElevatorContainer />
       </Row>
+      <TestCtrl />
     </div>
   )
 }

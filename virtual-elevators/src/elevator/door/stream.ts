@@ -1,7 +1,7 @@
+import { Immutable } from '/src/pkg/immutable'
 import { Map } from 'immutable'
 import { BehaviorSubject } from 'rxjs'
 import { inject, singleton } from 'tsyringe'
-import { Immutable } from '/src/pkg/immutable'
 import { IElevator } from '../model'
 import { Elevator$Map$ } from '../stream'
 import { ElevatorDoorFactory } from './factory'
@@ -24,7 +24,7 @@ export class ElevatorDoor$Map$ extends BehaviorSubject<IElevatorDoor$Map> {
       const elevator$Seq = elevator$Map$.value.valueSeq()
       return immutable.Map(elevator$Seq.map(elevator$ => [
         elevator$.value.id,
-        new BehaviorSubject(doorFactory.create())
+        new BehaviorSubject(doorFactory.create()),
       ]))
     }
   }

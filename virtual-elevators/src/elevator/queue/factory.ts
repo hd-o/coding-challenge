@@ -1,8 +1,8 @@
-import { RecordOf } from 'immutable'
-import { inject, singleton } from 'tsyringe'
 import { IFloorRecord } from '/src/floor/model'
 import { Immutable } from '/src/pkg/immutable'
 import { IComparator } from '/src/pkg/immutable/SortedSet'
+import { RecordOf } from 'immutable'
+import { inject, singleton } from 'tsyringe'
 import { IElevatorQueue } from './model'
 import { elevatorQueueState } from './model/moveState'
 
@@ -17,7 +17,7 @@ export class ElevatorQueueFactory {
   private readonly _ElevatorQueueRecord = this._immutable.Record<IElevatorQueue>({
     state: elevatorQueueState.Idle,
     MovingDown: new this._immutable.SortedSet<IFloorRecord>([], (a, b) => floorComparator(b, a)),
-    MovingUp: new this._immutable.SortedSet<IFloorRecord>([], floorComparator)
+    MovingUp: new this._immutable.SortedSet<IFloorRecord>([], floorComparator),
   })
 
   constructor (

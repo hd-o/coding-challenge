@@ -1,10 +1,10 @@
-import { createContext, useContext } from 'react'
-import { NestedCSSProperties } from 'typestyle/lib/types'
 import { AntdColCtx } from '/src/pkg/antd/col'
 import { Settings$Ctx } from '/src/settings/stream'
 import { useStream } from '/src/util/useStream'
 import { useStreamCtx } from '/src/util/useStreamCtx'
 import { useStyle } from '/src/util/useStyle'
+import { createContext, useContext } from 'react'
+import { NestedCSSProperties } from 'typestyle/lib/types'
 import { ElevatorDoorCtx } from '../door'
 import { IElevatorRecord } from '../model'
 import { ElevatorPositionCtrlCtx } from '../position/controller'
@@ -25,7 +25,7 @@ const container = (props: {
   padding: `${CarPadding.top}px ${CarPadding.side}px`,
   bottom: 0,
   position: 'absolute',
-  width: '100%'
+  width: '100%',
 })
 
 const interior = (): NestedCSSProperties => ({
@@ -34,11 +34,12 @@ const interior = (): NestedCSSProperties => ({
   height: `calc(100% - ${CarPadding.top * 2}px)`,
   width: `calc(100% - ${CarPadding.side * 2}px)`,
   position: 'absolute',
-  zIndex: 0
+  zIndex: 0,
 })
 
 interface Props {
   elevator: IElevatorRecord
+  index: number
 }
 
 function ElevatorCar (props: Props): JSX.Element {
@@ -46,7 +47,7 @@ function ElevatorCar (props: Props): JSX.Element {
   const ElevatorDoor = useContext(ElevatorDoorCtx)
 
   const settings = useStreamCtx(Settings$Ctx)
-  const elevatorPositionCtrl = useContext(ElevatorPositionCtrlCtx)
+  const elevatorPositionCtrl = useContext(ElevatorPositionCtrlCtx)()
   const position = useStream(elevatorPositionCtrl.getPosition$(props.elevator))
 
   return (
@@ -55,7 +56,10 @@ function ElevatorCar (props: Props): JSX.Element {
       style={{ bottom: position }}
     >
       <div className={useStyle(interior)} />
-      <ElevatorDoor elevator={props.elevator} />
+      <ElevatorDoor
+        elevator={props.elevator}
+        index={props.index}
+      />
     </Col>
   )
 }

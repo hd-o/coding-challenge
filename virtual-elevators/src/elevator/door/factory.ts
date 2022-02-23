@@ -1,5 +1,5 @@
-import { inject, singleton } from 'tsyringe'
 import { Immutable } from '/src/pkg/immutable'
+import { inject, singleton } from 'tsyringe'
 import { IElevatorDoor, IElevatorDoorRecord } from './model'
 import { elevatorDoorPosition } from './model/position'
 import { elevatorDoorStatus } from './model/status'
@@ -8,7 +8,7 @@ import { elevatorDoorStatus } from './model/status'
 export class ElevatorDoorFactory {
   private readonly _ElevatorDoorRecord = this._immutable.Record<IElevatorDoor>({
     status: elevatorDoorStatus.Closed,
-    position: elevatorDoorPosition.Closed
+    position: elevatorDoorPosition.Closed,
   })
 
   constructor (

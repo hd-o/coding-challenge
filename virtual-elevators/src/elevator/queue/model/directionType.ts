@@ -4,5 +4,5 @@ type IElevatorDirectionTypeMap = Record<IElevatorDirectionType, IElevatorDirecti
 
 export const elevatorDirectionType: IElevatorDirectionTypeMap = {
   MovingUp: 'MovingUp',
-  MovingDown: 'MovingDown'
+  MovingDown: 'MovingDown',
 }

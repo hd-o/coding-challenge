@@ -33,6 +33,7 @@ const eslintrc = {
         "exports": "always-multiline",
         "functions": "ignore",
     }],
+    "jest/expect-expect": 0,
     "import/no-absolute-path": 0,
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [

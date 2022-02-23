@@ -8,5 +8,5 @@ type IElevatorQueueStateMap = Record<IElevatorQueueState, IElevatorQueueState>
 /** @see IElevatorQueue.state */
 export const elevatorQueueState: IElevatorQueueStateMap = {
   ...elevatorDirectionType,
-  Idle: 'Idle'
+  Idle: 'Idle',
 }

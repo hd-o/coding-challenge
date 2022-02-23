@@ -1,8 +1,8 @@
+import { Immutable } from '/src/pkg/immutable'
+import { Lodash } from '/src/pkg/lodash'
 import { Map } from 'immutable'
 import { BehaviorSubject } from 'rxjs'
 import { inject, singleton } from 'tsyringe'
-import { Immutable } from '/src/pkg/immutable'
-import { Lodash } from '/src/pkg/lodash'
 import { IElevator } from '../model'
 import { Elevator$Map$ } from '../stream'
 

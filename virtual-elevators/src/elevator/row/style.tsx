@@ -11,7 +11,7 @@ export const elevatorRowStyle = (props: {
   zoom: 0.9,
   $nest: {
     '&:nth-child(odd)': {
-      background: '#ddd'
-    }
-  }
+      background: '#ddd',
+    },
+  },
 })

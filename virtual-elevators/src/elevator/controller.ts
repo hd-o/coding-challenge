@@ -1,6 +1,3 @@
-import { createContext } from 'react'
-import { skip, takeUntil } from 'rxjs'
-import { container, inject, singleton } from 'tsyringe'
 import { ElevatorDoorCtrl } from '/src/elevator/door/controller'
 import { ElevatorQueueCtrl } from '/src/elevator/queue/controller'
 import { Elevator$Map$, IElevator$ } from '/src/elevator/stream'
@@ -10,6 +7,9 @@ import { Lodash } from '/src/pkg/lodash'
 import { IProcess, IProcessId, ProcessLoop } from '/src/process/loop'
 import { Symbol } from '/src/symbol'
 import { NoElevatorServicesFloor } from '/src/symbol/NoElevatorServicesFloor'
+import { createContext } from 'react'
+import { skip, takeUntil } from 'rxjs'
+import { container, inject, singleton } from 'tsyringe'
 import { IElevator, IElevatorRecord } from './model'
 import { ElevatorMoveState } from './moveState'
 import { ElevatorPositionCtrl } from './position/controller'
@@ -38,7 +38,7 @@ export class ElevatorCtrl {
         .subscribe(() => {
           const process = this.createMovementProcess(elevatorId, queue$)
           this._processLoop.reset(this.getMovementProcessId(elevatorId), [
-            this._lodash.throttle(process, 10)
+            this._lodash.throttle(process, 10),
           ])
         })
     }
@@ -109,8 +109,11 @@ export class ElevatorCtrl {
       this._doorCtrl.open(nearestElevator)
       return nearestElevator
     }
-    // Cache current nearestDistance
-    let nearestDistance = this._queueCtrl.getDistance(nearestElevator, floor)
+    let nearestElevatorQueueSize = this._queueCtrl.getTotalQueueSize(nearestElevator)
+    if (nearestElevatorQueueSize === 0) {
+      this._queueCtrl.insert(nearestElevator, floor)
+      return nearestElevator
+    }
     // Loop from second elevator onward
     for (const elevator$ of elevator$Array.slice(1)) {
       const elevator = elevator$.value
@@ -119,18 +122,18 @@ export class ElevatorCtrl {
         this._doorCtrl.open(elevator)
         return elevator
       }
-      const distance = this._queueCtrl.getDistance(elevator, floor)
+      const queueSize = this._queueCtrl.getTotalQueueSize(elevator)
+      if (queueSize === 0) {
+        this._queueCtrl.insert(elevator, floor)
+        return elevator
+      }
       if (
-        nearestDistance === false ||
-        ((distance !== false) && distance < nearestDistance)
+        queueSize < nearestElevatorQueueSize
       ) {
         nearestElevator = elevator
-        nearestDistance = distance
+        nearestElevatorQueueSize = queueSize
       }
     }
-    // If no elevator services floor
-    if (nearestDistance === false) return this._sym.noElevatorServicesFloor
-    // Else request nearest elevator
     this._queueCtrl.insert(nearestElevator, floor)
     return nearestElevator
   }
@@ -143,4 +146,4 @@ export class ElevatorCtrl {
   }
 }
 
-export const ElevatorCtrlCtx = createContext(container.resolve(ElevatorCtrl))
+export const ElevatorCtrlCtx = createContext(() => container.resolve(ElevatorCtrl))
