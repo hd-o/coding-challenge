@@ -8,10 +8,10 @@ import { useStreamCtx } from '/src/util/useStreamCtx'
 import { useStyle } from '/src/util/useStyle'
 import { createContext, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
-import { ElevatorCallerCtx } from '../'
-import { ElevatorCtrlCtx } from '../../controller'
-import { elevatorRowStyle } from '../../row/style'
-import { ElevatorCallerProps } from '../props'
+import { ElevatorCtrlCtx } from '../../elevator/controller'
+import { elevatorRowStyle } from '../../elevator/row/style'
+import { FloorCallerCtx } from '../caller'
+import { FloorCallerProps } from '../caller/props'
 
 const cell = (): NestedCSSProperties => ({
   $debugName: 'elevator-caller-cell',
@@ -19,24 +19,24 @@ const cell = (): NestedCSSProperties => ({
   borderLeftWidth: 1,
 })
 
-interface CustomElevatorCallerProps extends Omit<ElevatorCallerProps, 'floorHasRequested'> {}
+interface CustomFloorCallerProps extends Omit<FloorCallerProps, 'requested'> {}
 
-function CustomElevatorCaller (props: CustomElevatorCallerProps): JSX.Element {
-  const ElevatorCaller = useContext(ElevatorCallerCtx)
+function CustomFloorCaller (props: CustomFloorCallerProps): JSX.Element {
+  const FloorCaller = useContext(FloorCallerCtx)
   const floorCtrl = useContext(FloorCtrlCtx)()
   const requested = useStream(floorCtrl.getRequest$(props.floor))
 
   const idBlock = `floor-${props.floor.number}-caller`
   const idModifier = requested ? '-requested' : ''
 
-  return <ElevatorCaller
+  return <FloorCaller
     {...props}
     data-testid={idBlock + idModifier}
-    floorHasRequested={requested}
+    requested={requested}
   />
 }
 
-function ElevatorCallerRows (): JSX.Element {
+function FloorContainer (): JSX.Element {
   const Row = useContext(AntdRowCtx)
 
   const elevatorCtrl = useContext(ElevatorCtrlCtx)()
@@ -53,7 +53,7 @@ function ElevatorCallerRows (): JSX.Element {
     <>
       {floors.slice().reverse().map((floor) => (
         <Row className={cellClass} key={floor.number}>
-          <CustomElevatorCaller
+          <CustomFloorCaller
             onClick={() => elevatorCtrl.requestElevator(floor)}
             floor={floor}
           />
@@ -63,4 +63,4 @@ function ElevatorCallerRows (): JSX.Element {
   )
 }
 
-export const ElevatorCallerRowsCtx = createContext(ElevatorCallerRows)
+export const FloorContainerCtx = createContext(FloorContainer)
