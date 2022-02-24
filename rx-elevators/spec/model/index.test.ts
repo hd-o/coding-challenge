@@ -182,16 +182,6 @@ describe('elevator queue', () => {
       .then(rmap(prop('floor')))
     expect(floorNumbers).toEqual(floors)
   })
-  test('floor removal updates queue with expected order', async () => {
-    const floors = [2, 1, 4, 3]
-    const [elevator] = await firstValueFrom(elevatorId$)
-    const elevatorQueueItems = nthValueFrom(floors.length + 1, newElevatorQueueItem$(elevator))
-    requestFloors(elevator, floors)
-    const floorItems = await elevatorQueueItems
-      .then(items => items.filter(elevatorQueueItemOfCategoryFloor))
-      .then(rmap(prop('floor')))
-    expect(floorItems).toEqual(floors)
-  })
 })
 
 describe('elevator movement', () => {
