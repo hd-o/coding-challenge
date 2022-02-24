@@ -14,7 +14,7 @@ import { FloorCallerCtx } from '../caller'
 import { FloorCallerProps } from '../caller/props'
 
 const cell = (): NestedCSSProperties => ({
-  $debugName: 'elevator-caller-cell',
+  $debugName: 'floor-caller-cell',
   borderBottomWidth: 1,
   borderLeftWidth: 1,
 })

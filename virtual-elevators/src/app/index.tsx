@@ -12,10 +12,8 @@ const appContainer = (): NestedCSSProperties => ({
   $debugName: 'app-container',
   padding: 20,
   height: '100%',
-  width: '100%',
+  width: 650,
   margin: '0 auto',
-  maxWidth: 650,
-  minWidth: 500,
 })
 
 const row = (): NestedCSSProperties => ({
