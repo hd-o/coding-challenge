@@ -20,6 +20,7 @@
     "react"
   ],
   "rules": {
+    "@typescript-eslint/promise-function-async": 0,
     "comma-dangle": [
       "error",
       {
@@ -30,7 +31,8 @@
         "functions": "ignore"
       }
     ],
-    "@typescript-eslint/promise-function-async": 0,
+    "jest/expect-expect": 0,
+    "import/no-absolute-path": 0,
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",
@@ -41,5 +43,10 @@
         "varsIgnorePattern": "^_"
       }
     ]
-  }
+  },
+  "ignorePatterns": [
+    ".vscode/",
+    ".cache/",
+    "dist/"
+  ]
 }
