@@ -1,4 +1,4 @@
-# SOLID Calendar
+# 📅 SOLID Calendar
 
 Research on coding a [SOLID][solid] and [functional][functional] front-end architecture with [React][react]
 
@@ -33,7 +33,6 @@ Research on coding a [SOLID][solid] and [functional][functional] front-end archi
 ![calendar screenshot](./public/images/reminder-editor.png)
 
 ![calendar screenshot](./public/images/reminder-list.png)
-
 
 [solid]: https://en.wikipedia.org/wiki/SOLID
 
