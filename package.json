@@ -3,6 +3,9 @@
   "author": "Hadrian de Oliveira (hd-o)",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "prepare": "husky install"
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
