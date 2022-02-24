@@ -37,7 +37,8 @@ function ElevatorDoor (props: Props): JSX.Element {
   const elevatorDoorCtrl = useContext(ElevatorDoorCtrlCtx)()
   const door$ = elevatorDoorCtrl.getDoor$(props.elevator)
   const { position, status } = useStream(door$)
-  const width = `max(calc(${position * 5}% - 0.5px), 0px)`
+  // Open door to 25%
+  const width = `${(position / 4) * 10 + 25}%`
 
   const idBlock = `elevator-${props.index}-door`
   const idModifier = `-${status.toLocaleLowerCase()}`

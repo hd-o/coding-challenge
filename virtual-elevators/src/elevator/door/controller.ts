@@ -25,7 +25,7 @@ export class ElevatorDoorCtrl {
         return true
       }
     }
-    return this._lodash.throttle(() => process(), 250)
+    return this._lodash.throttle(() => process(), 150)
   }
 
   private _setDoorPosition (door$: IElevatorDoor$, position: number): void {
