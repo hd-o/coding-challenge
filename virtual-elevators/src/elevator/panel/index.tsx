@@ -14,10 +14,11 @@ import { ElevatorQueueCtrlCtx } from '../queue/controller'
 import { elevatorRowStyle } from '../row/style'
 
 const row = (): NestedCSSProperties => ({
+  $debugName: 'elevator-panel-row',
   borderLeftWidth: 1,
   borderBottomWidth: 1,
   justifyContent: 'space-between',
-  padding: '0 30px 2px',
+  padding: '10px 20px',
 })
 
 interface CustomFloorCallerProps
