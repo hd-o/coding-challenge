@@ -1,15 +1,15 @@
 import { AntdButtonCtx } from '/src/pkg/antd/Button'
 import { createContext, useContext } from 'react'
-import { ElevatorCallerProps } from './props'
+import { FloorCallerProps } from './props'
 
-interface Props extends ElevatorCallerProps { }
+interface Props extends FloorCallerProps { }
 
-function ElevatorCaller (props: Props): JSX.Element {
+function FloorCaller (props: Props): JSX.Element {
   const Button = useContext(AntdButtonCtx)
   return (
     <Button
       data-testid={props['data-testid']}
-      type={props.floorHasRequested ? 'primary' : 'default'}
+      type={props.requested ? 'primary' : 'default'}
       onClick={props.onClick}
       shape="circle"
     >
@@ -18,4 +18,4 @@ function ElevatorCaller (props: Props): JSX.Element {
   )
 }
 
-export const ElevatorCallerCtx = createContext(ElevatorCaller)
+export const FloorCallerCtx = createContext(FloorCaller)

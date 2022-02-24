@@ -7,8 +7,8 @@ import { useStreamCtx } from '/src/util/useStreamCtx'
 import { useStyle } from '/src/util/useStyle'
 import { createContext, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
-import { ElevatorCallerCtx } from '../caller'
-import { ElevatorCallerProps } from '../caller/props'
+import { FloorCallerCtx } from '../../floor/caller'
+import { FloorCallerProps } from '../../floor/caller/props'
 import { IElevatorRecord } from '../model'
 import { ElevatorQueueCtrlCtx } from '../queue/controller'
 import { elevatorRowStyle } from '../row/style'
@@ -20,14 +20,14 @@ const row = (): NestedCSSProperties => ({
   padding: '0 30px 2px',
 })
 
-interface CustomElevatorCallerProps
-  extends Omit<ElevatorCallerProps, 'floorHasRequested' | 'onClick'> {
+interface CustomFloorCallerProps
+  extends Omit<FloorCallerProps, 'requested' | 'onClick'> {
   elevator: IElevatorRecord
   index: number
 }
 
-function CustomElevatorCaller (props: CustomElevatorCallerProps): JSX.Element {
-  const ElevatorCaller = useContext(ElevatorCallerCtx)
+function CustomFloorCaller (props: CustomFloorCallerProps): JSX.Element {
+  const FloorCaller = useContext(FloorCallerCtx)
   const elevatorQueueCtrl = useContext(ElevatorQueueCtrlCtx)()
   const requested = elevatorQueueCtrl.isGoingToFloor(props.elevator, props.floor)
 
@@ -36,10 +36,10 @@ function CustomElevatorCaller (props: CustomElevatorCallerProps): JSX.Element {
   const idBlock = `elevator-${props.index}-button-floor-${props.floor.number}`
   const idModifier = requested ? '-requested' : ''
 
-  return <ElevatorCaller
+  return <FloorCaller
     {...props}
     data-testid={idBlock + idModifier}
-    floorHasRequested={requested}
+    requested={requested}
     onClick={() => elevatorQueueCtrl.insert(props.elevator, props.floor)}
   />
 }
@@ -64,7 +64,7 @@ function ElevatorPanel (props: Props): JSX.Element {
   return (
     <Row className={rowClass}>
       {floors.map((floor) => (
-        <CustomElevatorCaller
+        <CustomFloorCaller
           index={props.index}
           elevator={props.elevator}
           floor={floor}

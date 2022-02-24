@@ -2,8 +2,8 @@ import 'reflect-metadata'
 import 'regenerator-runtime/runtime'
 import { FC, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
-import { ElevatorCallerRowsCtx } from '../elevator/caller/rows'
 import { ElevatorContainerCtx } from '../elevator/container'
+import { FloorContainerCtx } from '../floor/container'
 import { AntdColCtx } from '../pkg/antd/col'
 import { AntdRowCtx } from '../pkg/antd/row'
 import { useStyle } from '../util/useStyle'
@@ -32,7 +32,7 @@ interface Props {
 export function App (props: Props): JSX.Element {
   const { TestCtrl = () => null } = props
   const Col = useContext(AntdColCtx)
-  const ElevatorCallers = useContext(ElevatorCallerRowsCtx)
+  const FloorContainer = useContext(FloorContainerCtx)
   const ElevatorContainer = useContext(ElevatorContainerCtx)
   const Row = useContext(AntdRowCtx)
 
@@ -40,7 +40,7 @@ export function App (props: Props): JSX.Element {
     <div className={useStyle(appContainer)}>
       <Row className={useStyle(row)}>
         <Col span={6}>
-          <ElevatorCallers />
+          <FloorContainer />
         </Col>
         <ElevatorContainer />
       </Row>

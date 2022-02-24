@@ -1,8 +1,8 @@
 import { IFloorRecord } from '/src/floor/model'
 
-export interface ElevatorCallerProps {
+export interface FloorCallerProps {
   floor: IFloorRecord
-  floorHasRequested: boolean
+  requested: boolean
   onClick: () => unknown
   'data-testid'?: string
 }
