@@ -2,5 +2,5 @@
 
 project_name=$1
 
-bash ../.shared/node/bootstrap/project/index.sh $project_name
-bash ../.shared/node/bootstrap/parcel/index.sh
+bash ../../.shared/node/bootstrap/project/index.sh $project_name
+bash ../../.shared/node/bootstrap/parcel/index.sh

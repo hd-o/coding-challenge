@@ -2,7 +2,7 @@
 
 mkdir -p ./.config
 
-cp ../.shared/node/bootstrap/react/config/eslint.js.txt ./.config/eslint.js
+cp ../../.shared/node/bootstrap/react/config/eslint.js.txt ./.config/eslint.js
 
 yarn add \
   @testing-library/jest-dom \
