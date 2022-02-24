@@ -1,6 +1,7 @@
 import { Lodash } from '/src/pkg/lodash'
 import { IProcess, ProcessLoop } from '/src/process/loop'
 import { ProcessUtils } from '/src/process/utils'
+import { Settings$ } from '/src/settings/stream'
 import { createContext } from 'react'
 import { container, inject, singleton } from 'tsyringe'
 import { IElevatorRecord } from '../model'
@@ -14,7 +15,8 @@ import { ElevatorDoor$Map$, IElevatorDoor$ } from './stream'
 export class ElevatorDoorCtrl {
   private _createDoorMovementProcess (door$: IElevatorDoor$, doorStatus: IElevatorDoorStatus): IProcess {
     const isOpening = doorStatus === elevatorDoorStatus.Opening
-    const incrementValue = isOpening ? -1 : 1
+    const movementStep = this._settings$.value.elevatorDoorMovementStep
+    const incrementValue = isOpening ? -movementStep : movementStep
     const targetPosition = isOpening ? elevatorDoorPosition.Opened : elevatorDoorPosition.Closed
     let process: IProcess = () => {
       this._setDoorStatus(door$, doorStatus)
@@ -41,7 +43,8 @@ export class ElevatorDoorCtrl {
     @inject(ElevatorDoor$Map$) private readonly _elevatorDoors$: ElevatorDoor$Map$,
     @inject(ProcessLoop) private readonly _processLoop: ProcessLoop,
     @inject(ProcessUtils) private readonly _processUtils: ProcessUtils,
-    @inject(Lodash) private readonly _lodash: Lodash
+    @inject(Lodash) private readonly _lodash: Lodash,
+    @inject(Settings$) private readonly _settings$: Settings$,
   ) {}
 
   getDoor$ (elevator: IElevatorRecord): IElevatorDoor$ {

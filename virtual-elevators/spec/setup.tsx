@@ -6,6 +6,7 @@ import { App } from '/src/app'
 import { Lodash } from '/src/pkg/lodash'
 import { Rx } from '/src/pkg/rxjs'
 import { ProcessUtils } from '/src/process/utils'
+import { Settings$ } from '/src/settings/stream'
 import { FC, useEffect, useState } from 'react'
 import { container } from 'tsyringe'
 import { render } from '@testing-library/react'
@@ -52,6 +53,11 @@ const TestCtrl: FC = () => {
 
 beforeEach(() => {
   container.clearInstances()
+  // Faster movement to prevent timeouts
+  const settings$ = container.resolve(Settings$)
+  settings$.next(settings$.value
+    .set('elevatorMovementStep', 10)
+    .set('elevatorDoorMovementStep', 2))
   container.registerInstance(Lodash, { ...lodash, rangeMap, throttle })
   container.registerInstance(ProcessUtils, { ...processUtils, createWaitProcess })
   container.registerInstance(Rx, { ...rx, animationFrames })

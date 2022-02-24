@@ -10,6 +10,7 @@ import { NoElevatorServicesFloor } from '/src/symbol/NoElevatorServicesFloor'
 import { createContext } from 'react'
 import { skip, takeUntil } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
+import { Settings$ } from '../settings/stream'
 import { IElevator, IElevatorRecord } from './model'
 import { ElevatorMoveState } from './moveState'
 import { ElevatorPositionCtrl } from './position/controller'
@@ -28,7 +29,8 @@ export class ElevatorCtrl {
     @inject(ElevatorQueue$Map$) private readonly _queue$Map$: ElevatorQueue$Map$,
     @inject(ProcessLoop) private readonly _processLoop: ProcessLoop,
     @inject(Lodash) private readonly _lodash: Lodash,
-    @inject(Symbol) private readonly _sym: Symbol
+    @inject(Symbol) private readonly _sym: Symbol,
+    @inject(Settings$) private readonly _settings$: Settings$,
   ) {}
 
   readonly queue$Sub = this._queue$Map$.subscribe((queue$Map) => {
@@ -53,6 +55,7 @@ export class ElevatorCtrl {
   }
 
   createMovementProcess (elevatorId: IElevator['id'], queue$: IElevatorQueue$): IProcess {
+    const movementStep = this._settings$.value.elevatorMovementStep
     return () => {
       let elevator = this.getElevator$(elevatorId).value
 
@@ -72,7 +75,7 @@ export class ElevatorCtrl {
           elevator = this.setElevatorMoveState(elevator, ElevatorMoveState.Moving)
         }
         const position = this._positionCtrl.getPosition(elevator)
-        const increment = currentDirection === elevatorDirectionType.MovingUp ? 1 : -1
+        const increment = currentDirection === elevatorDirectionType.MovingUp ? movementStep : -movementStep
         this._positionCtrl.setPosition(elevator, position + increment)
       }
     }
@@ -110,10 +113,6 @@ export class ElevatorCtrl {
       return nearestElevator
     }
     let nearestElevatorQueueSize = this._queueCtrl.getTotalQueueSize(nearestElevator)
-    if (nearestElevatorQueueSize === 0) {
-      this._queueCtrl.insert(nearestElevator, floor)
-      return nearestElevator
-    }
     // Loop from second elevator onward
     for (const elevator$ of elevator$Array.slice(1)) {
       const elevator = elevator$.value
@@ -123,10 +122,6 @@ export class ElevatorCtrl {
         return elevator
       }
       const queueSize = this._queueCtrl.getTotalQueueSize(elevator)
-      if (queueSize === 0) {
-        this._queueCtrl.insert(elevator, floor)
-        return elevator
-      }
       if (
         queueSize < nearestElevatorQueueSize
       ) {

@@ -97,9 +97,11 @@ exports[`app snapshot: app 1`] = `
               <div
                 class="elevator-door_fe0sndj"
                 data-testid="elevator-0-door-closed"
+                style="width: 50%;"
               />
               <div
                 class="elevator-door_fe0sndj"
+                style="width: 50%;"
               />
             </div>
           </div>
@@ -170,9 +172,11 @@ exports[`app snapshot: app 1`] = `
               <div
                 class="elevator-door_fe0sndj"
                 data-testid="elevator-1-door-closed"
+                style="width: 50%;"
               />
               <div
                 class="elevator-door_fe0sndj"
+                style="width: 50%;"
               />
             </div>
           </div>
@@ -243,9 +247,11 @@ exports[`app snapshot: app 1`] = `
               <div
                 class="elevator-door_fe0sndj"
                 data-testid="elevator-2-door-closed"
+                style="width: 50%;"
               />
               <div
                 class="elevator-door_fe0sndj"
+                style="width: 50%;"
               />
             </div>
           </div>

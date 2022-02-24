@@ -13,6 +13,8 @@ export class Settings$ extends BehaviorSubject<ISettingsRecord> {
     function SettingsRecord (): ISettingsRecord {
       return immutable.Record<ISettings>({
         elevatorCount: 3,
+        elevatorMovementStep: 1,
+        elevatorDoorMovementStep: 1,
         floorHeight: 100,
         floorCount: 6,
       })()
