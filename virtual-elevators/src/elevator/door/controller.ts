@@ -13,6 +13,14 @@ import { ElevatorDoor$Map$, IElevatorDoor$ } from './stream'
 
 @singleton()
 export class ElevatorDoorCtrl {
+  constructor (
+    @inject(ElevatorDoor$Map$) private readonly _elevatorDoors$: ElevatorDoor$Map$,
+    @inject(ProcessLoop) private readonly _processLoop: ProcessLoop,
+    @inject(ProcessUtils) private readonly _processUtils: ProcessUtils,
+    @inject(Lodash) private readonly _lodash: Lodash,
+    @inject(Settings$) private readonly _settings$: Settings$,
+  ) {}
+
   private _createDoorMovementProcess (door$: IElevatorDoor$, doorStatus: IElevatorDoorStatus): IProcess {
     const isOpening = doorStatus === elevatorDoorStatus.Opening
     const movementStep = this._settings$.value.elevatorDoorMovementStep
@@ -39,13 +47,14 @@ export class ElevatorDoorCtrl {
     door$.next(door$.value.set('status', status))
   }
 
-  constructor (
-    @inject(ElevatorDoor$Map$) private readonly _elevatorDoors$: ElevatorDoor$Map$,
-    @inject(ProcessLoop) private readonly _processLoop: ProcessLoop,
-    @inject(ProcessUtils) private readonly _processUtils: ProcessUtils,
-    @inject(Lodash) private readonly _lodash: Lodash,
-    @inject(Settings$) private readonly _settings$: Settings$,
-  ) {}
+  close (elevator: IElevatorRecord): void {
+    const door$ = this.getDoor$(elevator)
+    /** @see ElevatorDoorCtrl.open #door-status  */
+    this._setDoorStatus(door$, elevatorDoorStatus.Closing)
+    this._processLoop.reset(door$, [
+      this._createDoorMovementProcess(door$, elevatorDoorStatus.Closing),
+    ])
+  }
 
   getDoor$ (elevator: IElevatorRecord): IElevatorDoor$ {
     return this._elevatorDoors$.value.get(elevator.id) as IElevatorDoor$
@@ -65,15 +74,6 @@ export class ElevatorDoorCtrl {
     this._processLoop.reset(door$, [
       this._createDoorMovementProcess(door$, elevatorDoorStatus.Opening),
       this._processUtils.createWaitProcess(2000),
-      this._createDoorMovementProcess(door$, elevatorDoorStatus.Closing),
-    ])
-  }
-
-  close (elevator: IElevatorRecord): void {
-    const door$ = this.getDoor$(elevator)
-    /** @see ElevatorDoorCtrl.open #door-status  */
-    this._setDoorStatus(door$, elevatorDoorStatus.Closing)
-    this._processLoop.reset(door$, [
       this._createDoorMovementProcess(door$, elevatorDoorStatus.Closing),
     ])
   }

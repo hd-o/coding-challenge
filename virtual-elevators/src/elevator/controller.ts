@@ -31,20 +31,20 @@ export class ElevatorCtrl {
     @inject(Lodash) private readonly _lodash: Lodash,
     @inject(Symbol) private readonly _sym: Symbol,
     @inject(Settings$) private readonly _settings$: Settings$,
-  ) {}
-
-  readonly queue$Sub = this._queue$Map$.subscribe((queue$Map) => {
-    for (const [elevatorId, queue$] of queue$Map.entries()) {
-      queue$
-        .pipe(takeUntil(this._queue$Map$.pipe(skip(1))))
-        .subscribe(() => {
-          const process = this.createMovementProcess(elevatorId, queue$)
-          this._processLoop.reset(this.getMovementProcessId(elevatorId), [
-            this._lodash.throttle(process, 10),
-          ])
-        })
-    }
-  })
+  ) {
+    this._queue$Map$.subscribe((queue$Map) => {
+      for (const [elevatorId, queue$] of queue$Map.entries()) {
+        queue$
+          .pipe(takeUntil(this._queue$Map$.pipe(skip(1))))
+          .subscribe(() => {
+            const process = this.createMovementProcess(elevatorId, queue$)
+            this._processLoop.reset(this.getMovementProcessId(elevatorId), [
+              this._lodash.throttle(process, 10),
+            ])
+          })
+      }
+    })
+  }
 
   canElevatorMove (elevator: IElevatorRecord, queue$: IElevatorQueue$): boolean {
     return (

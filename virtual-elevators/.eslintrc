@@ -21,6 +21,15 @@
   ],
   "rules": {
     "@typescript-eslint/promise-function-async": 0,
+    "@typescript-eslint/member-ordering": [
+      "error",
+      {
+        "default": {
+          "memberTypes": ["signature", "constructor", "field", "method"],
+          "order": "alphabetically"
+        }
+      }
+    ],
     "comma-dangle": [
       "error",
       {
