@@ -4,7 +4,7 @@ import { FnCtor } from '/src/function/container'
 import { useImmutableRecord } from '/src/pkg/immutable/Record'
 import { RecordOf } from 'immutable'
 
-type ElevatorFloorPairModel = {
+interface ElevatorFloorPairModel {
   elevator: ElevatorId
   floor: FloorNumber
 }
