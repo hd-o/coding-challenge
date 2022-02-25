@@ -2,7 +2,7 @@
 
 A context-friendly write-only atom, allowing dependency injection for atom setters.
 
-
+See [src/app](./src/app/index.tsx) for description, and usage.
 
 [🖥️ Live Demo @ CodeSandbox][live_demo]
 
