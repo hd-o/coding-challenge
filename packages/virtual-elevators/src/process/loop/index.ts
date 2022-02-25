@@ -11,6 +11,27 @@ type ProcessMap = Map<IProcessId, IProcess[]>
 
 @singleton()
 export class ProcessLoop {
+  constructor (
+    @inject(Rx) readonly rx: Rx
+  ) {
+    this._interval$ = rx.animationFrames()
+    this._processMap$ = new rx.BehaviorSubject<ProcessMap>(this._processMap)
+    if (!runningInServer) {
+      this._processMap$.pipe(
+        rx.switchMap((processMap) =>
+          rx.iif(
+            () => processMap.size === 0,
+            rx.of(),
+            this._interval$.pipe(
+              rx.share(),
+              rx.tap(() => this._runProcessMap(processMap)))
+          ),
+        ),
+      )
+        .subscribe()
+    }
+  }
+
   private _interval$: Observable<any>
 
   private readonly _processMap: ProcessMap = new Map()
@@ -45,27 +66,6 @@ export class ProcessLoop {
       }
     }
     if (modified) this._processMap$.next(processMap)
-  }
-
-  constructor (
-    @inject(Rx) readonly rx: Rx
-  ) {
-    this._interval$ = rx.animationFrames()
-    this._processMap$ = new rx.BehaviorSubject<ProcessMap>(this._processMap)
-    if (!runningInServer) {
-      this._processMap$.pipe(
-        rx.switchMap((processMap) =>
-          rx.iif(
-            () => processMap.size === 0,
-            rx.of(),
-            this._interval$.pipe(
-              rx.share(),
-              rx.tap(() => this._runProcessMap(processMap)))
-          ),
-        ),
-      )
-        .subscribe()
-    }
   }
 
   add (id: IProcessId, processes: IProcess[]): void {

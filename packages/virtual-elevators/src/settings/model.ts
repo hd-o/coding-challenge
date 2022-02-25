@@ -1,11 +1,11 @@
 import { RecordOf } from 'immutable'
 
 export interface ISettings {
-  elevatorMovementStep: number
-  elevatorDoorMovementStep: number
   elevatorCount: number
-  floorHeight: number
+  elevatorDoorMovementStep: number
+  elevatorMovementStep: number
   floorCount: number
+  floorHeight: number
 }
 
 export type ISettingsRecord = RecordOf<ISettings>

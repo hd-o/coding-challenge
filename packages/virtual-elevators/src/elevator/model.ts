@@ -3,8 +3,8 @@ import { List, RecordOf } from 'immutable'
 import { ElevatorMoveState } from './moveState'
 
 export interface IElevator {
-  id: string
   floors: List<IFloor>
+  id: string
   moveState: ElevatorMoveState
 }
 
