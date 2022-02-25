@@ -1,5 +1,4 @@
 #!/bin/sh
-# Reuse dirname value
 dir=$(dirname "$0")
 # Init husky
 . "$dir/_/husky.sh"
