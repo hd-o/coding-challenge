@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.html",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "category:data-structure",
+    "jotai",
+    "atom",
+    "react"
+  ],
   "scripts": {
     "lint": "run-p setup:eslint run:eslint",
     "run:eslint": "eslint -c .eslintrc .",
