@@ -48,4 +48,4 @@ Definitions:
 
 [react]: https://reactjs.org/
 
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/package/solid-calendar
+[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/solid-calendar
