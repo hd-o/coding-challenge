@@ -60,5 +60,8 @@
     "tsyringe": "^4.6.0",
     "typescript": "^4.5.5",
     "typestyle": "^2.2.0"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
   }
 }
