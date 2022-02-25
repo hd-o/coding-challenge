@@ -6,4 +6,4 @@ Virtual elevators controlled by rx streams
 
 ---
 
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/package/rx-elevators
+[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/rx-elevators

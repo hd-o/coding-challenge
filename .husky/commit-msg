@@ -11,7 +11,7 @@ msg=$(cat $1)
 if [[ $msg =~ ^.+\((.+)\) ]]; then
   # Run project's lint command (if any)
   project=${BASH_REMATCH[1]}
-  cd "$dir/../package/$project"
+  cd "$dir/../packages/$project"
   # If project runs on node
   if [ -f package.json ]; then
     yarn lint
