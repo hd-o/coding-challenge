@@ -5,7 +5,7 @@ import { IElevatorQueueState } from './moveState'
 export type IElevatorQueueSet = SortedSet<IFloorRecord>
 
 export interface IElevatorQueue {
-  state: IElevatorQueueState
-  MovingUp: IElevatorQueueSet
   MovingDown: IElevatorQueueSet
+  MovingUp: IElevatorQueueSet
+  state: IElevatorQueueState
 }

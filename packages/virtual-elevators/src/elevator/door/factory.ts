@@ -6,14 +6,14 @@ import { elevatorDoorStatus } from './model/status'
 
 @singleton()
 export class ElevatorDoorFactory {
+  constructor (
+    @inject(Immutable) private readonly _immutable: Immutable
+  ) {}
+
   private readonly _ElevatorDoorRecord = this._immutable.Record<IElevatorDoor>({
     status: elevatorDoorStatus.Closed,
     position: elevatorDoorPosition.Closed,
   })
-
-  constructor (
-    @inject(Immutable) private readonly _immutable: Immutable
-  ) {}
 
   create (state?: Partial<IElevatorDoor>): IElevatorDoorRecord {
     return this._ElevatorDoorRecord(state)
