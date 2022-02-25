@@ -3,7 +3,7 @@ import { TodoCtrlCtx } from '../controller'
 
 type SubmitHandler = (e: FormEvent<HTMLFormElement>) => void
 
-const TodoInput: FC<{}> = () => {
+const TodoInput: FC = () => {
   const todoCtrl = useContext(TodoCtrlCtx)()
   const [todo, setTodo] = useState('')
 
