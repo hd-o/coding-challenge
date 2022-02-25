@@ -18,14 +18,14 @@ const TodoInput: FC = () => {
     <form onSubmit={handleSubmit}>
       <input
         data-testid='todo-input'
-        type="input"
+        type='input'
         value={todo}
         onChange={({ target }) => setTodo(target.value)}
       />
       &nbsp;
       <button
         data-testid='add-todo-button'
-        type="submit"
+        type='submit'
         style={{ cursor: 'pointer' }}
       >
         +

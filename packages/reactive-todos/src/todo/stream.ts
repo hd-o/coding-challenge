@@ -1,10 +1,10 @@
 import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import { container, singleton } from 'tsyringe'
-import { ITodo } from './model'
+import { TodoModel } from './model'
 
 @singleton()
-export class Todo$ extends BehaviorSubject<ITodo[]> {
+export class Todo$ extends BehaviorSubject<TodoModel[]> {
   constructor () {
     super([])
   }
