@@ -7,8 +7,8 @@ import { ElevatorQueueFloorItemModel, useNewElevatorQueueFloorItem } from '../it
 import { ElevatorQueueFloorActionType } from './type'
 
 export type ElevatorQueueFloorActionModel = ElevatorQueueFloorItemModel & {
-  type: ElevatorQueueFloorActionType
   elevator: ElevatorId
+  type: ElevatorQueueFloorActionType
 }
 
 export type ElevatorQueueFloorAction = RecordOf<ElevatorQueueFloorActionModel>
