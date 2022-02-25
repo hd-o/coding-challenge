@@ -2,11 +2,11 @@ import { createContext, FC } from 'react'
 import { FloorNumber } from '../number'
 
 export interface FloorCallerProps {
-  testidPrefix: string
   disabled?: boolean
   floor: FloorNumber
   onClick: () => unknown
   requested?: boolean
+  testidPrefix: string
 }
 
 const FloorCaller: FC<FloorCallerProps> = (props) => {

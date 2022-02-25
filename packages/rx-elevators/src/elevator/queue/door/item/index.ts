@@ -12,8 +12,8 @@ import { ElevatorQueueDoorActionType } from '../action/type'
 export interface ElevatorQueueDoorItemModel {
   actionId: ElevatorDoorActionId
   category: ElevatorQueueItemCategory['Door']
-  type: ElevatorQueueDoorActionType
   elevator: ElevatorId
+  type: ElevatorQueueDoorActionType
 }
 
 export type ElevatorQueueDoorItem = RecordOf<ElevatorQueueDoorItemModel>

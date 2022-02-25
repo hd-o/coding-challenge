@@ -6,8 +6,8 @@ import { FnCtor } from '/src/function/container'
 import { Observable } from 'rxjs'
 
 interface ElevatorDoorPair {
-  elevator: ElevatorId
   doorState: ElevatorDoorState
+  elevator: ElevatorId
 }
 
 type ElevatorDoorPair$ = Observable<ElevatorDoorPair[]>
