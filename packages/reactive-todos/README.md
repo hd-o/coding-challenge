@@ -1,4 +1,4 @@
-# ✅ Reactive To-Dos
+# 📝 Reactive To-Dos
 
 MVC React architecture with injected state observables, and isolated controller classes
 

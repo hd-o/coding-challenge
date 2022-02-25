@@ -10,7 +10,7 @@
   ],
   "meta": {
     "category": "software-architecture",
-    "title": "✅ Reactive To-Dos"
+    "title": "📝 Reactive To-Dos"
   },
   "scripts": {
     "lint": "run-p setup:eslint run:eslint",
