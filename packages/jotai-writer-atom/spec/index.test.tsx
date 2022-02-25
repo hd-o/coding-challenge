@@ -1,7 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-import { App, CountAtomCtx } from '/src/app'
+import { App } from '/src/app'
+import { CountAtomCtx } from '/src/count/atom'
 import { atom } from 'jotai'
 import { fireEvent, render, screen } from '@testing-library/react'
 
