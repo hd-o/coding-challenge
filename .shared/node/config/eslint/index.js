@@ -25,6 +25,15 @@ const eslintrc = {
     "unused-imports",
   ],
   rules: {
+    "@typescript-eslint/member-ordering": [
+      "error",
+      {
+        "default": {
+          "memberTypes": ["signature", "constructor", "field", "method"],
+          "order": "alphabetically"
+        }
+      }
+    ],
     "@typescript-eslint/promise-function-async": 0,
     "comma-dangle": ["error", {
         "arrays": "always-multiline",

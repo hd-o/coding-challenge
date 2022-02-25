@@ -20,6 +20,20 @@
     "react"
   ],
   "rules": {
+    "@typescript-eslint/member-ordering": [
+      "error",
+      {
+        "default": {
+          "memberTypes": [
+            "signature",
+            "constructor",
+            "field",
+            "method"
+          ],
+          "order": "alphabetically"
+        }
+      }
+    ],
     "@typescript-eslint/promise-function-async": 0,
     "comma-dangle": [
       "error",

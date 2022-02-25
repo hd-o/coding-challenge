@@ -1,11 +1,11 @@
 import { createContext, FC, useContext } from 'react'
 import { TodoCtrlCtx } from './controller'
-import { ITodo } from './model'
+import { TodoModel } from './model'
 
-type TodoHandler = (t: ITodo) => () => void
+type TodoHandler = (t: TodoModel) => () => void
 
 interface Props {
-  todo: ITodo
+  todo: TodoModel
 }
 
 const Todo: FC<Props> = (props) => {
