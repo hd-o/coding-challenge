@@ -1,4 +1,21 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-npx --no -- commitlint --edit ""
+# Reuse dirname value
+dir=$(dirname "$0")
+# Init husky
+. "$dir/_/husky.sh"
+# Run commitlint
+yarn commitlint --edit $1
+# Get commit msg
+msg=$(cat $1)
+# If commit msg has project scope
+# e.g: "fix(rx-elevators): ..."
+if [[ $msg =~ ^.+\((.+)\) ]]; then
+  # Run project's lint command (if any)
+  project=${BASH_REMATCH[1]}
+  echo $project
+  cd "$dir/../packages/$project"
+  # If project runs on node
+  if [ -f package.json ]; then
+    yarn lint
+  fi
+fi

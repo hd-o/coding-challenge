@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "prepare": "husky install"
+    "postinstall": "husky install"
   },
   "commitlint": {
     "extends": [
