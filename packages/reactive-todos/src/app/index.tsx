@@ -2,7 +2,7 @@ import { FC, useContext } from 'react'
 import { TodoInputCtx } from '../todo/input'
 import { TodoListCtx } from '../todo/list'
 
-export const App: FC<{}> = () => {
+export const App: FC = () => {
   const TodoInput = useContext(TodoInputCtx)
   const TodoList = useContext(TodoListCtx)
   return (
