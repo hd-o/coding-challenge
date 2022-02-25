@@ -45,7 +45,7 @@ const Counter: FC = () => {
 }
 
 export const App: FC = () => {
-  const customCountAtom = useMemo(() => atom(0), [atom])
+  const customCountAtom = useMemo(() => atom(0), [])
   return (
     <div>
       <Counter />
