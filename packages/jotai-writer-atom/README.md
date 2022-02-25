@@ -1,10 +1,8 @@
 # 👻 Jotai Writer Atom
 
-A context-friendly write-only atom, allowing dependency injection for atom setters.
+A context-friendly write-only atom, allowing dependency injection for atom setters
 
-See [src/app](./src/app/index.tsx) for description, and usage.
-
-[🖥️ Live Demo @ CodeSandbox][live_demo]
+[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
 
 ```ts
 import { atom } from 'jotai'
@@ -19,4 +17,4 @@ const writerAtom = atom(
 )
 ```
 
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/jotai-writer-atom
+[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/jotai-writer-atom?file=/src/app/index.tsx
