@@ -1,5 +1,7 @@
 # 🛒 Cart Discounts
 
+Calculating total price for shopping carts, with different discounts applied
+
 ## Challenge
 
 ### Given the following product prices:

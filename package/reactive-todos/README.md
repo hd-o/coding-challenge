@@ -13,4 +13,4 @@ MVC React architecture with injected state observables, and isolated controller 
   />
 </p>
 
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/reactive-todos
+[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/package/reactive-todos

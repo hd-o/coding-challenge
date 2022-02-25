@@ -1,8 +1,16 @@
 # 📅 SOLID Calendar
 
-Research on coding a [SOLID][solid] and [functional][functional] front-end architecture with [React][react]
+Research on coding a SOLID and functional front-end architecture with React.
+
+Definitions:
+
+- [Functional][functional]
+- [React][react]
+- [SOLID][solid]
 
 [🖥️ Live Demo @ CodeSandbox][live_demo]
+
+---
 
 ## Project Goals
 
@@ -28,11 +36,11 @@ Research on coding a [SOLID][solid] and [functional][functional] front-end archi
 
 ## Screenshots
 
-![calendar screenshot](./public/images/calendar-view.png)
+![calendar screenshot](./assets/images/calendar-view.png)
 
-![calendar screenshot](./public/images/reminder-editor.png)
+![calendar screenshot](./assets/images/reminder-editor.png)
 
-![calendar screenshot](./public/images/reminder-list.png)
+![calendar screenshot](./assets/images/reminder-list.png)
 
 [solid]: https://en.wikipedia.org/wiki/SOLID
 
@@ -40,4 +48,4 @@ Research on coding a [SOLID][solid] and [functional][functional] front-end archi
 
 [react]: https://reactjs.org/
 
-[live_demo]: https://jtohp.sse.codesandbox.io/
+[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/package/solid-calendar
