@@ -2,7 +2,7 @@
 
 MVC React architecture with injected state observables, and isolated controller classes
 
-[🖥️ Live Demo @ CodeSandbox][live_demo]
+[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
 
 ---
 
