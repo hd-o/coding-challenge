@@ -2,7 +2,6 @@
   "name": "skip-iterator",
   "version": "1.0.0",
   "description": "Iterator implementing skipping through `.skip()`",
-  "main": "index.html",
   "license": "MIT",
   "keywords": [
     "iterator",

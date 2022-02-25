@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-yarn add \
+pnpm add \
   @types/lodash \
   @types/ramda \
   lodash \

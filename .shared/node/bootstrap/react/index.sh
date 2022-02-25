@@ -4,7 +4,8 @@ mkdir -p ./.config
 
 cp ../../.shared/node/bootstrap/react/config/eslint.js.txt ./.config/eslint.js
 
-yarn add \
+pnpm add \
+  @testing-library/dom \
   @testing-library/jest-dom \
   @testing-library/react \
   @testing-library/user-event \
