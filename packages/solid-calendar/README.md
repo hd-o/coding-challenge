@@ -1,14 +1,8 @@
 # 📅 SOLID Calendar
 
-Research on coding a SOLID and functional front-end architecture with React.
+Research on coding a SOLID and functional front-end architecture with React
 
-Definitions:
-
-- [Functional][functional]
-- [React][react]
-- [SOLID][solid]
-
-[🖥️ Live Demo @ CodeSandbox][live_demo]
+[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
 
 ---
 

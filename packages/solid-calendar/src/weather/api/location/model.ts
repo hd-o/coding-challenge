@@ -4,9 +4,9 @@ export interface WeatherLocation {
 }
 
 export interface WeatherLocationDay {
-  weather_state_abbr: string
-  min_temp: number
   max_temp: number
+  min_temp: number
+  weather_state_abbr: string
 }
 
 type WOEId = WeatherLocation['woeid']

@@ -6,8 +6,8 @@ import { WeatherApiUrlCtx } from '../'
 import { WeatherLocation } from './model'
 
 interface Props {
-  location: WeatherLocation
   date: Date
+  location: WeatherLocation
 }
 
 function useWeatherApiLocationDay (): (props: Props) => string {
