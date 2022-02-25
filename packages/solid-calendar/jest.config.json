@@ -8,8 +8,5 @@
     "^/(.*)$": "<rootDir>/$1"
   },
   "preset": "ts-jest",
-  "testEnvironment": "jsdom",
-  "setupFilesAfterEnv": [
-    "./spec/setup.ts"
-  ]
+  "testEnvironment": "node"
 }

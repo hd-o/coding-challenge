@@ -17,7 +17,7 @@ const Index: FC = () => {
     // Can be substituted by:
     // https://nextjs.org/docs/advanced-features/i18n-routing
     void import('/src/lang/en.json').then((en) => {
-      setIntl(en.default)
+      setIntl(en)
     })
   })
 
