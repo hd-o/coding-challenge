@@ -10,4 +10,4 @@ json=$(echo "${json/package-name/$package_name}")
 
 echo "$json" > ./package.json
 
-yarn
+pnpm

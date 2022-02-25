@@ -2,7 +2,6 @@
   "description": "",
   "keywords": [],
   "license": "MIT",
-  "main": "index.html",
   "name": "package-name",
   "scripts": {
     "lint": "run-p setup:eslint run:eslint",

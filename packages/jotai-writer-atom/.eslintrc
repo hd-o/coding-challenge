@@ -6,7 +6,8 @@
   },
   "extends": [
     "standard-with-typescript",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "plugin:react-hooks/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -15,9 +16,24 @@
   "plugins": [
     "@typescript-eslint",
     "jest",
-    "unused-imports"
+    "unused-imports",
+    "react"
   ],
   "rules": {
+    "@typescript-eslint/member-ordering": [
+      "error",
+      {
+        "default": {
+          "memberTypes": [
+            "signature",
+            "constructor",
+            "field",
+            "method"
+          ],
+          "order": "alphabetically"
+        }
+      }
+    ],
     "@typescript-eslint/promise-function-async": 0,
     "comma-dangle": [
       "error",

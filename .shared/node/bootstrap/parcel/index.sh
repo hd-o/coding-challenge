@@ -2,4 +2,4 @@
 
 bash ../../.shared/node/bootstrap/html/index.sh
 
-yarn add parcel-bundler
+pnpm add parcel

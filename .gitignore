@@ -17,8 +17,8 @@ node_modules
 **/*.log
 
 # Next.js
-/.next/
-/out/
+.next
+out
 
 # Misc
 .DS_Store

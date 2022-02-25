@@ -2,7 +2,8 @@
 
 bash ../../.shared/node/bootstrap/config/index.sh
 
-yarn add \
+pnpm add \
+  @babel/core \
   @babel/preset-env \
   @types/jest \
   @typescript-eslint/eslint-plugin \
