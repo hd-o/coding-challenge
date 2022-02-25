@@ -19,4 +19,4 @@ const writerAtom = atom(
 )
 ```
 
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/jotai-writer-atom
+[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/package/jotai-writer-atom

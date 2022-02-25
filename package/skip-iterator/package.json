@@ -1,15 +1,18 @@
 {
-  "name": "jotai-writer-atom",
+  "name": "skip-iterator",
   "version": "1.0.0",
-  "description": "",
+  "description": "Iterator implementing skipping through `.skip()`",
   "main": "index.html",
   "license": "MIT",
   "keywords": [
-    "category:data-structure",
-    "jotai",
-    "atom",
-    "react"
+    "iterator",
+    "skip",
+    "typescript"
   ],
+  "meta": {
+    "category": "data-structure",
+    "title": "⏭️ SkipIterator"
+  },
   "scripts": {
     "lint": "run-p setup:eslint run:eslint",
     "run:eslint": "eslint -c .eslintrc .",
@@ -17,17 +20,12 @@
     "setup:eslint": "node .config/eslint",
     "setup:jest": "node .config/jest",
     "setup:typescript": "node .config/typescript",
-    "start": "run-s setup:* start:*",
-    "start:parcel": "parcel index.html",
-    "test": "jest spec --maxWorkers=2"
+    "start": "run-s setup",
+    "test": "DEBUG_PRINT_LIMIT=0 jest spec --maxWorkers=1"
   },
   "dependencies": {
     "@babel/preset-env": "^7.16.11",
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.3",
     "@types/jest": "^27.4.0",
-    "@types/react": "^17.0.39",
-    "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^8.9.0",
@@ -36,15 +34,9 @@
     "eslint-plugin-jest": "^26.1.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "jest": "^27.5.1",
-    "jotai": "^1.6.0",
     "npm-run-all": "^4.1.5",
-    "parcel-bundler": "^1.12.5",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "ts-jest": "^27.1.3",
     "typescript": "^4.5.5"
   }
