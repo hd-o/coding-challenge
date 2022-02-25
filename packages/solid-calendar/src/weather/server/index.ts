@@ -17,7 +17,7 @@ const randomIntInRange = (min: number, max: number): number =>
 // const url = 'https://www.metaweather.com/api'
 // await fetch(`${url}/location/...`)
 
-const useWeatherServer = (): Pretender => {
+const newWeatherServer = (): Pretender => {
   return new Pretender(function () {
     this.get('/api/weather/location/day', () => {
       const stateAbbrIndex = randomIntInRange(0, weatherStateAbbr.length - 1)
@@ -37,4 +37,4 @@ const useWeatherServer = (): Pretender => {
   })
 }
 
-export const WeatherServerCtx = createContext(useWeatherServer)
+export const WeatherServerCtx = createContext(newWeatherServer)

@@ -7,11 +7,11 @@ import { WeatherServerCtx } from './weather/server'
 
 const Index: FC = () => {
   const AppProviders = useContext(AppProvidersCtx)
-  const useWeatherServer = useContext(WeatherServerCtx)
+  const newWeatherServer = useContext(WeatherServerCtx)
 
   const [intlValue, setIntl] = useState<typeof en | undefined>()
 
-  useMemo(() => useWeatherServer(), [useWeatherServer])
+  useMemo(() => newWeatherServer(), [newWeatherServer])
 
   useEffect(() => {
     // Can be substituted by:
