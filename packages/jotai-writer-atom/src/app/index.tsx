@@ -1,9 +1,7 @@
 import { atom, useAtom } from 'jotai'
-import { createContext, FC, useContext, useMemo } from 'react'
+import { FC, useContext, useMemo } from 'react'
+import { CountAtomCtx } from '../count/atom'
 import { WriterAtomCtx } from '../writer/atom'
-
-const countAtom = atom(0)
-export const CountAtomCtx = createContext(countAtom)
 
 type IncrementCount = () => void
 

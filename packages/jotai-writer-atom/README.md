@@ -1,6 +1,8 @@
 # 👻 Jotai Writer Atom
 
-A context-friendly write-only atom, allowing dependency injection for atom setters
+A context-friendly write-only atom, allowing dependency injection for atom setters.
+
+
 
 [🖥️ Live Demo @ CodeSandbox][live_demo]
 
