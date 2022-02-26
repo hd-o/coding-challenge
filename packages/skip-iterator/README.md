@@ -2,10 +2,12 @@
 
 `#iterator` `#skip` `#typescript`
 
-Iterator implementing skipping through `.skip()`
-
 [![Open in CodeSandbox](https://img.shields.io/badge/Open-＠CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
 [![Develop on localhost](https://img.shields.io/badge/Develop-＠localhost-DDD?style=flat-square&logo=gnubash&logoColor=EEE)][develop]
+
+Iterator implementing skipping through `.skip()`
+
+---
 
 ```typescript
 const myIter = new SkipIterator([1,3,4,3,5])
