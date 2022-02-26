@@ -239,7 +239,7 @@ const ComponentA = () => {
 
 I spent some time thinking of when to use context vs props. It is possible to use any for all dependencies, but I found each to have its best case scenario, ending up with the following rules:
 
-**Use props with values related to a component's instance, or that are expected to change for each component instance:**
+**Use props with values related to a component's instance, that are expected to change with each instance:**
 
 ```ts
 // Rendering a list of values/components
@@ -252,7 +252,7 @@ items.map(item =>
 <Button type='primary' disabled={true} />
 ```
 
-**Use context with values which are not expected to change for each component instance, but may be changed by parent components if necessary:**
+**Use context with values which are not expected to change for each component instance:**
 
 ```ts
 const ComponentA = () => {
