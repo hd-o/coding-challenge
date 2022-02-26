@@ -7,7 +7,7 @@
 
 A context-friendly write-only atom, allowing dependency injection for atom setters.
 
-While working on [solid-calendar][solid_calendar], I encountered the need to inject an atom value only when a handler function was called, lazily, not eagerly during component render. A `writerAtom` solves this by exposing Jotai's get/set functions lazily, only when the write function is called. This method allows components to render without having to eagerly resolve/get the value of atoms needed by handler functions. See [handleSave.ts][handleSave] for example
+While working on [solid-calendar][solid_calendar], I encountered the need to inject an atom value only when a handler function was called, lazily, not eagerly during component render. A `writerAtom` solves this by exposing Jotai's get/set functions lazily, only when the write function is called. This method allows component rendering without eagerly resolving/getting atoms needed by handler functions. See [handleSave.ts][handleSave] for example
 
 ---
 
