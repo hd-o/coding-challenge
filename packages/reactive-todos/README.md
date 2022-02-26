@@ -13,7 +13,7 @@ This experiment was done in preparation for [virtual-elevators][virtual_elevator
 
 <p align="center">
   <img
-    src="./.assets/screenshot.png?v=2"
+    src="./.assets/screenshot.png?v=3"
   />
 </p>
 
