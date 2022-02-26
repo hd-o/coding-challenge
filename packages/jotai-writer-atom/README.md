@@ -1,7 +1,9 @@
 # 👻 Jotai Writer Atom
 
+`#atom` `#jotai` `#react`
+
 [![Open in CodeSandbox](https://img.shields.io/badge/Open-＠CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
-[![Develop Locally](https://img.shields.io/badge/Develop-＠localhost-DDD?style=flat-square&logo=gnubash&logoColor=EEE)][develop]
+[![Develop on localhost](https://img.shields.io/badge/Develop-＠localhost-DDD?style=flat-square&logo=gnubash&logoColor=EEE)][develop]
 
 A context-friendly write-only atom, allowing dependency injection for atom setters
 
