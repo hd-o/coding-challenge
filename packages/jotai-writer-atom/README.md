@@ -22,7 +22,7 @@ const writerAtom = atom(
 
 ---
 
-While working on [solid-calendar][solid_calendar], I encountered the need to inject an atom value, but only resolve it on a handler function call, lazily, not eagerly on component render. A `writerAtom` solves this by exposing Jotai's get/set functions lazily, only when the write function is called. This method allows components to render without having to eagerly resolve/get the value of atoms needed by handler functions. See [handleSave.ts][handleSave] for usage example.
+While working on [solid-calendar][solid_calendar], I encountered the need to inject an atom value only when a handler function was called, lazily, not eagerly during component render. A `writerAtom` solves this by exposing Jotai's get/set functions lazily, only when the write function is called. This method allows components to render without having to eagerly resolve/get the value of atoms needed by handler functions. See [handleSave.ts][handleSave] for example.
 
 [develop]: ../../.shared/node/README.md#development
 
