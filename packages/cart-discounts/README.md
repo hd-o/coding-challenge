@@ -1,5 +1,7 @@
 # 🛒 Cart Discounts
 
+`#discounts` `#python` `#shopping`
+
 Calculating total price for shopping carts, with different discounts applied
 
 ## Challenge
