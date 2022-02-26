@@ -11,5 +11,8 @@
   "meta": {
     "category": "algorithm",
     "title": "🛒 Cart Discounts"
+  },
+  "scripts": {
+    "lint": "echo ''"
   }
 }
