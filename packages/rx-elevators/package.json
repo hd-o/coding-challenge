@@ -1,10 +1,10 @@
 {
   "name": "rx-elevators",
   "version": "1.0.0",
-  "description": "Virtual elevators controlled by rx streams",
+  "description": "Virtual elevators, powered by rx streams, and React components",
   "license": "MIT",
   "keywords": [
-    "elevator",
+    "elevators",
     "react",
     "rx"
   ],
