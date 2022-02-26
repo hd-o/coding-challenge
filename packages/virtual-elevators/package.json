@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "Virtual elevators, powered by controller classes, and React components",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "elevators",
+    "react",
+    "solid"
+  ],
   "meta": {
     "category": "software-architecture",
     "title": "🛗 Virtual Elevators"
