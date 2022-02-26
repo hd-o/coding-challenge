@@ -243,8 +243,7 @@ I spent some time thinking of when to use context vs props. It is possible to us
 
 ```ts
 // Rendering a list of values/components
-items.map(item =>
-  <ListItem item={item} key={item.id} />)
+items.map(item => <ListItem item={item} key={item.id} />)
 ```
 
 ```ts
