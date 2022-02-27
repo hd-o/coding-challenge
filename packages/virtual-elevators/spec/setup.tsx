@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import './util/matchMediaMock'
+import './elevator/util/matchMediaMock'
 import { App } from '/src/app'
 import { Lodash } from '/src/pkg/lodash'
 import { Rx } from '/src/pkg/rxjs'

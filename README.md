@@ -40,4 +40,4 @@ My coding challenge solutions, and projects where I explore different technologi
 
 - [🛗 Elevator Specs](./packages/elevator-specs)
   - `#elevator` `#jest` `#spec`
-  - Shared virtual elevators specification tests, using testing-library
+  - Shared virtual elevators specification tests, using @testing-library

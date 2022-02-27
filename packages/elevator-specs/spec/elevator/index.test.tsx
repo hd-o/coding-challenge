@@ -1,19 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import './setup'
 import '@testing-library/jest-dom'
-import { App } from '/src/app'
-import { render } from '@testing-library/react'
 import { click } from './util/click'
 import { find } from './util/find'
 import { findAll } from './util/findAll'
 import { query } from './util/query'
-
-test('app snapshot', () => {
-  const app = render(<App />)
-  expect(app.asFragment()).toMatchSnapshot('app')
-})
 
 describe('elevator queue', () => {
   describe('requesting floor from floor panel', () => {
