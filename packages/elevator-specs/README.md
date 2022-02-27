@@ -4,11 +4,11 @@
 
 Shared virtual elevators specification tests, using @testing-library.
 
-Used by [virtual-elevators][virtual_elevators], and other elevator projects.
+Used by [virtual-elevators][virtual_elevators], and other elevator projects
 
 ## Instructions
 
-Because of limitations with [Jest and symbolic links][jest_symlink], current usage method involves copying from this project into the consumer project by adding a script command that runs before Jest:
+Because of limitations with [Jest and symbolic links][jest_symlink], current usage method involves copying test files from this project into the consumer project by adding a script command that runs before Jest:
 
 ```jsonc
 // In consumer's package.json
