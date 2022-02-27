@@ -15,13 +15,15 @@
   "scripts": {
     "lint": "run-p setup:eslint run:eslint",
     "run:eslint": "eslint -c .eslintrc .",
+    "run:jest": "DEBUG_PRINT_LIMIT=0 jest spec --maxWorkers=1",
     "setup": "run-p setup:*",
     "setup:eslint": "node .config/eslint",
     "setup:jest": "node .config/jest",
+    "setup:spec": "bash ../elevator-specs/setup.sh",
     "setup:typescript": "node .config/typescript",
     "start": "run-s setup:* start:*",
     "start:parcel": "parcel index.html",
-    "test": "DEBUG_PRINT_LIMIT=0 jest spec --maxWorkers=1"
+    "test": "run-s setup:jest setup:spec run:jest"
   },
   "dependencies": {
     "@babel/core": "^7.17.5",
