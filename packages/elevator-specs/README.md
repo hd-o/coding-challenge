@@ -8,7 +8,7 @@ Used by [virtual-elevators][virtual_elevators], and other elevator projects
 
 ## Instructions
 
-Because of limitations with [Jest and symbolic links][jest_symlink], current usage method involves copying test files from this project into the consumer project by adding a script command that runs before Jest:
+Because of limitations with [Jest and symbolic links][jest_symlink], current usage method involves copying test files from this project into the consumer project by adding a script command that runs before Jest. See [virtual-elevators/package.json][virtual_elevators_package] for usage example
 
 ```jsonc
 // In consumer's package.json
@@ -20,8 +20,6 @@ Because of limitations with [Jest and symbolic links][jest_symlink], current usa
   }
 }
 ```
-
-See [virtual-elevators/package.json][virtual_elevators_package] for usage example
 
 [jest_symlink]: https://github.com/facebook/jest/issues/1477
 
