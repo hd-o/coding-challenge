@@ -15,17 +15,19 @@ class FunctionContainer {
     return this._parent._resolve(fn)
   }
 
-  readonly childContainer = (): FnC => new FunctionContainer(this)
+  childContainer (): FnC {
+    return new FunctionContainer(this)
+  }
 
-  readonly register = <F extends FnCtor> (fn: F, value: FnCtor<ReturnType<typeof fn>>): void => {
+  register <F extends FnCtor> (fn: F, value: FnCtor<ReturnType<typeof fn>>): void {
     this._map.set(fn, value(this))
   }
 
-  readonly reset = (): void => {
+  reset (): void {
     this._map = new WeakMap()
   }
 
-  readonly resolve = <F extends FnCtor> (fn: F): ReturnType<typeof fn> => {
+  resolve <F extends FnCtor> (fn: F): ReturnType<typeof fn> {
     const resolved = this._resolve(fn)
     if (resolved !== undefined) return resolved
     const value = fn(this)
@@ -35,6 +37,5 @@ class FunctionContainer {
 }
 
 export type FnC = FunctionContainer
-
 export const fnContainer = new FunctionContainer()
 export const FnContainerCtx = createContext(fnContainer)
