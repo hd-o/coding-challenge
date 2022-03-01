@@ -18,13 +18,13 @@ This project is a follow-up to [solid-calendar][solid_calendar], with the goal o
     <td>
       <img
         alt="elevators screenshot"
-        src="./.assets/screenshot.png"
+        src="./.assets/screenshot.png?v=1"
       />
     </td>
     <td>
       <img
         alt="elevator movement screenshot"
-        src="./.assets/screenshot-movement.png?v=1"
+        src="./.assets/screenshot-movement.png?v=2"
       />
     </td>
   </tr>
