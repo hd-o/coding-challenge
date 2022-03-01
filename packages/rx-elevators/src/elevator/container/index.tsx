@@ -14,7 +14,7 @@ const ElevatorContainer: FC<{}> = () => {
 
   return <>
     {
-      elevatorIds.map((id) => {
+      elevatorIds.map((id, index) => {
         const doorState$ = doorState$Map.get(id)
         const position$ = position$Map.get(id)
         if (position$ === undefined) return null
@@ -22,6 +22,7 @@ const ElevatorContainer: FC<{}> = () => {
         return <Elevator
           doorState$={doorState$}
           id={id}
+          index={index}
           key={String(id)}
           position$={position$}
         />

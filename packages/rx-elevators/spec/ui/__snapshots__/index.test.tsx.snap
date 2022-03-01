@@ -21,7 +21,7 @@ exports[`UI render App snapshot: app-render 1`] = `
             >
               <button
                 class="ui button info"
-                data-testid="floor-panel__floor-caller-4"
+                data-testid="floor-4-caller"
                 style="padding: 10px; margin-top: 5px;"
               >
                 4
@@ -40,7 +40,7 @@ exports[`UI render App snapshot: app-render 1`] = `
             >
               <button
                 class="ui button info"
-                data-testid="floor-panel__floor-caller-3"
+                data-testid="floor-3-caller"
                 style="padding: 10px; margin-top: 5px;"
               >
                 3
@@ -59,7 +59,7 @@ exports[`UI render App snapshot: app-render 1`] = `
             >
               <button
                 class="ui button info"
-                data-testid="floor-panel__floor-caller-2"
+                data-testid="floor-2-caller"
                 style="padding: 10px; margin-top: 5px;"
               >
                 2
@@ -78,7 +78,7 @@ exports[`UI render App snapshot: app-render 1`] = `
             >
               <button
                 class="ui button info"
-                data-testid="floor-panel__floor-caller-1"
+                data-testid="floor-1-caller"
                 style="padding: 10px; margin-top: 5px;"
               >
                 1
@@ -97,7 +97,7 @@ exports[`UI render App snapshot: app-render 1`] = `
             >
               <button
                 class="ui button info"
-                data-testid="floor-panel__floor-caller-0"
+                data-testid="floor-0-caller"
                 style="padding: 10px; margin-top: 5px;"
               >
                 0
@@ -116,42 +116,41 @@ exports[`UI render App snapshot: app-render 1`] = `
           >
             <th />
             <th
+              data-testid="elevator-0"
               style="text-align: center; position: relative; overflow: visible;"
             >
-              <div
-                data-testid="elevator-1-panel"
-              >
+              <div>
                 <button
                   class="ui button info"
-                  data-testid="elevator-1-panel__floor-caller-0"
+                  data-testid="elevator-0-button-floor-0"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   0
                 </button>
                 <button
                   class="ui button info"
-                  data-testid="elevator-1-panel__floor-caller-1"
+                  data-testid="elevator-0-button-floor-1"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   1
                 </button>
                 <button
                   class="ui button info"
-                  data-testid="elevator-1-panel__floor-caller-2"
+                  data-testid="elevator-0-button-floor-2"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   2
                 </button>
                 <button
                   class="ui button info"
-                  data-testid="elevator-1-panel__floor-caller-3"
+                  data-testid="elevator-0-button-floor-3"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   3
                 </button>
                 <button
                   class="ui button info"
-                  data-testid="elevator-1-panel__floor-caller-4"
+                  data-testid="elevator-0-button-floor-4"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   4
@@ -161,6 +160,7 @@ exports[`UI render App snapshot: app-render 1`] = `
                 style="height: 100px; width: 100%; background: rgb(187, 187, 187); position: absolute; bottom: 100px; left: 0px;"
               >
                 <div
+                  data-testid="elevator-0-door-closed"
                   style="display: flex; height: 100%; width: 100%; justify-content: space-between;"
                 >
                   <div
@@ -173,42 +173,41 @@ exports[`UI render App snapshot: app-render 1`] = `
               </div>
             </th>
             <th
+              data-testid="elevator-1"
               style="text-align: center; position: relative; overflow: visible;"
             >
-              <div
-                data-testid="elevator-2-panel"
-              >
+              <div>
                 <button
                   class="ui button info"
-                  data-testid="elevator-2-panel__floor-caller-0"
+                  data-testid="elevator-1-button-floor-0"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   0
                 </button>
                 <button
                   class="ui button info"
-                  data-testid="elevator-2-panel__floor-caller-1"
+                  data-testid="elevator-1-button-floor-1"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   1
                 </button>
                 <button
                   class="ui button info"
-                  data-testid="elevator-2-panel__floor-caller-2"
+                  data-testid="elevator-1-button-floor-2"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   2
                 </button>
                 <button
                   class="ui button info"
-                  data-testid="elevator-2-panel__floor-caller-3"
+                  data-testid="elevator-1-button-floor-3"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   3
                 </button>
                 <button
                   class="ui button info"
-                  data-testid="elevator-2-panel__floor-caller-4"
+                  data-testid="elevator-1-button-floor-4"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   4
@@ -218,6 +217,7 @@ exports[`UI render App snapshot: app-render 1`] = `
                 style="height: 100px; width: 100%; background: rgb(187, 187, 187); position: absolute; bottom: 100px; left: 0px;"
               >
                 <div
+                  data-testid="elevator-1-door-closed"
                   style="display: flex; height: 100%; width: 100%; justify-content: space-between;"
                 >
                   <div
@@ -230,42 +230,41 @@ exports[`UI render App snapshot: app-render 1`] = `
               </div>
             </th>
             <th
+              data-testid="elevator-2"
               style="text-align: center; position: relative; overflow: visible;"
             >
-              <div
-                data-testid="elevator-3-panel"
-              >
+              <div>
                 <button
                   class="ui button info"
-                  data-testid="elevator-3-panel__floor-caller-0"
+                  data-testid="elevator-2-button-floor-0"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   0
                 </button>
                 <button
                   class="ui button info"
-                  data-testid="elevator-3-panel__floor-caller-1"
+                  data-testid="elevator-2-button-floor-1"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   1
                 </button>
                 <button
                   class="ui button info"
-                  data-testid="elevator-3-panel__floor-caller-2"
+                  data-testid="elevator-2-button-floor-2"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   2
                 </button>
                 <button
                   class="ui button info"
-                  data-testid="elevator-3-panel__floor-caller-3"
+                  data-testid="elevator-2-button-floor-3"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   3
                 </button>
                 <button
                   class="ui button info"
-                  data-testid="elevator-3-panel__floor-caller-4"
+                  data-testid="elevator-2-button-floor-4"
                   style="padding: 10px; margin-top: 5px;"
                 >
                   4
@@ -275,6 +274,7 @@ exports[`UI render App snapshot: app-render 1`] = `
                 style="height: 100px; width: 100%; background: rgb(187, 187, 187); position: absolute; bottom: 100px; left: 0px;"
               >
                 <div
+                  data-testid="elevator-2-door-closed"
                   style="display: flex; height: 100%; width: 100%; justify-content: space-between;"
                 >
                   <div

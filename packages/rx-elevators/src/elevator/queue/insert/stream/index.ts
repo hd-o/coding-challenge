@@ -1,7 +1,7 @@
 import { ElevatorFloorPair } from '/src/elevator/floor/pair'
 import { useElevatorPositionPair$Proxy } from '/src/elevator/position/pair/stream/proxy'
 import { useElevatorQueueDoorOpenEvent$ } from '/src/elevator/queue/door/open/event'
-import { useEelevatorQueueInsertEvent$ } from '/src/elevator/queue/insert/event'
+import { useElevatorQueueInsertEvent$ } from '/src/elevator/queue/insert/event'
 import { floorHeight } from '/src/floor/height'
 import { FnCtor } from '/src/function/container'
 import { useRxOf } from '/src/pkg/rxjs/of'
@@ -13,7 +13,7 @@ type ElevatorQueueInsert$ = Observable<ElevatorFloorPair>
 
 export const useElevatorQueueInsert$: FnCtor<ElevatorQueueInsert$> = (container) => {
   const elevatorQueueDoorOpenEvent$ = container.resolve(useElevatorQueueDoorOpenEvent$)
-  const elevatorQueueInsertEvent$ = container.resolve(useEelevatorQueueInsertEvent$)
+  const elevatorQueueInsertEvent$ = container.resolve(useElevatorQueueInsertEvent$)
   const elevatorPositionPair$Proxy = container.resolve(useElevatorPositionPair$Proxy)
   const of = container.resolve(useRxOf)
   const switchMap = container.resolve(useRxSwitchMap)
