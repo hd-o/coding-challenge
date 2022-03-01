@@ -13,6 +13,7 @@
     "title": "📅 SOLID Calendar"
   },
   "scripts": {
+    "dev": "parcel index.html",
     "lint": "run-p setup:eslint run:eslint",
     "run:eslint": "eslint -c .eslintrc .",
     "setup": "run-p setup:*",
