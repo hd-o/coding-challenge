@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@babel/core': ^7.17.5
+  '@babel/helper-plugin-utils': ^7.16.7
   '@babel/plugin-proposal-decorators': ^7.17.2
   '@babel/preset-env': ^7.16.11
   '@testing-library/dom': ^8.11.3
@@ -16,7 +17,6 @@ specifiers:
   '@typescript-eslint/parser': ^5.12.1
   antd: ^4.18.7
   autobind-decorator: ^2.4.0
-  babel-plugin-transform-typescript-metadata: ^0.3.2
   eslint: ^8.9.0
   eslint-config-standard-with-typescript: ^21.0.1
   eslint-plugin-import: ^2.25.4
@@ -45,6 +45,7 @@ specifiers:
 
 dependencies:
   '@babel/core': 7.17.5
+  '@babel/helper-plugin-utils': 7.16.7
   '@babel/plugin-proposal-decorators': 7.17.2_@babel+core@7.17.5
   '@babel/preset-env': 7.16.11_@babel+core@7.17.5
   '@testing-library/dom': 8.11.3
@@ -59,7 +60,6 @@ dependencies:
   '@typescript-eslint/parser': 5.12.1_eslint@8.9.0+typescript@4.5.5
   antd: 4.18.8_react-dom@17.0.2+react@17.0.2
   autobind-decorator: 2.4.0
-  babel-plugin-transform-typescript-metadata: 0.3.2
   eslint: 8.9.0
   eslint-config-standard-with-typescript: 21.0.1_81ef1176da9c22cab062abd1d87be566
   eslint-plugin-import: 2.25.4_eslint@8.9.0
@@ -2957,12 +2957,6 @@ packages:
       '@babel/helper-define-polyfill-provider': 0.3.1_@babel+core@7.17.5
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /babel-plugin-transform-typescript-metadata/0.3.2:
-    resolution: {integrity: sha512-mWEvCQTgXQf48yDqgN7CH50waTyYBeP2Lpqx4nNWab9sxEpdXVeKgfj1qYI2/TgUPQtNFZ85i3PemRtnXVYYJg==}
-    dependencies:
-      '@babel/helper-plugin-utils': 7.16.7
     dev: false
 
   /babel-preset-current-node-syntax/1.0.1_@babel+core@7.17.5:
