@@ -15,7 +15,7 @@
     "start": "run-s setup start:*",
     "start:parcel": "parcel index.html",
     "test": "run-s setup run:jest",
-    "test:watch": "run-s setup:test 'run:jest -- --watch'"
+    "test:watch": "run-s setup:jest 'run:jest -- --watch'"
   },
   "version": "1.0.0"
 }

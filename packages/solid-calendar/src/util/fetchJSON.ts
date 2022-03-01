@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
 import { CacheCtx } from './cache'
 
-function useFetchJSON (): <V> (path: RequestInfo) => Promise<V> {
+function useFetchJSON (): <V> (path: string) => Promise<V> {
   return useContext(CacheCtx)(
     'fetchJSON', [],
     () => function fetchJSON (path) {
