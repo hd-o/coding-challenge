@@ -13,7 +13,6 @@
     "title": "⏭️ SkipIterator"
   },
   "scripts": {
-    "dev": "echo \"run 'npm run test'\"",
     "lint": "run-p setup:eslint run:eslint",
     "run:eslint": "eslint -c .eslintrc .",
     "setup": "run-p setup:*",
