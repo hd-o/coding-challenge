@@ -1,7 +1,7 @@
 {
   "name": "skip-iterator",
   "version": "1.0.0",
-  "description": "Iterator implementing value skipping",
+  "description": "Iterator class, implementing value skipping",
   "license": "MIT",
   "keywords": [
     "iterator",

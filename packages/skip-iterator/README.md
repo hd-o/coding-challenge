@@ -5,7 +5,7 @@
 [![Open in CodeSandbox](https://img.shields.io/badge/Open-＠CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
 [![Develop on localhost](https://img.shields.io/badge/Develop-＠localhost-DDD?style=flat-square&logo=gnubash&logoColor=EEE)][develop]
 
-Iterator implementing value skipping
+Iterator class, implementing value skipping
 
 ---
 
