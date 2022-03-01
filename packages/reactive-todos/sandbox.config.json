@@ -1,5 +1,5 @@
 {
   "node": "16",
   "template": "node",
-  "startScript": "start:parcel"
+  "startScript": "dev"
 }
