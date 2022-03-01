@@ -33,7 +33,7 @@ export class FloorCtrl {
 
   readonly getTopPosition: MemoizedFunction & GetPosition
 
-  getRequest$ = (floor: IFloorRecord): IFloorRequest$ => {
+  getRequest$ (floor: IFloorRecord): IFloorRequest$ {
     return this._floorRequest$.value.get(floor) as IFloorRequest$
   }
 
