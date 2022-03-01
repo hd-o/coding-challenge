@@ -20,4 +20,4 @@ myIter.next() // 5
 
 [develop]: ../../.shared/node/README.md#development
 
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/skip-iterator?file=/README.md&previewwindow=tests
+[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/skip-iterator?file=/spec/SkipIterator.test.ts&previewwindow=tests
