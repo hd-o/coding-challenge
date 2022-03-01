@@ -64,7 +64,7 @@ describe('elevator queue', () => {
   })
 })
 
-describe.skip('elevator movement', () => {
+describe('elevator movement', () => {
   test('only elevator with non empty queue is moving', async () => {
     // Should call elevator 0
     await click('floor-2-caller')
@@ -126,7 +126,7 @@ describe.skip('elevator movement', () => {
   })
 })
 
-describe.skip('elevator door movement', () => {
+describe('elevator door movement', () => {
   test('door opens when elevator arrives at floor', async () => {
     await click('elevator-1-button-floor-1')
     await click('test-interval-start')
