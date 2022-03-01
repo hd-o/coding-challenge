@@ -10,6 +10,7 @@ specifiers:
   '@types/jest': ^27.4.1
   '@types/keymirror': ^0.1.1
   '@types/lodash': ^4.14.178
+  '@types/ramda': ^0.28.0
   '@types/react': ^17.0.39
   '@types/react-dom': ^17.0.11
   '@typescript-eslint/eslint-plugin': ^5.12.1
@@ -48,6 +49,7 @@ dependencies:
   '@types/jest': 27.4.1
   '@types/keymirror': 0.1.1
   '@types/lodash': 4.14.178
+  '@types/ramda': 0.28.0
   '@types/react': 17.0.39
   '@types/react-dom': 17.0.11
   '@typescript-eslint/eslint-plugin': 5.12.1_aa3af6382115a42a71cc388b7b2c30b3
@@ -2348,6 +2350,12 @@ packages:
 
   /@types/prop-types/15.7.4:
     resolution: {integrity: sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==}
+    dev: false
+
+  /@types/ramda/0.28.0:
+    resolution: {integrity: sha512-w3NK/csQSMwTTkC5iCXZu+b0RL55oZYZVEkPBtimL892KcmSQtleZV+Ytm/znFYiXQXjGjHrzfk3YURez8V7ig==}
+    dependencies:
+      ts-toolbelt: 6.15.5
     dev: false
 
   /@types/react-dom/17.0.11:
@@ -6546,6 +6554,10 @@ packages:
       semver: 7.3.5
       typescript: 4.5.5
       yargs-parser: 20.2.9
+    dev: false
+
+  /ts-toolbelt/6.15.5:
+    resolution: {integrity: sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==}
     dev: false
 
   /tsconfig-paths/3.12.0:

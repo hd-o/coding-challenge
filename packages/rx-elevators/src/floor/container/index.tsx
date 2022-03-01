@@ -31,9 +31,9 @@ const FloorContainer: FC<{}> = () => {
         <tr key={number} style={{ height: floorHeight }}>
           <td className='two wide' style={{ textAlign: 'center' }}>
             <FloorPanelCaller
+              data-testid={`floor-${number}-caller`}
               floor={number}
               onClick={handleFloorCall(number)}
-              testidPrefix='floor-panel'
             />
           </td>
           {floorCells}

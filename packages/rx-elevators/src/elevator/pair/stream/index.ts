@@ -4,7 +4,7 @@ import { Map$ } from '/src/map/stream'
 import { useImmutableRecord } from '/src/pkg/immutable/Record'
 import { useRxCombineLatest } from '/src/pkg/rxjs/combineLatest'
 import { useRxMap } from '/src/pkg/rxjs/map'
-import { useRxShare } from '/src/pkg/rxjs/share'
+import { useRxShareReplay } from '/src/pkg/rxjs/shareReplay'
 import { useRxSwitchMap } from '/src/pkg/rxjs/switchMap'
 import { RecordOf } from 'immutable'
 import { Observable } from 'rxjs'
@@ -21,7 +21,7 @@ export const useNewElevatorPair$: FnCtor<NewElevatorPair$> = (container) => {
   const combineLatest = container.resolve(useRxCombineLatest)
   const map = container.resolve(useRxMap)
   const Record = container.resolve(useImmutableRecord)
-  const share = container.resolve(useRxShare)
+  const shareReplay = container.resolve(useRxShareReplay)
   const switchMap = container.resolve(useRxSwitchMap)
 
   /**
@@ -44,7 +44,7 @@ export const useNewElevatorPair$: FnCtor<NewElevatorPair$> = (container) => {
     return map$.pipe(
       map(map => map.entrySeq().toArray()),
       switchMap((entries) => combineLatest(toElevatorValuePair$s(entries))),
-      share(),
+      shareReplay(1),
     )
   }
 

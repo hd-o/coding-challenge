@@ -7,17 +7,18 @@ import { useStreamFn } from '/src/util/useStreamFn'
 import { createContext, FC, useContext, useMemo } from 'react'
 import { useNewElevatorFloorPair } from '../floor/pair'
 import { ElevatorId } from '../id'
-import { useEelevatorQueueInsertEvent$ } from '../queue/insert/event'
+import { useElevatorQueueInsertEvent$ } from '../queue/insert/event'
 import { useNewElevatorQueueItem$ } from '../queue/item/stream'
 
 interface ElevatorPanelProps {
+  'data-testid': string
   elevator: ElevatorId
 }
 
 const ElevatorPanel: FC<ElevatorPanelProps> = (props) => {
   const FloorCaller = useContext(FloorCallerCtx)
 
-  const elevatorQueueInsertEvent$ = useResolve(useEelevatorQueueInsertEvent$)
+  const elevatorQueueInsertEvent$ = useResolve(useElevatorQueueInsertEvent$)
   const newElevatorFloorPair = useResolve(useNewElevatorFloorPair)
   const newElevatorQueueItems$ = useResolve(useNewElevatorQueueItem$)
   const floorNumbers = useStreamFn(useFloorNumber$)
@@ -35,19 +36,20 @@ const ElevatorPanel: FC<ElevatorPanelProps> = (props) => {
   const isFloorInQueue = (floor: FloorNumber): boolean =>
     queueItems.find(item => 'floor' in item && item.floor === floor) !== undefined
 
-  const testId = `elevator-${props.elevator}-panel`
+  const idBlock = `${props['data-testid']}-button`
 
   return (
-    <div data-testid={testId}>
+    <div>
       {
         floorNumbers.map(floor => {
           const requested = isFloorInQueue(floor)
+          const idElement = `-floor-${floor}`
           return <FloorCaller
+            data-testid={`${idBlock}${idElement}`}
             key={floor}
             floor={floor}
             onClick={handleClick(floor)}
             requested={requested}
-            testidPrefix={testId}
           />
         })
       }

@@ -2,11 +2,11 @@ import { createContext, FC } from 'react'
 import { FloorNumber } from '../number'
 
 export interface FloorCallerProps {
+  'data-testid': string
   disabled?: boolean
   floor: FloorNumber
   onClick: () => unknown
   requested?: boolean
-  testidPrefix: string
 }
 
 const FloorCaller: FC<FloorCallerProps> = (props) => {
@@ -15,16 +15,16 @@ const FloorCaller: FC<FloorCallerProps> = (props) => {
 
   /**
    * Example:
-   * - elevator-panel__floor-caller-0--requested
-   * - floor-panel__floor-caller-1
+   * - elevator-0-button-floor-2-requested
+   * - floor-1-caller
+   * - floor-1-caller-requested
    */
-  const testIdBlock = props.testidPrefix
-  const testIdElement = `__floor-caller-${props.floor}`
-  const testIdModifier = requested ? '--requested' : ''
+  const idBlock = props['data-testid']
+  const idModifier = requested ? '-requested' : ''
 
   return <button
     className={`ui button ${requestedClassName}`}
-    data-testid={`${testIdBlock}${testIdElement}${testIdModifier}`}
+    data-testid={`${idBlock}${idModifier}`}
     disabled={props.disabled ?? props.requested}
     style={{ padding: 10, marginTop: 5 }}
     onClick={props.onClick}
