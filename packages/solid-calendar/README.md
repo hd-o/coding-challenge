@@ -67,8 +67,9 @@ const someFn = () => 'C'
 
 // ComponentC depends on `someFn`
 // which is injected through `props`
-const ComponentC = (props = { someFn }) =>
-  <div>{props.someFn()}</div>
+const ComponentC = (props = { someFn }) => {
+  return <div>{props.someFn()}</div>
+}
 
 // ComponentB depends on ComponentC,
 // and if any parent of ComponentB
@@ -77,14 +78,17 @@ const ComponentC = (props = { someFn }) =>
 // need to be "drilled" down the call stack
 const someFnB = () => 'B'
 
-const ComponentB = (props = { someFn = someFnB }) =>
-  <ComponentC someFn={props.someFn} />
+const ComponentB = (props = { someFn = someFnB }) => {
+  return <ComponentC someFn={props.someFn} />
+}
 
-const ComponentA1 = () =>
-  <ComponentB />
+const ComponentA1 = () => {
+  return <ComponentB />
+}
 
-const ComponentA2 = () =>
-  <ComponentB someFn={() => 'A'}/>
+const ComponentA2 = () => {
+  return <ComponentB someFn={() => 'A'}/>
+}
 
 // This is a simplified example, but a larger
 // dependency tree would require a rewrite of
@@ -124,8 +128,9 @@ const ComponentB = () => {
 // optionally inject a different behavior
 // to `someFn` by its SomeFnBCtx
 
-const ComponentA1 = () =>
-  <ComponentB />
+const ComponentA1 = () => {
+  return <ComponentB />
+}
 
 const SomeFnACtx = createContext(() => 'A')
 
