@@ -16,7 +16,7 @@ My coding challenge solutions, and projects where I explore different technologi
 
 - [⏭️ SkipIterator](./packages/skip-iterator)
   - `#iterator` `#skip` `#typescript`
-  - Iterator implementing skipping through `.skip()`
+  - Iterator implementing value skipping
 
 ## 🏛️ Software Architecture
 

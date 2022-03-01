@@ -1,7 +1,7 @@
 {
   "name": "skip-iterator",
   "version": "1.0.0",
-  "description": "Iterator implementing skipping through `.skip()`",
+  "description": "Iterator implementing value skipping",
   "license": "MIT",
   "keywords": [
     "iterator",
