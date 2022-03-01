@@ -13,16 +13,18 @@
     "title": "📅 SOLID Calendar"
   },
   "scripts": {
-    "dev": "parcel index.html",
-    "lint": "run-p setup:eslint run:eslint",
+    "dev": "run-s start:parcel",
+    "lint": "run-s setup:eslint run:eslint",
     "run:eslint": "eslint -c .eslintrc .",
+    "run:jest": "DEBUG_PRINT_LIMIT=0 jest",
     "setup": "run-p setup:*",
     "setup:eslint": "node .config/eslint",
     "setup:jest": "node .config/jest",
     "setup:typescript": "node .config/typescript",
-    "start": "run-s setup:* start:*",
+    "start": "run-s setup start:*",
     "start:parcel": "parcel index.html",
-    "test": "DEBUG_PRINT_LIMIT=0 jest spec --maxWorkers=4"
+    "test": "run-s setup run:jest",
+    "test:watch": "run-s setup:test 'run:jest -- --watch'"
   },
   "dependencies": {
     "@babel/core": "^7.17.5",

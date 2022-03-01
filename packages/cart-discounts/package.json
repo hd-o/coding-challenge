@@ -13,6 +13,19 @@
     "title": "🛒 Cart Discounts"
   },
   "scripts": {
-    "lint": "echo ''"
+    "lint": "run-s setup:eslint run:eslint",
+    "dev": "run-s start:parcel",
+    "run:eslint": "eslint -c .eslintrc .",
+    "run:jest": "DEBUG_PRINT_LIMIT=0 jest",
+    "setup": "run-p setup:*",
+    "setup:eslint": "node .config/eslint",
+    "setup:jest": "node .config/jest",
+    "setup:test": "run-s setup:jest setup:spec",
+    "setup:spec": "bash ../elevator-specs/setup.sh",
+    "setup:typescript": "node .config/typescript",
+    "start": "run-s setup start:*",
+    "start:parcel": "parcel index.html",
+    "test": "run-s setup run:jest",
+    "test:watch": "run-s setup:test 'run:jest -- --watch'"
   }
 }
