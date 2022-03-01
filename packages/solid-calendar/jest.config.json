@@ -4,9 +4,13 @@
       "isolatedModules": true
     }
   },
+  "maxWorkers": 4,
   "moduleNameMapper": {
     "^/(.*)$": "<rootDir>/$1"
   },
   "preset": "ts-jest",
-  "testEnvironment": "node"
+  "testEnvironment": "jsdom",
+  "testMatch": [
+    "**/spec/**/*.test.t(s|sx)"
+  ]
 }

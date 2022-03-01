@@ -1,8 +1,7 @@
-import { jsonResponse } from '/src/util/jsonResponse'
 import {
   WeatherLocation, WeatherLocationDayMap, WeatherLocationSearch
 } from '/src/weather/api/location/model'
-import Pretender from 'pretender'
+import qs from 'qs'
 
 const london: WeatherLocation = {
   title: 'London',
@@ -33,15 +32,20 @@ const weatherLocationDay: WeatherLocationDayMap = {
   }],
 }
 
-export const newWeatherServer = (): Pretender => {
-  return new Pretender(function () {
-    this.get('/api/weather/location/day', (req) => {
-      const woeid = req.queryParams.woeid ?? ''
-      return jsonResponse(weatherLocationDay[woeid] ?? [])
-    })
-    this.get('/api/weather/location/search', (req) => {
-      const query = req.queryParams.query ?? ''
-      return jsonResponse(weatherLocationSearch[query] ?? [])
-    })
+type WeatherFetchJson = <V> (req: string) => Promise<V>
+
+export const useWeatherServer = (): WeatherFetchJson => {
+  return <V> (req: string): Promise<V> => new Promise((resolve) => {
+    const params = qs.parse(req.split('?')[1] ?? '') as Record<string, string>
+    let result = {}
+    if (req.startsWith('/api/weather/location/day')) {
+      const woeid = params.woeid ?? ''
+      result = weatherLocationDay[woeid] ?? []
+    }
+    if (req.startsWith('/api/weather/location/search')) {
+      const query = params.query ?? ''
+      result = weatherLocationSearch[query] ?? []
+    }
+    return resolve(result as unknown as V)
   })
 }

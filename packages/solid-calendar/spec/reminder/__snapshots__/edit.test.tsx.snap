@@ -55,7 +55,7 @@ Object {
   "date": "12/01/2021 01:00 am",
   "location": "",
   "title": "Test",
-  "weather": "",
+  "weather": "Barcelona • 🌦️ Showers 23°C / 23°C",
 }
 `;
 

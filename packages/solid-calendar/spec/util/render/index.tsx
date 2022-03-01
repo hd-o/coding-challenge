@@ -1,6 +1,8 @@
+import { useWeatherServer } from '/spec/mocks/api/weather'
 import { AppProvidersCtx } from '/src/app/providers'
 import intl from '/src/lang/en.json'
 import { NativeDateCtx } from '/src/pkg/native/date'
+import { FetchJSONCtx } from '/src/util/fetchJSON'
 import { FC } from 'react'
 import { render as testRender } from '@testing-library/react'
 
@@ -19,15 +21,17 @@ class CustomDate {
 
 export function render (Component: FC): ReturnType<typeof testRender> {
   return testRender(
-    <NativeDateCtx.Provider value={CustomDate as DateConstructor}>
-      <AppProvidersCtx.Consumer>
-        {AppProviders => (
-          <AppProviders intl={intl}>
-            <Component />
-          </AppProviders>
-        )}
-      </AppProvidersCtx.Consumer>
-    </NativeDateCtx.Provider>
+    <FetchJSONCtx.Provider value={useWeatherServer}>
+      <NativeDateCtx.Provider value={CustomDate as DateConstructor}>
+        <AppProvidersCtx.Consumer>
+          {AppProviders => (
+            <AppProviders intl={intl}>
+              <Component />
+            </AppProviders>
+          )}
+        </AppProvidersCtx.Consumer>
+      </NativeDateCtx.Provider>
+    </FetchJSONCtx.Provider>
   )
 }
 

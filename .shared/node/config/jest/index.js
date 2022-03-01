@@ -16,7 +16,7 @@ const config = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   testMatch: [
-    './spec/**/*.test.tsx?'
+    "**/spec/**/*.test.t(s|sx)",
   ],
 }
 
