@@ -9,11 +9,15 @@ const config = {
       isolatedModules: true,
     },
   },
+  maxWorkers: 4,
   moduleNameMapper: {
     '^/(.*)$': '<rootDir>/$1'
   },
   preset: 'ts-jest',
   testEnvironment: 'node',
+  testMatch: [
+    './spec/**/*.test.tsx?'
+  ],
 }
 
 const writeJestConfig = (c = config) => writeConfig(c, './jest.config.json')
