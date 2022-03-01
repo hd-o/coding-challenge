@@ -13,6 +13,7 @@
     "title": "🛗 Rx Elevators"
   },
   "scripts": {
+    "dev": "parcel index.html",
     "lint": "run-p setup:eslint run:eslint",
     "run:eslint": "eslint -c .eslintrc .",
     "run:jest": "DEBUG_PRINT_LIMIT=0 jest spec --maxWorkers=4",
