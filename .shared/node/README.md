@@ -1,4 +1,4 @@
-# ![node][node_img] Node Configs
+# <img src="https://nodejs.org/static/images/favicons/favicon-32x32.png" style="width: 24px;" /> Node Configs
 
 **1. System Dependencies:**
 
@@ -15,9 +15,3 @@
 1. Example: `pnpm start`
 
 [package]: ./bootstrap//package/package.json
-
-[node_img]: https://nodejs.org/static/images/favicons/favicon-32x32.png
-
-<style>
-  img[alt=node] { width: 21px; }
-</style>
