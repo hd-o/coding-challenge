@@ -1,7 +1,7 @@
 import { resolve, Use } from '/src'
 import { Container } from 'inversify'
 
-let container = new Container()
+const container = new Container()
 
 type Sum = (x: number) => (y: number) => number
 type SumX = (x: number) => number
@@ -22,14 +22,11 @@ const useSum100: Use<SumX> = (resolve) => {
 
 const useSum200: Use<SumX> = (_, container) => {
   const childContainer = container.createChild()
+  const childResolve = resolve(childContainer)
   const sum200: Sum = () => (y) => y + 200
   childContainer.bind(useSum).toConstantValue(sum200)
-  return resolve(childContainer)(useSum100)
+  return useSum100(childResolve, childContainer)
 }
-
-beforeEach(() => {
-  container = new Container()
-})
 
 describe('resolve', () => {
   test('resolving dependencies', () => {
