@@ -8,6 +8,10 @@ My coding challenge solutions, and projects where I explore different technologi
   - `#discounts` `#python` `#shopping`
   - Calculating total price for shopping carts, with different discounts applied
 
+- [➡️ Function Resolve](./packages/function-resolve)
+  - `#container` `#dependency` `#functional`
+  - IoC container resolver for functional programming.
+
 ## 🗂️ Data Structure
 
 - [👻 Jotai Writer Atom](./packages/jotai-writer-atom)

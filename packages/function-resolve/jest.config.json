@@ -1,0 +1,16 @@
+{
+  "globals": {
+    "ts-jest": {
+      "isolatedModules": true
+    }
+  },
+  "maxWorkers": 4,
+  "moduleNameMapper": {
+    "^/(.*)$": "<rootDir>/$1"
+  },
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "testMatch": [
+    "**/spec/**/*.test.t(s|sx)"
+  ]
+}
