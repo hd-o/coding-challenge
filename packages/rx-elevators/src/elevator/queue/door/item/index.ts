@@ -5,7 +5,7 @@ import {
 } from '/src/elevator/queue/item/category'
 import { useImmutableRecord } from '/src/pkg/immutable/Record'
 import { useLodashUniqueId } from '/src/pkg/lodash/uniqueId'
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 import { RecordOf } from 'immutable'
 import { ElevatorQueueDoorActionType } from '../action/type'
 
@@ -20,9 +20,9 @@ export type ElevatorQueueDoorItem = RecordOf<ElevatorQueueDoorItemModel>
 
 type NewElevatorQueueDoorItem = (t: ElevatorQueueDoorActionType, e: ElevatorId) => ElevatorQueueDoorItem
 
-export const useNewElevatorQueueDoorItem: Use<NewElevatorQueueDoorItem> = (container) => {
-  const Record = resolve(container)(useImmutableRecord)
-  const uniqueId = resolve(container)(useLodashUniqueId)
+export const useNewElevatorQueueDoorItem: Use<NewElevatorQueueDoorItem> = (resolve) => {
+  const Record = resolve(useImmutableRecord)
+  const uniqueId = resolve(useLodashUniqueId)
 
   const newElevatorQueueDoorItem: NewElevatorQueueDoorItem = (type, elevator) =>
     Record<ElevatorQueueDoorItemModel>({

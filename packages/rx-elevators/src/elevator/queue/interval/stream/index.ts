@@ -6,20 +6,20 @@ import { useRxMap } from '/src/pkg/rxjs/map'
 import { useRxOf } from '/src/pkg/rxjs/of'
 import { useRxShare } from '/src/pkg/rxjs/share'
 import { useRxSwitchMap } from '/src/pkg/rxjs/switchMap'
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 import { Observable } from 'rxjs'
 import { ElevatorQueue } from '../..'
 
 type NewElevatorQueueInterval$ = (e: ElevatorId) => Observable<ElevatorQueue>
 
-export const useNewElevatorQueueInterval$: Use<NewElevatorQueueInterval$> = (container) => {
-  const animationFrames = resolve(container)(useRxAnimationFrames)
-  const elevatorQueue$Map$ = resolve(container)(useElevatorQueue$Map$)
-  const map = resolve(container)(useRxMap)
-  const memoizeWith = resolve(container)(useRamdaMemoizeWith)
-  const of = resolve(container)(useRxOf)
-  const switchMap = resolve(container)(useRxSwitchMap)
-  const share = resolve(container)(useRxShare)
+export const useNewElevatorQueueInterval$: Use<NewElevatorQueueInterval$> = (resolve) => {
+  const animationFrames = resolve(useRxAnimationFrames)
+  const elevatorQueue$Map$ = resolve(useElevatorQueue$Map$)
+  const map = resolve(useRxMap)
+  const memoizeWith = resolve(useRamdaMemoizeWith)
+  const of = resolve(useRxOf)
+  const switchMap = resolve(useRxSwitchMap)
+  const share = resolve(useRxShare)
 
   const newElevatorQueueInterval$: NewElevatorQueueInterval$ = (elevator) =>
     elevatorQueue$Map$.pipe(

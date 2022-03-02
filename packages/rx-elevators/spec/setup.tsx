@@ -24,8 +24,8 @@ const of = specResolve(useRxOf)
 const Record = specResolve(useImmutableRecord)
 const settings: Settings = Record<SettingsModel>({
   // Increase movement speed to prevent timeouts
-  elevatorDoorMovementStep: 1,
-  elevatorMovementStep: 10,
+  elevatorDoorMovementStep: 2,
+  elevatorMovementStep: 20,
 })()
 
 beforeEach(async () => {

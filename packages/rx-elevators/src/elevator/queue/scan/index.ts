@@ -1,4 +1,4 @@
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 import { ElevatorQueue } from '../'
 import { ElevatorQueueAction } from '../action'
 import { useElevatorQueueDoorScan } from '../door/scan'
@@ -9,9 +9,9 @@ const itemCategories = elevatorQueueItemCategories
 
 type ElevatorQueueScan = (q: ElevatorQueue, a: ElevatorQueueAction) => ElevatorQueue
 
-export const useElevatorQueueScan: Use<ElevatorQueueScan> = (container) => {
-  const doorScan = resolve(container)(useElevatorQueueDoorScan)
-  const floorScan = resolve(container)(useElevatorQueueFloorScan)
+export const useElevatorQueueScan: Use<ElevatorQueueScan> = (resolve) => {
+  const doorScan = resolve(useElevatorQueueDoorScan)
+  const floorScan = resolve(useElevatorQueueFloorScan)
 
   const elevatorQueueScan: ElevatorQueueScan = (queue, action) => {
     if (action.category === itemCategories.Door) return doorScan(action, queue)

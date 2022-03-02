@@ -6,18 +6,18 @@ import { floorHeight } from '/src/floor/height'
 import { useRxOf } from '/src/pkg/rxjs/of'
 import { useRxSwitchMap } from '/src/pkg/rxjs/switchMap'
 import { useRxWithLatestFrom } from '/src/pkg/rxjs/withLatestFrom'
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 import { Observable } from 'rxjs'
 
 type ElevatorQueueInsert$ = Observable<ElevatorFloorPair>
 
-export const useElevatorQueueInsert$: Use<ElevatorQueueInsert$> = (container) => {
-  const elevatorQueueDoorOpenEvent$ = resolve(container)(useElevatorQueueDoorOpenEvent$)
-  const elevatorQueueInsertEvent$ = resolve(container)(useElevatorQueueInsertEvent$)
-  const elevatorPositionPair$Proxy = resolve(container)(useElevatorPositionPair$Proxy)
-  const of = resolve(container)(useRxOf)
-  const switchMap = resolve(container)(useRxSwitchMap)
-  const withLatestFrom = resolve(container)(useRxWithLatestFrom)
+export const useElevatorQueueInsert$: Use<ElevatorQueueInsert$> = (resolve) => {
+  const elevatorQueueDoorOpenEvent$ = resolve(useElevatorQueueDoorOpenEvent$)
+  const elevatorQueueInsertEvent$ = resolve(useElevatorQueueInsertEvent$)
+  const elevatorPositionPair$Proxy = resolve(useElevatorPositionPair$Proxy)
+  const of = resolve(useRxOf)
+  const switchMap = resolve(useRxSwitchMap)
+  const withLatestFrom = resolve(useRxWithLatestFrom)
 
   const elevatorQueueInsert$ = elevatorQueueInsertEvent$.pipe(
     withLatestFrom(elevatorPositionPair$Proxy),

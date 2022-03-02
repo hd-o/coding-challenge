@@ -1,6 +1,6 @@
 import { ElevatorId } from '/src/elevator/id'
 import { useImmutableRecord } from '/src/pkg/immutable/Record'
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 import { RecordOf } from 'immutable'
 import { ElevatorQueue$ } from '../'
 
@@ -13,8 +13,8 @@ export type ElevatorQueue$Pair = RecordOf<ElevatorQueue$PairModel>
 
 type NewElevatorQueue$Pair = (e: ElevatorId, q$: ElevatorQueue$) => ElevatorQueue$Pair
 
-export const useNewElevatorQueue$Pair: Use<NewElevatorQueue$Pair> = (container) => {
-  const Record = resolve(container)(useImmutableRecord)
+export const useNewElevatorQueue$Pair: Use<NewElevatorQueue$Pair> = (resolve) => {
+  const Record = resolve(useImmutableRecord)
 
   const newElevatorQueue$Pair: NewElevatorQueue$Pair =
     (elevator, queue$) => Record({ elevator, queue$ })()

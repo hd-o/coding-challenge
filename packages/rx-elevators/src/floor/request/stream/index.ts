@@ -4,21 +4,21 @@ import { useElevatorQueuePair$Proxy } from '/src/elevator/queue/pair/stream/prox
 import { useRxSkipWhile } from '/src/pkg/rxjs/skipWhile'
 import { useRxSwitchMap } from '/src/pkg/rxjs/switchMap'
 import { useRxWithLatestFrom } from '/src/pkg/rxjs/withLatestFrom'
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 import { Observable } from 'rxjs'
 import { useFloorRequestEvent$ } from '../event/stream'
 import { useFloorRequestMapper } from '../mapper'
 
 export type FloorRequest$ = Observable<ElevatorFloorPair>
 
-export const useFloorRequest$: Use<FloorRequest$> = (container) => {
-  const elevatorPositionPair$Proxy = resolve(container)(useElevatorPositionPair$Proxy)
-  const elevatorQueuePair$Proxy = resolve(container)(useElevatorQueuePair$Proxy)
-  const floorRequestEvent$ = resolve(container)(useFloorRequestEvent$)
-  const floorRequestMapper = resolve(container)(useFloorRequestMapper)
-  const skipWhile = resolve(container)(useRxSkipWhile)
-  const switchMap = resolve(container)(useRxSwitchMap)
-  const withLatestFrom = resolve(container)(useRxWithLatestFrom)
+export const useFloorRequest$: Use<FloorRequest$> = (resolve) => {
+  const elevatorPositionPair$Proxy = resolve(useElevatorPositionPair$Proxy)
+  const elevatorQueuePair$Proxy = resolve(useElevatorQueuePair$Proxy)
+  const floorRequestEvent$ = resolve(useFloorRequestEvent$)
+  const floorRequestMapper = resolve(useFloorRequestMapper)
+  const skipWhile = resolve(useRxSkipWhile)
+  const switchMap = resolve(useRxSwitchMap)
+  const withLatestFrom = resolve(useRxWithLatestFrom)
 
   const floorRequest$ = floorRequestEvent$.pipe(
     withLatestFrom(elevatorQueuePair$Proxy, elevatorPositionPair$Proxy),
