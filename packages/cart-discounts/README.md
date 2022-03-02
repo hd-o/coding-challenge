@@ -2,7 +2,7 @@
 
 `#discounts` `#python` `#shopping`
 
-Calculating total price for shopping carts, with different discounts applied
+Calculating total price for shopping carts, with discounts applied
 
 ## Challenge
 
