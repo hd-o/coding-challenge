@@ -1,4 +1,4 @@
-import { SkipIterator } from '/src/SkipIterator'
+import { SkipIterator } from '../src'
 
 const mock = [
   {
