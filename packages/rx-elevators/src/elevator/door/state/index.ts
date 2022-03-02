@@ -1,5 +1,6 @@
-import { FnCtor } from '/src/function/container'
+
 import { useImmutableRecord } from '/src/pkg/immutable/Record'
+import { resolve, Use } from '/src/util/resolve'
 import { RecordOf } from 'immutable'
 import { ElevatorDoorActionId } from '../action/id'
 import { elevatorDoorMovementTypes, ElevatorDoorMovementTypes } from '../movement/types'
@@ -16,8 +17,8 @@ export type ElevatorDoorState = RecordOf<ElevatorDoorStateModel>
 
 type NewDoorState = () => ElevatorDoorState
 
-export const useNewElevatorDoorState: FnCtor<NewDoorState> = (container) => {
-  const Record = container.resolve(useImmutableRecord)
+export const useNewElevatorDoorState: Use<NewDoorState> = (container) => {
+  const Record = resolve(container)(useImmutableRecord)
 
   const newDoorState: NewDoorState = () => Record<ElevatorDoorStateModel>({
     currentActionId: null,

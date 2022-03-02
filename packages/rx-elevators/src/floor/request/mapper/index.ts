@@ -1,3 +1,4 @@
+
 import { ElevatorFloorPair, useNewElevatorFloorPair } from '/src/elevator/floor/pair'
 import { ElevatorPositionPair } from '/src/elevator/position/pair'
 import { useElevatorQueueContainsFloor } from '/src/elevator/queue/contains/floor'
@@ -5,18 +6,18 @@ import { useElevatorQueueDoorOpenEvent$ } from '/src/elevator/queue/door/open/ev
 import { ElevatorQueuePair } from '/src/elevator/queue/pair'
 import { floorHeight } from '/src/floor/height'
 import { FloorNumber } from '/src/floor/number'
-import { FnCtor } from '/src/function/container'
 import { useRxOf } from '/src/pkg/rxjs/of'
+import { resolve, Use } from '/src/util/resolve'
 import { Observable } from 'rxjs'
 
 type FloorRequestTriple = [FloorNumber, ElevatorQueuePair[], ElevatorPositionPair[]]
 type FloorRequestMapper = (floorQueuePair: FloorRequestTriple) => Observable<ElevatorFloorPair>
 
-export const useFloorRequestMapper: FnCtor<FloorRequestMapper> = (container) => {
-  const doorOpenEvent$ = container.resolve(useElevatorQueueDoorOpenEvent$)
-  const newElevatorFloorPair = container.resolve(useNewElevatorFloorPair)
-  const of = container.resolve(useRxOf)
-  const queueContainsFloor = container.resolve(useElevatorQueueContainsFloor)
+export const useFloorRequestMapper: Use<FloorRequestMapper> = (container) => {
+  const doorOpenEvent$ = resolve(container)(useElevatorQueueDoorOpenEvent$)
+  const newElevatorFloorPair = resolve(container)(useNewElevatorFloorPair)
+  const of = resolve(container)(useRxOf)
+  const queueContainsFloor = resolve(container)(useElevatorQueueContainsFloor)
 
   /**
    * Logic for selecting an elevator on floor request.

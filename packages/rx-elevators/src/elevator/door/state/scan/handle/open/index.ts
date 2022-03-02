@@ -3,18 +3,18 @@ import { elevatorDoorPositions } from '/src/elevator/door/position'
 import { ElevatorDoorState } from '/src/elevator/door/state'
 import { ElevatorId } from '/src/elevator/id'
 import { useElevatorQueueDoorClosedEvent$ } from '/src/elevator/queue/door/closed/event'
-import { FnCtor } from '/src/function/container'
 import { useLodashRound } from '/src/pkg/lodash/round'
 import { Settings } from '/src/settings/stream'
+import { resolve, Use } from '/src/util/resolve'
 
 const movementTypes = elevatorDoorMovementTypes
 
 type ElevatorDoorStateScanHandleOpen =
   (e: ElevatorId, props: [ElevatorDoorState, Settings]) => ElevatorDoorState
 
-export const useElevatorDoorStateScanHandleOpen: FnCtor<ElevatorDoorStateScanHandleOpen> = (container) => {
-  const elevatorQueueDoorClosedEvent$ = container.resolve(useElevatorQueueDoorClosedEvent$)
-  const round = container.resolve(useLodashRound)
+export const useElevatorDoorStateScanHandleOpen: Use<ElevatorDoorStateScanHandleOpen> = (container) => {
+  const elevatorQueueDoorClosedEvent$ = resolve(container)(useElevatorQueueDoorClosedEvent$)
+  const round = resolve(container)(useLodashRound)
 
   const elevatorDoorStateScanHandleOpen: ElevatorDoorStateScanHandleOpen = (elevator, [state, settings]) => {
     const speed = settings.elevatorDoorMovementStep

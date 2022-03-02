@@ -1,11 +1,12 @@
+
 import { ElevatorId } from '/src/elevator/id'
 import { useNewElevatorQueueInterval$ } from '/src/elevator/queue/interval/stream'
-import { FnCtor } from '/src/function/container'
 import { useRxScan } from '/src/pkg/rxjs/scan'
 import { useRxShare } from '/src/pkg/rxjs/share'
 import { useRxStartWith } from '/src/pkg/rxjs/startWith'
 import { useRxWithLatestFrom } from '/src/pkg/rxjs/withLatestFrom'
 import { useSettings$ } from '/src/settings/stream'
+import { resolve, Use } from '/src/util/resolve'
 import { Observable } from 'rxjs'
 import { ElevatorDoorState, useNewElevatorDoorState } from '../'
 import { useElevatorDoorStateScan } from '../scan'
@@ -14,15 +15,15 @@ export type ElevatorDoorState$ = Observable<ElevatorDoorState>
 
 type NewElevatorDoorState$ = (e: ElevatorId, s?: ElevatorDoorState) => ElevatorDoorState$
 
-export const useNewElevatorDoorState$: FnCtor<NewElevatorDoorState$> = (container) => {
-  const newDoorState = container.resolve(useNewElevatorDoorState)
-  const scan = container.resolve(useRxScan)
-  const share = container.resolve(useRxShare)
-  const startWith = container.resolve(useRxStartWith)
-  const stateScan = container.resolve(useElevatorDoorStateScan)
-  const newElevatorQueueInterval$ = container.resolve(useNewElevatorQueueInterval$)
-  const settings$ = container.resolve(useSettings$)
-  const withLatestFrom = container.resolve(useRxWithLatestFrom)
+export const useNewElevatorDoorState$: Use<NewElevatorDoorState$> = (container) => {
+  const newDoorState = resolve(container)(useNewElevatorDoorState)
+  const scan = resolve(container)(useRxScan)
+  const share = resolve(container)(useRxShare)
+  const startWith = resolve(container)(useRxStartWith)
+  const stateScan = resolve(container)(useElevatorDoorStateScan)
+  const newElevatorQueueInterval$ = resolve(container)(useNewElevatorQueueInterval$)
+  const settings$ = resolve(container)(useSettings$)
+  const withLatestFrom = resolve(container)(useRxWithLatestFrom)
 
   const initialState = newDoorState()
 

@@ -9,7 +9,7 @@ import { useNewElevator$Map$ } from '/src/elevator/stream/map/stream'
 import { useFloorNumber$ } from '/src/floor/number/stream'
 import { equals } from 'ramda'
 import { firstValueFrom, of } from 'rxjs'
-import { elevatorCount, floorCount, resolve } from '../shared'
+import { elevatorCount, floorCount, specResolve } from '../shared'
 
 let elevatorId$: ReturnType<typeof useElevatorId$>
 let floorNumber$: ReturnType<typeof useFloorNumber$>
@@ -21,10 +21,10 @@ const mockValue = Symbol('mockValue')
 const mockValue$ = of(mockValue)
 
 beforeEach(() => {
-  elevatorId$ = resolve(useElevatorId$)
-  floorNumber$ = resolve(useFloorNumber$)
-  newElevator$Map$ = resolve(useNewElevator$Map$)
-  newElevatorPair$ = resolve(useNewElevatorPair$)
+  elevatorId$ = specResolve(useElevatorId$)
+  floorNumber$ = specResolve(useFloorNumber$)
+  newElevator$Map$ = specResolve(useNewElevator$Map$)
+  newElevatorPair$ = specResolve(useNewElevatorPair$)
 })
 
 describe('model startup', () => {

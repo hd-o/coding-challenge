@@ -1,11 +1,10 @@
-import { useContext } from 'react'
 import { Observable, ObservedValueOf } from 'rxjs'
-import { FnContainerCtx, FnCtor } from '../function/container'
+import { Use } from './resolve'
+import { useResolve } from './useResolve'
 import { useStream } from './useStream'
 
 export const useStreamFn =
-  <Fn extends FnCtor<Observable<any>>>
+  <Fn extends Use<Observable<any>>>
   (fn: Fn): ObservedValueOf<ReturnType<Fn>> => {
-    const container = useContext(FnContainerCtx)
-    return useStream(container.resolve(fn))
+    return useStream(useResolve(fn))
   }

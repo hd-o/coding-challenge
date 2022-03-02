@@ -1,21 +1,22 @@
+
 import { ElevatorId } from '/src/elevator/id'
 import { useElevatorId$ } from '/src/elevator/id/stream'
-import { FnCtor } from '/src/function/container'
 import { useNewMapFromTuple } from '/src/map/from/tuple'
 import { Map$ } from '/src/map/stream'
 import { useRxMap } from '/src/pkg/rxjs/map'
 import { useRxShareReplay } from '/src/pkg/rxjs/shareReplay'
+import { resolve, Use } from '/src/util/resolve'
 import { Observable } from 'rxjs'
 
 type NewElevator$Map$ =
   <Value, Value$ extends Observable<Value>>
   (newValue$: (e: ElevatorId) => Value$) => Map$<ElevatorId, Value$>
 
-export const useNewElevator$Map$: FnCtor<NewElevator$Map$> = (container) => {
-  const elevatorId$ = container.resolve(useElevatorId$)
-  const map = container.resolve(useRxMap)
-  const newMapFromTuple = container.resolve(useNewMapFromTuple)
-  const shareReplay = container.resolve(useRxShareReplay)
+export const useNewElevator$Map$: Use<NewElevator$Map$> = (container) => {
+  const elevatorId$ = resolve(container)(useElevatorId$)
+  const map = resolve(container)(useRxMap)
+  const newMapFromTuple = resolve(container)(useNewMapFromTuple)
+  const shareReplay = resolve(container)(useRxShareReplay)
 
   /**
    * @param newValue$ Function that, given an ElevatorId, creates a stream of values (Value$)

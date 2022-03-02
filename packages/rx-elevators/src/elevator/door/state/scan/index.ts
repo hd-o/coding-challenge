@@ -1,10 +1,11 @@
+
 import { elevatorDoorMovementTypes } from '/src/elevator/door/movement/types'
 import { ElevatorId } from '/src/elevator/id'
 import { ElevatorQueue } from '/src/elevator/queue'
 import { elevatorQueueDoorActionTypes } from '/src/elevator/queue/door/action/type'
 import { elevatorQueueItemCategories } from '/src/elevator/queue/item/category'
-import { FnCtor } from '/src/function/container'
 import { Settings } from '/src/settings/stream'
+import { resolve, Use } from '/src/util/resolve'
 import { ElevatorDoorState } from '../'
 import { useElevatorDoorStateScanHandleOpen } from './handle/open'
 
@@ -14,8 +15,8 @@ const itemCategories = elevatorQueueItemCategories
 
 type Scan = (e: ElevatorId) => (s: ElevatorDoorState, props: [ElevatorQueue, Settings]) => ElevatorDoorState
 
-export const useElevatorDoorStateScan: FnCtor<Scan> = (container) => {
-  const handleOpen = container.resolve(useElevatorDoorStateScanHandleOpen)
+export const useElevatorDoorStateScan: Use<Scan> = (container) => {
+  const handleOpen = resolve(container)(useElevatorDoorStateScanHandleOpen)
 
   const doorStateScan: Scan = (elevator) => (state, [queue, settings]) => {
     const nextItem = queue.first()
