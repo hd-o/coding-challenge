@@ -7,6 +7,10 @@
 
 IoC container resolver for functional programming
 
+This algorithm was designed while working on [rx-elevators][rx_elevators]. It wraps a dependency container, in this case [inversify][inversify] but could be others like [tsyringe][tsyringe], and exposes [resolve][resolve] to enable a functional dependency resolution syntax. In summary, it enables functional inversion of control, or IoC without classes, similar to React's Context. See [Context vs Containers][c_vs_c] for background.
+
+In more capable functional programming languages, like [Haskell][haskell], or [Scala][scala], inversion of control is achieved by using implicit parameters ([Haskell][haskell_imp], [Scala][scala_imp]), but TypeScript does not provide such a practical feature. IoC can be easily achieved with JavaScript, but many methods require dynamic resolution ("stringly typed", and/or proxies), making it harder to correctly type an algorithm (type as in typed, "strongly typed"). In JavaScript it is common to find solutions like [inversify][inversify] for class based IoC, and [React Context][react_ctx] for function based IoC
+
 ---
 
 ```ts
@@ -32,12 +36,6 @@ test('resolving dependencies', () => {
   expect(sum10(20)).toBe(30)
 })
 ```
-
----
-
-This algorithm was designed while working on [rx-elevators][rx_elevators]. It wraps a dependency container, in this case [inversify][inversify] but could be others like [tsyringe][tsyringe], and exposes [resolve][resolve] to enable a functional dependency resolution syntax. In summary, it enables functional inversion of control, or IoC without classes, similar to React's Context. See [Context vs Containers][c_vs_c] for background.
-
-In more capable functional programming languages, like [Haskell][haskell], or [Scala][scala], inversion of control is achieved by using implicit parameters ([Haskell][haskell_imp], [Scala][scala_imp]), but TypeScript does not provide such a practical feature. IoC can be easily achieved with JavaScript, but many methods require dynamic resolution ("stringly typed", and/or proxies), making it harder to correctly type an algorithm (type as in typed, "strongly typed"). In JavaScript it is common to find solutions like [inversify][inversify] for class based IoC, and [React Context][react_ctx] for function based IoC.
 
 <!--  -->
 
