@@ -6,7 +6,7 @@ My coding challenge solutions, and projects where I explore different technologi
 
 - [🛒 Cart Discounts](./packages/cart-discounts)
   - `#discounts` `#python` `#shopping`
-  - Calculating total price for shopping carts, with different discounts applied
+  - Calculating total price for shopping carts, with discounts applied
 
 - [➡️ Function Resolve](./packages/function-resolve)
   - `#container` `#dependency` `#functional`
