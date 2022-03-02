@@ -5,12 +5,12 @@ import { elevatorQueueFloorActionTypes } from '/src/elevator/queue/floor/action/
 import { useElevatorQueueInsert$ } from '/src/elevator/queue/insert/stream'
 import { useElevatorQueueRemoveEvent$ } from '/src/elevator/queue/remove/event/stream'
 import { useFloorRequest$ } from '/src/floor/request/stream'
-import { FnCtor } from '/src/function/container'
 import { useFunctionTapLog } from '/src/function/tapLog'
 import { useRxMap } from '/src/pkg/rxjs/map'
 import { useRxMerge } from '/src/pkg/rxjs/merge'
 import { useRxShare } from '/src/pkg/rxjs/share'
 import { useRxTap } from '/src/pkg/rxjs/tap'
+import { resolve, Use } from '/src/util/resolve'
 import { Observable } from 'rxjs'
 import { ElevatorQueueAction } from '../'
 import { useElevatorQueueActionMapDoorItem } from '../map/door/item'
@@ -21,19 +21,19 @@ const floorActionTypes = elevatorQueueFloorActionTypes
 
 type ElevatorQueueAction$ = Observable<ElevatorQueueAction>
 
-export const useElevatorQueueAction$: FnCtor<ElevatorQueueAction$> = (container) => {
-  const doorClosedEvent$ = container.resolve(useElevatorQueueDoorClosedEvent$)
-  const doorOpenEvent$ = container.resolve(useElevatorQueueDoorOpenEvent$)
-  const floorRequest$ = container.resolve(useFloorRequest$)
-  const insert$ = container.resolve(useElevatorQueueInsert$)
-  const map = container.resolve(useRxMap)
-  const mapDoorItem = container.resolve(useElevatorQueueActionMapDoorItem)
-  const mapFloorAction = container.resolve(useElevatorQueueMapFloorAction)
-  const merge = container.resolve(useRxMerge)
-  const removeEvent$ = container.resolve(useElevatorQueueRemoveEvent$)
-  const share = container.resolve(useRxShare)
-  const tap = container.resolve(useRxTap)
-  const tapLog = container.resolve(useFunctionTapLog)
+export const useElevatorQueueAction$: Use<ElevatorQueueAction$> = (container) => {
+  const doorClosedEvent$ = resolve(container)(useElevatorQueueDoorClosedEvent$)
+  const doorOpenEvent$ = resolve(container)(useElevatorQueueDoorOpenEvent$)
+  const floorRequest$ = resolve(container)(useFloorRequest$)
+  const insert$ = resolve(container)(useElevatorQueueInsert$)
+  const map = resolve(container)(useRxMap)
+  const mapDoorItem = resolve(container)(useElevatorQueueActionMapDoorItem)
+  const mapFloorAction = resolve(container)(useElevatorQueueMapFloorAction)
+  const merge = resolve(container)(useRxMerge)
+  const removeEvent$ = resolve(container)(useElevatorQueueRemoveEvent$)
+  const share = resolve(container)(useRxShare)
+  const tap = resolve(container)(useRxTap)
+  const tapLog = resolve(container)(useFunctionTapLog)
 
   const elevatorQueueAction$: ElevatorQueueAction$ = merge(
     doorClosedEvent$.pipe(map(mapDoorItem(doorActionTypes.Closed))),

@@ -1,11 +1,12 @@
+
 import { FloorNumber } from '/src/floor/number'
-import { FnCtor } from '/src/function/container'
 import { useRxSubject } from '/src/pkg/rxjs/Subject'
+import { resolve, Use } from '/src/util/resolve'
 import { Subject } from 'rxjs'
 
 type FloorRequestEvent$ = Subject<FloorNumber>
 
-export const useFloorRequestEvent$: FnCtor<FloorRequestEvent$> = (container) => {
-  const Subject = container.resolve(useRxSubject)
+export const useFloorRequestEvent$: Use<FloorRequestEvent$> = (container) => {
+  const Subject = resolve(container)(useRxSubject)
   return new Subject<FloorNumber>()
 }

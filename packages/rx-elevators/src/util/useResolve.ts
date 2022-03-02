@@ -1,7 +1,14 @@
 import { useContext } from 'react'
-import { FnContainerCtx, FnCtor } from '../function/container'
+import { ContainerCtx } from '../container'
+import { resolve, Use } from './resolve'
 
-export const useResolve = <Fn extends FnCtor<any>> (useFn: Fn): ReturnType<Fn> => {
-  const container = useContext(FnContainerCtx)
-  return container.resolve(useFn)
+/**
+ * Should only be used by React Components.
+ * Other functions should use `resolve` directly.
+ * so its container argument is used for resolution,
+ * while Components should use ContainerCtx's value
+ */
+export const useResolve = <Fn extends Use<any>> (useFn: Fn): ReturnType<Fn> => {
+  const container = useContext(ContainerCtx)
+  return resolve(container)(useFn)
 }

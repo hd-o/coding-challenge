@@ -4,7 +4,6 @@
 import { App } from '/src/app'
 import { useElevatorCount$ } from '/src/elevator/count/stream'
 import { useFloorCount$ } from '/src/floor/count'
-import { FnContainerCtx } from '/src/function/container'
 import { useImmutableRecord } from '/src/pkg/immutable/Record'
 import { useRxAnimationFrames } from '/src/pkg/rxjs/animationFrames'
 import { useRxOf } from '/src/pkg/rxjs/of'
@@ -13,15 +12,16 @@ import { useStartup } from '/src/startup'
 import { FC, useEffect, useState } from 'react'
 import { Subscription } from 'rxjs'
 import { render } from '@testing-library/react'
+import { ContainerCtx } from '../src/container'
 import { useElevatorDoorPair$ } from './model/util/elevatorDoorPair$'
 import { useMockInterval$ } from './model/util/interval$'
-import { container, elevatorCount, floorCount, resolve } from './shared'
+import { elevatorCount, floorCount, specContainer, specResolve } from './shared'
 
 let mockInterval$: ReturnType<typeof useMockInterval$>
 let startupSubscription: Subscription
 
-const of = container.resolve(useRxOf)
-const Record = container.resolve(useImmutableRecord)
+const of = specResolve(useRxOf)
+const Record = specResolve(useImmutableRecord)
 const settings: Settings = Record<SettingsModel>({
   // Increase movement speed to prevent timeouts
   elevatorDoorMovementStep: 1,
@@ -29,18 +29,18 @@ const settings: Settings = Record<SettingsModel>({
 })()
 
 beforeEach(async () => {
-  container.reset()
+  specContainer.unload()
 
-  container.register(useSettings$, () => of(settings))
-  container.register(useRxAnimationFrames, () => () => mockInterval$)
-  mockInterval$ = resolve(useMockInterval$)
+  specContainer.bind(useSettings$).toConstantValue(of(settings))
+  specContainer.bind(useRxAnimationFrames).toConstantValue(() => mockInterval$)
+  mockInterval$ = specResolve(useMockInterval$)
 
-  startupSubscription = resolve(useStartup)()
+  startupSubscription = specResolve(useStartup)()
   // Start door pair stream for elevator movement tests
-  startupSubscription.add(resolve(useElevatorDoorPair$).subscribe(() => {}))
+  startupSubscription.add(specResolve(useElevatorDoorPair$).subscribe(() => {}))
 
-  resolve(useElevatorCount$).next(elevatorCount)
-  resolve(useFloorCount$).next(floorCount)
+  specResolve(useElevatorCount$).next(elevatorCount)
+  specResolve(useFloorCount$).next(floorCount)
 
   // Elements required by elevator spec tests
   const TestCtrl: FC = () => {
@@ -66,12 +66,12 @@ beforeEach(async () => {
 
   // Render App for UI snapshots, and elevator tests
   render(
-    <FnContainerCtx.Provider value={container}>
+    <ContainerCtx.Provider value={specContainer}>
       <App
         TestCtrl={TestCtrl}
         subscription={startupSubscription}
       />
-    </FnContainerCtx.Provider>
+    </ContainerCtx.Provider>
   )
 })
 

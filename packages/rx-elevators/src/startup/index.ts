@@ -3,15 +3,15 @@ import { useElevatorPositionPair$ } from '../elevator/position/pair/stream'
 import { useElevatorPositionPair$Proxy } from '../elevator/position/pair/stream/proxy'
 import { useElevatorQueuePair$ } from '../elevator/queue/pair/stream'
 import { useElevatorQueuePair$Proxy } from '../elevator/queue/pair/stream/proxy'
-import { FnCtor } from '../function/container'
+import { resolve, Use } from '../util/resolve'
 
 type Startup = () => Subscription
 
-export const useStartup: FnCtor<Startup> = (container) => {
-  const elevatorQueuePair$ = container.resolve(useElevatorQueuePair$)
-  const elevatorQueuePair$Proxy = container.resolve(useElevatorQueuePair$Proxy)
-  const elevatorPositionPair$ = container.resolve(useElevatorPositionPair$)
-  const elevatorPositionPair$Proxy = container.resolve(useElevatorPositionPair$Proxy)
+export const useStartup: Use<Startup> = (container) => {
+  const elevatorQueuePair$ = resolve(container)(useElevatorQueuePair$)
+  const elevatorQueuePair$Proxy = resolve(container)(useElevatorQueuePair$Proxy)
+  const elevatorPositionPair$ = resolve(container)(useElevatorPositionPair$)
+  const elevatorPositionPair$Proxy = resolve(container)(useElevatorPositionPair$Proxy)
 
   const startup = (): Subscription => {
     const modelSub = new Subscription()

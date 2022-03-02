@@ -1,11 +1,12 @@
-import { ElevatorFloorPair } from '/src/floor/pair'
-import { FnCtor } from '/src/function/container'
+
+import { ElevatorFloorPair } from '/src/elevator/floor/pair'
 import { useRxSubject } from '/src/pkg/rxjs/Subject'
+import { resolve, Use } from '/src/util/resolve'
 import { Subject } from 'rxjs'
 
 type ElevatorQueueRemoveEvent$ = Subject<ElevatorFloorPair>
 
-export const useElevatorQueueRemoveEvent$: FnCtor<ElevatorQueueRemoveEvent$> = (container) => {
-  const Subject = container.resolve(useRxSubject)
+export const useElevatorQueueRemoveEvent$: Use<ElevatorQueueRemoveEvent$> = (container) => {
+  const Subject = resolve(container)(useRxSubject)
   return new Subject<ElevatorFloorPair>()
 }

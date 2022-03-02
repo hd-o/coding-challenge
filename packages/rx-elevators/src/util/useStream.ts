@@ -1,14 +1,12 @@
-import { useContext } from 'react'
 import { Observable, ObservedValueOf } from 'rxjs'
-import { FnContainerCtx } from '../function/container'
 import {
   useObservableHooksUseObservableEagerState
 } from '../pkg/observable-hooks/useObservableEagerState'
+import { useResolve } from './useResolve'
 
 type UseStream = <S extends Observable<any>> ($: S) => ObservedValueOf<typeof $>
 
 export const useStream: UseStream = ($) => {
-  const container = useContext(FnContainerCtx)
-  const useObservableEagerState = container.resolve(useObservableHooksUseObservableEagerState)
+  const useObservableEagerState = useResolve(useObservableHooksUseObservableEagerState)
   return useObservableEagerState($)
 }

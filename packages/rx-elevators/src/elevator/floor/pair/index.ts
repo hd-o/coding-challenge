@@ -1,7 +1,8 @@
+
 import { ElevatorId } from '/src/elevator/id'
 import { FloorNumber } from '/src/floor/number'
-import { FnCtor } from '/src/function/container'
 import { useImmutableRecord } from '/src/pkg/immutable/Record'
+import { resolve, Use } from '/src/util/resolve'
 import { RecordOf } from 'immutable'
 
 interface ElevatorFloorPairModel {
@@ -13,8 +14,8 @@ export type ElevatorFloorPair = RecordOf<ElevatorFloorPairModel>
 
 type NewElevatorFloorPair = (e: ElevatorId, f: FloorNumber) => ElevatorFloorPair
 
-export const useNewElevatorFloorPair: FnCtor<NewElevatorFloorPair> = (container) => {
-  const Record = container.resolve(useImmutableRecord)
+export const useNewElevatorFloorPair: Use<NewElevatorFloorPair> = (container) => {
+  const Record = resolve(container)(useImmutableRecord)
 
   const newElevatorFloorPair: NewElevatorFloorPair =
     (elevator, floor) => Record({ elevator, floor })()

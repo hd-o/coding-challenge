@@ -1,11 +1,12 @@
+
 import { ElevatorId } from '/src/elevator/id'
-import { FnCtor } from '/src/function/container'
 import { useRxSubject } from '/src/pkg/rxjs/Subject'
+import { resolve, Use } from '/src/util/resolve'
 import { Subject } from 'rxjs'
 
 type ElevatorQueueDoorOpenEvent$ = Subject<ElevatorId>
 
-export const useElevatorQueueDoorOpenEvent$: FnCtor<ElevatorQueueDoorOpenEvent$> = (container) => {
-  const Subject = container.resolve(useRxSubject)
+export const useElevatorQueueDoorOpenEvent$: Use<ElevatorQueueDoorOpenEvent$> = (container) => {
+  const Subject = resolve(container)(useRxSubject)
   return new Subject<ElevatorId>()
 }
