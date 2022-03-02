@@ -1,4 +1,3 @@
-
 import { ElevatorId } from '/src/elevator/id'
 import { useNewElevatorQueueInterval$ } from '/src/elevator/queue/interval/stream'
 import { useRxScan } from '/src/pkg/rxjs/scan'

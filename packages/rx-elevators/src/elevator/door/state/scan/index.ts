@@ -1,4 +1,3 @@
-
 import { elevatorDoorMovementTypes } from '/src/elevator/door/movement/types'
 import { ElevatorId } from '/src/elevator/id'
 import { ElevatorQueue } from '/src/elevator/queue'

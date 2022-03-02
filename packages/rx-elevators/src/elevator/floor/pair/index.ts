@@ -1,4 +1,3 @@
-
 import { ElevatorId } from '/src/elevator/id'
 import { FloorNumber } from '/src/floor/number'
 import { useImmutableRecord } from '/src/pkg/immutable/Record'

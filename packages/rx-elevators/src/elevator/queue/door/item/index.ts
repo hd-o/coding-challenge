@@ -1,4 +1,3 @@
-
 import { ElevatorDoorActionId } from '/src/elevator/door/action/id'
 import { ElevatorId } from '/src/elevator/id'
 import {

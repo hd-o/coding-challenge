@@ -1,4 +1,3 @@
-
 import { useElevatorQueuePair$ } from '/src/elevator/queue/pair/stream'
 import { FloorNumber } from '/src/floor/number'
 import { useRxMap } from '/src/pkg/rxjs/map'

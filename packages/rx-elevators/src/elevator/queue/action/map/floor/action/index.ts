@@ -1,4 +1,3 @@
-
 import { ElevatorFloorPair } from '/src/elevator/floor/pair'
 import {
   ElevatorQueueFloorAction, useNewElevatorQueueFloorAction

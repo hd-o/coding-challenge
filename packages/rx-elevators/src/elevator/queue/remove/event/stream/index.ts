@@ -1,4 +1,3 @@
-
 import { ElevatorFloorPair } from '/src/elevator/floor/pair'
 import { useRxSubject } from '/src/pkg/rxjs/Subject'
 import { resolve, Use } from '/src/util/resolve'

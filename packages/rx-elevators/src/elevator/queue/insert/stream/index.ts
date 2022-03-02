@@ -1,4 +1,3 @@
-
 import { ElevatorFloorPair } from '/src/elevator/floor/pair'
 import { useElevatorPositionPair$Proxy } from '/src/elevator/position/pair/stream/proxy'
 import { useElevatorQueueDoorOpenEvent$ } from '/src/elevator/queue/door/open/event'

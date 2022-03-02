@@ -1,4 +1,3 @@
-
 import { ElevatorId } from '/src/elevator/id'
 import { useRxSubject } from '/src/pkg/rxjs/Subject'
 import { resolve, Use } from '/src/util/resolve'

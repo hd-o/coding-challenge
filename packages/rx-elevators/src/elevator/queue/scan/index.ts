@@ -1,4 +1,3 @@
-
 import { resolve, Use } from '/src/util/resolve'
 import { ElevatorQueue } from '../'
 import { ElevatorQueueAction } from '../action'
