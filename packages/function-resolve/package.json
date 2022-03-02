@@ -1,0 +1,51 @@
+{
+  "name": "function-resolve",
+  "description": "IoC container resolver for functional programming",
+  "keywords": [
+    "container",
+    "dependency",
+    "functional"
+  ],
+  "meta": {
+    "category": "algorithm",
+    "title": "➡️ Function Resolve"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "run-s start:parcel",
+    "lint": "run-s setup:eslint run:eslint",
+    "run:eslint": "eslint -c .eslintrc .",
+    "run:jest": "DEBUG_PRINT_LIMIT=0 jest",
+    "setup": "run-p setup:*",
+    "setup:eslint": "node .config/eslint",
+    "setup:jest": "node .config/jest",
+    "setup:typescript": "node .config/typescript",
+    "start": "run-s setup start:*",
+    "start:parcel": "parcel index.html",
+    "test": "run-s setup run:jest",
+    "test:watch": "run-s setup:jest 'run:jest -- --watch'"
+  },
+  "version": "1.0.0",
+  "dependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "@types/jest": "^27.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.13.0",
+    "eslint": "^8.10.0",
+    "eslint-config-standard-with-typescript": "^21.0.1",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^26.1.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.29.2",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "inversify": "^6.0.1",
+    "jest": "^27.5.1",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.3.2",
+    "ts-jest": "^27.1.3",
+    "typescript": "^4.6.2"
+  }
+}

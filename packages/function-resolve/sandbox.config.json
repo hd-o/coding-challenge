@@ -1,0 +1,6 @@
+{
+  "node": "16",
+  "port": 1234,
+  "template": "parcel",
+  "startScript": "test"
+}
