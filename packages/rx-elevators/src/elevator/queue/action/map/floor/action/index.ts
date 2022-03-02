@@ -3,13 +3,13 @@ import {
   ElevatorQueueFloorAction, useNewElevatorQueueFloorAction
 } from '/src/elevator/queue/floor/action'
 import { ElevatorQueueFloorActionType } from '/src/elevator/queue/floor/action/type'
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 
 type ElevatorQueueMapFloorAction =
   (t: ElevatorQueueFloorActionType) => (p: ElevatorFloorPair) => ElevatorQueueFloorAction
 
-export const useElevatorQueueMapFloorAction: Use<ElevatorQueueMapFloorAction> = (container) => {
-  const newFloorAction = resolve(container)(useNewElevatorQueueFloorAction)
+export const useElevatorQueueMapFloorAction: Use<ElevatorQueueMapFloorAction> = (resolve) => {
+  const newFloorAction = resolve(useNewElevatorQueueFloorAction)
 
   const elevatorQueueMapFloorAction: ElevatorQueueMapFloorAction =
     (type) => (pair) => newFloorAction(type, pair)

@@ -1,7 +1,7 @@
 import { ElevatorQueue } from '/src/elevator/queue'
 import { elevatorQueueItemCategories } from '/src/elevator/queue/item/category'
 import { useImmutableOrderedSet } from '/src/pkg/immutable/OrderedSet'
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 import { elevatorQueueDoorActionTypes } from '../action/type'
 import { ElevatorQueueDoorItem } from '../item'
 
@@ -10,8 +10,8 @@ const categories = elevatorQueueItemCategories
 
 type ElevatorQueueDoorScan = (i: ElevatorQueueDoorItem, q: ElevatorQueue) => ElevatorQueue
 
-export const useElevatorQueueDoorScan: Use<ElevatorQueueDoorScan> = (container) => {
-  const OrderedSet = resolve(container)(useImmutableOrderedSet)
+export const useElevatorQueueDoorScan: Use<ElevatorQueueDoorScan> = (resolve) => {
+  const OrderedSet = resolve(useImmutableOrderedSet)
 
   const elevatorQueueScanCategoryDoor: ElevatorQueueDoorScan = (item, queue) => {
     if (item.type === actionTypes.Open) {

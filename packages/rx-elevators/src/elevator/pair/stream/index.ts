@@ -5,7 +5,7 @@ import { useRxCombineLatest } from '/src/pkg/rxjs/combineLatest'
 import { useRxMap } from '/src/pkg/rxjs/map'
 import { useRxShareReplay } from '/src/pkg/rxjs/shareReplay'
 import { useRxSwitchMap } from '/src/pkg/rxjs/switchMap'
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 import { RecordOf } from 'immutable'
 import { Observable } from 'rxjs'
 
@@ -17,12 +17,12 @@ type NewElevatorPair$ =
   //
   ) => Observable<PairType[]>
 
-export const useNewElevatorPair$: Use<NewElevatorPair$> = (container) => {
-  const combineLatest = resolve(container)(useRxCombineLatest)
-  const map = resolve(container)(useRxMap)
-  const Record = resolve(container)(useImmutableRecord)
-  const shareReplay = resolve(container)(useRxShareReplay)
-  const switchMap = resolve(container)(useRxSwitchMap)
+export const useNewElevatorPair$: Use<NewElevatorPair$> = (resolve) => {
+  const combineLatest = resolve(useRxCombineLatest)
+  const map = resolve(useRxMap)
+  const Record = resolve(useImmutableRecord)
+  const shareReplay = resolve(useRxShareReplay)
+  const switchMap = resolve(useRxSwitchMap)
 
   /**
    * @param entries$ Stream of map entries

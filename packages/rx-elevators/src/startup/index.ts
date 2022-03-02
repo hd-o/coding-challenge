@@ -3,15 +3,15 @@ import { useElevatorPositionPair$ } from '../elevator/position/pair/stream'
 import { useElevatorPositionPair$Proxy } from '../elevator/position/pair/stream/proxy'
 import { useElevatorQueuePair$ } from '../elevator/queue/pair/stream'
 import { useElevatorQueuePair$Proxy } from '../elevator/queue/pair/stream/proxy'
-import { resolve, Use } from '../util/resolve'
+import { Use } from '../util/resolve'
 
 type Startup = () => Subscription
 
-export const useStartup: Use<Startup> = (container) => {
-  const elevatorQueuePair$ = resolve(container)(useElevatorQueuePair$)
-  const elevatorQueuePair$Proxy = resolve(container)(useElevatorQueuePair$Proxy)
-  const elevatorPositionPair$ = resolve(container)(useElevatorPositionPair$)
-  const elevatorPositionPair$Proxy = resolve(container)(useElevatorPositionPair$Proxy)
+export const useStartup: Use<Startup> = (resolve) => {
+  const elevatorQueuePair$ = resolve(useElevatorQueuePair$)
+  const elevatorQueuePair$Proxy = resolve(useElevatorQueuePair$Proxy)
+  const elevatorPositionPair$ = resolve(useElevatorPositionPair$)
+  const elevatorPositionPair$Proxy = resolve(useElevatorPositionPair$Proxy)
 
   const startup = (): Subscription => {
     const modelSub = new Subscription()

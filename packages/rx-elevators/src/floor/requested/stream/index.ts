@@ -2,15 +2,15 @@ import { useElevatorQueuePair$ } from '/src/elevator/queue/pair/stream'
 import { FloorNumber } from '/src/floor/number'
 import { useRxMap } from '/src/pkg/rxjs/map'
 import { useRxStartWith } from '/src/pkg/rxjs/startWith'
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 import { Observable } from 'rxjs'
 
 type NewFloorRequested$ = (f: FloorNumber) => Observable<boolean>
 
-export const useNewFloorRequested$: Use<NewFloorRequested$> = (container) => {
-  const elevatorQueuePair$ = resolve(container)(useElevatorQueuePair$)
-  const map = resolve(container)(useRxMap)
-  const startsWith = resolve(container)(useRxStartWith)
+export const useNewFloorRequested$: Use<NewFloorRequested$> = (resolve) => {
+  const elevatorQueuePair$ = resolve(useElevatorQueuePair$)
+  const map = resolve(useRxMap)
+  const startsWith = resolve(useRxStartWith)
 
   const newFloorRequested$: NewFloorRequested$ = (floor) =>
     elevatorQueuePair$.pipe(

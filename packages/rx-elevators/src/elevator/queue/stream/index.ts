@@ -6,7 +6,7 @@ import { useRxScan } from '/src/pkg/rxjs/scan'
 import { useRxShare } from '/src/pkg/rxjs/share'
 import { useRxStartWith } from '/src/pkg/rxjs/startWith'
 import { useRxTap } from '/src/pkg/rxjs/tap'
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 import { Observable } from 'rxjs'
 import { ElevatorQueue } from '../'
 import { useElevatorQueueAction$ } from '../action/stream'
@@ -16,16 +16,16 @@ export type ElevatorQueue$ = Observable<ElevatorQueue>
 
 type NewElevatorQueue$ = (e: ElevatorId, initQ?: ElevatorQueue) => ElevatorQueue$
 
-export const useNewElevatorQueue$: Use<NewElevatorQueue$> = (container) => {
-  const elevatorQueueAction$ = resolve(container)(useElevatorQueueAction$)
-  const filter = resolve(container)(useRxFilter)
-  const OrderedSet = resolve(container)(useImmutableOrderedSet)
-  const queueScan = resolve(container)(useElevatorQueueScan)
-  const scan = resolve(container)(useRxScan)
-  const share = resolve(container)(useRxShare)
-  const startWith = resolve(container)(useRxStartWith)
-  const tap = resolve(container)(useRxTap)
-  const tapLog = resolve(container)(useFunctionTapLog)
+export const useNewElevatorQueue$: Use<NewElevatorQueue$> = (resolve) => {
+  const elevatorQueueAction$ = resolve(useElevatorQueueAction$)
+  const filter = resolve(useRxFilter)
+  const OrderedSet = resolve(useImmutableOrderedSet)
+  const queueScan = resolve(useElevatorQueueScan)
+  const scan = resolve(useRxScan)
+  const share = resolve(useRxShare)
+  const startWith = resolve(useRxStartWith)
+  const tap = resolve(useRxTap)
+  const tapLog = resolve(useFunctionTapLog)
 
   const newElevatorQueue$: NewElevatorQueue$ = (elevator, initQ = OrderedSet()) =>
     elevatorQueueAction$.pipe(

@@ -6,16 +6,16 @@ import { elevatorQueueItemCategories } from '/src/elevator/queue/item/category'
 import { useElevatorQueueRemoveEvent$ } from '/src/elevator/queue/remove/event/stream'
 import { floorHeight } from '/src/floor/height'
 import { Settings } from '/src/settings/stream'
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 import { ElevatorPosition } from '../'
 
 type ElevatorPositionScan =
   (e: ElevatorId) => (p: ElevatorPosition, props: [ElevatorQueue, Settings]) => ElevatorPosition
 
-export const newElevatorPositionScan: Use<ElevatorPositionScan> = (container) => {
-  const elevatorQueueDoorOpenEvent$ = resolve(container)(useElevatorQueueDoorOpenEvent$)
-  const elevatorQueueRemoveEvent$ = resolve(container)(useElevatorQueueRemoveEvent$)
-  const newElevatorFloorPair = resolve(container)(useNewElevatorFloorPair)
+export const newElevatorPositionScan: Use<ElevatorPositionScan> = (resolve) => {
+  const elevatorQueueDoorOpenEvent$ = resolve(useElevatorQueueDoorOpenEvent$)
+  const elevatorQueueRemoveEvent$ = resolve(useElevatorQueueRemoveEvent$)
+  const newElevatorFloorPair = resolve(useNewElevatorFloorPair)
 
   const elevatorPositionScan: ElevatorPositionScan = (elevator) =>
     (position, [queue, settings]) => {

@@ -5,7 +5,7 @@ import { useRxShare } from '/src/pkg/rxjs/share'
 import { useRxStartWith } from '/src/pkg/rxjs/startWith'
 import { useRxWithLatestFrom } from '/src/pkg/rxjs/withLatestFrom'
 import { useSettings$ } from '/src/settings/stream'
-import { resolve, Use } from '/src/util/resolve'
+import { Use } from '/src/util/resolve'
 import { Observable } from 'rxjs'
 import { ElevatorPosition } from '../'
 import { newElevatorPositionScan } from '../scan'
@@ -14,14 +14,14 @@ export type ElevatorPosition$ = Observable<ElevatorPosition>
 
 type NewElevatorPosition$ = (e: ElevatorId) => ElevatorPosition$
 
-export const useNewElevatorPosition$: Use<NewElevatorPosition$> = (container) => {
-  const elevatorPositionScan = resolve(container)(newElevatorPositionScan)
-  const newElevatorQueueInterval$ = resolve(container)(useNewElevatorQueueInterval$)
-  const scan = resolve(container)(useRxScan)
-  const share = resolve(container)(useRxShare)
-  const startWith = resolve(container)(useRxStartWith)
-  const settings$ = resolve(container)(useSettings$)
-  const withLatestFrom = resolve(container)(useRxWithLatestFrom)
+export const useNewElevatorPosition$: Use<NewElevatorPosition$> = (resolve) => {
+  const elevatorPositionScan = resolve(newElevatorPositionScan)
+  const newElevatorQueueInterval$ = resolve(useNewElevatorQueueInterval$)
+  const scan = resolve(useRxScan)
+  const share = resolve(useRxShare)
+  const startWith = resolve(useRxStartWith)
+  const settings$ = resolve(useSettings$)
+  const withLatestFrom = resolve(useRxWithLatestFrom)
 
   const newElevatorPosition$: NewElevatorPosition$ = (elevator) =>
     newElevatorQueueInterval$(elevator).pipe(
