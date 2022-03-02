@@ -1,4 +1,3 @@
-
 import { ElevatorFloorPair, useNewElevatorFloorPair } from '/src/elevator/floor/pair'
 import { ElevatorPositionPair } from '/src/elevator/position/pair'
 import { useElevatorQueueContainsFloor } from '/src/elevator/queue/contains/floor'

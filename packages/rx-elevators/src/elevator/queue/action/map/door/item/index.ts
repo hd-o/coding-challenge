@@ -1,4 +1,3 @@
-
 import { ElevatorId } from '/src/elevator/id'
 import { ElevatorQueueDoorActionType } from '/src/elevator/queue/door/action/type'
 import { ElevatorQueueDoorItem, useNewElevatorQueueDoorItem } from '/src/elevator/queue/door/item'

@@ -1,4 +1,3 @@
-
 import { useElevatorQueueItemIsOfFloor } from '/src/elevator/queue/floor/item/of/floor'
 import { FloorNumber } from '/src/floor/number'
 import { resolve, Use } from '/src/util/resolve'

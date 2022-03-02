@@ -1,4 +1,3 @@
-
 import {
   elevatorQueueItemCategories, ElevatorQueueItemCategory
 } from '/src/elevator/queue/item/category'

@@ -1,4 +1,3 @@
-
 import { ElevatorQueueItem } from '/src/elevator/queue/item'
 import { FloorNumber } from '/src/floor/number'
 import { resolve, Use } from '/src/util/resolve'
