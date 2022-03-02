@@ -51,7 +51,7 @@ In more capable functional programming languages, like [Haskell][haskell], or [S
 
 [inversify]: https://github.com/inversify/InversifyJS
 
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/rx-elevators?file=/spec/index.test.ts&previewwindow=tests
+[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/function-resolve?file=/spec/index.test.ts&previewwindow=tests
 
 [react_ctx]: https://reactjs.org/docs/context.html
 
