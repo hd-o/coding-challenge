@@ -4,7 +4,7 @@ import { Container } from 'inversify'
 let container = new Container()
 
 type Sum = (x: number) => (y: number) => number
-type SumX = ReturnType<Sum>
+type SumX = (x: number) => number
 
 const useSum: Use<Sum> = () => {
   return (x) => (y) => x + y
