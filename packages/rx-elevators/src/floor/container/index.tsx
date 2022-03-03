@@ -10,7 +10,7 @@ import { useFloorNumber$ } from '../number/stream'
 import { FloorPanelCallerCtx } from '../panel/caller'
 import { useFloorRequestEvent$ } from '../request/event/stream'
 
-const FloorContainer: FC<{}> = () => {
+const FloorContainer: FC = () => {
   const FloorPanelCaller = useContext(FloorPanelCallerCtx)
 
   const floorRequestEvent$ = useResolve(useFloorRequestEvent$)

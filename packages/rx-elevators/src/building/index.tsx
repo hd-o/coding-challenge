@@ -3,7 +3,7 @@ import { ElevatorContainerCtx } from '../elevator/container'
 import { FloorContainerCtx } from '../floor/container'
 import { floorHeight } from '../floor/height'
 
-const Building: FC<{}> = () => {
+const Building: FC = () => {
   const ElevatorContainer = useContext(ElevatorContainerCtx)
   const FloorContainer = useContext(FloorContainerCtx)
 

@@ -5,7 +5,7 @@ import { useElevatorDoorState$Map$ } from '../door/state/stream/map'
 import { useElevatorId$ } from '../id/stream'
 import { useElevatorPosition$Map$ } from '../position/stream/map/stream'
 
-const ElevatorContainer: FC<{}> = () => {
+const ElevatorContainer: FC = () => {
   const Elevator = useContext(ElevatorCtx)
 
   const elevatorIds = useStreamFn(useElevatorId$)
