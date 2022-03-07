@@ -30,4 +30,4 @@ const writerAtom = atom(
 
 [live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/jotai-writer-atom?file=/src/app/index.tsx
 
-[solid_calendar]: ../solid-calendar/README.md
+[solid_calendar]: ../solid-calendar/

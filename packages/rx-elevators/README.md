@@ -42,6 +42,6 @@ This project is a follow-up to [solid-calendar][solid_calendar], with the goal o
 
 [solid]: https://simple.wikipedia.org/wiki/SOLID_(object-oriented_design)
 
-[solid_calendar]: ../solid-calendar/README.md
+[solid_calendar]: ../solid-calendar/
 
-[virtual_elevators]: ../virtual-elevators/README.md
+[virtual_elevators]: ../virtual-elevators/

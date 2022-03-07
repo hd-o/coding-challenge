@@ -270,8 +270,8 @@ const ComponentA = () => {
 
 [live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/solid-calendar
 
-[rx_elevators]: ../rx-elevators/README.md
+[rx_elevators]: ../rx-elevators/
 
 [solid]: https://simple.wikipedia.org/wiki/SOLID_(object-oriented_design)
 
-[virtual_elevators]: ../virtual-elevators/README.md
+[virtual_elevators]: ../virtual-elevators/

@@ -36,10 +36,10 @@ This project is a follow-up to [solid-calendar][solid_calendar], and [reactive-t
 
 [mobx]: https://github.com/mobxjs/mobx
 
-[reactive_todos]: ../reactive-todos/README.md
+[reactive_todos]: ../reactive-todos/
 
-[rx_elevators]: ../rx-elevators/README.md
+[rx_elevators]: ../rx-elevators/
 
 [rxjs]: https://github.com/ReactiveX/rxjs
 
-[solid_calendar]: ../solid-calendar/README.md
+[solid_calendar]: ../solid-calendar/

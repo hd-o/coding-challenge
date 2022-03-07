@@ -23,6 +23,6 @@ Because of limitations with [Jest and symbolic links][jest_symlink], current usa
 
 [jest_symlink]: https://github.com/facebook/jest/issues/1477
 
-[virtual_elevators]: ../virtual-elevators/README.md
+[virtual_elevators]: ../virtual-elevators/
 
 [virtual_elevators_package]: ../virtual-elevators/package.json
