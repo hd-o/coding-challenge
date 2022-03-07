@@ -23,4 +23,4 @@ This experiment was done in preparation for [virtual-elevators][virtual_elevator
 
 [tsyringe]: https://github.com/Microsoft/tsyringe
 
-[virtual_elevators]: ../virtual-elevators/README.md
+[virtual_elevators]: ../virtual-elevators/
