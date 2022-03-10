@@ -1,4 +1,4 @@
-# 😜 Emoji Club
+# **[⚠️  WIP]** 😜 Emoji Club
 
 `#ethereum` `#nft` `#react`
 
