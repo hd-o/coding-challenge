@@ -18,6 +18,6 @@ const eslintrc = {
   ],
 }
 
-const writeEslintrc = () => writeConfig(eslintrc, './.eslintrc')
+const writeEslintrc = (config = eslintrc) => writeConfig(config, './.eslintrc')
 
 module.exports = { eslintrc, writeEslintrc }
