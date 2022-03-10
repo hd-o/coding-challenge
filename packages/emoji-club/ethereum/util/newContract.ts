@@ -1,11 +1,11 @@
 import { EmojiClub } from '../typechain'
-import { useEthers } from './pkg/hardhat/ethers'
+import { useHardhatEthers } from './pkg/hardhat/ethers'
 import { Use } from './resolve'
 
 export type NewContract = () => Promise<EmojiClub>
 
 export const useNewContract: Use<NewContract> = (resolve) => {
-  const ethers = resolve(useEthers)
+  const ethers = resolve(useHardhatEthers)
 
   const newContract: NewContract = async () => {
     const EmojiClub = await ethers.getContractFactory('EmojiClub')

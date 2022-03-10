@@ -1,15 +1,16 @@
 import { expect } from 'chai'
-import { ethers } from 'hardhat'
 import { Container } from 'inversify'
 import { EmojiClub } from '../typechain'
 import { useEmojiClub } from '../util/emojiClub'
 import { Mint, useMint } from '../util/mint'
 import { useNewContract } from '../util/newContract'
+import { Ethers, useHardhatEthers } from '../util/pkg/hardhat/ethers'
 import { Resolve, resolve as resolver } from '../util/resolve'
 import { ToNumbers, useToNumbers } from '../util/toNumbers'
 
 let container: Container
 let emojiClub: EmojiClub
+let ethers: Ethers
 let mint: Mint
 let resolve: ReturnType<Resolve>
 let toNumbers: ToNumbers
@@ -19,6 +20,7 @@ beforeEach(async () => {
   resolve = resolver(container)
   emojiClub = await resolve(useNewContract)()
   container.bind(useEmojiClub).toConstantValue(emojiClub)
+  ethers = resolve(useHardhatEthers)
   toNumbers = resolve(useToNumbers)
   mint = resolve(useMint)
 })
