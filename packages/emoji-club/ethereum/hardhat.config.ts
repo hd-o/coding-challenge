@@ -9,7 +9,7 @@ import { HardhatUserConfig } from 'hardhat/config'
 dotenv.config()
 
 const config: HardhatUserConfig = {
-  solidity: '0.8.4',
+  solidity: '0.8.9',
   paths: {
     artifacts: './artifacts'
   }
