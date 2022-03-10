@@ -2,7 +2,7 @@ import { ethers } from 'hardhat'
 
 async function main () {
   const EmojiClub = await ethers.getContractFactory('EmojiClub')
-  const emojiClub = await EmojiClub.deploy('EmojiClub deploy')
+  const emojiClub = await EmojiClub.deploy()
   await emojiClub.deployed()
   console.log('EmojiClub deployed to:', emojiClub.address)
 }
