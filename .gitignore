@@ -15,11 +15,30 @@ node_modules
 
 # Logs
 **/*.log
+**/*.log.*
 
 # Next.js
 .next
 out
+build
 
 # Misc
 .DS_Store
 *.pem
+.env
+.env.*
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+
+# Coverage
+coverage
+coverage.json
+
+# Hardhat
+artifacts
+cache
+typechain
