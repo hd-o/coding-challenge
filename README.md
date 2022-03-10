@@ -24,6 +24,10 @@ My coding challenge solutions, and projects where I explore different technologi
 
 ## 🏛️ Software Architecture
 
+- [😜 Emoji Club](./packages/emoji-club)
+  - `#ethereum` `#nft` `#react`
+  - Full Stack Emoji NFT Dapp
+
 - [📝 Reactive To-Dos](./packages/reactive-todos)
   - `#mvc` `#react` `#rxjs`
   - MVC React architecture with injected state observables, and isolated controller classes
