@@ -1,7 +1,8 @@
 {
   "name": "emoji-club-ethereum",
   "scripts": {
-    "lint": "eslint -c .eslintrc.js ."
+    "lint": "eslint -c .eslintrc.js .",
+    "test": "hardhat test"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
