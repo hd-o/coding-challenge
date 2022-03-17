@@ -32,14 +32,14 @@ describe('EmojiClub', () => {
     expect(ownerBalance).to.equal(0)
   })
   it('mints tokens', async () => {
-    const [, user1, user2] = await ethers.getSigners()
+    const [user1, user2] = await ethers.getSigners()
     await mint(user1.address)
     await mint(user2.address)
     expect(await emojiClub.balanceOf(user1.address)).to.equal(1)
     expect(await emojiClub.balanceOf(user2.address)).to.equal(1)
   })
   it('returns user tokens', async () => {
-    const [, user1, user2] = await ethers.getSigners()
+    const [user1, user2] = await ethers.getSigners()
     // Mint two tokens for each user, in turn
     await mint(user1.address)
     await mint(user2.address)
@@ -59,7 +59,7 @@ describe('EmojiClub', () => {
     expect(await emojiClub.totalSupply()).to.equal(3)
   })
   it('transfers tokens', async () => {
-    const [, user1, user2] = await ethers.getSigners()
+    const [user1, user2] = await ethers.getSigners()
     // Mint two tokens
     await mint(user1.address)
     await mint(user1.address)
