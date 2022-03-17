@@ -1,12 +1,12 @@
 import { expect } from 'chai'
 import { Container } from 'inversify'
 import { EmojiClub } from '../typechain'
-import { useEmojiClub } from '../util/emojiClub'
+import { useEmojiClub } from '../util/emoji-club'
 import { Mint, useMint } from '../util/mint'
-import { useNewContract } from '../util/newContract'
+import { useNewContract } from '../util/new-contract'
 import { Ethers, useHardhatEthers } from '../util/pkg/hardhat/ethers'
 import { Resolve, resolve as resolver } from '../util/resolve'
-import { ToNumbers, useToNumbers } from '../util/toNumbers'
+import { ToNumbers, useToNumbers } from '../util/to-numbers'
 
 let container: Container
 let emojiClub: EmojiClub
