@@ -14,7 +14,7 @@ const eslintrc = {
   ignorePatterns: [
     ...base.eslintrc.ignorePatterns,
     'next-env.d.ts',
-    'next.config.js'
+    '**/*.js'
   ]
 }
 
