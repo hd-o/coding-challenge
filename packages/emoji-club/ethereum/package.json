@@ -1,10 +1,9 @@
 {
   "name": "emoji-club-ethereum",
   "scripts": {
-    "dev": "run-s -l dev:build && run-p -l hardhat:*",
-    "dev:build": "hardhat compile",
-    "hardhat:node": "hardhat node",
-    "hardhat:deploy-local": "hardhat run scripts/deploy.ts --network localhost",
+    "dev": "run-s -l dev:hardhat",
+    "dev:hardhat": "hardhat node",
+    "deploy": "hardhat run scripts/deploy.ts",
     "lint": "eslint -c .eslintrc.js .",
     "test": "hardhat test"
   },
@@ -25,6 +24,7 @@
     "@typescript-eslint/parser": "^4.33.0",
     "chai": "^4.3.6",
     "dotenv": "^10.0.0",
+    "envfile": "^6.17.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^16.0.3",

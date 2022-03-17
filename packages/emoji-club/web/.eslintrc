@@ -64,6 +64,6 @@
     ".cache/",
     "dist/",
     "next-env.d.ts",
-    "next.config.js"
+    "**/*.js"
   ]
 }
