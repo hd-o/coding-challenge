@@ -9,11 +9,14 @@
     "react"
   ],
   "scripts": {
+    "dev": "run-p dev:*",
+    "dev:ethereum": "cd ethereum && pnpm dev",
+    "dev:web": "cd web && pnpm dev",
     "lint": "run-p lint:*",
     "lint:ethereum": "cd ethereum && pnpm lint",
     "lint:web": "cd web && pnpm lint"
   },
-  "dependencies": {
+  "devDependencies": {
     "npm-run-all": "^4.1.5"
   }
 }
