@@ -1,6 +1,6 @@
 import { ContractTransaction } from 'ethers'
 import { ethers } from 'hardhat'
-import { useEmojiClub } from './emojiClub'
+import { useEmojiClub } from './emoji-club'
 import { Use } from './resolve'
 
 export type Mint = (toAddress: string) => Promise<ContractTransaction>
