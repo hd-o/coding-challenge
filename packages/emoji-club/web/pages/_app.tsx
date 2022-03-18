@@ -1,18 +1,39 @@
 import '/src/style/index.css'
+import { App, Intl, IntlMessages } from '/src/app'
 import { themes } from '/src/style/theme'
-import { AppProps } from 'next/app'
-import { FC } from 'react'
+import { NextPage } from 'next'
+import NextApp, { AppContext, AppProps } from 'next/app'
 import { ThemeProvider } from '@mui/material'
 
-const MyApp: FC<AppProps> = (props) => {
+interface Props extends AppProps {
+  intl: Intl
+}
+
+const EmojiClubApp: NextPage<Props> = (props) => {
   const { Component, pageProps } = props
   const theme = themes.dark
 
   return (
     <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
+      <App
+        Component={() => <Component {...pageProps} />}
+        intl={props.intl}
+      />
     </ThemeProvider>
   )
 }
 
-export default MyApp
+EmojiClubApp.getInitialProps = async (ctx): Promise<any> => {
+  const appCtx = ctx as unknown as AppContext
+  const appProps = await NextApp.getInitialProps(appCtx)
+
+  const { locale = 'en-US' } = appCtx.router
+  const messages: IntlMessages = await import(`/lang/${locale}.json`)
+
+  return {
+    ...appProps,
+    intl: { locale, messages },
+  }
+}
+
+export default EmojiClubApp

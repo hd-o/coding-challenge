@@ -1,6 +1,8 @@
 import { createContext, FC, useContext } from 'react'
+import { useIntl } from 'react-intl'
 import { MuiBoxCtx } from '../pkg/mui/Box'
 import { MuiTypographyCtx } from '../pkg/mui/Typography'
+import { intlIds } from '../util/intl-messages'
 import { ViewSelectCtx } from '../view/select'
 import { LayoutDividerCtx } from './divider'
 
@@ -9,6 +11,8 @@ const Layout: FC = (props) => {
   const LayoutDivider = useContext(LayoutDividerCtx)
   const Typography = useContext(MuiTypographyCtx)
   const ViewSelect = useContext(ViewSelectCtx)
+
+  const intl = useIntl()
 
   return (
     <Box
@@ -39,8 +43,8 @@ const Layout: FC = (props) => {
           },
         }}
       >
-        <Typography variant='h4'>
-          😜 Emoji Club
+        <Typography variant='h4' sx={{ paddingBottom: '5px' }}>
+          😎 {intl.formatMessage({ id: intlIds.title })}
         </Typography>
         <LayoutDivider />
         <ViewSelect />
