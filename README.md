@@ -24,7 +24,7 @@ My coding challenge solutions, and projects where I explore different technologi
 
 ## 🏛️ Software Architecture
 
-- [😜 Emoji Club](./packages/emoji-club)
+- [😎 Emoji Club](./packages/emoji-club)
   - `#ethereum` `#nft` `#react`
   - Full Stack Emoji NFT Dapp
 
