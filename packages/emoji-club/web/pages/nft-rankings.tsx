@@ -1,19 +1,19 @@
 import type { NextPage } from 'next'
 import { LayoutCtx } from '/src/layout'
-import { MyNFTsWelcomeCtx } from '/src/view/my-nfts/welcome'
+import { NFTRankingsCtx } from '/src/view/nft-rankings'
 import { useContext } from 'react'
 
-const Index: NextPage = () => {
+const NFTRankings: NextPage = () => {
   const Layout = useContext(LayoutCtx)
-  const MyNFTsWelcome = useContext(MyNFTsWelcomeCtx)
+  const NFTRankings = useContext(NFTRankingsCtx)
 
   return (
     <>
       <Layout>
-        <MyNFTsWelcome />
+        <NFTRankings />
       </Layout>
     </>
   )
 }
 
-export default Index
+export default NFTRankings
