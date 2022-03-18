@@ -1,33 +1,50 @@
-import { MuiNativeSelectCtx } from '/src/pkg/mui/NativeSelect'
+import { MuiMenuItemCtx } from '/src/pkg/mui/MenuItem'
+import { SharedSelectCtx } from '/src/shared/select'
+import { intlIds } from '/src/util/intl-messages'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { createContext, FC, useContext } from 'react'
+import { useIntl } from 'react-intl'
+import { Box } from '@mui/material'
 
 const ViewSelect: FC = () => {
-  const NativeSelect = useContext(MuiNativeSelectCtx)
+  const MenuItem = useContext(MuiMenuItemCtx)
+  const SharedSelect = useContext(SharedSelectCtx)
+
+  const intl = useIntl()
+  const router = useRouter()
+
+  const paths = [
+    {
+      name: '/',
+      label: intl.formatMessage({ id: intlIds.viewMyNFTs }),
+    },
+    {
+      name: '/nft-rankings',
+      label: intl.formatMessage({ id: intlIds.viewNFTRankings }),
+    },
+  ]
+
+  const selectedPath = paths.find(path => path.name === router.pathname)
+  const selectedIndex = selectedPath !== undefined ? paths.indexOf(selectedPath) : 0
 
   return (
-    <NativeSelect
-      defaultValue={1}
-      fullWidth
-      sx={{
-        '&::after': {
-          display: 'none',
-        },
-      }}
-      inputProps={{
-        sx: {
-          color: theme => theme.text.primary,
-          '& option': {
-            color: 'inherit',
-          },
-          margin: '10px 0',
-        },
-        name: 'view',
-        id: 'native-select',
-      }}
-    >
-      <option value={1}>📔 My NFTs</option>
-      <option value={2}>📰 NFT Rankings</option>
-    </NativeSelect>
+    <SharedSelect
+      items={paths.map((path, index) => (
+        <MenuItem
+          key={path.name}
+          value={index}
+        >
+          <Link href={path.name} passHref>
+            <Box sx={{ width: '100%' }}>
+              {path.label}
+            </Box>
+          </Link>
+        </MenuItem>
+      ))}
+      label={intl.formatMessage({ id: intlIds.view })}
+      value={selectedIndex}
+    />
   )
 }
 

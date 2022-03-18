@@ -1,4 +1,8 @@
 {
   "title": "Emoji Club",
-  "description": "Full Stack Emoji NFT Dapp"
+  "description": "Full Stack Emoji NFT Dapp",
+  "ranking": "Ranking",
+  "view": "View",
+  "viewMyNFTs": "📔 My NFTs",
+  "viewNFTRankings": "📰 NFT Rankings"
 }
