@@ -4,12 +4,11 @@ import Switch from '@mui/material/Switch'
 const ThemeSwitch: FC = () => {
   return (
     <Switch
+      disableRipple
       sx={{
         width: 62,
         height: 34,
         '& .MuiSwitch-switchBase': {
-          margin: 1,
-          padding: 0,
           '&.Mui-checked': {
             color: '#fff',
             '& .MuiSwitch-thumb:before': {
