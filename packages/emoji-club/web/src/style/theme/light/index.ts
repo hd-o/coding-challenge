@@ -23,7 +23,6 @@ const lightPalette: {
 }
 
 export const light = createTheme({
-  name: 'light',
   components: {
     MuiPopover: {
       styleOverrides: {
@@ -78,5 +77,8 @@ export const light = createTheme({
       },
     },
   },
-  palette: lightPalette,
+  palette: {
+    ...lightPalette,
+    mode: 'light',
+  },
 })
