@@ -1,9 +1,7 @@
 import '/src/style/index.css'
 import { App, Intl, IntlMessages } from '/src/app'
-import { themes } from '/src/style/theme'
 import { NextPage } from 'next'
 import NextApp, { AppContext, AppProps } from 'next/app'
-import { ThemeProvider } from '@mui/material'
 
 interface Props extends AppProps {
   intl: Intl
@@ -11,15 +9,12 @@ interface Props extends AppProps {
 
 const EmojiClubApp: NextPage<Props> = (props) => {
   const { Component, pageProps } = props
-  const theme = themes.dark
 
   return (
-    <ThemeProvider theme={theme}>
-      <App
-        Component={() => <Component {...pageProps} />}
-        intl={props.intl}
-      />
-    </ThemeProvider>
+    <App
+      Component={() => <Component {...pageProps} />}
+      intl={props.intl}
+    />
   )
 }
 

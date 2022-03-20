@@ -1,6 +1,3 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiMenuItemCtx } from '/src/pkg/mui/MenuItem'
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
 import { SharedSelectCtx } from '/src/shared/select'
 import { EtherscanIconCtx, EtherscanIconLightCtx } from '/src/style/icons/etherscan'
 import { OpenSeaIconCtx } from '/src/style/icons/opensea'
@@ -8,6 +5,9 @@ import { intlIds } from '/src/util/intl-messages'
 import { createContext, FC, useContext } from 'react'
 import { useIntl } from 'react-intl'
 import { useTheme } from '@mui/material'
+import { MuiBoxCtx } from '../../../pkg/mui/Box'
+import { MuiMenuItemCtx } from '../../../pkg/mui/MenuItem'
+import { MuiTypographyCtx } from '../../../pkg/mui/Typography'
 
 interface Ranking {
   source: 'etherscan' | 'opensea'
