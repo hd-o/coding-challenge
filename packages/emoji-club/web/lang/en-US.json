@@ -1,7 +1,15 @@
 {
-  "title": "Emoji Club",
+  "connectWallet": "Connect Wallet",
   "description": "Full Stack Emoji NFT Dapp",
+  "myNFTsWelcomeAccountWarning": "Do not use these accounts on mainnet!",
+  "myNFTsWelcomeSignIn": "👋 Welcome! Sign-in with Web3:",
+  "myNFTsWelcomeStepConnectLocalhost": "📡 1. Connect to {localhost}",
+  "myNFTsWelcomeStepConnectWallet": "✨ 3. Connect your wallet",
+  "myNFTsWelcomeStepUseTestAccounts": "🔑 2. Use a test account private key",
   "ranking": "Ranking",
+  "title": "Emoji Club",
+  "toggleDarkMode": "Toggle theme to dark mode",
+  "toggleLightMode": "Toggle theme to light mode",
   "view": "View",
   "viewMyNFTs": "📔 My NFTs",
   "viewNFTRankings": "📰 NFT Rankings"
