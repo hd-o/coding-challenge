@@ -1,4 +1,3 @@
-import { MuiMenuItemCtx } from '/src/pkg/mui/MenuItem'
 import { SharedSelectCtx } from '/src/shared/select'
 import { intlIds } from '/src/util/intl-messages'
 import Link from 'next/link'
@@ -6,6 +5,7 @@ import { useRouter } from 'next/router'
 import { createContext, FC, useContext } from 'react'
 import { useIntl } from 'react-intl'
 import { Box } from '@mui/material'
+import { MuiMenuItemCtx } from '../../pkg/mui/MenuItem'
 
 const ViewSelect: FC = () => {
   const MenuItem = useContext(MuiMenuItemCtx)

@@ -26,9 +26,11 @@ specifiers:
   keymirror: ^0.1.1
   next: 12.1.0
   npm-run-all: ^4.1.5
+  observable-hooks: ^4.2.0
   react: 17.0.2
   react-dom: 17.0.2
   react-intl: ^5.24.7
+  rxjs: ^7.5.5
   ts-jest: ^27.1.3
   typescript: 4.6.2
 
@@ -39,9 +41,11 @@ dependencies:
   ethers: 5.6.1
   keymirror: 0.1.1
   next: 12.1.0_fbf64ceed39fcaf258f74679fe7c79ca
+  observable-hooks: 4.2.0_95dbd2143a892133cb1f95671e6a188e
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-intl: 5.24.7_react@17.0.2+typescript@4.6.2
+  rxjs: 7.5.5
 
 devDependencies:
   '@babel/core': 7.17.7
@@ -5263,6 +5267,18 @@ packages:
       es-abstract: 1.19.1
     dev: true
 
+  /observable-hooks/4.2.0_95dbd2143a892133cb1f95671e6a188e:
+    resolution: {integrity: sha512-bGjfGQI9vXrOIf1zAc3dmMqIXSqGQM+MLYOSQuqTzgP/8ptyDn9Gsm3tXXnohHkL7byyzHFc0/zuWyydUjtAFg==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+      rxjs: '>=6.0.0'
+    dependencies:
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      rxjs: 7.5.5
+    dev: false
+
   /once/1.4.0:
     resolution: {integrity: sha1-WDsap3WWHUsROsF9nFC6753Xa9E=}
     dependencies:
@@ -5676,6 +5692,12 @@ packages:
     dependencies:
       queue-microtask: 1.2.3
     dev: true
+
+  /rxjs/7.5.5:
+    resolution: {integrity: sha512-sy+H0pQofO95VDmFLzyaw9xNJU4KTRSwQIGM6+iG3SypAtCiLDzpeG8sJrNCWn2Up9km+KhkvTdbkrdy+yzZdw==}
+    dependencies:
+      tslib: 2.3.1
+    dev: false
 
   /safe-buffer/5.1.2:
     resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}

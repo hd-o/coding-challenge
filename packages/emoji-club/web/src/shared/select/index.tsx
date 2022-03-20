@@ -1,7 +1,7 @@
-import { MuiFormControlCtx } from '/src/pkg/mui/FormControl'
-import { MuiInputLabelCtx } from '/src/pkg/mui/InputLabel'
-import { MuiSelectCtx } from '/src/pkg/mui/Select'
 import { createContext, FC, useContext } from 'react'
+import { MuiFormControlCtx } from '../../pkg/mui/FormControl'
+import { MuiInputLabelCtx } from '../../pkg/mui/InputLabel'
+import { MuiSelectCtx } from '../../pkg/mui/Select'
 
 type SelectItem = JSX.Element | string | number
 

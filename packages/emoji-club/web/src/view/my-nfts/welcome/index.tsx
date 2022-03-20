@@ -1,7 +1,7 @@
 import accounts from '/../ethereum/hardhat-accounts.json'
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
 import { createContext, FC, useContext } from 'react'
 import { Button } from '@mui/material'
+import { MuiTypographyCtx } from '../../../pkg/mui/Typography'
 
 const accountKeys = Object
   .keys(accounts)

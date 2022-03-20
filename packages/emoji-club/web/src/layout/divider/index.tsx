@@ -1,5 +1,5 @@
-import { MuiDividerCtx } from '/src/pkg/mui/Divider'
 import { createContext, FC, useContext } from 'react'
+import { MuiDividerCtx } from '../../pkg/mui/Divider'
 
 const LayoutDivider: FC = () => {
   const Divider = useContext(MuiDividerCtx)
