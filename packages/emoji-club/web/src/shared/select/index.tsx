@@ -35,7 +35,6 @@ const SharedSelect: FC<Props> = (props) => {
           '&::after': {
             display: 'none',
           },
-          margin: '5px 0',
         }}
         inputProps={{
           sx: {

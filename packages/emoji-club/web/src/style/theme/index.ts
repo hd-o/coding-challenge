@@ -2,17 +2,8 @@ import { Theme } from '@mui/material/styles'
 import { dark } from './dark'
 import { light } from './light'
 
-interface AppTheme {
-  name: string
-}
+export type ThemeType = Theme['palette']['mode']
 
-declare module '@mui/material/styles' {
-  interface Theme extends AppTheme { }
-  interface ThemeOptions extends AppTheme { }
-}
-
-export const themeTypes = ['dark', 'light'] as const
-
-export type ThemeType = (typeof themeTypes)[number]
+export const themeTypes: readonly ThemeType[] = ['dark', 'light']
 
 export const themes: Record<ThemeType, Theme> = { dark, light }

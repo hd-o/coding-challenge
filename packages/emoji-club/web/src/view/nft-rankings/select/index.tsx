@@ -1,3 +1,6 @@
+import { MuiBoxCtx } from '/src/pkg/mui/Box'
+import { MuiMenuItemCtx } from '/src/pkg/mui/MenuItem'
+import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
 import { SharedSelectCtx } from '/src/shared/select'
 import { EtherscanIconCtx, EtherscanIconLightCtx } from '/src/style/icons/etherscan'
 import { OpenSeaIconCtx } from '/src/style/icons/opensea'
@@ -5,9 +8,6 @@ import { intlIds } from '/src/util/intl-messages'
 import { createContext, FC, useContext } from 'react'
 import { useIntl } from 'react-intl'
 import { useTheme } from '@mui/material'
-import { MuiBoxCtx } from '../../../pkg/mui/Box'
-import { MuiMenuItemCtx } from '../../../pkg/mui/MenuItem'
-import { MuiTypographyCtx } from '../../../pkg/mui/Typography'
 
 interface Ranking {
   source: 'etherscan' | 'opensea'
@@ -47,7 +47,7 @@ const NFTRankingsSelect: FC = () => {
   const theme = useTheme()
 
   const sourceIcons: Record<Ranking['source'], JSX.Element> = {
-    etherscan: theme.name === 'dark'
+    etherscan: theme.palette.mode === 'dark'
       ? <EtherscanIconLight {...iconImageProps} />
       : <EtherscanIcon {...iconImageProps} />,
     opensea: <OpenSeaIcon {...iconImageProps} />,
@@ -78,11 +78,14 @@ const NFTRankingsSelect: FC = () => {
   ))
 
   return (
-    <SharedSelect
-      items={items}
-      label={intl.formatMessage({ id: intlIds.ranking })}
-      value={0}
-    />
+    <>
+      <Box marginTop={1} />
+      <SharedSelect
+        items={items}
+        label={intl.formatMessage({ id: intlIds.ranking })}
+        value={0}
+      />
+    </>
   )
 }
 
