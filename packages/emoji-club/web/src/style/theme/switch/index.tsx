@@ -1,5 +1,7 @@
+import { intlIds } from '/src/util/intl-messages'
 import { useResolveBehaviorState } from '/src/util/use-resolve-behavior-state'
 import { createContext, FC } from 'react'
+import { useIntl } from 'react-intl'
 import Switch from '@mui/material/Switch'
 import { useThemeTypeSubject } from '../type/subject'
 
@@ -9,6 +11,8 @@ const ThemeSwitch: FC = () => {
   const handleClick = (): void => {
     setThemeType(themeType === 'dark' ? 'light' : 'dark')
   }
+
+  const intl = useIntl()
 
   return (
     <Switch
@@ -55,6 +59,11 @@ const ThemeSwitch: FC = () => {
           borderRadius: 20 / 2,
         },
       }}
+      title={intl.formatMessage({
+        id: themeType === 'dark'
+          ? intlIds.toggleLightMode
+          : intlIds.toggleDarkMode,
+      })}
     />
   )
 }
