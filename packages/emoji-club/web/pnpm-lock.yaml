@@ -9,6 +9,7 @@ specifiers:
   '@types/jest': ^27.4.1
   '@types/keymirror': ^0.1.1
   '@types/node': 17.0.21
+  '@types/ramda': ^0.28.1
   '@types/react': 17.0.40
   '@typescript-eslint/eslint-plugin': ^5.14.0
   '@typescript-eslint/parser': ^5.14.0
@@ -27,6 +28,7 @@ specifiers:
   next: 12.1.0
   npm-run-all: ^4.1.5
   observable-hooks: ^4.2.0
+  ramda: ^0.28.0
   react: 17.0.2
   react-dom: 17.0.2
   react-intl: ^5.24.7
@@ -42,6 +44,7 @@ dependencies:
   keymirror: 0.1.1
   next: 12.1.0_fbf64ceed39fcaf258f74679fe7c79ca
   observable-hooks: 4.2.0_95dbd2143a892133cb1f95671e6a188e
+  ramda: 0.28.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-intl: 5.24.7_react@17.0.2+typescript@4.6.2
@@ -53,6 +56,7 @@ devDependencies:
   '@types/jest': 27.4.1
   '@types/keymirror': 0.1.1
   '@types/node': 17.0.21
+  '@types/ramda': 0.28.1
   '@types/react': 17.0.40
   '@typescript-eslint/eslint-plugin': 5.15.0_db076be34112e9885c5791dd3a6cfcc6
   '@typescript-eslint/parser': 5.15.0_eslint@8.10.0+typescript@4.6.2
@@ -2399,6 +2403,12 @@ packages:
 
   /@types/prop-types/15.7.4:
     resolution: {integrity: sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==}
+
+  /@types/ramda/0.28.1:
+    resolution: {integrity: sha512-8wnJK5aPaGL7AYhQSe7olwxjhIB9GO4GOCxd6JjYlVNe128DHJDOu7Kyve4kx4uazeKJdnOS3N5TVRv0z1bb1g==}
+    dependencies:
+      ts-toolbelt: 6.15.5
+    dev: true
 
   /@types/react-is/17.0.3:
     resolution: {integrity: sha512-aBTIWg1emtu95bLTLx0cpkxwGW3ueZv71nE2YFBpL8k/z5czEW8yYpOo8Dp+UUAFAtKwNaOsh/ioSeQnWlZcfw==}
@@ -5507,6 +5517,10 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
 
+  /ramda/0.28.0:
+    resolution: {integrity: sha512-9QnLuG/kPVgWvMQ4aODhsBUFKOUmnbUnsSXACv+NCQZcHbeb+v8Lodp8OVxtRULN1/xOyYLLaL6npE6dMq5QTA==}
+    dev: false
+
   /react-dom/17.0.2_react@17.0.2:
     resolution: {integrity: sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==}
     peerDependencies:
@@ -6081,6 +6095,10 @@ packages:
       semver: 7.3.5
       typescript: 4.6.2
       yargs-parser: 20.2.9
+    dev: true
+
+  /ts-toolbelt/6.15.5:
+    resolution: {integrity: sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==}
     dev: true
 
   /tsconfig-paths/3.14.0:

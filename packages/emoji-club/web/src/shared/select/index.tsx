@@ -21,8 +21,7 @@ const SharedSelect: FC<Props> = (props) => {
       <InputLabel
         htmlFor="nft-rankings-ranking-select"
         sx={{
-          padding: '20px 10px 0',
-
+          padding: '12px 0 0 10px',
         }}
         variant="standard"
       >
@@ -41,8 +40,9 @@ const SharedSelect: FC<Props> = (props) => {
             '& option': {
               color: 'inherit',
             },
+            display: 'flex',
             margin: '0',
-            padding: '30px 10px 10px',
+            padding: '30px 0 10px 10px',
           },
           name: 'view',
           id: 'native-select',
