@@ -1,5 +1,7 @@
-import { createTheme, Theme } from '@mui/material'
+import { mergeDeepRight } from 'ramda'
+import { createTheme, Theme, ThemeOptions } from '@mui/material'
 import { grey } from '@mui/material/colors'
+import { sharedTheme } from '../shared'
 
 const darkPalette: {
   background: Theme['palette']['background']
@@ -11,52 +13,29 @@ const darkPalette: {
     disabled: grey[400],
   },
   background: {
-    default: '#444',
+    default: '#111',
     paper: '#222',
   },
 }
 
-export const dark = createTheme({
+const darkAppOptions: Theme['app'] = {
+  layoutSectionPaper: '#181818',
+  layoutSectionPaperHover: '#111',
+  textListItem: '#111',
+}
+
+const darkThemeOptions: ThemeOptions = {
+  app: darkAppOptions,
   components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          color: 'inherit',
-          // backgroundColor: '#222',
-          border: 'none',
-          '&:hover': {
-            // backgroundColor: 'rgba(10, 10, 10, 0.7)',
-            border: 'none',
-          },
-        },
-      },
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          zIndex: 1,
-        },
-      },
-    },
-    MuiMenu: {
-      styleOverrides: {
-        list: {
-          paddingTop: 0,
-          paddingBottom: 0,
-        },
-      },
-    },
     MuiMenuItem: {
       styleOverrides: {
         root: {
           backgroundColor: '#222',
-          paddingTop: '8px',
-          paddingBottom: '8px',
           '&:hover': {
             backgroundColor: 'rgba(144, 202, 249, 0.3)',
           },
           '&.Mui-selected': {
-            backgroundColor: 'rgba(10, 10, 10, 0.6)',
+            backgroundColor: 'rgba(144, 202, 249, 0.1)',
           },
           '&.Mui-selected:hover': {
             backgroundColor: 'rgba(144, 202, 249, 0.3)',
@@ -66,13 +45,10 @@ export const dark = createTheme({
     },
     MuiOutlinedInput: {
       styleOverrides: {
-        notchedOutline: {
-          border: 'none',
-        },
         root: {
-          backgroundColor: '#222',
+          backgroundColor: darkAppOptions.layoutSectionPaper,
           '&:hover': {
-            backgroundColor: '#1a1a1a',
+            backgroundColor: darkAppOptions.layoutSectionPaperHover,
           },
         },
       },
@@ -94,20 +70,7 @@ export const dark = createTheme({
     MuiTableContainer: {
       styleOverrides: {
         root: {
-          backgroundColor: '#111',
-        },
-      },
-    },
-    MuiTable: {
-      styleOverrides: {
-        root: {
-          '& th': {
-            background: '#222',
-            borderBottom: 'none',
-          },
-          '& .MuiTableRow-hover:hover': {
-
-          },
+          backgroundColor: darkPalette.background.default,
         },
       },
     },
@@ -165,4 +128,8 @@ export const dark = createTheme({
       light: darkPalette.text.secondary,
     },
   },
-})
+}
+
+const darkTheme = mergeDeepRight(sharedTheme, darkThemeOptions)
+
+export const dark = createTheme(darkTheme as ThemeOptions)

@@ -1,15 +1,13 @@
 import { SharedSelectCtx } from '/src/shared/select'
+import { SharedSelectItemCtx } from '/src/shared/select/item'
 import { intlIds } from '/src/util/intl-messages'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { createContext, FC, useContext } from 'react'
 import { useIntl } from 'react-intl'
-import { Box } from '@mui/material'
-import { MuiMenuItemCtx } from '../../pkg/mui/MenuItem'
 
 const ViewSelect: FC = () => {
-  const MenuItem = useContext(MuiMenuItemCtx)
   const SharedSelect = useContext(SharedSelectCtx)
+  const SharedSelectItem = useContext(SharedSelectItemCtx)
 
   const intl = useIntl()
   const router = useRouter()
@@ -31,16 +29,9 @@ const ViewSelect: FC = () => {
   return (
     <SharedSelect
       items={paths.map((path, index) => (
-        <MenuItem
-          key={path.name}
-          value={index}
-        >
-          <Link href={path.name} passHref>
-            <Box sx={{ width: '100%' }}>
-              {path.label}
-            </Box>
-          </Link>
-        </MenuItem>
+        <SharedSelectItem key={path.name} value={index} href={path.name}>
+          {path.label}
+        </SharedSelectItem>
       ))}
       label={intl.formatMessage({ id: intlIds.view })}
       value={selectedIndex}

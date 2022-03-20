@@ -9,8 +9,9 @@ const LayoutSection: FC = (props) => {
   return (
     <Box marginTop={1}>
       <Paper
+        elevation={0}
         sx={{
-          backgroundColor: '#111',
+          backgroundColor: theme => theme.app.layoutSectionPaper,
           padding: '10px',
         }}
       >

@@ -1,7 +1,7 @@
 import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiMenuItemCtx } from '/src/pkg/mui/MenuItem'
 import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
 import { SharedSelectCtx } from '/src/shared/select'
+import { SharedSelectItemCtx } from '/src/shared/select/item'
 import { EtherscanIconCtx, EtherscanIconLightCtx } from '/src/style/icons/etherscan'
 import { OpenSeaIconCtx } from '/src/style/icons/opensea'
 import { intlIds } from '/src/util/intl-messages'
@@ -38,9 +38,9 @@ const NFTRankingsSelect: FC = () => {
   const Box = useContext(MuiBoxCtx)
   const EtherscanIcon = useContext(EtherscanIconCtx)
   const EtherscanIconLight = useContext(EtherscanIconLightCtx)
-  const MenuItem = useContext(MuiMenuItemCtx)
   const OpenSeaIcon = useContext(OpenSeaIconCtx)
   const SharedSelect = useContext(SharedSelectCtx)
+  const SharedSelectItem = useContext(SharedSelectItemCtx)
   const Typography = useContext(MuiTypographyCtx)
 
   const intl = useIntl()
@@ -54,27 +54,12 @@ const NFTRankingsSelect: FC = () => {
   }
 
   const items = rankings.map((ranking, index) => (
-    <MenuItem
-      key={index}
-      value={index}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'middle',
-        }}
-      >
-        {sourceIcons[ranking.source]}
-        <Typography
-          variant='body1'
-          sx={{
-            marginLeft: '5px',
-          }}
-        >
-          {ranking.title}
-        </Typography>
-      </Box>
-    </MenuItem>
+    <SharedSelectItem key={index} value={index}>
+      {sourceIcons[ranking.source]}
+      <Typography variant='body1' marginLeft='5px'>
+        {ranking.title}
+      </Typography>
+    </SharedSelectItem>
   ))
 
   return (

@@ -5,22 +5,22 @@ import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
 import { intlIds } from '/src/util/intl-messages'
 import { createContext, FC, useContext } from 'react'
 import { useIntl } from 'react-intl'
+import { List, ListItem } from '@mui/material'
 
 const accountKeys = Object
   .keys(accounts)
   .map((address) => accounts[address as keyof typeof accounts].privateKey)
 
 const Ul: FC = (props) => (
-  <ul style={{ padding: 0, margin: 0, width: '100%', transform: 'translateX(-2px)' }}>
+  <List style={{ padding: 0, margin: 0, width: '100%', transform: 'translateX(-2px)' }}>
     {props.children}
-  </ul>
+  </List>
 )
 
 const Li: FC = (props) => (
-  <li
-    style={{
-      background: '#111',
-      border: '1px solid #252525',
+  <ListItem
+    sx={{
+      background: theme => theme.app.textListItem,
       borderRadius: '3px',
       marginTop: '6px',
       overflow: 'auto',
@@ -29,7 +29,7 @@ const Li: FC = (props) => (
     }}
   >
     {props.children}
-  </li>
+  </ListItem>
 )
 
 const MyNFTsWelcomeStepUseTestAccount: FC = () => {
