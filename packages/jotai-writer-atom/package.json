@@ -1,17 +1,7 @@
 {
   "name": "jotai-writer-atom",
-  "description": "A context-friendly write-only atom, allowing dependency injection for atom setters",
-  "version": "1.0.0",
   "license": "MIT",
-  "keywords": [
-    "atom",
-    "jotai",
-    "react"
-  ],
-  "meta": {
-    "category": "software-architecture",
-    "title": "👻 Jotai Writer Atom"
-  },
+  "private": true,
   "scripts": {
     "dev": "run-s start:parcel",
     "lint": "run-s setup:eslint run:eslint",

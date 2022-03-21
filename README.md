@@ -2,7 +2,7 @@
 
 My coding challenge solutions, and projects where I explore different technologies
 
-## 🧮 Algorithm
+## 🧮 Algorithms
 
 - [🛒 Cart Discounts](./packages/cart-discounts)
   - `#discounts` `#python` `#shopping`
@@ -12,7 +12,13 @@ My coding challenge solutions, and projects where I explore different technologi
   - `#container` `#dependency` `#functional`
   - IoC container resolver for functional programming
 
-## 🗂️ Data Structure
+## 🟢 Automated Testing
+
+- [🛗 Elevator Specs](./packages/elevator-specs)
+  - `#elevator` `#jest` `#spec`
+  - Shared virtual elevators specification tests, using @testing-library
+
+## 🗂️ Data Structures
 
 - [👻 Jotai Writer Atom](./packages/jotai-writer-atom)
   - `#atom` `#jotai` `#react`
@@ -22,11 +28,13 @@ My coding challenge solutions, and projects where I explore different technologi
   - `#iterator` `#skip` `#typescript`
   - Iterator class, implementing value skipping
 
-## 🏛️ Software Architecture
+## 🌐 Decentralized Apps
 
 - [😎 Emoji Club](./packages/emoji-club)
   - `#ethereum` `#nft` `#react`
   - Full Stack Emoji NFT Dapp
+
+## 🏛️ Software Architecture
 
 - [📝 Reactive To-Dos](./packages/reactive-todos)
   - `#mvc` `#react` `#rxjs`
@@ -43,9 +51,3 @@ My coding challenge solutions, and projects where I explore different technologi
 - [🛗 Virtual Elevators](./packages/virtual-elevators)
   - `#elevators` `#react` `#solid`
   - Virtual elevators, powered by controller classes, and React components
-
-## 🟢 Testing
-
-- [🛗 Elevator Specs](./packages/elevator-specs)
-  - `#elevator` `#jest` `#spec`
-  - Shared virtual elevators specification tests, using @testing-library

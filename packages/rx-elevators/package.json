@@ -1,17 +1,7 @@
 {
   "name": "rx-elevators",
-  "version": "1.0.0",
-  "description": "Virtual elevators, powered by rx streams, and React components",
   "license": "MIT",
-  "keywords": [
-    "elevators",
-    "react",
-    "rx"
-  ],
-  "meta": {
-    "category": "software-architecture",
-    "title": "🛗 Rx Elevators"
-  },
+  "private": true,
   "scripts": {
     "setup:spec": "bash ../elevator-specs/setup.sh",
     "dev": "run-s start:parcel",

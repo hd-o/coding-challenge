@@ -1,17 +1,7 @@
 {
   "name": "reactive-todos",
-  "version": "1.0.0",
-  "description": "MVC React architecture with injected state observables, and isolated controller classes",
   "license": "MIT",
-  "keywords": [
-    "rxjs",
-    "mvc",
-    "react"
-  ],
-  "meta": {
-    "category": "software-architecture",
-    "title": "📝 Reactive To-Dos"
-  },
+  "private": true,
   "scripts": {
     "dev": "run-s start:parcel",
     "lint": "run-s setup:eslint run:eslint",
