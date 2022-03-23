@@ -15,7 +15,11 @@ const eslintrc = {
     ...base.eslintrc.ignorePatterns,
     'next-env.d.ts',
     '**/*.js'
-  ]
+  ],
+  rules: {
+    ...base.eslintrc.rules,
+    '@typescript-eslint/consistent-type-assertions': 0,
+  },
 }
 
 base.writeEslintrc(eslintrc)
