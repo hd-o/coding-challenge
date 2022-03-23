@@ -57,7 +57,8 @@
         "vars": "all",
         "varsIgnorePattern": "^_"
       }
-    ]
+    ],
+    "@typescript-eslint/consistent-type-assertions": 0
   },
   "ignorePatterns": [
     ".vscode/",
