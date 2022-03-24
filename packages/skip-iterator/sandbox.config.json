@@ -1,6 +1,8 @@
 {
-  "node": "16",
-  "port": 1234,
-  "template": "parcel",
-  "startScript": "jest"
+  "template": "node",
+  "container": {
+    "node": "16",
+    "port": 1234,
+    "startScript": "sandbox"
+  }
 }
