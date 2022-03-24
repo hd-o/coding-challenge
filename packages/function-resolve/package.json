@@ -8,7 +8,7 @@
     "run:eslint": "eslint -c .eslintrc .",
     "run:jest": "DEBUG_PRINT_LIMIT=0 jest",
     "sandbox": "npx --yes pnpm i && npx pnpm sandbox:start",
-    "sandbox:start": "run-p start:parcel jest",
+    "sandbox:start": "run-p start:parcel run:jest",
     "setup": "run-p setup:*",
     "setup:eslint": "node .config/eslint",
     "setup:jest": "node .config/jest",
