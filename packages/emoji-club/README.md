@@ -1,4 +1,6 @@
-# **[⚠️  WIP]** 😎 Emoji Club
+# 😎 Emoji Club
+
+> ⚠️  **WIP:** This project is work in progress
 
 `#ethereum` `#nft` `#react`
 
@@ -40,10 +42,6 @@ Full Stack Emoji NFT Dapp
     </td>
   </tr>
 </table>
-
----
-
-> This project is work in progress
 
 [apollo]: https://github.com/apollographql/apollo-client
 [apollo-server]: https://github.com/apollographql/apollo-server
