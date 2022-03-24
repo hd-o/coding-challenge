@@ -27,20 +27,6 @@ Full Stack Emoji NFT Dapp
       />
     </td>
   </tr>
-  <tr>
-    <td>
-      <img
-        alt="elevators screenshot"
-        src="./assets/my-nfts-light.png"
-      />
-    </td>
-    <td>
-      <img
-        alt="elevator movement screenshot"
-        src="./assets/nft-rankings-light.png"
-      />
-    </td>
-  </tr>
 </table>
 
 [apollo]: https://github.com/apollographql/apollo-client
