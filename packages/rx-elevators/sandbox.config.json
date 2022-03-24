@@ -2,6 +2,7 @@
   "template": "node",
   "container": {
     "node": "16",
+    "port": 1234,
     "startScript": "sandbox"
   }
 }
