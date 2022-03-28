@@ -1,0 +1,17 @@
+{
+  "globals": {
+    "ts-jest": {
+      "isolatedModules": true,
+      "tsconfig": "<rootDir>/tsconfig.spec.json"
+    }
+  },
+  "maxWorkers": 4,
+  "moduleNameMapper": {
+    "^/(.*)$": "<rootDir>/$1"
+  },
+  "preset": "ts-jest",
+  "testEnvironment": "jsdom",
+  "testMatch": [
+    "**/spec/**/*.test.t(s|sx)"
+  ]
+}
