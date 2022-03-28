@@ -51,3 +51,9 @@ My coding challenge solutions, and projects where I explore different technologi
 - [🛗 Virtual Elevators](./packages/virtual-elevators)
   - `#elevators` `#react` `#solid`
   - Virtual elevators, powered by controller classes, and React components
+
+## 🎨 UI Engineering
+
+- [👁️‍🗨️ Social Media Dashboard](./packages/social-dashboard)
+  - `#dashboard` `#react` `#ui`
+  - Responsive, drag & drop enabled dashboard

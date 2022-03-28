@@ -1,0 +1,21 @@
+{
+  "count": "{count, number, :: K}",
+  "countPercent": "{count, number, :: %}",
+  "countToday": "{count, number, :: K} Today",
+  "darkMode": "Dark Mode",
+  "facebook": "Facebook",
+  "followers": "followers",
+  "followersCount": "{count, number} followers",
+  "instagram": "Instagram",
+  "lightMode": "Light Mode",
+  "likes": "Likes",
+  "overviewToday": "Overview - Today",
+  "pageViews": "Page Views",
+  "profileViews": "Profile Views",
+  "retweets": "Retweets",
+  "socialDashboardTitle": "Social Media Dashboard",
+  "totalFollowers": "Total Followers: {count, number}",
+  "totalViews": "Total Views",
+  "twitter": "Twitter",
+  "youtube": "YouTube"
+}

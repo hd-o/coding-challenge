@@ -43,6 +43,7 @@ const tsconfig = {
   ],
 }
 
-const writeTsConfig = () => writeConfig(tsconfig, './tsconfig.json')
+const writeTsConfig =
+  (config = tsconfig, path = './tsconfig.json') => writeConfig(config, path)
 
 module.exports = { tsconfig, writeTsConfig }
