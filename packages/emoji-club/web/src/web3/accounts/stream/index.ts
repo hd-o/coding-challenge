@@ -10,6 +10,7 @@ import { useRxTake } from '/src/pkg/rxjs/take'
 import { useRxWithLatestFrom } from '/src/pkg/rxjs/withLatestFrom'
 import { Use } from '/src/util/function-context/context'
 import { useWeb3AccountsRequest$ } from '/src/web3/accounts/request/stream'
+import { isWeb3Error, Web3Error, web3Errors } from '/src/web3/errors'
 import { useWeb3Provider$ } from '/src/web3/provider'
 import { Observable } from 'rxjs'
 import { useWeb3AccountsClearError$ } from '../clear-error/stream'
@@ -24,7 +25,7 @@ type Web3AccountsValue =
   // During request, fetching data
   | { requesting: true }
   // Post request, error data
-  | { error: string }
+  | { error: Web3Error }
 
 // Default/Initial values
 const initialValue = {} as Web3AccountsValue
@@ -58,7 +59,7 @@ export const useWeb3Accounts$: Use<Web3Accounts$> = (resolve) => {
         provider
           .send('eth_requestAccounts', [])
           .then((accounts: Web3Accounts) => resolve({ accounts }))
-          .catch(error => resolve({ error: error.message }))
+          .catch(error => resolve({ error }))
       })
       // First emit `requestingValue`,
       // then emit result of request promise
@@ -75,11 +76,12 @@ export const useWeb3Accounts$: Use<Web3Accounts$> = (resolve) => {
       return request$.pipe(take(2))
     }),
     switchMap(v => {
-      // TODO: Error handling
-      console.log('switchMap(v): ', v)
       if (!('error' in v)) return of(v)
-      const resetAccountsValue$ = clearError$.pipe(map(() => initialValue))
-      return merge(of(v), resetAccountsValue$)
+      // Show loading status if error is of `requestPending`
+      if (isWeb3Error(web3Errors.requestPending, v.error)) return of(requestingValue)
+      // Otherwise, emit error (which can be cleared by clearError$)
+      const resetValue$ = clearError$.pipe(map(() => initialValue))
+      return merge(of(v), resetValue$)
     }),
     shareReplay(1),
     startWith(initialValue),
