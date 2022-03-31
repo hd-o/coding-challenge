@@ -9,27 +9,24 @@ import { useRxSwitchMap } from '/src/pkg/rxjs/switchMap'
 import { useRxTake } from '/src/pkg/rxjs/take'
 import { useRxWithLatestFrom } from '/src/pkg/rxjs/withLatestFrom'
 import { Use } from '/src/util/function-context/context'
+import { useWeb3AccountsClearError$ } from '/src/web3/accounts/clear-error/stream'
 import { useWeb3AccountsRequest$ } from '/src/web3/accounts/request/stream'
 import { isWeb3Error, Web3Error, web3Errors } from '/src/web3/errors'
 import { useWeb3Provider$ } from '/src/web3/provider'
 import { Observable } from 'rxjs'
-import { useWeb3AccountsClearError$ } from '../clear-error/stream'
 
 export type Web3Accounts = string[]
 
-type Web3AccountsValue =
-  // Default, no value
-  | {}
+const web3AccountsState = {
   // Post request, account data
-  | { accounts: Web3Accounts }
+  accounts: [] as Web3Accounts,
   // During request, fetching data
-  | { requesting: true }
+  requesting: false,
   // Post request, error data
-  | { error: Web3Error }
+  errors: [] as Web3Error[],
+}
 
-// Default/Initial values
-const initialValue = {} as Web3AccountsValue
-const requestingValue = { requesting: true }
+type Web3AccountsValue = typeof web3AccountsState
 
 type Web3Accounts$ = Observable<Web3AccountsValue>
 
@@ -52,19 +49,19 @@ export const useWeb3Accounts$: Use<Web3Accounts$> = (resolve) => {
     withLatestFrom(provider$),
     // Debounce requests while request promise is being resolved
     exhaustMap(([, providerValue]) => {
-      if (!('provider' in providerValue)) return of(initialValue)
+      if (!('provider' in providerValue)) return of(web3AccountsState)
       const { provider } = providerValue
       // Wrap request with `Promise` to enable resolving caught error
       const requestPromise = new Promise<Web3AccountsValue>(resolve => {
         provider
           .send('eth_requestAccounts', [])
-          .then((accounts: Web3Accounts) => resolve({ accounts }))
-          .catch(error => resolve({ error }))
+          .then((accounts: Web3Accounts) => resolve({ ...web3AccountsState, accounts }))
+          .catch(error => resolve({ ...web3AccountsState, errors: [error] }))
       })
       // First emit `requestingValue`,
       // then emit result of request promise
       const request$ = merge(
-        of(requestingValue),
+        of({ ...web3AccountsState, requesting: true }),
         from(requestPromise),
       )
       /**
@@ -76,14 +73,15 @@ export const useWeb3Accounts$: Use<Web3Accounts$> = (resolve) => {
       return request$.pipe(take(2))
     }),
     switchMap(v => {
-      if (!('error' in v)) return of(v)
+      if (v.errors[0] === undefined) return of(v)
       // Show loading status if error is of `requestPending`
-      if (isWeb3Error(web3Errors.requestPending, v.error)) return of(requestingValue)
+      const isError = isWeb3Error(web3Errors.requestPending, v.errors[0])
+      if (isError) return of({ ...web3AccountsState, requesting: true })
       // Otherwise, emit error (which can be cleared by clearError$)
-      const resetValue$ = clearError$.pipe(map(() => initialValue))
+      const resetValue$ = clearError$.pipe(map(() => web3AccountsState))
       return merge(of(v), resetValue$)
     }),
     shareReplay(1),
-    startWith(initialValue),
+    startWith(web3AccountsState),
   )
 }

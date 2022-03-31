@@ -14,7 +14,7 @@ const MyNFTs: FC = () => {
   return (
     <Layout>
       {
-        'accounts' in accountsState
+        accountsState.accounts.length > 0
           ? <MyNFTsGrid />
           : <MyNFTsWelcome />
       }

@@ -1,0 +1,48 @@
+import { MuiBoxCtx } from '/src/pkg/mui/Box'
+import { MuiModalCtx } from '/src/pkg/mui/Modal'
+import { useRouter } from 'next/router'
+import { createContext, FC, useContext } from 'react'
+import { SxProps, Theme } from '@mui/material'
+import { MyNFTsDetailsCloseButtonCtx } from './close-button'
+import { MyNFTsDetailsImageCtx } from './image'
+import { MyNFTsDetailsInfoCtx } from './info'
+
+const containerSx: SxProps<Theme> = {
+  backgroundColor: 'background.paper',
+  borderRadius: '3px',
+  boxShadow: 24,
+  display: 'flex',
+  left: '50%',
+  minWidth: '300px',
+  padding: 0,
+  position: 'absolute',
+  top: '50%',
+  transform: 'translate(-50%, -50%)',
+}
+
+const MyNFTsDetails: FC = () => {
+  const Box = useContext(MuiBoxCtx)
+  const Modal = useContext(MuiModalCtx)
+  const MyNFTsDetailsCloseButton = useContext(MyNFTsDetailsCloseButtonCtx)
+  const MyNFTsDetailsImage = useContext(MyNFTsDetailsImageCtx)
+  const MyNFTsDetailsInfo = useContext(MyNFTsDetailsInfoCtx)
+
+  const router = useRouter()
+
+  return (
+    <Modal
+      open={true}
+      onClose={router.back}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={containerSx}>
+        <MyNFTsDetailsCloseButton />
+        <MyNFTsDetailsImage />
+        <MyNFTsDetailsInfo />
+      </Box>
+    </Modal>
+  )
+}
+
+export const MyNFTsDetailsCtx = createContext(MyNFTsDetails)

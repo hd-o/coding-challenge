@@ -1,14 +1,32 @@
-import { useResolve$ } from '/src/util/use-resolve-stream'
-import { useWeb3Accounts$ } from '/src/web3/accounts/stream'
-import { createContext, FC } from 'react'
+import { useRouter } from 'next/router'
+import { createContext, FC, useContext } from 'react'
+import { Grid, SxProps, Theme } from '@mui/material'
+import { MyNFTsDetailsCtx } from '../details'
+import { MyNFTsGridMinerItemCtx } from './miner-item'
+import { MyNFTsGridNFTItemCtx } from './nft-item'
+
+const containerSx: SxProps<Theme> = {
+  marginTop: 0,
+}
 
 const MyNFTsGrid: FC = () => {
-  const accountsState = useResolve$(useWeb3Accounts$)
+  const MyNFTsDetails = useContext(MyNFTsDetailsCtx)
+  const MyNFTsGridNFTItem = useContext(MyNFTsGridNFTItemCtx)
+  const MyNFTsGridMinerItem = useContext(MyNFTsGridMinerItemCtx)
+
+  const router = useRouter()
+  const NFTId = router.query.NFTId
 
   return (
-    <pre>
-      {JSON.stringify(accountsState, null, 2)}
-    </pre>
+    <Grid container spacing={2} sx={containerSx}>
+      <MyNFTsGridNFTItem />
+      <MyNFTsGridNFTItem />
+      <MyNFTsGridNFTItem />
+      <MyNFTsGridMinerItem />
+      {
+        NFTId !== undefined && <MyNFTsDetails />
+      }
+    </Grid>
   )
 }
 

@@ -18,7 +18,10 @@ const MyNFTsWelcomeStepConnectWallet: FC = () => {
   const accountsState = useResolve$(useWeb3Accounts$)
 
   const intl = useIntl()
-  const requesting = 'requesting' in accountsState
+
+  // useEffect(() => {
+  //   accountsRequest$.next()
+  // })
 
   return (
     <LayoutSection>
@@ -30,8 +33,8 @@ const MyNFTsWelcomeStepConnectWallet: FC = () => {
       </LayoutSectionHeader>
       <LoadingButton
         color='primary'
-        disabled={requesting}
-        loading={requesting}
+        disabled={accountsState.requesting}
+        loading={accountsState.requesting}
         onClick={() => accountsRequest$.next()}
         sx={{ marginTop: '10px' }}
         variant='contained'
