@@ -105,6 +105,13 @@ const darkThemeOptions: ThemeOptions = {
         },
       },
     },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: darkPalette.text.primary,
+        },
+      },
+    },
   },
   palette: {
     ...darkPalette,
