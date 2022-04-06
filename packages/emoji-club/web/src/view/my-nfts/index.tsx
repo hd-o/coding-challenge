@@ -10,11 +10,12 @@ const MyNFTs: FC = () => {
   const MyNFTsGrid = useContext(MyNFTsGridCtx)
   const MyNFTsWelcome = useContext(MyNFTsWelcomeCtx)
   const accountsState = useResolve$(useWeb3Accounts$)
+  const accountsLength = accountsState.accounts?.length ?? 0
 
   return (
     <Layout>
       {
-        accountsState.accounts.length > 0
+        accountsLength > 0
           ? <MyNFTsGrid />
           : <MyNFTsWelcome />
       }

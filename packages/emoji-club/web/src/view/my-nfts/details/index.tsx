@@ -1,5 +1,9 @@
+import { useEthersBigNumber } from '/src/pkg/ethers/BigNumber'
 import { MuiBoxCtx } from '/src/pkg/mui/Box'
 import { MuiModalCtx } from '/src/pkg/mui/Modal'
+import { useResolve } from '/src/util/use-resolve'
+import { useResolve$ } from '/src/util/use-resolve-stream'
+import { useWeb3Tokens } from '/src/web3/tokens'
 import { useRouter } from 'next/router'
 import { createContext, FC, useContext } from 'react'
 import { SxProps, Theme } from '@mui/material'
@@ -21,6 +25,7 @@ const containerSx: SxProps<Theme> = {
 }
 
 const MyNFTsDetails: FC = () => {
+  const BigNumber = useResolve(useEthersBigNumber)
   const Box = useContext(MuiBoxCtx)
   const Modal = useContext(MuiModalCtx)
   const MyNFTsDetailsCloseButton = useContext(MyNFTsDetailsCloseButtonCtx)
@@ -28,6 +33,11 @@ const MyNFTsDetails: FC = () => {
   const MyNFTsDetailsInfo = useContext(MyNFTsDetailsInfoCtx)
 
   const router = useRouter()
+  const NFTIdQuery = BigNumber.from(router.query.NFTId ?? '-0')
+  const { tokens = [] } = useResolve$(useWeb3Tokens)
+  const currentUserOwnsNFT = tokens.includes(NFTIdQuery)
+
+  if (!currentUserOwnsNFT) return null
 
   return (
     <Modal
