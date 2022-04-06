@@ -28,15 +28,17 @@ const verifyContractInfo = async () => {
     /** @type {(msg: string) => Promise<any>} */
     const retry = async (msg) => {
       log(`${msg}, retrying (${attempt})`)
-      return wait(3000).then(() => verify(attempt+1))
+      return wait(3000).then(() => verify(attempt + 1))
     }
 
     dotenv.config()
-    const contractAddress = process.env.HARDHAT_CONTRACT_ADDRESS
+    const contractAddress = process.env.NEXT_PUBLIC_HARDHAT_CONTRACT_ADDRESS
 
     if (contractAddress === undefined) {
       return retry('contract address undefined')
     }
+
+    log('contract info verified')
   }
 
   return verify()

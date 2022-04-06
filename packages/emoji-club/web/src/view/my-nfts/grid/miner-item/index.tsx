@@ -26,7 +26,6 @@ const MyNFTsGridMinerItem: FC = () => {
   return (
     <MyNFTsGridItem>
       <Tooltip
-        followCursor
         title={intl.formatMessage({
           id: mining
             ? intlIds.myNFTsTooltipMineNFTLoading

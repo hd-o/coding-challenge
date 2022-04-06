@@ -19,10 +19,6 @@ const MyNFTsWelcomeStepConnectWallet: FC = () => {
 
   const intl = useIntl()
 
-  // useEffect(() => {
-  //   accountsRequest$.next()
-  // })
-
   return (
     <LayoutSection>
       <LayoutSectionHeader>

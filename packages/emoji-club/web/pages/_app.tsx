@@ -27,7 +27,10 @@ EmojiClubApp.getInitialProps = async (ctx): Promise<any> => {
 
   return {
     ...appProps,
-    intl: { locale, messages },
+    intl: {
+      locale,
+      messages,
+    },
   }
 }
 

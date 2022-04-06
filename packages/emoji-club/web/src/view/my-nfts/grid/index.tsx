@@ -1,4 +1,5 @@
-import { useRouter } from 'next/router'
+import { useResolve$ } from '/src/util/use-resolve-stream'
+import { useWeb3Tokens } from '/src/web3/tokens'
 import { createContext, FC, useContext } from 'react'
 import { Grid, SxProps, Theme } from '@mui/material'
 import { MyNFTsDetailsCtx } from '../details'
@@ -13,19 +14,20 @@ const MyNFTsGrid: FC = () => {
   const MyNFTsDetails = useContext(MyNFTsDetailsCtx)
   const MyNFTsGridNFTItem = useContext(MyNFTsGridNFTItemCtx)
   const MyNFTsGridMinerItem = useContext(MyNFTsGridMinerItemCtx)
-
-  const router = useRouter()
-  const NFTId = router.query.NFTId
+  const { tokens = [] } = useResolve$(useWeb3Tokens)
 
   return (
     <Grid container spacing={2} sx={containerSx}>
-      <MyNFTsGridNFTItem />
-      <MyNFTsGridNFTItem />
-      <MyNFTsGridNFTItem />
-      <MyNFTsGridMinerItem />
       {
-        NFTId !== undefined && <MyNFTsDetails />
+        tokens.map(token =>
+          <MyNFTsGridNFTItem
+            key={token.toString()}
+            token={token}
+          />
+        )
       }
+      <MyNFTsGridMinerItem />
+      <MyNFTsDetails />
     </Grid>
   )
 }

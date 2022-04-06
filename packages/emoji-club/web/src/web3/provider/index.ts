@@ -12,16 +12,12 @@ import { useWeb3AccountsProxy } from '../accounts/proxy'
 import { Web3Accounts } from '../accounts/stream'
 import { useEthereum } from '../ethereum'
 
-type ProviderValue =
-  | { provider: providers.Web3Provider }
-  /**
-   * Prevent interaction with `provider`
-   * when a page reload is needed.
-   * @see {useWeb3Provider$}
-   */
-  | { needsPageReload: true }
+interface ProviderState {
+  needsPageReload?: true
+  provider?: providers.Web3Provider
+}
 
-type ChainId = string
+type ChainId = string | undefined
 
 interface ProviderScanProps {
   // Accounts received from web3 provider
@@ -35,9 +31,9 @@ interface ProviderScanProps {
 }
 
 type ProviderScan =
-  (value: ProviderValue, props: ProviderScanProps) => ProviderValue
+  (value: ProviderState, props: ProviderScanProps) => ProviderState
 
-type Provider$ = Observable<ProviderValue>
+type Provider$ = Observable<ProviderState>
 
 export const useWeb3Provider$: Use<Provider$> = (resolve) => {
   const accountsProxy = resolve(useWeb3AccountsProxy)
@@ -58,7 +54,7 @@ export const useWeb3Provider$: Use<Provider$> = (resolve) => {
      * is emitted by the Web3Provider and there were
      * accounts loaded. If accounts were not already
      * loaded, then change events can be ignored.
-     * @see {ProviderValue}
+     * @see {ProviderState}
      */
     const needsPageReload = accounts !== undefined &&
       (chainChanged !== undefined || accountsChanged !== undefined)
@@ -77,7 +73,7 @@ export const useWeb3Provider$: Use<Provider$> = (resolve) => {
         accounts: accountsProxy
           .pipe(startWith(undefined)),
         chainChanged: providerOn('chainChanged')
-          .pipe(startWith(undefined)) as Observable<ChainId | undefined>,
+          .pipe(startWith(undefined)) as Observable<ChainId>,
         accountsChanged: providerOn('accountsChanged')
           .pipe(startWith(undefined)),
       }).pipe(

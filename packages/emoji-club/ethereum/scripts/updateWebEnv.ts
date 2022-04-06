@@ -10,7 +10,7 @@ export const updateWebEnv = (emojiClub: EmojiClub): void => {
 
   const envUpdate = stringify({
     ...env,
-    HARDHAT_CONTRACT_ADDRESS: emojiClub?.address
+    NEXT_PUBLIC_HARDHAT_CONTRACT_ADDRESS: emojiClub?.address
   })
 
   writeFileSync(webEnvPath, envUpdate, { encoding: 'utf8' })
