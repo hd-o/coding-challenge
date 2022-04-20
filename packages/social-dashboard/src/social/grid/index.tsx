@@ -1,18 +1,14 @@
-import { DraggableSortableContainerCtx } from '/src/draggable/sortable/container'
+import { DraggableSortableContainer } from '/src/draggable/sortable/container'
 import { draggableTypes } from '/src/draggable/types'
-import { MuiGridCtx } from '/src/pkg/mui/Grid'
 import { useResolvedStream } from '/src/util/use-resolved-stream'
-import { createContext, FC, useContext } from 'react'
-import { SocialCardCtx } from '../card'
+import { FC } from 'react'
+import { Grid } from '@mui/material'
+import { SocialCard } from '../card'
 import { SocialFollowerStats } from '../stats'
 import { useSocialStatsSubject } from '../stats/subject'
 import { useSocialGridOrderState } from './order'
 
-const SocialGrid: FC = () => {
-  const DraggableSortableContainer = useContext(DraggableSortableContainerCtx)
-  const Grid = useContext(MuiGridCtx)
-  const SocialCard = useContext(SocialCardCtx)
-
+export const SocialGrid: FC = () => {
   const stats = useResolvedStream(useSocialStatsSubject)
   const [cardIdsOrder, setCardIdsOrder] = useSocialGridOrderState()
 
@@ -41,5 +37,3 @@ const SocialGrid: FC = () => {
     />
   )
 }
-
-export const SocialGridCtx = createContext(SocialGrid)

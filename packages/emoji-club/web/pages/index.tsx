@@ -1,9 +1,7 @@
-import type { NextPage } from 'next'
-import { MyNFTsCtx } from '/src/view/my-nfts'
-import { useContext } from 'react'
+import { MyNFTs } from '/src/view/my-nfts'
+import { NextPage } from 'next'
 
 const Index: NextPage = () => {
-  const MyNFTs = useContext(MyNFTsCtx)
   return <MyNFTs />
 }
 

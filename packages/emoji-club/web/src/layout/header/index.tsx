@@ -1,13 +1,9 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { ThemeSwitchCtx } from '/src/style/theme/switch'
-import { createContext, FC, useContext } from 'react'
-import { LayoutTitleCtx } from '../title'
+import { ThemeSwitch } from '/src/style/theme/switch'
+import { FC } from 'react'
+import { Box } from '@mui/material'
+import { LayoutTitle } from '../title'
 
-const LayoutHeader: FC = () => {
-  const Box = useContext(MuiBoxCtx)
-  const LayoutTitle = useContext(LayoutTitleCtx)
-  const ThemeSwitch = useContext(ThemeSwitchCtx)
-
+export const LayoutHeader: FC = () => {
   return (
     <Box
       alignItems='center'
@@ -20,5 +16,3 @@ const LayoutHeader: FC = () => {
     </Box>
   )
 }
-
-export const LayoutHeaderCtx = createContext(LayoutHeader)

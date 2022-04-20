@@ -1,14 +1,11 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiCardCtx } from '/src/pkg/mui/Card'
-import { MuiCardContentCtx } from '/src/pkg/mui/CardContent'
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
-import { NextImageCtx } from '/src/pkg/next/Image'
-import { ColorsCtx } from '/src/styles/colors'
+import { colors } from '/src/styles/colors'
 import { useGetCountChange } from '/src/util/count-change'
 import { intlIds } from '/src/util/intl-messages'
 import { useResolved } from '/src/util/use-resolved'
-import { createContext, FC, useContext } from 'react'
+import Image from 'next/image'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
+import { Box, Card, CardContent, Typography } from '@mui/material'
 import { useSocialNetworkColors } from '../network/colors'
 import { SocialFollowerStats } from '../stats'
 
@@ -17,15 +14,9 @@ interface Props {
   stats: SocialFollowerStats
 }
 
-const SocialCard: FC<Props> = (props) => {
-  const Box = useContext(MuiBoxCtx)
-  const Card = useContext(MuiCardCtx)
-  const CardContent = useContext(MuiCardContentCtx)
-  const colors = useContext(ColorsCtx)
+export const SocialCard: FC<Props> = (props) => {
   const getCountChange = useResolved(useGetCountChange)
-  const Image = useContext(NextImageCtx)
   const socialNetworkColors = useResolved(useSocialNetworkColors)
-  const Typography = useContext(MuiTypographyCtx)
 
   const intl = useIntl()
 
@@ -144,5 +135,3 @@ const SocialCard: FC<Props> = (props) => {
     </Box>
   )
 }
-
-export const SocialCardCtx = createContext(SocialCard)

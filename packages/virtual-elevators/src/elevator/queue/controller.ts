@@ -1,6 +1,5 @@
 import { FloorCtrl } from '/src/floor/controller'
 import { IFloorRecord } from '/src/floor/model'
-import { createContext } from 'react'
 import { container, inject, singleton } from 'tsyringe'
 import { ElevatorDoorCtrl } from '../door/controller'
 import { IElevatorRecord } from '../model'
@@ -22,7 +21,7 @@ export class ElevatorQueueCtrl {
     @inject(ElevatorQueue$Map$) private readonly _elevatorQueue$: ElevatorQueue$Map$,
     @inject(FloorCtrl) private readonly _floorCtrl: FloorCtrl,
     @inject(ElevatorPositionCtrl) private readonly _elevatorPositionCtrl: ElevatorPositionCtrl
-  ) {}
+  ) { }
 
   getActiveQueueSet (elevator: IElevatorRecord): IElevatorQueueSet {
     const queue = this.getQueue(elevator)
@@ -131,4 +130,5 @@ export class ElevatorQueueCtrl {
   }
 }
 
-export const ElevatorQueueCtrlCtx = createContext(() => container.resolve(ElevatorQueueCtrl))
+export const useElevatorQueueCtrl =
+  (): ElevatorQueueCtrl => container.resolve(ElevatorQueueCtrl)

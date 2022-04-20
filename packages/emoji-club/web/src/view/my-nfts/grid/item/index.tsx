@@ -1,14 +1,10 @@
-import { MuiGridCtx } from '/src/pkg/mui/Grid'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
+import { Grid } from '@mui/material'
 
-const MyNFTsGridItem: FC = (props) => {
-  const Grid = useContext(MuiGridCtx)
-
+export const MyNFTsGridItem: FC = (props) => {
   return (
     <Grid item xs={4} sm={3}>
       {props.children}
     </Grid>
   )
 }
-
-export const MyNFTsGridItemCtx = createContext(MyNFTsGridItem)

@@ -1,8 +1,7 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
+import { Box } from '@mui/material'
 
-const SharedSelectItemBox: FC = (props) => {
-  const Box = useContext(MuiBoxCtx)
+export const SharedSelectItemBox: FC = (props) => {
   return <Box
     {...props}
     sx={{
@@ -13,5 +12,3 @@ const SharedSelectItemBox: FC = (props) => {
     }}
   />
 }
-
-export const SharedSelectItemBoxCtx = createContext(SharedSelectItemBox)

@@ -6,7 +6,7 @@ import { createContext, useContext } from 'react'
 import { CalendarGridCtx } from './grid'
 import { CalendarGridHeaderCtx } from './grid/header'
 
-function Calendar (): JSX.Element {
+function Calendar(): JSX.Element {
   const Box = useContext(MuiBoxCtx)
   const Grid = useContext(CalendarGridCtx)
   const GridHeader = useContext(CalendarGridHeaderCtx)

@@ -1,14 +1,11 @@
-import { SharedSelectCtx } from '/src/shared/select'
-import { SharedSelectItemCtx } from '/src/shared/select/item'
+import { SharedSelect } from '/src/shared/select'
+import { SharedSelectItem } from '/src/shared/select/item'
 import { intlIds } from '/src/util/intl-messages'
 import { useRouter } from 'next/router'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
 
-const ViewSelect: FC = () => {
-  const SharedSelect = useContext(SharedSelectCtx)
-  const SharedSelectItem = useContext(SharedSelectItemCtx)
-
+export const ViewSelect: FC = () => {
   const intl = useIntl()
   const router = useRouter()
 
@@ -38,5 +35,3 @@ const ViewSelect: FC = () => {
     />
   )
 }
-
-export const ViewSelectCtx = createContext(ViewSelect)

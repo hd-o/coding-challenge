@@ -1,19 +1,16 @@
 import { useResolve$ } from '/src/util/use-resolve-stream'
 import { useWeb3Tokens } from '/src/web3/tokens'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
 import { Grid, SxProps, Theme } from '@mui/material'
-import { MyNFTsDetailsCtx } from '../details'
-import { MyNFTsGridMinerItemCtx } from './miner-item'
-import { MyNFTsGridNFTItemCtx } from './nft-item'
+import { MyNFTsDetails } from '../details'
+import { MyNFTsGridMinerItem } from './miner-item'
+import { MyNFTsGridNFTItem } from './nft-item'
 
 const containerSx: SxProps<Theme> = {
   marginTop: 0,
 }
 
-const MyNFTsGrid: FC = () => {
-  const MyNFTsDetails = useContext(MyNFTsDetailsCtx)
-  const MyNFTsGridNFTItem = useContext(MyNFTsGridNFTItemCtx)
-  const MyNFTsGridMinerItem = useContext(MyNFTsGridMinerItemCtx)
+export const MyNFTsGrid: FC = () => {
   const { tokens = [] } = useResolve$(useWeb3Tokens)
 
   return (
@@ -31,5 +28,3 @@ const MyNFTsGrid: FC = () => {
     </Grid>
   )
 }
-
-export const MyNFTsGridCtx = createContext(MyNFTsGrid)

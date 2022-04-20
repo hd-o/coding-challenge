@@ -1,15 +1,10 @@
-import { LayoutBackgroundCtx } from '/src/layout/background'
-import { LayoutHeaderCtx } from '/src/layout/header'
-import { LayoutPaperCtx } from '/src/layout/paper'
-import { ViewSelectCtx } from '/src/view/select'
-import { createContext, FC, useContext } from 'react'
+import { LayoutBackground } from '/src/layout/background'
+import { LayoutHeader } from '/src/layout/header'
+import { LayoutPaper } from '/src/layout/paper'
+import { ViewSelect } from '/src/view/select'
+import { FC } from 'react'
 
-const Layout: FC = (props) => {
-  const LayoutBackground = useContext(LayoutBackgroundCtx)
-  const LayoutHeader = useContext(LayoutHeaderCtx)
-  const LayoutPaper = useContext(LayoutPaperCtx)
-  const ViewSelect = useContext(ViewSelectCtx)
-
+export const Layout: FC = (props) => {
   return (
     <LayoutBackground>
       <LayoutPaper>
@@ -20,5 +15,3 @@ const Layout: FC = (props) => {
     </LayoutBackground>
   )
 }
-
-export const LayoutCtx = createContext(Layout)

@@ -1,9 +1,6 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiTableFooterCtx } from '/src/pkg/mui/TableFooter'
-import { MuiTablePaginationCtx } from '/src/pkg/mui/TablePagination'
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
-import { ChangeEventHandler, createContext, FC, useContext, useState } from 'react'
+import { ChangeEventHandler, FC, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { Box, TableFooter, TablePagination, Typography } from '@mui/material'
 
 interface NFTRankingsData {
   token: string
@@ -25,12 +22,7 @@ export const rows: NFTRankingsData[] = [
   },
 ]
 
-const NFTRankingsTableFooter: FC = () => {
-  const Box = useContext(MuiBoxCtx)
-  const TableFooter = useContext(MuiTableFooterCtx)
-  const TablePagination = useContext(MuiTablePaginationCtx)
-  const Typography = useContext(MuiTypographyCtx)
-
+export const NFTRankingsTableFooter: FC = () => {
   const [page] = useState(0)
   const [rowsPerPage] = useState(5)
 
@@ -82,5 +74,3 @@ const NFTRankingsTableFooter: FC = () => {
     </TableFooter>
   )
 }
-
-export const NFTRankingsTableFooterCtx = createContext(NFTRankingsTableFooter)

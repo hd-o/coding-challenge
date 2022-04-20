@@ -1,7 +1,6 @@
 import { Lodash } from '/src/pkg/lodash'
 import { Settings$ } from '/src/settings/stream'
 import { MemoizedFunction } from 'lodash'
-import { createContext } from 'react'
 import { container, inject, singleton } from 'tsyringe'
 import { IFloorRecord } from './model'
 import { FloorRequest$, IFloorRequest$ } from './requests/stream'
@@ -46,4 +45,4 @@ export class FloorCtrl {
   }
 }
 
-export const FloorCtrlCtx = createContext(() => container.resolve(FloorCtrl))
+export const useFloorCtrl = (): FloorCtrl => container.resolve(FloorCtrl)

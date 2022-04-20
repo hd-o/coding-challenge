@@ -1,4 +1,4 @@
-import { createContext, FC } from 'react'
+import { FC } from 'react'
 import { FloorNumber } from '../number'
 
 export interface FloorCallerProps {
@@ -9,7 +9,7 @@ export interface FloorCallerProps {
   requested?: boolean
 }
 
-const FloorCaller: FC<FloorCallerProps> = (props) => {
+export const FloorCaller: FC<FloorCallerProps> = (props) => {
   const requested = props.requested === true
   const requestedClassName = requested ? 'primary' : 'info'
 
@@ -32,5 +32,3 @@ const FloorCaller: FC<FloorCallerProps> = (props) => {
     {props.floor}
   </button>
 }
-
-export const FloorCallerCtx = createContext(FloorCaller)

@@ -1,11 +1,7 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiPaperCtx } from '/src/pkg/mui/Paper'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
+import { Box, Paper } from '@mui/material'
 
-const LayoutSection: FC = (props) => {
-  const Box = useContext(MuiBoxCtx)
-  const Paper = useContext(MuiPaperCtx)
-
+export const LayoutSection: FC = (props) => {
   return (
     <Box marginTop={1}>
       <Paper
@@ -20,5 +16,3 @@ const LayoutSection: FC = (props) => {
     </Box>
   )
 }
-
-export const LayoutSectionCtx = createContext(LayoutSection)

@@ -1,13 +1,13 @@
 import { floorHeight } from '/src/floor/height'
 import { useStream } from '/src/util/useStream'
-import { createContext, FC } from 'react'
+import { FC } from 'react'
 import { ElevatorPosition$ } from '../position/stream'
 
 interface ElevatorCarProps {
   position$: ElevatorPosition$
 }
 
-const ElevatorCar: FC<ElevatorCarProps> = (props) => {
+export const ElevatorCar: FC<ElevatorCarProps> = (props) => {
   const position = useStream(props.position$)
   return (
     <div style={{
@@ -22,5 +22,3 @@ const ElevatorCar: FC<ElevatorCarProps> = (props) => {
     </div>
   )
 }
-
-export const ElevatorCarCtx = createContext(ElevatorCar)

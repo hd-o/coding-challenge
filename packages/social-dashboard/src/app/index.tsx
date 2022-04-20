@@ -1,7 +1,7 @@
 import { themes } from '/src/styles/theme'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import { createContext, FC } from 'react'
+import { FC } from 'react'
 import { Cookies, CookiesProvider } from 'react-cookie'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
@@ -50,5 +50,3 @@ export const AppContainer: FC<AppContainerProps> = (props) => {
     </CookiesProvider>
   )
 }
-
-export const AppContainerCtx = createContext(AppContainer)

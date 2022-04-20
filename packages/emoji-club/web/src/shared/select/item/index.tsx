@@ -1,23 +1,15 @@
-import { MuiLinkCtx } from '/src/pkg/mui/Link'
-import { MuiMenuItemCtx } from '/src/pkg/mui/MenuItem'
-import { NextLinkCtx } from '/src/pkg/next/Link'
-import { createContext, FC, useContext } from 'react'
-import { MenuItemProps } from '@mui/material'
-import { SharedSelectItemBoxCtx } from './box'
+import NextLink from 'next/link'
+import { FC } from 'react'
+import { Link, MenuItem, MenuItemProps } from '@mui/material'
+import { SharedSelectItemBox } from './box'
 
 interface Props extends MenuItemProps {
   href?: string
   value: Required<MenuItemProps['value']>
 }
 
-const SharedSelectItem: FC<Props> = (props) => {
+export const SharedSelectItem: FC<Props> = (props) => {
   const { href, ...menuItemProps } = props
-
-  const Link = useContext(MuiLinkCtx)
-  const MenuItem = useContext(MuiMenuItemCtx)
-  const NextLink = useContext(NextLinkCtx)
-  const SharedSelectItemBox = useContext(SharedSelectItemBoxCtx)
-
   return (
     <MenuItem
       {...menuItemProps}
@@ -47,5 +39,3 @@ const SharedSelectItem: FC<Props> = (props) => {
     </MenuItem>
   )
 }
-
-export const SharedSelectItemCtx = createContext(SharedSelectItem)

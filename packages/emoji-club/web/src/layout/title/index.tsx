@@ -1,15 +1,10 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
 import { intlIds } from '/src/util/intl-messages'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
+import { Box, Typography } from '@mui/material'
 
-const LayoutTitle: FC = () => {
-  const Box = useContext(MuiBoxCtx)
-  const Typography = useContext(MuiTypographyCtx)
-
+export const LayoutTitle: FC = () => {
   const intl = useIntl()
-
   return (
     <Box>
       <Typography
@@ -24,5 +19,3 @@ const LayoutTitle: FC = () => {
     </Box>
   )
 }
-
-export const LayoutTitleCtx = createContext(LayoutTitle)

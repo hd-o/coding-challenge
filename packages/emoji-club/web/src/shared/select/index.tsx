@@ -1,7 +1,5 @@
-import { createContext, FC, useContext } from 'react'
-import { MuiFormControlCtx } from '../../pkg/mui/FormControl'
-import { MuiInputLabelCtx } from '../../pkg/mui/InputLabel'
-import { MuiSelectCtx } from '../../pkg/mui/Select'
+import { FC } from 'react'
+import { FormControl, InputLabel, Select } from '@mui/material'
 
 type SelectItem = JSX.Element | string | number
 
@@ -11,11 +9,7 @@ interface Props {
   value: number
 }
 
-const SharedSelect: FC<Props> = (props) => {
-  const FormControl = useContext(MuiFormControlCtx)
-  const InputLabel = useContext(MuiInputLabelCtx)
-  const Select = useContext(MuiSelectCtx)
-
+export const SharedSelect: FC<Props> = (props) => {
   return (
     <FormControl fullWidth>
       <InputLabel
@@ -55,5 +49,3 @@ const SharedSelect: FC<Props> = (props) => {
     </FormControl>
   )
 }
-
-export const SharedSelectCtx = createContext(SharedSelect)

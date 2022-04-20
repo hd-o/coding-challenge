@@ -1,16 +1,14 @@
-import { FloorList$Ctx } from '/src/floor/stream'
-import { AntdRowCtx } from '/src/pkg/antd/row'
-import { TypeStyleClassesCtx } from '/src/pkg/typestyle/classes'
-import { Settings$Ctx } from '/src/settings/stream'
+import { useFloorList$ } from '/src/floor/stream'
+import { useSettings$ } from '/src/settings/stream'
 import { useStream } from '/src/util/useStream'
-import { useStreamCtx } from '/src/util/useStreamCtx'
 import { useStyle } from '/src/util/useStyle'
-import { createContext, useContext } from 'react'
+import { Row } from 'antd'
+import { classes } from 'typestyle'
 import { NestedCSSProperties } from 'typestyle/lib/types'
-import { FloorCallerCtx } from '../../floor/caller'
+import { FloorCaller } from '../../floor/caller'
 import { FloorCallerProps } from '../../floor/caller/props'
 import { IElevatorRecord } from '../model'
-import { ElevatorQueueCtrlCtx } from '../queue/controller'
+import { useElevatorQueueCtrl } from '../queue/controller'
 import { elevatorRowStyle } from '../row/style'
 
 const row = (): NestedCSSProperties => ({
@@ -28,12 +26,11 @@ interface CustomFloorCallerProps
 }
 
 function CustomFloorCaller (props: CustomFloorCallerProps): JSX.Element {
-  const FloorCaller = useContext(FloorCallerCtx)
-  const elevatorQueueCtrl = useContext(ElevatorQueueCtrlCtx)()
-  const requested = elevatorQueueCtrl.isGoingToFloor(props.elevator, props.floor)
+  const elevatorQueueCtrl = useElevatorQueueCtrl()
 
   useStream(elevatorQueueCtrl.getQueue$(props.elevator))
 
+  const requested = elevatorQueueCtrl.isGoingToFloor(props.elevator, props.floor)
   const idBlock = `elevator-${props.index}-button-floor-${props.floor.number}`
   const idModifier = requested ? '-requested' : ''
 
@@ -51,12 +48,9 @@ interface Props {
 }
 
 /** Internal elevator buttons */
-function ElevatorPanel (props: Props): JSX.Element {
-  const Row = useContext(AntdRowCtx)
-
-  const settings = useStreamCtx(Settings$Ctx)
-  const floors = useStreamCtx(FloorList$Ctx)
-  const classes = useContext(TypeStyleClassesCtx)
+export function ElevatorPanel (props: Props): JSX.Element {
+  const settings = useStream(useSettings$())
+  const floors = useStream(useFloorList$())
 
   const rowClass = classes(
     useStyle(elevatorRowStyle, settings),
@@ -75,5 +69,3 @@ function ElevatorPanel (props: Props): JSX.Element {
     </Row>
   )
 }
-
-export const ElevatorPanelCtx = createContext(ElevatorPanel)

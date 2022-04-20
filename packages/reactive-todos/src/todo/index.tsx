@@ -1,5 +1,5 @@
-import { createContext, FC, useContext } from 'react'
-import { TodoCtrlCtx } from './controller'
+import { FC } from 'react'
+import { useTodoCtrl } from './controller'
 import { TodoModel } from './model'
 
 type TodoHandler = (t: TodoModel) => () => void
@@ -8,9 +8,9 @@ interface Props {
   todo: TodoModel
 }
 
-const Todo: FC<Props> = (props) => {
+export const Todo: FC<Props> = (props) => {
   const { todo } = props
-  const todoCtrl = useContext(TodoCtrlCtx)()
+  const todoCtrl = useTodoCtrl()
 
   const handleToggle: TodoHandler = (todo) => {
     return () => todoCtrl.toggleComplete(todo.id)
@@ -42,5 +42,3 @@ const Todo: FC<Props> = (props) => {
     </li>
   )
 }
-
-export const TodoCtx = createContext(Todo)

@@ -1,9 +1,5 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiTableCellCtx } from '/src/pkg/mui/TableCell'
-import { MuiTableHeadCtx } from '/src/pkg/mui/TableHead'
-import { MuiTableRowCtx } from '/src/pkg/mui/TableRow'
-import { MuiTableSortLabelCtx } from '/src/pkg/mui/TableSortLabel'
-import { createContext, FC, MouseEvent, MouseEventHandler, useContext } from 'react'
+import { FC, MouseEvent, MouseEventHandler } from 'react'
+import { Box, TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material'
 
 export type SortOrder = 'desc' | 'asc' | undefined
 
@@ -35,14 +31,8 @@ interface Props {
   orderBy: string
 }
 
-const NFTRankingsTableHead: FC<Props> = (props) => {
+export const NFTRankingsTableHead: FC<Props> = (props) => {
   const { order, orderBy } = props
-
-  const Box = useContext(MuiBoxCtx)
-  const TableCell = useContext(MuiTableCellCtx)
-  const TableHead = useContext(MuiTableHeadCtx)
-  const TableRow = useContext(MuiTableRowCtx)
-  const TableSortLabel = useContext(MuiTableSortLabelCtx)
 
   const newSortHandler: NewSortHandler = (property) => (event) => {
     props.onRequestSort(event, property)
@@ -94,5 +84,3 @@ const NFTRankingsTableHead: FC<Props> = (props) => {
     </TableHead>
   )
 }
-
-export const NFTRankingsTableHeadCtx = createContext(NFTRankingsTableHead)

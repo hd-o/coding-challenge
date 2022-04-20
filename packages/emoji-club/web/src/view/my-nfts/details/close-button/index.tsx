@@ -1,8 +1,7 @@
-import { MuiCloseIconCtx } from '/src/pkg/mui/CloseButton'
-import { MuiIconButtonCtx } from '/src/pkg/mui/MuiIconButton'
 import { useRouter } from 'next/router'
-import { createContext, FC, useContext } from 'react'
-import { SxProps, Theme } from '@mui/material'
+import { FC } from 'react'
+import CloseIcon from '@mui/icons-material/Close'
+import { IconButton, SxProps, Theme } from '@mui/material'
 
 const iconButtonSx: SxProps<Theme> = {
   padding: 0,
@@ -12,12 +11,8 @@ const iconButtonSx: SxProps<Theme> = {
   zIndex: 1,
 }
 
-const MyNFTsDetailsCloseButton: FC = () => {
-  const CloseIcon = useContext(MuiCloseIconCtx)
-  const IconButton = useContext(MuiIconButtonCtx)
-
+export const MyNFTsDetailsCloseButton: FC = () => {
   const router = useRouter()
-
   return (
     <IconButton
       aria-label='close'
@@ -28,5 +23,3 @@ const MyNFTsDetailsCloseButton: FC = () => {
     </IconButton>
   )
 }
-
-export const MyNFTsDetailsCloseButtonCtx = createContext(MyNFTsDetailsCloseButton)

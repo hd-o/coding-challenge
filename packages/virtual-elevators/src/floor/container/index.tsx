@@ -1,16 +1,14 @@
-import { FloorCtrlCtx } from '/src/floor/controller'
-import { FloorList$Ctx } from '/src/floor/stream'
-import { AntdRowCtx } from '/src/pkg/antd/row'
-import { TypeStyleClassesCtx } from '/src/pkg/typestyle/classes'
-import { Settings$Ctx } from '/src/settings/stream'
+import { useFloorCtrl } from '/src/floor/controller'
+import { useFloorList$ } from '/src/floor/stream'
+import { useSettings$ } from '/src/settings/stream'
 import { useStream } from '/src/util/useStream'
-import { useStreamCtx } from '/src/util/useStreamCtx'
 import { useStyle } from '/src/util/useStyle'
-import { createContext, useContext } from 'react'
+import { Row } from 'antd'
+import { classes } from 'typestyle'
 import { NestedCSSProperties } from 'typestyle/lib/types'
-import { ElevatorCtrlCtx } from '../../elevator/controller'
+import { useElevatorCtrl } from '../../elevator/controller'
 import { elevatorRowStyle } from '../../elevator/row/style'
-import { FloorCallerCtx } from '../caller'
+import { FloorCaller } from '../caller'
 import { FloorCallerProps } from '../caller/props'
 
 const cell = (): NestedCSSProperties => ({
@@ -19,11 +17,10 @@ const cell = (): NestedCSSProperties => ({
   borderLeftWidth: 1,
 })
 
-interface CustomFloorCallerProps extends Omit<FloorCallerProps, 'requested'> {}
+interface CustomFloorCallerProps extends Omit<FloorCallerProps, 'requested'> { }
 
 function CustomFloorCaller (props: CustomFloorCallerProps): JSX.Element {
-  const FloorCaller = useContext(FloorCallerCtx)
-  const floorCtrl = useContext(FloorCtrlCtx)()
+  const floorCtrl = useFloorCtrl()
   const requested = useStream(floorCtrl.getRequest$(props.floor))
 
   const idBlock = `floor-${props.floor.number}-caller`
@@ -36,14 +33,11 @@ function CustomFloorCaller (props: CustomFloorCallerProps): JSX.Element {
   />
 }
 
-function FloorContainer (): JSX.Element {
-  const Row = useContext(AntdRowCtx)
+export function FloorContainer (): JSX.Element {
+  const elevatorCtrl = useElevatorCtrl()
+  const floors = useStream(useFloorList$())
 
-  const elevatorCtrl = useContext(ElevatorCtrlCtx)()
-  const floors = useStreamCtx(FloorList$Ctx)
-
-  const settings = useStreamCtx(Settings$Ctx)
-  const classes = useContext(TypeStyleClassesCtx)
+  const settings = useStream(useSettings$())
 
   const cellClass = classes(
     useStyle(elevatorRowStyle, settings),
@@ -62,5 +56,3 @@ function FloorContainer (): JSX.Element {
     </>
   )
 }
-
-export const FloorContainerCtx = createContext(FloorContainer)

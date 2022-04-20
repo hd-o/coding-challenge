@@ -1,8 +1,8 @@
 import { themes } from '/src/style/theme'
-import { FC, useContext, useEffect, useState } from 'react'
+import Head from 'next/head'
+import { FC, useEffect, useState } from 'react'
 import { IntlProvider, useIntl } from 'react-intl'
 import { ThemeProvider } from '@mui/material'
-import { NextHeadCtx } from '../pkg/next/Head'
 import { useThemeTypeSubject } from '../style/theme/type/subject'
 import { intlIds } from '../util/intl-messages'
 import { useResolveBehaviorState } from '../util/use-resolve-behavior-state'
@@ -22,7 +22,6 @@ interface Props {
 }
 
 const Content: FC<Props> = (props) => {
-  const Head = useContext(NextHeadCtx)
   const intl = useIntl()
 
   // Disable Content SSR

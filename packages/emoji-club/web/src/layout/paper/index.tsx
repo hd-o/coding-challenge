@@ -1,8 +1,7 @@
-import { MuiPaperCtx } from '/src/pkg/mui/Paper'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
+import { Paper } from '@mui/material'
 
-const LayoutPaper: FC = (props) => {
-  const Paper = useContext(MuiPaperCtx)
+export const LayoutPaper: FC = (props) => {
   return (
     <Paper
       sx={{
@@ -24,5 +23,3 @@ const LayoutPaper: FC = (props) => {
     </Paper>
   )
 }
-
-export const LayoutPaperCtx = createContext(LayoutPaper)

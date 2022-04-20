@@ -4,7 +4,7 @@ export interface Web3Error {
   message: string
 }
 
-type NewError = (error: Web3Error) => (data: unknown) => { error: Web3Error }
+type NewError = (error: Web3Error) => (data?: unknown) => { error: Web3Error }
 
 const newError: NewError = (web3Error) => (data) => ({
   error: { ...web3Error, data },
@@ -22,6 +22,10 @@ export const web3Errors = <const>{
   failedLoadingTokens: newError({
     code: 2,
     message: 'Failed to load account tokens',
+  }),
+  failedMining: newError({
+    code: 3,
+    message: 'Failed to mine new token',
   }),
 }
 

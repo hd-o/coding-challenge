@@ -1,8 +1,6 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
-import { createContext, FC, useContext } from 'react'
-import { SxProps, Theme } from '@mui/material'
-import { MyNFTsTransferCtx } from '../../transfer'
+import { FC } from 'react'
+import { Box, SxProps, Theme, Typography } from '@mui/material'
+import { MyNFTsTransfer } from '../../transfer'
 
 const containerSx: SxProps<Theme> = {
   flexGrow: 1,
@@ -11,11 +9,7 @@ const containerSx: SxProps<Theme> = {
   paddingRight: 2,
 }
 
-const MyNFTsDetailsInfo: FC = () => {
-  const Box = useContext(MuiBoxCtx)
-  const MyNFTsTransfer = useContext(MyNFTsTransferCtx)
-  const Typography = useContext(MuiTypographyCtx)
-
+export const MyNFTsDetailsInfo: FC = () => {
   return (
     <Box sx={containerSx}>
       <Typography variant='h5'>
@@ -28,5 +22,3 @@ const MyNFTsDetailsInfo: FC = () => {
     </Box>
   )
 }
-
-export const MyNFTsDetailsInfoCtx = createContext(MyNFTsDetailsInfo)

@@ -1,7 +1,7 @@
 import update from 'immutability-helper'
-import { createContext, FC, useCallback, useContext } from 'react'
+import { FC, useCallback } from 'react'
 import { ConnectDropTarget, useDrop } from 'react-dnd'
-import { DraggableItemChild, DraggableItemCtx } from '../../item'
+import { DraggableItem, DraggableItemChild } from '../../item'
 import { DraggableType } from '../../types'
 
 interface Props {
@@ -12,8 +12,7 @@ interface Props {
   setIdsOrder: (idsOrder: string[]) => void
 }
 
-const DraggableSortableContainer: FC<Props> = (props) => {
-  const DraggableItem = useContext(DraggableItemCtx)
+export const DraggableSortableContainer: FC<Props> = (props) => {
   const { idsOrder, setIdsOrder, ParentComponent } = props
 
   const getItemIndex = useCallback(
@@ -56,5 +55,3 @@ const DraggableSortableContainer: FC<Props> = (props) => {
     </ParentComponent>
   )
 }
-
-export const DraggableSortableContainerCtx = createContext(DraggableSortableContainer)

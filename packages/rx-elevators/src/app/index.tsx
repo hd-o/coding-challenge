@@ -1,6 +1,6 @@
-import { FC, useContext, useEffect, useMemo } from 'react'
+import { FC, useEffect, useMemo } from 'react'
 import { Subscription } from 'rxjs'
-import { BuildingCtx } from '../building'
+import { Building } from '../building'
 import { useStartup } from '../startup'
 import { useResolve } from '../util/useResolve'
 
@@ -10,7 +10,6 @@ interface Props {
 }
 
 export const App: FC<Props> = (props) => {
-  const Building = useContext(BuildingCtx)
   const TestCtrl = props.TestCtrl ?? (() => <></>)
   const startup = useResolve(useStartup)
 

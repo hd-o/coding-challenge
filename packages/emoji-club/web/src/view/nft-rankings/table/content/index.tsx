@@ -1,21 +1,12 @@
-import { MuiTableCtx } from '/src/pkg/mui/Table'
-import { MuiTableBodyCtx } from '/src/pkg/mui/TableBody'
-import { MuiTableCellCtx } from '/src/pkg/mui/TableCell'
-import { MuiTableRowCtx } from '/src/pkg/mui/TableRow'
 import { rows } from '/src/view/nft-rankings/table/footer'
 import {
-  NFTRankingsTableHeadCtx, RequestSortHandler, SortOrder
+  NFTRankingsTableHead, RequestSortHandler, SortOrder
 } from '/src/view/nft-rankings/table/head'
-import { createContext, FC, useContext, useState } from 'react'
+import { FC, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { Table, TableBody, TableCell, TableRow } from '@mui/material'
 
-const NFTRankingsTableContent: FC = () => {
-  const NFTRankingsTableHead = useContext(NFTRankingsTableHeadCtx)
-  const Table = useContext(MuiTableCtx)
-  const TableBody = useContext(MuiTableBodyCtx)
-  const TableCell = useContext(MuiTableCellCtx)
-  const TableRow = useContext(MuiTableRowCtx)
-
+export const NFTRankingsTableContent: FC = () => {
   const [order, setOrder] = useState<SortOrder>('asc')
   const [orderBy, setOrderBy] = useState('calories')
 
@@ -61,5 +52,3 @@ const NFTRankingsTableContent: FC = () => {
     </Table>
   )
 }
-
-export const NFTRankingsTableContentCtx = createContext(NFTRankingsTableContent)

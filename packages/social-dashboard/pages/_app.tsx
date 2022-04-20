@@ -1,9 +1,8 @@
 import '/src/styles/index.css'
-import { AppContainerCtx, AppContainerProps, IntlMessages } from '/src/app'
+import { AppContainer, AppContainerProps, IntlMessages } from '/src/app'
 import { newEmotionCache } from '/src/util/emotion-cache'
 import { NextPage } from 'next'
 import App, { AppContext, AppProps } from 'next/app'
-import { useContext } from 'react'
 import { EmotionCache } from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
 
@@ -20,7 +19,6 @@ const clientSideEmotionCache = newEmotionCache()
 // using App requires CustomApp to be a class type
 const CustomApp: NextPage<Props> = (props) => {
   const { emotionCache = clientSideEmotionCache } = props
-  const AppContainer = useContext(AppContainerCtx)
 
   return (
     <CacheProvider value={emotionCache}>

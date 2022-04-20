@@ -1,8 +1,8 @@
-import { MuiPaperCtx } from '/src/pkg/mui/Paper'
 import { createContext, FC, forwardRef, useContext } from 'react'
-import { PaperProps, SxProps, Theme } from '@mui/material'
+import { LoadingButton, LoadingButtonProps } from '@mui/lab'
+import { SxProps, Theme } from '@mui/material'
 
-const paperSx: SxProps<Theme> = {
+const buttonSx: SxProps<Theme> = {
   alignItems: 'center',
   background: theme => theme.app.layoutSectionPaper,
   cursor: 'pointer',
@@ -18,20 +18,17 @@ const paperSx: SxProps<Theme> = {
   },
 }
 
-const MyNFTsGridItemPaper: FC<PaperProps> = (props, ref) => {
-  const Paper = useContext(MuiPaperCtx)
-
+const MyNFTsGridLoadingButtonBase: FC<LoadingButtonProps> = (props, ref) => {
   return (
-    <Paper
+    <LoadingButton
       {...props}
       ref={ref}
-      sx={{ ...paperSx, ...props.sx }}
+      sx={{ ...buttonSx, ...props.sx }}
     >
       {props.children}
-    </Paper>
+    </LoadingButton>
   )
 }
 
-export const MyNFTsGridItemPaperCtx = createContext(
-  forwardRef(MyNFTsGridItemPaper as any) as FC<PaperProps>,
-)
+export const MyNFTsGridLoadingButton =
+  forwardRef(MyNFTsGridLoadingButtonBase as any) as FC<PaperProps>

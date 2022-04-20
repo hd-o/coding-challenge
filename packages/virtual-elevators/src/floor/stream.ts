@@ -1,7 +1,6 @@
 import { FloorFactory } from '/src/floor/factory'
 import { Lodash } from '/src/pkg/lodash'
 import { List } from 'immutable'
-import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { Immutable } from '../pkg/immutable'
@@ -29,4 +28,4 @@ export class FloorList$ extends BehaviorSubject<IFloorRecordList> {
   }
 }
 
-export const FloorList$Ctx = createContext(() => container.resolve(FloorList$))
+export const useFloorList$ = (): FloorList$ => container.resolve(FloorList$)

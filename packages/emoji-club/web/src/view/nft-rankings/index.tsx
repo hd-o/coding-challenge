@@ -1,15 +1,10 @@
-import { LayoutCtx } from '/src/layout'
-import { createContext, FC, useContext } from 'react'
-import { NFTRankingsActionsCtx } from './actions'
-import { NFTRankingsSelectCtx } from './select'
-import { NFTRankingsTableCtx } from './table'
+import { Layout } from '/src/layout'
+import { FC } from 'react'
+import { NFTRankingsActions } from './actions'
+import { NFTRankingsSelect } from './select'
+import { NFTRankingsTable } from './table'
 
-const NFTRankings: FC = () => {
-  const Layout = useContext(LayoutCtx)
-  const NFTRankingsActions = useContext(NFTRankingsActionsCtx)
-  const NFTRankingsSelect = useContext(NFTRankingsSelectCtx)
-  const NFTRankingsTable = useContext(NFTRankingsTableCtx)
-
+export const NFTRankings: FC = () => {
   return (
     <Layout>
       <NFTRankingsSelect />
@@ -18,5 +13,3 @@ const NFTRankings: FC = () => {
     </Layout>
   )
 }
-
-export const NFTRankingsCtx = createContext(NFTRankings)

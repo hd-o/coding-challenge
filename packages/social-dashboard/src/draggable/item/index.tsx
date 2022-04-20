@@ -1,4 +1,4 @@
-import { createContext, FC } from 'react'
+import { FC } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import { DraggableType } from '../types'
 
@@ -21,7 +21,7 @@ interface Item {
   originalIndex: number
 }
 
-const DraggableItem: FC<Props> = (props) => {
+export const DraggableItem: FC<Props> = (props) => {
   const { ChildComponent } = props
 
   const originalIndex = props.getItemIndex(props.id)
@@ -63,5 +63,3 @@ const DraggableItem: FC<Props> = (props) => {
     />
   )
 }
-
-export const DraggableItemCtx = createContext(DraggableItem)

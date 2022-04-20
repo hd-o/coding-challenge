@@ -1,10 +1,10 @@
-import { FloorCallerCtx } from '/src/floor/caller'
+import { FloorCaller } from '/src/floor/caller'
 import { FloorNumber } from '/src/floor/number'
 import { useFloorNumber$ } from '/src/floor/number/stream'
 import { useResolve } from '/src/util/useResolve'
 import { useStream } from '/src/util/useStream'
 import { useStreamFn } from '/src/util/useStreamFn'
-import { createContext, FC, useContext, useMemo } from 'react'
+import { FC, useMemo } from 'react'
 import { useNewElevatorFloorPair } from '../floor/pair'
 import { ElevatorId } from '../id'
 import { useElevatorQueueInsertEvent$ } from '../queue/insert/event'
@@ -15,9 +15,7 @@ interface ElevatorPanelProps {
   elevator: ElevatorId
 }
 
-const ElevatorPanel: FC<ElevatorPanelProps> = (props) => {
-  const FloorCaller = useContext(FloorCallerCtx)
-
+export const ElevatorPanel: FC<ElevatorPanelProps> = (props) => {
   const elevatorQueueInsertEvent$ = useResolve(useElevatorQueueInsertEvent$)
   const newElevatorFloorPair = useResolve(useNewElevatorFloorPair)
   const newElevatorQueueItems$ = useResolve(useNewElevatorQueueItem$)
@@ -56,5 +54,3 @@ const ElevatorPanel: FC<ElevatorPanelProps> = (props) => {
     </div>
   )
 }
-
-export const ElevatorPanelCtx = createContext(ElevatorPanel)

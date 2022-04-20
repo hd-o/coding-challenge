@@ -1,27 +1,18 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiTooltipCtx } from '/src/pkg/mui/Tooltip'
 import { intlIds } from '/src/util/intl-messages'
-import { createContext, FC, useContext } from 'react'
+import { useResolve } from '/src/util/use-resolve'
+import { useResolve$ } from '/src/util/use-resolve-stream'
+import { useWeb3MiningRequest$ } from '/src/web3/mining/request/stream'
+import { useWeb3Mining } from '/src/web3/mining/stream'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
-import { CircularProgress, SxProps, Theme } from '@mui/material'
-import { MyNFTsGridItemCtx } from '../item'
-import { MyNFTsGridItemPaperCtx } from '../item/paper'
+import { Box, CircularProgress, Tooltip } from '@mui/material'
+import { MyNFTsGridItem } from '../item'
+import { MyNFTsGridLoadingButton } from '../loading-button'
 
-const paperSx: SxProps<Theme> = {
-  opacity: 0.5,
-  '&:hover': {
-    opacity: 1,
-  },
-}
-
-const MyNFTsGridMinerItem: FC = () => {
-  const Box = useContext(MuiBoxCtx)
-  const MyNFTsGridItem = useContext(MyNFTsGridItemCtx)
-  const MyNFTsGridItemPaper = useContext(MyNFTsGridItemPaperCtx)
-  const Tooltip = useContext(MuiTooltipCtx)
-
+export const MyNFTsGridMinerItem: FC = () => {
   const intl = useIntl()
-  const mining = false
+  const mineRequest$ = useResolve(useWeb3MiningRequest$)
+  const mining = useResolve$(useWeb3Mining).mining === true
 
   return (
     <MyNFTsGridItem>
@@ -32,18 +23,19 @@ const MyNFTsGridMinerItem: FC = () => {
             : intlIds.myNFTsTooltipMineNFT,
         })}
       >
-        <MyNFTsGridItemPaper sx={mining ? {} : paperSx}>
-          <Box>
+        <MyNFTsGridLoadingButton
+          disabled={mining}
+          onClick={() => mineRequest$.next()}
+        >
+          <Box color='text.secondary'>
             {
               mining
                 ? <CircularProgress />
                 : <span>⛏</span>
             }
           </Box>
-        </MyNFTsGridItemPaper>
+        </MyNFTsGridLoadingButton>
       </Tooltip>
     </MyNFTsGridItem>
   )
 }
-
-export const MyNFTsGridMinerItemCtx = createContext(MyNFTsGridMinerItem)
