@@ -266,6 +266,18 @@ const ComponentA = () => {
 }
 ```
 
+### Injection Precision
+
+> TO-DO
+
+### Context Use Cases
+
+> TO-DO
+
+### Container Use Cases
+
+> TO-DO
+
 [develop]: ../../.shared/node/README.md#development
 
 [live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/solid-calendar
