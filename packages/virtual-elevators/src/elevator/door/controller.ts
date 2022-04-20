@@ -2,7 +2,6 @@ import { Lodash } from '/src/pkg/lodash'
 import { IProcess, ProcessLoop } from '/src/process/loop'
 import { ProcessUtils } from '/src/process/utils'
 import { Settings$ } from '/src/settings/stream'
-import { createContext } from 'react'
 import { container, inject, singleton } from 'tsyringe'
 import { IElevatorRecord } from '../model'
 import { ElevatorMoveState } from '../moveState'
@@ -19,7 +18,7 @@ export class ElevatorDoorCtrl {
     @inject(ProcessUtils) private readonly _processUtils: ProcessUtils,
     @inject(Lodash) private readonly _lodash: Lodash,
     @inject(Settings$) private readonly _settings$: Settings$,
-  ) {}
+  ) { }
 
   private _createDoorMovementProcess (door$: IElevatorDoor$, doorStatus: IElevatorDoorStatus): IProcess {
     const isOpening = doorStatus === elevatorDoorStatus.Opening
@@ -79,4 +78,4 @@ export class ElevatorDoorCtrl {
   }
 }
 
-export const ElevatorDoorCtrlCtx = createContext(() => container.resolve(ElevatorDoorCtrl))
+export const useElevatorDoorCtrl = (): ElevatorDoorCtrl => container.resolve(ElevatorDoorCtrl)

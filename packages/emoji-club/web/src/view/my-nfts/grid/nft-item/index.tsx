@@ -1,22 +1,17 @@
-import { MuiTooltipCtx } from '/src/pkg/mui/Tooltip'
-import { NextLinkCtx } from '/src/pkg/next/Link'
 import { intlIds } from '/src/util/intl-messages'
 import { Web3Token } from '/src/web3/tokens'
-import { createContext, FC, useContext } from 'react'
+import Link from 'next/link'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
-import { MyNFTsGridItemCtx } from '../item'
-import { MyNFTsGridItemPaperCtx } from '../item/paper'
+import { Tooltip } from '@mui/material'
+import { MyNFTsGridItem } from '../item'
+import { MyNFTsGridLoadingButton } from '../loading-button'
 
 interface Props {
   token: Web3Token
 }
 
-const MyNFTsGridNFTItem: FC<Props> = () => {
-  const Link = useContext(NextLinkCtx)
-  const MyNFTsGridItem = useContext(MyNFTsGridItemCtx)
-  const MyNFTsGridItemPaper = useContext(MyNFTsGridItemPaperCtx)
-  const Tooltip = useContext(MuiTooltipCtx)
-
+export const MyNFTsGridNFTItem: FC<Props> = () => {
   const intl = useIntl()
 
   return (
@@ -26,14 +21,12 @@ const MyNFTsGridNFTItem: FC<Props> = () => {
           <Tooltip
             title={intl.formatMessage({ id: intlIds.myNFTsTooltipOpenDetails })}
           >
-            <MyNFTsGridItemPaper>
+            <MyNFTsGridLoadingButton>
               <span>🐧</span>
-            </MyNFTsGridItemPaper>
+            </MyNFTsGridLoadingButton>
           </Tooltip>
         </a>
       </Link>
     </MyNFTsGridItem>
   )
 }
-
-export const MyNFTsGridNFTItemCtx = createContext(MyNFTsGridNFTItem)

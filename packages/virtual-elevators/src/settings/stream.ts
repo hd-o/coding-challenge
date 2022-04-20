@@ -1,4 +1,3 @@
-import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { Immutable } from '../pkg/immutable'
@@ -22,4 +21,4 @@ export class Settings$ extends BehaviorSubject<ISettingsRecord> {
   }
 }
 
-export const Settings$Ctx = createContext(() => container.resolve(Settings$))
+export const useSettings$ = (): Settings$ => container.resolve(Settings$)

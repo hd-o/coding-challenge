@@ -1,9 +1,8 @@
 import { useStream } from '/src/util/useStream'
 import { useStyle } from '/src/util/useStyle'
-import { createContext, useContext } from 'react'
 import { NestedCSSProperties } from 'typestyle/lib/types'
 import { IElevatorRecord } from '../model'
-import { ElevatorDoorCtrlCtx } from './controller'
+import { useElevatorDoorCtrl } from './controller'
 
 const door = (): NestedCSSProperties => ({
   $debugName: 'elevator-door',
@@ -33,10 +32,11 @@ function Door (props: DoorProps): JSX.Element {
   />
 }
 
-function ElevatorDoor (props: Props): JSX.Element {
-  const elevatorDoorCtrl = useContext(ElevatorDoorCtrlCtx)()
+export function ElevatorDoor (props: Props): JSX.Element {
+  const elevatorDoorCtrl = useElevatorDoorCtrl()
   const door$ = elevatorDoorCtrl.getDoor$(props.elevator)
   const { position, status } = useStream(door$)
+
   // Open door to 25%
   const width = `${(position / 4) * 10 + 25}%`
 
@@ -50,5 +50,3 @@ function ElevatorDoor (props: Props): JSX.Element {
     </>
   )
 }
-
-export const ElevatorDoorCtx = createContext(ElevatorDoor)

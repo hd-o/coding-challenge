@@ -1,4 +1,3 @@
-import { createContext } from 'react'
 import { container, inject, singleton } from 'tsyringe'
 import { Lodash } from '../pkg/lodash'
 import { TodoModel } from './model'
@@ -9,7 +8,7 @@ export class TodoCtrl {
   constructor (
     @inject(Todo$) private readonly _todo$: Todo$,
     @inject(Lodash) private readonly _lodash: Lodash,
-  ) {}
+  ) { }
 
   create (todoText: string): void {
     const todos = this._todo$.value.concat({
@@ -33,4 +32,4 @@ export class TodoCtrl {
   }
 }
 
-export const TodoCtrlCtx = createContext(() => container.resolve(TodoCtrl))
+export const useTodoCtrl = (): TodoCtrl => container.resolve(TodoCtrl)

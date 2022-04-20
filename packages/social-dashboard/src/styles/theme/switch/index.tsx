@@ -1,5 +1,5 @@
-import { MuiSwitchCtx } from '/src/pkg/mui/Switch'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
+import { Switch } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { useAppThemeState } from '../state'
 import { useToggleTheme } from '../toggle'
@@ -11,7 +11,6 @@ const track = {
 }
 
 const BaseSwitch: FC = (props) => {
-  const Switch = useContext(MuiSwitchCtx)
   const [theme] = useAppThemeState()
   const toggleTheme = useToggleTheme()
 
@@ -24,7 +23,7 @@ const BaseSwitch: FC = (props) => {
   />
 }
 
-const ThemeSwitch = styled(BaseSwitch)(({ theme }) => ({
+export const ThemeSwitch = styled(BaseSwitch)(({ theme }) => ({
   width: 42,
   height: 20,
   padding: 0,
@@ -47,5 +46,3 @@ const ThemeSwitch = styled(BaseSwitch)(({ theme }) => ({
   },
   '& .MuiSwitch-track': track,
 }))
-
-export const ThemeSwitchCtx = createContext(ThemeSwitch)

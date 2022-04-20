@@ -1,13 +1,10 @@
-import { Elevator$Ctx } from '/src/elevator/stream'
-import { AntdColCtx } from '/src/pkg/antd/col'
-import { useStreamCtx } from '/src/util/useStreamCtx'
-import { createContext, useContext } from 'react'
-import { ElevatorCtx } from '../'
+import { useElevator$ } from '/src/elevator/stream'
+import { useStream } from '/src/util/useStream'
+import { Col } from 'antd'
+import { Elevator } from '../'
 
-function ElevatorContainer (): JSX.Element {
-  const Col = useContext(AntdColCtx)
-  const Elevator = useContext(ElevatorCtx)
-  const elevators = useStreamCtx(Elevator$Ctx)
+export function ElevatorContainer (): JSX.Element {
+  const elevators = useStream(useElevator$())
   return (
     <>
       {elevators.valueSeq().map((elevator$, index) => (
@@ -18,5 +15,3 @@ function ElevatorContainer (): JSX.Element {
     </>
   )
 }
-
-export const ElevatorContainerCtx = createContext(ElevatorContainer)

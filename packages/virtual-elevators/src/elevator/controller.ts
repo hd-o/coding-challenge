@@ -7,7 +7,6 @@ import { Lodash } from '/src/pkg/lodash'
 import { IProcess, IProcessId, ProcessLoop } from '/src/process/loop'
 import { Symbol } from '/src/symbol'
 import { NoElevatorServicesFloor } from '/src/symbol/NoElevatorServicesFloor'
-import { createContext } from 'react'
 import { skip, takeUntil } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { Settings$ } from '../settings/stream'
@@ -141,4 +140,5 @@ export class ElevatorCtrl {
   }
 }
 
-export const ElevatorCtrlCtx = createContext(() => container.resolve(ElevatorCtrl))
+export const useElevatorCtrl =
+  (): ElevatorCtrl => container.resolve(ElevatorCtrl)

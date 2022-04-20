@@ -1,13 +1,11 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
-import { SharedSelectCtx } from '/src/shared/select'
-import { SharedSelectItemCtx } from '/src/shared/select/item'
-import { EtherscanIconCtx, EtherscanIconLightCtx } from '/src/style/icons/etherscan'
-import { OpenSeaIconCtx } from '/src/style/icons/opensea'
+import { SharedSelect } from '/src/shared/select'
+import { SharedSelectItem } from '/src/shared/select/item'
+import { EtherscanIcon, EtherscanIconLight } from '/src/style/icons/etherscan'
+import { OpenSeaIcon } from '/src/style/icons/opensea'
 import { intlIds } from '/src/util/intl-messages'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
-import { useTheme } from '@mui/material'
+import { Box, Typography, useTheme } from '@mui/material'
 
 interface Ranking {
   source: 'etherscan' | 'opensea'
@@ -34,15 +32,7 @@ const iconImageProps = {
   width: 20,
 }
 
-const NFTRankingsSelect: FC = () => {
-  const Box = useContext(MuiBoxCtx)
-  const EtherscanIcon = useContext(EtherscanIconCtx)
-  const EtherscanIconLight = useContext(EtherscanIconLightCtx)
-  const OpenSeaIcon = useContext(OpenSeaIconCtx)
-  const SharedSelect = useContext(SharedSelectCtx)
-  const SharedSelectItem = useContext(SharedSelectItemCtx)
-  const Typography = useContext(MuiTypographyCtx)
-
+export const NFTRankingsSelect: FC = () => {
   const intl = useIntl()
   const theme = useTheme()
 
@@ -73,5 +63,3 @@ const NFTRankingsSelect: FC = () => {
     </>
   )
 }
-
-export const NFTRankingsSelectCtx = createContext(NFTRankingsSelect)

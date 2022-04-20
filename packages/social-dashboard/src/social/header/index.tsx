@@ -1,15 +1,10 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
 import { intlIds } from '/src/util/intl-messages'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
-import { ColorsCtx } from '../../styles/colors'
+import { Box, Typography } from '@mui/material'
+import { colors } from '../../styles/colors'
 
-const SocialHeader: FC = () => {
-  const Box = useContext(MuiBoxCtx)
-  const colors = useContext(ColorsCtx)
-  const Typography = useContext(MuiTypographyCtx)
-
+export const SocialHeader: FC = () => {
   const intl = useIntl()
   const pageTitle = intl.formatMessage({ id: intlIds.socialDashboardTitle })
 
@@ -56,5 +51,3 @@ const SocialHeader: FC = () => {
     </Box>
   )
 }
-
-export const SocialHeaderCtx = createContext(SocialHeader)

@@ -3,16 +3,14 @@ import { useRamdaReverse } from '/src/pkg/ramda/reverse'
 import { useRamdaTimes } from '/src/pkg/ramda/times'
 import { useResolve } from '/src/util/useResolve'
 import { useStreamFn } from '/src/util/useStreamFn'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
 import { floorHeight } from '../height'
 import { FloorNumber } from '../number'
 import { useFloorNumber$ } from '../number/stream'
-import { FloorPanelCallerCtx } from '../panel/caller'
+import { FloorPanelCaller } from '../panel/caller'
 import { useFloorRequestEvent$ } from '../request/event/stream'
 
-const FloorContainer: FC = () => {
-  const FloorPanelCaller = useContext(FloorPanelCallerCtx)
-
+export const FloorContainer: FC = () => {
   const floorRequestEvent$ = useResolve(useFloorRequestEvent$)
   const reverse = useResolve(useRamdaReverse)
   const times = useResolve(useRamdaTimes)
@@ -42,5 +40,3 @@ const FloorContainer: FC = () => {
     }
   </>
 }
-
-export const FloorContainerCtx = createContext(FloorContainer)

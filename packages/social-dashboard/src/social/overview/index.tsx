@@ -1,15 +1,11 @@
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
-import { ColorsCtx } from '/src/styles/colors'
+import { colors } from '/src/styles/colors'
 import { intlIds } from '/src/util/intl-messages'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
-import { SocialOverviewGridCtx } from './grid'
+import { Typography } from '@mui/material'
+import { SocialOverviewGrid } from './grid'
 
-const SocialOverview: FC = () => {
-  const colors = useContext(ColorsCtx)
-  const SocialOverviewGrid = useContext(SocialOverviewGridCtx)
-  const Typography = useContext(MuiTypographyCtx)
-
+export const SocialOverview: FC = () => {
   const intl = useIntl()
 
   return (
@@ -28,5 +24,3 @@ const SocialOverview: FC = () => {
     </>
   )
 }
-
-export const SocialOverviewCtx = createContext(SocialOverview)

@@ -1,4 +1,3 @@
-import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import { container, singleton } from 'tsyringe'
 import { TodoModel } from './model'
@@ -10,4 +9,4 @@ export class Todo$ extends BehaviorSubject<TodoModel[]> {
   }
 }
 
-export const Todo$Ctx = createContext(() => container.resolve(Todo$))
+export const useTodo$ = (): Todo$ => container.resolve(Todo$)

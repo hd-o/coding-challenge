@@ -1,15 +1,11 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiCardCtx } from '/src/pkg/mui/Card'
-import { MuiCardContentCtx } from '/src/pkg/mui/CardContent'
-import { MuiStackCtx } from '/src/pkg/mui/Stack'
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
-import { NextImageCtx } from '/src/pkg/next/Image'
-import { ColorsCtx } from '/src/styles/colors'
+import { colors } from '/src/styles/colors'
 import { useGetCountChange } from '/src/util/count-change'
 import { intlIds } from '/src/util/intl-messages'
 import { useResolved } from '/src/util/use-resolved'
-import { createContext, FC, useContext } from 'react'
+import Image from 'next/image'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
+import { Box, Card, CardContent, Stack, Typography } from '@mui/material'
 import { SocialOverviewStats } from '../../stats'
 
 interface Props {
@@ -17,15 +13,8 @@ interface Props {
   stats: SocialOverviewStats
 }
 
-const SocialOverviewCard: FC<Props> = (props) => {
-  const Box = useContext(MuiBoxCtx)
-  const Card = useContext(MuiCardCtx)
-  const CardContent = useContext(MuiCardContentCtx)
-  const colors = useContext(ColorsCtx)
+export const SocialOverviewCard: FC<Props> = (props) => {
   const getCountChange = useResolved(useGetCountChange)
-  const Image = useContext(NextImageCtx)
-  const Stack = useContext(MuiStackCtx)
-  const Typography = useContext(MuiTypographyCtx)
 
   const intl = useIntl()
 
@@ -120,5 +109,3 @@ const SocialOverviewCard: FC<Props> = (props) => {
     </Box>
   )
 }
-
-export const SocialOverviewCardCtx = createContext(SocialOverviewCard)

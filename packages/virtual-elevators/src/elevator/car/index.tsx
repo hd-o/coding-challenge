@@ -1,13 +1,11 @@
-import { AntdColCtx } from '/src/pkg/antd/col'
-import { Settings$Ctx } from '/src/settings/stream'
+import { useSettings$ } from '/src/settings/stream'
 import { useStream } from '/src/util/useStream'
-import { useStreamCtx } from '/src/util/useStreamCtx'
 import { useStyle } from '/src/util/useStyle'
-import { createContext, useContext } from 'react'
+import { Col } from 'antd'
 import { NestedCSSProperties } from 'typestyle/lib/types'
-import { ElevatorDoorCtx } from '../door'
+import { ElevatorDoor } from '../door'
 import { IElevatorRecord } from '../model'
-import { ElevatorPositionCtrlCtx } from '../position/controller'
+import { useElevatorPositionCtrl } from '../position/controller'
 
 const enum CarPadding {
   top = 8,
@@ -42,12 +40,9 @@ interface Props {
   index: number
 }
 
-function ElevatorCar (props: Props): JSX.Element {
-  const Col = useContext(AntdColCtx)
-  const ElevatorDoor = useContext(ElevatorDoorCtx)
-
-  const settings = useStreamCtx(Settings$Ctx)
-  const elevatorPositionCtrl = useContext(ElevatorPositionCtrlCtx)()
+export function ElevatorCar (props: Props): JSX.Element {
+  const settings = useStream(useSettings$())
+  const elevatorPositionCtrl = useElevatorPositionCtrl()
   const position = useStream(elevatorPositionCtrl.getPosition$(props.elevator))
 
   return (
@@ -63,5 +58,3 @@ function ElevatorCar (props: Props): JSX.Element {
     </Col>
   )
 }
-
-export const ElevatorCarCtx = createContext(ElevatorCar)

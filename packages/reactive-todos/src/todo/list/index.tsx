@@ -1,11 +1,10 @@
 import { useObservableEagerState } from 'observable-hooks'
-import { createContext, FC, useContext } from 'react'
-import { TodoCtx } from '../'
-import { Todo$Ctx } from '../stream'
+import { FC } from 'react'
+import { Todo } from '../'
+import { useTodo$ } from '../stream'
 
-const TodoList: FC = () => {
-  const Todo = useContext(TodoCtx)
-  const todo$ = useContext(Todo$Ctx)()
+export const TodoList: FC = () => {
+  const todo$ = useTodo$()
   const todos = useObservableEagerState(todo$)
 
   if (todos.length === 0) {
@@ -25,5 +24,3 @@ const TodoList: FC = () => {
     </ul>
   )
 }
-
-export const TodoListCtx = createContext(TodoList)

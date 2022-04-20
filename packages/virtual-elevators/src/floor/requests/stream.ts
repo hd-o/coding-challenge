@@ -1,6 +1,5 @@
 import { Immutable } from '/src/pkg/immutable'
 import { Map } from 'immutable'
-import { createContext } from 'react'
 import { BehaviorSubject } from 'rxjs'
 import { container, inject, singleton } from 'tsyringe'
 import { IFloorRecord } from '../model'
@@ -28,4 +27,4 @@ export class FloorRequest$ extends BehaviorSubject<IFloorRequestMap> {
   }
 }
 
-export const FloorRequest$Ctx = createContext(() => container.resolve(FloorRequest$))
+export const useFloorRequest$ = (): FloorRequest$ => container.resolve(FloorRequest$)

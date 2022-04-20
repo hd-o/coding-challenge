@@ -1,10 +1,9 @@
-import { LayoutSectionCtx } from '/src/layout/section'
-import { LayoutSectionHeaderCtx } from '/src/layout/section/header'
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiButtonCtx } from '/src/pkg/mui/Button'
+import { LayoutSection } from '/src/layout/section'
+import { LayoutSectionHeader } from '/src/layout/section/header'
 import { intlIds } from '/src/util/intl-messages'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
+import { Box, Button } from '@mui/material'
 
 interface WalletInfo {
   href: string
@@ -22,14 +21,8 @@ const walletInfos: WalletInfo[] = [
   },
 ]
 
-const MyNFTsWelcomeStepConnectLocalhost: FC = () => {
-  const Box = useContext(MuiBoxCtx)
-  const Button = useContext(MuiButtonCtx)
-  const LayoutSection = useContext(LayoutSectionCtx)
-  const LayoutSectionHeader = useContext(LayoutSectionHeaderCtx)
-
+export const MyNFTsWelcomeStepConnectLocalhost: FC = () => {
   const intl = useIntl()
-
   return (
     <LayoutSection>
       <LayoutSectionHeader>
@@ -67,6 +60,3 @@ const MyNFTsWelcomeStepConnectLocalhost: FC = () => {
     </LayoutSection>
   )
 }
-
-export const MyNFTsWelcomeStepConnectLocalhostCtx =
-  createContext(MyNFTsWelcomeStepConnectLocalhost)

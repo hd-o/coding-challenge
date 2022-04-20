@@ -1,6 +1,5 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { createContext, FC, useContext } from 'react'
-import { SxProps, Theme } from '@mui/material'
+import { FC } from 'react'
+import { Box, SxProps, Theme } from '@mui/material'
 
 const containerSx: SxProps<Theme> = {
   alignItems: 'center',
@@ -14,14 +13,10 @@ const containerSx: SxProps<Theme> = {
   userSelect: 'none',
 }
 
-const MyNFTsDetailsImage: FC = () => {
-  const Box = useContext(MuiBoxCtx)
-
+export const MyNFTsDetailsImage: FC = () => {
   return (
     <Box sx={containerSx}>
       <span>🐧</span>
     </Box>
   )
 }
-
-export const MyNFTsDetailsImageCtx = createContext(MyNFTsDetailsImage)

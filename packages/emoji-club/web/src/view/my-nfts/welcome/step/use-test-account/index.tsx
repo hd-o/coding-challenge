@@ -1,11 +1,10 @@
 import accounts from '/../ethereum/hardhat-accounts.json'
-import { LayoutSectionCtx } from '/src/layout/section'
-import { LayoutSectionHeaderCtx } from '/src/layout/section/header'
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
+import { LayoutSection } from '/src/layout/section'
+import { LayoutSectionHeader } from '/src/layout/section/header'
 import { intlIds } from '/src/util/intl-messages'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
-import { List, ListItem } from '@mui/material'
+import { List, ListItem, Typography } from '@mui/material'
 
 const accountKeys = Object
   .keys(accounts)
@@ -32,13 +31,8 @@ const Li: FC = (props) => (
   </ListItem>
 )
 
-const MyNFTsWelcomeStepUseTestAccount: FC = () => {
-  const LayoutSection = useContext(LayoutSectionCtx)
-  const LayoutSectionHeader = useContext(LayoutSectionHeaderCtx)
-  const Typography = useContext(MuiTypographyCtx)
-
+export const MyNFTsWelcomeStepUseTestAccount: FC = () => {
   const intl = useIntl()
-
   return (
     <LayoutSection>
       <LayoutSectionHeader>
@@ -64,6 +58,3 @@ const MyNFTsWelcomeStepUseTestAccount: FC = () => {
     </LayoutSection>
   )
 }
-
-export const MyNFTsWelcomeStepUseTestAccountCtx =
-  createContext(MyNFTsWelcomeStepUseTestAccount)

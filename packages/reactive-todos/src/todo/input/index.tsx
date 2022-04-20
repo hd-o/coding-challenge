@@ -1,10 +1,10 @@
-import { createContext, FC, FormEvent, useContext, useState } from 'react'
-import { TodoCtrlCtx } from '../controller'
+import { FC, FormEvent, useState } from 'react'
+import { useTodoCtrl } from '../controller'
 
 type SubmitHandler = (e: FormEvent<HTMLFormElement>) => void
 
-const TodoInput: FC = () => {
-  const todoCtrl = useContext(TodoCtrlCtx)()
+export const TodoInput: FC = () => {
+  const todoCtrl = useTodoCtrl()
   const [todo, setTodo] = useState('')
 
   const handleSubmit: SubmitHandler = (event) => {
@@ -33,5 +33,3 @@ const TodoInput: FC = () => {
     </form>
   )
 }
-
-export const TodoInputCtx = createContext(TodoInput)

@@ -1,13 +1,9 @@
-import { createContext, FC, useContext } from 'react'
-import { MuiBoxCtx } from '../pkg/mui/Box'
-import { ColorsCtx } from '../styles/colors'
-import { LayoutBackgroundCtx } from './background'
+import { FC } from 'react'
+import { Box } from '@mui/material'
+import { colors } from '../styles/colors'
+import { LayoutBackground } from './background'
 
-const Layout: FC = (props) => {
-  const Box = useContext(MuiBoxCtx)
-  const colors = useContext(ColorsCtx)
-  const LayoutBackground = useContext(LayoutBackgroundCtx)
-
+export const Layout: FC = (props) => {
   return (
     <Box
       sx={{
@@ -33,5 +29,3 @@ const Layout: FC = (props) => {
     </Box>
   )
 }
-
-export const LayoutCtx = createContext(Layout)

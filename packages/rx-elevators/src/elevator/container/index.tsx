@@ -1,13 +1,11 @@
 import { useStreamFn } from '/src/util/useStreamFn'
-import { createContext, FC, useContext } from 'react'
-import { ElevatorCtx } from '../'
+import { FC } from 'react'
+import { Elevator } from '../'
 import { useElevatorDoorState$Map$ } from '../door/state/stream/map'
 import { useElevatorId$ } from '../id/stream'
 import { useElevatorPosition$Map$ } from '../position/stream/map/stream'
 
-const ElevatorContainer: FC = () => {
-  const Elevator = useContext(ElevatorCtx)
-
+export const ElevatorContainer: FC = () => {
   const elevatorIds = useStreamFn(useElevatorId$)
   const doorState$Map = useStreamFn(useElevatorDoorState$Map$)
   const position$Map = useStreamFn(useElevatorPosition$Map$)
@@ -30,5 +28,3 @@ const ElevatorContainer: FC = () => {
     }
   </>
 }
-
-export const ElevatorContainerCtx = createContext(ElevatorContainer)

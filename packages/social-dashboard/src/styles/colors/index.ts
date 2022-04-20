@@ -1,6 +1,5 @@
-import { createContext } from 'react'
 
-const colors = {
+export const colors = {
   'Bright Red': 'hsl(356, 69%, 56%)',
   'Dark Desaturated Blue': 'hsl(228, 28%, 20%)',
   'Dark Grayish Blue': 'hsl(228, 12%, 44%)',
@@ -14,7 +13,5 @@ const colors = {
   'Very Dark Greyish Blue': 'hsl(240, 11%, 27%)',
   White: 'hsl(0, 0%, 100%)',
 }
-
-export const ColorsCtx = createContext(colors)
 
 export type Color = keyof typeof colors

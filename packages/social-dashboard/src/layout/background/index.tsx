@@ -1,13 +1,10 @@
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { createContext, FC, useContext } from 'react'
-import { ColorsCtx } from '../../styles/colors'
+import { FC } from 'react'
+import { Box } from '@mui/material'
+import { colors } from '../../styles/colors'
 
 const borderRadius = '16px'
 
-const LayoutBackground: FC = () => {
-  const Box = useContext(MuiBoxCtx)
-  const colors = useContext(ColorsCtx)
-
+export const LayoutBackground: FC = () => {
   return <Box
     sx={{
       backgroundColor: theme => colors[theme.background.layoutTop],
@@ -23,5 +20,3 @@ const LayoutBackground: FC = () => {
     }}
   />
 }
-
-export const LayoutBackgroundCtx = createContext(LayoutBackground)

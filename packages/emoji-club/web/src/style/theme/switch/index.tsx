@@ -1,11 +1,11 @@
 import { intlIds } from '/src/util/intl-messages'
 import { useResolveBehaviorState } from '/src/util/use-resolve-behavior-state'
-import { createContext, FC } from 'react'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
 import Switch from '@mui/material/Switch'
 import { useThemeTypeSubject } from '../type/subject'
 
-const ThemeSwitch: FC = () => {
+export const ThemeSwitch: FC = () => {
   const [themeType, setThemeType] = useResolveBehaviorState(useThemeTypeSubject)
 
   const handleClick = (): void => {
@@ -67,5 +67,3 @@ const ThemeSwitch: FC = () => {
     />
   )
 }
-
-export const ThemeSwitchCtx = createContext(ThemeSwitch)

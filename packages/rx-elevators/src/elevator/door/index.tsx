@@ -1,5 +1,5 @@
 import { useStream } from '/src/util/useStream'
-import { createContext, FC } from 'react'
+import { FC } from 'react'
 import { ElevatorDoorState$ } from './state/stream'
 
 interface ElevatorDoorProps {
@@ -7,7 +7,7 @@ interface ElevatorDoorProps {
   state$: ElevatorDoorState$
 }
 
-const ElevatorDoor: FC<ElevatorDoorProps> = (props) => {
+export const ElevatorDoor: FC<ElevatorDoorProps> = (props) => {
   const { position, movementState } = useStream(props.state$)
   const idModifier = `-${movementState}`.toLowerCase()
 
@@ -29,11 +29,9 @@ const ElevatorDoor: FC<ElevatorDoorProps> = (props) => {
         width: '100%',
         justifyContent: 'space-between',
       }
-    }>
+      }>
       {panel}
       {panel}
     </div>
   )
 }
-
-export const ElevatorDoorCtx = createContext(ElevatorDoor)

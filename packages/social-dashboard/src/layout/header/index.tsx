@@ -1,5 +1,5 @@
-import { MuiGridCtx } from '/src/pkg/mui/Grid'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
+import { Grid } from '@mui/material'
 
 interface BreakpointWidths {
   sm: number
@@ -28,11 +28,8 @@ const defaultBreakpointWidths: Props['breakpointWidths'] = {
   },
 }
 
-const LayoutHeader: FC<Props> = (props) => {
-  const Grid = useContext(MuiGridCtx)
-
+export const LayoutHeader: FC<Props> = (props) => {
   const breakpointWidths = props.breakpointWidths ?? defaultBreakpointWidths
-
   return (
     <Grid container spacing={0}>
       <Grid item {...breakpointWidths.left}>
@@ -44,5 +41,3 @@ const LayoutHeader: FC<Props> = (props) => {
     </Grid>
   )
 }
-
-export const LayoutHeaderCtx = createContext(LayoutHeader)

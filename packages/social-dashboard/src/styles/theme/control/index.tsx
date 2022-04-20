@@ -1,17 +1,12 @@
-import { MuiFormControlLabelCtx } from '/src/pkg/mui/FormControlLabel'
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
-import { ColorsCtx } from '/src/styles/colors'
+import { colors } from '/src/styles/colors'
 import { intlIds } from '/src/util/intl-messages'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
 import { useIntl } from 'react-intl'
+import { FormControlLabel, Typography } from '@mui/material'
 import { useAppThemeState } from '../state'
-import { ThemeSwitchCtx } from '../switch'
+import { ThemeSwitch } from '../switch'
 
-const ThemeControl: FC = () => {
-  const colors = useContext(ColorsCtx)
-  const FormControlLabel = useContext(MuiFormControlLabelCtx)
-  const Typography = useContext(MuiTypographyCtx)
-  const ThemeSwitch = useContext(ThemeSwitchCtx)
+export const ThemeControl: FC = () => {
   const [theme] = useAppThemeState()
   const intl = useIntl()
 
@@ -48,5 +43,3 @@ const ThemeControl: FC = () => {
     />
   )
 }
-
-export const ThemeControlCtx = createContext(ThemeControl)

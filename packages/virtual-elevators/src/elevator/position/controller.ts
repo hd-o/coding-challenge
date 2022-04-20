@@ -1,7 +1,6 @@
 import { FloorCtrl } from '/src/floor/controller'
 import { IFloorRecord } from '/src/floor/model'
 import { Settings$ } from '/src/settings/stream'
-import { createContext } from 'react'
 import { container, inject, singleton } from 'tsyringe'
 import { IElevatorRecord } from '../model'
 import { ElevatorPosition$Map$, IElevatorPosition$ } from './stream'
@@ -40,4 +39,5 @@ export class ElevatorPositionCtrl {
   }
 }
 
-export const ElevatorPositionCtrlCtx = createContext(() => container.resolve(ElevatorPositionCtrl))
+export const useElevatorPositionCtrl =
+  (): ElevatorPositionCtrl => container.resolve(ElevatorPositionCtrl)

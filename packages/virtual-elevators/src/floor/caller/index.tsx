@@ -1,11 +1,9 @@
-import { AntdButtonCtx } from '/src/pkg/antd/Button'
-import { createContext, useContext } from 'react'
+import { Button } from 'antd'
 import { FloorCallerProps } from './props'
 
 interface Props extends FloorCallerProps { }
 
-function FloorCaller (props: Props): JSX.Element {
-  const Button = useContext(AntdButtonCtx)
+export function FloorCaller (props: Props): JSX.Element {
   return (
     <Button
       data-testid={props['data-testid']}
@@ -17,5 +15,3 @@ function FloorCaller (props: Props): JSX.Element {
     </Button>
   )
 }
-
-export const FloorCallerCtx = createContext(FloorCaller)

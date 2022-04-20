@@ -1,11 +1,10 @@
-import { FloorCallerCtx, FloorCallerProps } from '/src/floor/caller'
+import { FloorCaller, FloorCallerProps } from '/src/floor/caller'
 import { useNewFloorRequested$ } from '/src/floor/requested/stream'
 import { useResolve } from '/src/util/useResolve'
 import { useStream } from '/src/util/useStream'
-import { createContext, FC, useContext, useMemo } from 'react'
+import { FC, useMemo } from 'react'
 
-const FloorPanelCaller: FC<FloorCallerProps> = (props) => {
-  const FloorCaller = useContext(FloorCallerCtx)
+export const FloorPanelCaller: FC<FloorCallerProps> = (props) => {
   const newFloorRequested$ = useResolve(useNewFloorRequested$)
 
   const floorRequested$ = useMemo(
@@ -21,5 +20,3 @@ const FloorPanelCaller: FC<FloorCallerProps> = (props) => {
     requested={floorRequested}
   />
 }
-
-export const FloorPanelCallerCtx = createContext(FloorPanelCaller)

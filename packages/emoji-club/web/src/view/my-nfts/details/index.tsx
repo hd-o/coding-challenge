@@ -1,15 +1,13 @@
 import { useEthersBigNumber } from '/src/pkg/ethers/BigNumber'
-import { MuiBoxCtx } from '/src/pkg/mui/Box'
-import { MuiModalCtx } from '/src/pkg/mui/Modal'
 import { useResolve } from '/src/util/use-resolve'
 import { useResolve$ } from '/src/util/use-resolve-stream'
 import { useWeb3Tokens } from '/src/web3/tokens'
 import { useRouter } from 'next/router'
-import { createContext, FC, useContext } from 'react'
-import { SxProps, Theme } from '@mui/material'
-import { MyNFTsDetailsCloseButtonCtx } from './close-button'
-import { MyNFTsDetailsImageCtx } from './image'
-import { MyNFTsDetailsInfoCtx } from './info'
+import { FC } from 'react'
+import { Box, Modal, SxProps, Theme } from '@mui/material'
+import { MyNFTsDetailsCloseButton } from './close-button'
+import { MyNFTsDetailsImage } from './image'
+import { MyNFTsDetailsInfo } from './info'
 
 const containerSx: SxProps<Theme> = {
   backgroundColor: 'background.paper',
@@ -24,14 +22,8 @@ const containerSx: SxProps<Theme> = {
   transform: 'translate(-50%, -50%)',
 }
 
-const MyNFTsDetails: FC = () => {
+export const MyNFTsDetails: FC = () => {
   const BigNumber = useResolve(useEthersBigNumber)
-  const Box = useContext(MuiBoxCtx)
-  const Modal = useContext(MuiModalCtx)
-  const MyNFTsDetailsCloseButton = useContext(MyNFTsDetailsCloseButtonCtx)
-  const MyNFTsDetailsImage = useContext(MyNFTsDetailsImageCtx)
-  const MyNFTsDetailsInfo = useContext(MyNFTsDetailsInfoCtx)
-
   const router = useRouter()
   const NFTIdQuery = BigNumber.from(router.query.NFTId ?? '-0')
   const { tokens = [] } = useResolve$(useWeb3Tokens)
@@ -54,5 +46,3 @@ const MyNFTsDetails: FC = () => {
     </Modal>
   )
 }
-
-export const MyNFTsDetailsCtx = createContext(MyNFTsDetails)

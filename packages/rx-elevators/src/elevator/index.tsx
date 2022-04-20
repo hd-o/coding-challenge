@@ -1,10 +1,10 @@
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
 import { useStreamFn } from '../util/useStreamFn'
-import { ElevatorCarCtx } from './car'
-import { ElevatorDoorCtx } from './door'
+import { ElevatorCar } from './car'
+import { ElevatorDoor } from './door'
 import { ElevatorDoorState$ } from './door/state/stream'
 import { ElevatorId } from './id'
-import { ElevatorPanelCtx } from './panel'
+import { ElevatorPanel } from './panel'
 import { ElevatorPosition$ } from './position/stream'
 import { elevatorQueueItemCategories } from './queue/item/category'
 import { useElevatorQueuePair$ } from './queue/pair/stream'
@@ -16,11 +16,7 @@ interface Props {
   position$: ElevatorPosition$
 }
 
-const Elevator: FC<Props> = (props) => {
-  const ElevatorCar = useContext(ElevatorCarCtx)
-  const ElevatorDoor = useContext(ElevatorDoorCtx)
-  const ElevatorPanel = useContext(ElevatorPanelCtx)
-
+export const Elevator: FC<Props> = (props) => {
   const queuePairs = useStreamFn(useElevatorQueuePair$)
   const isMoving = queuePairs
     .find(({ elevator }) => elevator === props.id)
@@ -47,5 +43,3 @@ const Elevator: FC<Props> = (props) => {
     </th>
   )
 }
-
-export const ElevatorCtx = createContext(Elevator)

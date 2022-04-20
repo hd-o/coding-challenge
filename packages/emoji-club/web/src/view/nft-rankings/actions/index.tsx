@@ -1,11 +1,8 @@
-import { LayoutSectionCtx } from '/src/layout/section'
-import { MuiButtonCtx } from '/src/pkg/mui/Button'
-import { createContext, FC, useContext } from 'react'
+import { LayoutSection } from '/src/layout/section'
+import { FC } from 'react'
+import { Button } from '@mui/material'
 
-const NFTRankingsActions: FC = () => {
-  const Button = useContext(MuiButtonCtx)
-  const LayoutSection = useContext(LayoutSectionCtx)
-
+export const NFTRankingsActions: FC = () => {
   return (
     <LayoutSection>
       <Button
@@ -20,5 +17,3 @@ const NFTRankingsActions: FC = () => {
     </LayoutSection>
   )
 }
-
-export const NFTRankingsActionsCtx = createContext(NFTRankingsActions)

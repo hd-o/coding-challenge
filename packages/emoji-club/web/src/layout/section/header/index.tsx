@@ -1,14 +1,10 @@
-import { MuiTypographyCtx } from '/src/pkg/mui/Typography'
-import { createContext, FC, useContext } from 'react'
+import { FC } from 'react'
+import { Typography } from '@mui/material'
 
-const LayoutSectionHeader: FC = (props) => {
-  const Typography = useContext(MuiTypographyCtx)
-
+export const LayoutSectionHeader: FC = (props) => {
   return (
     <Typography variant='body1'>
       {props.children}
     </Typography>
   )
 }
-
-export const LayoutSectionHeaderCtx = createContext(LayoutSectionHeader)

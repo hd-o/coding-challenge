@@ -1,7 +1,6 @@
 import Image from 'next/image'
-import { createContext } from 'react'
+import { FC } from 'react'
 import { IconProps } from '../'
 
-export const OpenSeaIconCtx = createContext(
-  (props: IconProps) => <Image {...props} alt='OpenSea logo' src='/image/opensea.svg' />
-)
+export const OpenSeaIcon: FC<IconProps> = (props) =>
+  <Image {...props} alt='OpenSea logo' src='/image/opensea.svg' />
