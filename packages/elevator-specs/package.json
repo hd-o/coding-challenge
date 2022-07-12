@@ -3,18 +3,14 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "run-s start:parcel",
-    "lint": "run-s setup:eslint run:eslint",
+    "lint": "yarn setup:eslint && yarn run:eslint",
     "run:eslint": "eslint -c .eslintrc .",
     "run:jest": "DEBUG_PRINT_LIMIT=0 jest",
-    "setup": "run-p setup:*",
+    "setup": "concurrently 'yarn:setup:*'",
     "setup:eslint": "node .config/eslint",
     "setup:jest": "node .config/jest",
     "setup:typescript": "node .config/typescript",
-    "start": "run-s setup start:*",
-    "start:parcel": "parcel index.html",
-    "test": "run-s setup run:jest",
-    "test:watch": "run-s setup:jest 'run:jest -- --watch'"
+    "test": "yarn setup && yarn run:jest"
   },
   "dependencies": {
     "@babel/core": "^7.17.5",
@@ -28,6 +24,7 @@
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
+    "concurrently": "^7.2.2",
     "eslint": "^8.10.0",
     "eslint-config-standard-with-typescript": "^21.0.1",
     "eslint-plugin-import": "^2.25.4",
@@ -38,7 +35,6 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "jest": "^27.5.1",
-    "npm-run-all": "^4.1.5",
     "parcel": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

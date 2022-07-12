@@ -1,19 +1,18 @@
-#!/bin/sh
+#!/usr/bin/env bash
 dir=$(dirname "$0")
 # Init husky
 . "$dir/_/husky.sh"
 # Run commitlint
-pnpm commitlint --edit $1
+yarn commitlint --edit "$1"
 # Get commit msg
-msg=$(cat $1)
-# If commit msg has project scope
-# e.g: "fix(rx-elevators): ..."
+msg=$(cat "$1")
+# Check for commit scope
 if [[ $msg =~ ^.+\((.+)\) ]]; then
   # Run project's lint command (if any)
   project=${BASH_REMATCH[1]}
-  cd "$dir/../packages/$project"
+  cd "$dir/../packages/$project" || exit
   # If project runs on node
   if [ -f package.json ]; then
-    pnpm lint
+    yarn lint
   fi
 fi
