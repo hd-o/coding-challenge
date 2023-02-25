@@ -9,7 +9,7 @@ Virtual elevators, powered by controller classes, and React components.
 
 This project is a follow-up to [solid-calendar][solid_calendar], and [reactive-todos][reactive_todos], with the goal of achieving a SOLID architecture with React, while isolating logic functions from view components, being able to run these functions with other view frameworks, or even with physical devices. This project is a sibling to [rx-elevators][rx_elevators], which aims at the same goals while using function composition, without classes.
 
-[MobX][mobx] was my preferred option for managing state in front-end applications, but this time I decided to experiment with [RxJS][rxjs] for handling data observability, a decision I believe was one of the best in my career, learning the capabilities of Rx, which I later deep-dived into while developing [rx-elevators][rx_elevators]
+[MobX][mobx] was my preferred option for managing state in front-end applications, but for this project I decided to experiment with [RxJS][rxjs] for data observability, a decision I greatly appreciate. I later deep-dived into Rx while developing [rx-elevators][rx_elevators]
 
 ---
 
