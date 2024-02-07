@@ -20,6 +20,7 @@ import { Container } from 'inversify'
 const container = new Container()
 
 type Sum = (x: number) => (y: number) => number
+
 type SumX = (x: number) => number
 
 const useSum: Use<Sum> = () => {

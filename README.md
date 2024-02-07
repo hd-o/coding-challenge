@@ -36,6 +36,10 @@ My coding challenge solutions, and projects where I explore different technologi
 
 ## 🏛️ Software Architecture
 
+- [🧩 MVC + Functional OOP](./packages/mvc-functional-oop)
+  - `#functional` `#mvc` `#oop`
+  - MVC architecture with functional OOP design
+
 - [📝 Reactive To-Dos](./packages/reactive-todos)
   - `#mvc` `#react` `#rxjs`
   - MVC React architecture with injected state observables, and isolated controller classes
