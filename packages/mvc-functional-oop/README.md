@@ -48,7 +48,7 @@ class ModelController {
 
   getCustomController = memoize(() => {
     return new Controller({
-      ...defaultDependencies,
+      ...this.ctrl.dependencies,
       FormatController: class CustomFormatter extends FormatController {
         getFullName (item: Named) {
           return `${super.getFullName(item)} Bravo`
