@@ -18,10 +18,11 @@ Following-up on [function-resolve][function-resolve], I've been thinking about h
 
 ```tsx
 import { Record } from 'immutable'
+import memoize from 'lodash/memoize'
 import { Named, User } from '../model'
 
-class Formatter {
-  getFullName = (item: Named) => {
+class FormatController {
+  getFullName (item: Named) {
     return `${item.firstName} ${item.lastName}`
   }
 }
@@ -32,7 +33,7 @@ class UserRecord extends Record(new User()) {
   }
 
   get fullName () {
-    return this.ctrl.formatter.getFullName(this)
+    return this.ctrl.format.getFullName(this)
   }
 }
 
@@ -41,30 +42,47 @@ class ModelController {
 
   constructor (private ctrl: Controller) {}
 
-  getUser = (state: Partial<User> = {}): UserRecord => {
+  getUser (state: Partial<User> = {}): UserRecord {
     return new this.types.UserRecord(state, this.ctrl)
+  }
+
+  getCustomController = memoize(() => {
+    return new Controller({
+      ...defaultDependencies,
+      FormatController: class CustomFormatter extends FormatController {
+        getFullName (item: Named) {
+          return `${super.getFullName(item)} Bravo`
+        }
+      }
+    })
+  })
+
+  getCustomUser (state: Partial<User> = {}): UserRecord {
+    return new this.types.UserRecord(state, this.getCustomController())
   }
 }
 
 const defaultDependencies = Object.freeze({
-  Formatter,
+  FormatController,
   ModelController,
 })
 
-export class Controller {
+class Controller {
   constructor (public dependencies = defaultDependencies) {
-    this.formatter = new dependencies.Formatter()
+    this.format = new dependencies.FormatController()
     this.model = new dependencies.ModelController(this)
   }
 
-  formatter: Formatter
+  format: FormatController
   model: ModelController
 }
 
+export const classController = new Controller()
+
 export const customClassController = new Controller({
   ...defaultDependencies,
-  Formatter: class CustomFormatter extends Formatter {
-    getFullName = (item: Named) => {
+  FormatController: class CustomFormatter extends FormatController {
+    getFullName (item: Named) {
       return `${item.lastName}, ${item.firstName}`
     }
   }
