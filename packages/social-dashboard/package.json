@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "yarn setup && yarn dev:next",
-    "dev:next": "next dev",
+    "dev": "next dev",
+    "dev:local": "yarn setup && yarn dev",
     "lint": "yarn setup:eslint && yarn run:eslint",
     "run:eslint": "eslint -c .eslintrc .",
     "run:jest": "DEBUG_PRINT_LIMIT=0 jest",
