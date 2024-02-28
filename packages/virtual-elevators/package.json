@@ -3,7 +3,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "yarn setup && yarn start",
+    "dev": "parcel index.html",
+    "dev:local": "yarn setup && yarn dev",
     "lint": "yarn setup:eslint && yarn run:eslint",
     "run:eslint": "eslint -c .eslintrc .",
     "run:jest": "DEBUG_PRINT_LIMIT=0 jest",
@@ -12,7 +13,6 @@
     "setup:jest": "node .config/jest",
     "setup:spec": "bash ../elevator-specs/setup.sh",
     "setup:typescript": "node .config/typescript",
-    "start": "parcel index.html",
     "test": "yarn setup && yarn run:jest"
   },
   "dependencies": {
