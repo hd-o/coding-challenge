@@ -52,6 +52,10 @@ My coding challenge solutions, and projects where I explore different technologi
   - `#functional` `#react` `#solid`
   - Research on coding a SOLID and functional front-end architecture with React
 
+- [🐑 Typed Use Cases](./packages/typed-use-cases)
+  - `#functional` `#solid`
+  - Functional IoC using JS function context
+
 - [🛗 Virtual Elevators](./packages/virtual-elevators)
   - `#elevators` `#react` `#solid`
   - Virtual elevators, powered by controller classes, and React components
