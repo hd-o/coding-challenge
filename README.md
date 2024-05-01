@@ -8,7 +8,7 @@ My coding challenge solutions, and projects where I explore different technologi
   - `#discounts` `#python` `#shopping`
   - Calculating total price for shopping carts, with discounts applied
 
-- 🚃 Functional Predicates
+- [🚃 Functional Predicates](./packages/functional-predicates)
   - `#data` `#functional`
   - Composable functional array predicates
 
