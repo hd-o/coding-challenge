@@ -8,9 +8,9 @@ My coding challenge solutions, and projects where I explore different technologi
   - `#discounts` `#python` `#shopping`
   - Calculating total price for shopping carts, with discounts applied
 
-- [➡️ Function Resolve](./packages/function-resolve)
-  - `#container` `#dependency` `#functional`
-  - IoC container resolver for functional programming
+- 🚃 Functional Predicates
+  - `#data` `#functional`
+  - Composable functional array predicates
 
 ## 🟢 Automated Testing
 
@@ -35,6 +35,10 @@ My coding challenge solutions, and projects where I explore different technologi
   - Full Stack Emoji NFT Dapp
 
 ## 🏛️ Software Architecture
+
+- [➡️ Function Resolve](./packages/function-resolve)
+  - `#container` `#dependency` `#functional`
+  - IoC container resolver for functional programming
 
 - [🧩 MVC + Functional OOP](./packages/mvc-functional-oop)
   - `#functional` `#mvc` `#oop`
