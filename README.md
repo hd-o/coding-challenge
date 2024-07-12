@@ -28,6 +28,10 @@ My coding challenge solutions, and projects where I explore different technologi
   - `#iterator` `#skip` `#typescript`
   - Iterator class, implementing value skipping
 
+- [🔏 TS Immutable Record](./packages/ts-immutable-record)
+  - `#functional` `#oop` `#typescript`
+  - Immutable Record in plain TypeScript
+
 ## 🌐 Decentralized Apps
 
 - [😎 Emoji Club](./packages/emoji-club)
