@@ -11,6 +11,7 @@
     "packages/*"
   ],
   "scripts": {
+    "run:ve": "cd packages/virtual-elevators && npm run dev",  
     "postinstall": "husky install"
   },
   "commitlint": {

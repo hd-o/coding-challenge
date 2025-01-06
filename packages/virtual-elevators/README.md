@@ -29,7 +29,7 @@ This project is a follow-up to [solid-calendar][solid_calendar], and [reactive-t
   </tr>
 </table>
 
-[demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/virtual-elevators&file=packages/virtual-elevators/index.html&startScript=dev
+[demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/virtual-elevators&file=packages/virtual-elevators/index.html&startScript=run:ve
 
 [mobx]: https://github.com/mobxjs/mobx
 
