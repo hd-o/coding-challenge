@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "git:commit-msg": "commitlint --edit"
+    "postinstall": "husky install"
   },
   "commitlint": {
     "extends": [
@@ -16,7 +16,8 @@
   },
   "dependencies": {
     "@commitlint/cli": "^16.2.1",
-    "@commitlint/config-conventional": "^16.2.1"
+    "@commitlint/config-conventional": "^16.2.1",
+    "husky": "^7.0.4"
   },
   "packageManager": "yarn@4.6.0"
 }

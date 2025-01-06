@@ -1,0 +1,16 @@
+{
+  "name": "Node.js & TypeScript",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+  "postCreateCommand": "./.devcontainer/install.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "EditorConfig.EditorConfig",
+        "github.vscode-github-actions",
+        "streetsidesoftware.code-spell-checker",
+        "usernamehw.errorlens"
+      ]
+    }
+  }
+}

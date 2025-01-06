@@ -4,17 +4,12 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "yarn setup && yarn dev:setup && yarn dev:next",
+    "dev": "yarn dev:setup && yarn dev:next",
     "dev:next": "next dev",
     "dev:setup": "cd ../ethereum && yarn deploy",
-    "lint": "yarn setup:eslint && yarn run:eslint",
-    "run:eslint": "eslint -c .eslintrc .",
-    "run:jest": "DEBUG_PRINT_LIMIT=0 jest",
-    "setup": "concurrently 'yarn:setup:*'",
-    "setup:eslint": "node .config/eslint",
-    "setup:jest": "node .config/jest",
-    "start": "next start",
-    "test": "yarn setup && yarn run:jest"
+    "lint": "eslint -c .eslintrc .",
+    "test": "DEBUG_PRINT_LIMIT=0 jest",
+    "start": "next start"
   },
   "dependencies": {
     "@emotion/react": "^11.8.2",

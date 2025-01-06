@@ -5,16 +5,9 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "dev:local": "yarn setup && yarn dev",
-    "lint": "yarn setup:eslint && yarn run:eslint",
-    "run:eslint": "eslint -c .eslintrc .",
-    "run:jest": "DEBUG_PRINT_LIMIT=0 jest",
-    "setup": "concurrently 'yarn:setup:*'",
-    "setup:eslint": "node .config/eslint",
-    "setup:jest": "node .config/jest",
-    "setup:typescript": "node .config/typescript",
+    "lint": "eslint -c .eslintrc .",
     "start": "next start",
-    "test": "yarn setup && yarn jest"
+    "test": "DEBUG_PRINT_LIMIT=0 jest"
   },
   "dependencies": {
     "@emotion/cache": "^11.7.1",

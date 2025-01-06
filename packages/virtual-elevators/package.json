@@ -3,17 +3,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "parcel index.html",
-    "dev:local": "yarn setup && yarn dev",
-    "lint": "yarn setup:eslint && yarn run:eslint",
-    "run:eslint": "eslint -c .eslintrc .",
-    "run:jest": "DEBUG_PRINT_LIMIT=0 jest",
-    "setup": "concurrently 'yarn:setup:*'",
-    "setup:eslint": "node .config/eslint",
-    "setup:jest": "node .config/jest",
-    "setup:spec": "bash ../elevator-specs/setup.sh",
-    "setup:typescript": "node .config/typescript",
-    "test": "yarn setup && yarn run:jest"
+    "dev": "yarn start",
+    "lint": "eslint -c .eslintrc .",
+    "test": "DEBUG_PRINT_LIMIT=0 jest",
+    "start": "parcel index.html"
   },
   "dependencies": {
     "@babel/core": "^7.17.5",
