@@ -40,10 +40,6 @@ Composable functional array predicates
   `#container` `#dependency` `#functional` <br>
   IoC container resolver for functional programming
 
-> [🧩 MVC + Functional OOP](./packages/mvc-functional-oop) <br>
-  `#functional` `#mvc` `#oop` <br>
-  MVC architecture with functional OOP design
-
 > [📝 Reactive To-Dos](./packages/reactive-todos) <br>
   `#mvc` `#react` `#rxjs` <br>
   MVC React architecture with injected state observables, and isolated controller classes
@@ -55,10 +51,6 @@ Composable functional array predicates
 > [📅 SOLID Calendar](./packages/solid-calendar) <br>
   `#functional` `#react` `#solid` <br>
   Research on coding a SOLID and functional front-end architecture with React
-
-> [🐑 Typed Use Cases](./packages/typed-use-cases) <br>
-  `#functional` `#solid` <br>
-  Functional IoC using JS function context
 
 > [🛗 Virtual Elevators](./packages/virtual-elevators) <br>
   `#elevators` `#react` `#solid` <br>
