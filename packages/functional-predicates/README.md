@@ -4,9 +4,9 @@ Composable functional array predicates
 
 `#data` `#functional`
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)][stackblitz]
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)][demo]
 
-[stackblitz]: https://stackblitz.com/edit/functional-predicates?file=index.ts
+[demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/functional-predicates&file=packages/functional-predicates/index.ts&startScript=run:functional-predicates
 
 ```tsx
 const containsOnlyFloridaOrTexas = contains(
