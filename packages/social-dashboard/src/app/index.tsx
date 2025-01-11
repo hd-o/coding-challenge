@@ -1,13 +1,13 @@
-import { themes } from '/src/styles/theme'
 import { AppProps } from 'next/app'
-import Head from 'next/head'
-import { FC } from 'react'
 import { Cookies, CookiesProvider } from 'react-cookie'
+import { CssBaseline, ThemeProvider } from '@mui/material'
 import { DndProvider } from 'react-dnd'
+import { FC } from 'react'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { IntlProvider } from 'react-intl'
-import { CssBaseline, ThemeProvider } from '@mui/material'
+import { themes } from '/src/styles/theme'
 import { useAppThemeState } from '../styles/theme/state'
+import Head from 'next/head'
 
 export interface IntlMessages {
   [id: string]: string

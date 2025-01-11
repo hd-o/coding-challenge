@@ -2,8 +2,9 @@
 
 `#functional` `#react` `#solid`
 
-[![Open in CodeSandbox](https://img.shields.io/badge/Open-＠CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
-[![Develop on localhost](https://img.shields.io/badge/Develop-＠localhost-DDD?style=flat-square&logo=gnubash&logoColor=EEE)][develop]
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)][demo]
+
+[demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/solid-calendar&file=packages/solid-calendar/index.html&startScript=run:solid-calendar
 
 Research on coding a SOLID and functional front-end architecture with React.
 
@@ -277,10 +278,6 @@ const ComponentA = () => {
 ### Container Use Cases
 
 > TO-DO
-
-[develop]: ../../.shared/node/README.md#development
-
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/solid-calendar
 
 [rx_elevators]: ../rx-elevators/
 

@@ -3,10 +3,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "yarn start",
+    "dev": "vite",
     "lint": "eslint -c .eslintrc .",
-    "test": "DEBUG_PRINT_LIMIT=0 jest",
-    "start": "parcel index.html"
+    "test": "DEBUG_PRINT_LIMIT=0 jest"
   },
   "dependencies": {
     "@babel/core": "^7.17.5",
@@ -44,9 +43,6 @@
     "ts-jest": "^27.1.3",
     "tsyringe": "^4.6.0",
     "typescript": "^4.5.5"
-  },
-  "devDependencies": {
-    "process": "^0.11.10"
   },
   "resolutions": {
     "@babel/preset-env": "7.13.8"

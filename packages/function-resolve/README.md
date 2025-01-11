@@ -2,8 +2,9 @@
 
 `#container` `#dependency` `#functional`
 
-[![Open in CodeSandbox](https://img.shields.io/badge/Open-＠CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
-[![Develop on localhost](https://img.shields.io/badge/Develop-＠localhost-DDD?style=flat-square&logo=gnubash&logoColor=EEE)][develop]
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)][demo]
+
+[demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/function-resolve&file=packages/function-resolve/index.html&startScript=run:function-resolve
 
 IoC container resolver for functional programming
 
@@ -42,15 +43,11 @@ test('resolving dependencies', () => {
 
 [c_vs_c]: ../solid-calendar/README.md#context-vs-containers
 
-[develop]: ../../.shared/node/README.md#development
-
 [haskell]: https://www.haskell.org/
 
 [haskell_imp]: https://www.haskell.org/hugs/pages/users_guide/implicit-parameters.html
 
 [inversify]: https://github.com/inversify/InversifyJS
-
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/function-resolve?file=/spec/index.test.ts&previewwindow=tests
 
 [react_ctx]: https://reactjs.org/docs/context.html
 

@@ -2,8 +2,9 @@
 
 `#elevators` `#react` `#rx`
 
-[![Open in CodeSandbox](https://img.shields.io/badge/Open-＠CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
-[![Develop on localhost](https://img.shields.io/badge/Develop-＠localhost-DDD?style=flat-square&logo=gnubash&logoColor=EEE)][develop]
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)][demo]
+
+[demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/rx-elevators&file=packages/rx-elevators/index.html&startScript=run:rx-elevators
 
 Virtual elevators, powered by Rx streams, and React components.
 
@@ -29,10 +30,6 @@ This project is a follow-up to [solid-calendar][solid_calendar], with the goal o
     </td>
   </tr>
 </table>
-
-[develop]: ../../.shared/node/README.md#development
-
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/rx-elevators
 
 [mobx]: https://github.com/mobxjs/mobx
 

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "lint": "eslint -c .eslintrc .",
-    "test": "DEBUG_PRINT_LIMIT=0 jest"
+    "setup:spec": "bash ../elevator-specs/setup.sh",
+    "test": "npm run setup:spec && npm run run:jest"
   },
   "dependencies": {
     "@testing-library/dom": "^8.11.3",

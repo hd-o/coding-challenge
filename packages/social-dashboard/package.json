@@ -6,6 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint -c .eslintrc .",
+    "postinstall": "node scripts/patch-dnd.js",
     "start": "next start",
     "test": "DEBUG_PRINT_LIMIT=0 jest"
   },

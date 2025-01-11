@@ -4,6 +4,8 @@
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)][demo]
 
+[demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/virtual-elevators&file=packages/virtual-elevators/index.html&startScript=run:virtual-elevators
+
 Virtual elevators, powered by controller classes, and React components.
 
 This project is a follow-up to [solid-calendar][solid_calendar], and [reactive-todos][reactive_todos], with the goal of achieving a SOLID architecture with React, while isolating logic functions from view components, being able to run these functions with other view frameworks, or even with physical devices. This project is a sibling to [rx-elevators][rx_elevators], which aims at the same goals while using function composition, without classes.
@@ -28,8 +30,6 @@ This project is a follow-up to [solid-calendar][solid_calendar], and [reactive-t
     </td>
   </tr>
 </table>
-
-[demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/virtual-elevators&file=packages/virtual-elevators/index.html&startScript=run:ve
 
 [mobx]: https://github.com/mobxjs/mobx
 

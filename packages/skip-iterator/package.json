@@ -3,10 +3,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "yarn start",
     "lint": "eslint -c .eslintrc .",
-    "test": "DEBUG_PRINT_LIMIT=0 jest",
-    "start": "parcel index.html"
+    "test": "DEBUG_PRINT_LIMIT=0 jest"
   },
   "dependencies": {
     "@babel/preset-env": "^7.16.11",

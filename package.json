@@ -11,7 +11,14 @@
     "packages/*"
   ],
   "scripts": {
-    "run:ve": "cd packages/virtual-elevators && npm run dev",
+    "run:function-resolve": "cd packages/function-resolve && npm run test",
+    "run:jotai-writer-atom": "cd packages/jotai-writer-atom && npm run dev",
+    "run:reactive-todos": "cd packages/reactive-todos && npm run dev",
+    "run:rx-elevators": "cd packages/rx-elevators && npm run dev",
+    "run:skip-iterator": "cd packages/skip-iterator && npm run test",
+    "run:social-dashboard": "cd packages/social-dashboard && npm run dev",
+    "run:solid-calendar": "cd packages/solid-calendar && npm run dev",
+    "run:virtual-elevators": "cd packages/virtual-elevators && npm run dev",
     "prepare": "husky"
   },
   "commitlint": {

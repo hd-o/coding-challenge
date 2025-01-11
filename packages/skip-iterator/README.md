@@ -2,8 +2,9 @@
 
 `#iterator` `#skip` `#typescript`
 
-[![Open in CodeSandbox](https://img.shields.io/badge/Open-＠CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
-[![Develop on localhost](https://img.shields.io/badge/Develop-＠localhost-DDD?style=flat-square&logo=gnubash&logoColor=EEE)][develop]
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)][demo]
+
+[demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/skip-iterator&file=packages/skip-iterator/index.html&startScript=run:skip-iterator
 
 Iterator class, implementing value skipping
 
@@ -17,7 +18,3 @@ myIter.skip(3)
 myIter.next() // 4
 myIter.next() // 5
 ```
-
-[develop]: ../../.shared/node/README.md#development
-
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/skip-iterator?file=/spec/index.test.ts&previewwindow=tests

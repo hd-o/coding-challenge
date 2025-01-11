@@ -2,14 +2,12 @@
 
 `#dashboard` `#react` `#ui`
 
-[![Open in CodeSandbox](https://img.shields.io/badge/Open-＠CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
-[![Develop on localhost](https://img.shields.io/badge/Develop-＠localhost-DDD?style=flat-square&logo=gnubash&logoColor=EEE)][develop]
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)][demo]
+
+[demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/social-dashboard&file=packages/social-dashboard/index.html&startScript=run:social-dashboard
 
 Responsive, drag & drop enabled dashboard
 
 ---
 
 ![dashboard desktop screenshot, dark theme](.assets/desktop-dark.png)
-
-[develop]: ../../.shared/node/README.md#development
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/social-dashboard

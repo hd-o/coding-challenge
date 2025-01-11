@@ -2,8 +2,9 @@
 
 `#atom` `#jotai` `#react`
 
-[![Open in CodeSandbox](https://img.shields.io/badge/Open-＠CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
-[![Develop on localhost](https://img.shields.io/badge/Develop-＠localhost-DDD?style=flat-square&logo=gnubash&logoColor=EEE)][develop]
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)][demo]
+
+[demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/jotai-writer-atom&file=packages/jotai-writer-atom/index.html&startScript=run:jotai-writer-atom
 
 A context-friendly write-only atom, allowing dependency injection for atom setters.
 
@@ -24,10 +25,6 @@ const writerAtom = atom(
 )
 ```
 
-[develop]: ../../.shared/node/README.md#development
-
 [handleSave]: ../solid-calendar/src/reminder/editor/handleSave.ts
-
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/jotai-writer-atom?file=/src/app/index.tsx
 
 [solid_calendar]: ../solid-calendar/

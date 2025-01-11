@@ -2,8 +2,9 @@
 
 `#mvc` `#react` `#rxjs`
 
-[![Open in CodeSandbox](https://img.shields.io/badge/Open-＠CodeSandbox-blue?style=flat-square&logo=codesandbox)][live_demo]
-[![Develop on localhost](https://img.shields.io/badge/Develop-＠localhost-DDD?style=flat-square&logo=gnubash&logoColor=EEE)][develop]
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)][demo]
+
+[demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/reactive-todos&file=packages/reactive-todos/index.html&startScript=run:reactive-todos
 
 MVC React architecture with injected state observables, and isolated controller classes.
 
@@ -16,10 +17,6 @@ This experiment was done in preparation for [virtual-elevators][virtual_elevator
     src="./.assets/screenshot.png?v=4"
   />
 </p>
-
-[develop]: ../../.shared/node/README.md#development
-
-[live_demo]: https://codesandbox.io/s/github/hd-o/coding-challenge/tree/main/packages/reactive-todos
 
 [tsyringe]: https://github.com/Microsoft/tsyringe
 
