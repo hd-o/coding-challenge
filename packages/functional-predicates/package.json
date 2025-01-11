@@ -1,0 +1,11 @@
+{
+  "name": "functional-predicates",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "tsx index.ts"
+  },
+  "dependencies": {
+    "tsx": "^4.19.2"
+  }
+}

@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "run:function-resolve": "cd packages/function-resolve && npm run test",
+    "run:functional-predicates": "cd packages/functional-predicates && npm run dev",
     "run:jotai-writer-atom": "cd packages/jotai-writer-atom && npm run dev",
     "run:reactive-todos": "cd packages/reactive-todos && npm run dev",
     "run:rx-elevators": "cd packages/rx-elevators && npm run dev",
