@@ -1,1 +1,3 @@
-git config --global core.editor vi
+#!/bin/bash
+
+npm install
