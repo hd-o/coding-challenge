@@ -3,7 +3,9 @@
 `#elevators` `#react` `#rx`
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)][demo]
+[![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)][codeanywhere-demo]
 
+[codeanywhere-demo]: https://app.codeanywhere.com/#https://github.com/hd-o/coding-challenge/blob/918c9a0a63586e4b17fd5c65188962d3115e8a2e/packages/rx-elevators/README.md
 [demo]: https://stackblitz.com/github/hd-o/coding-challenge?configPath=packages/rx-elevators&file=packages/rx-elevators/index.html&startScript=run:rx-elevators
 
 Virtual elevators, powered by Rx streams, and React components.
