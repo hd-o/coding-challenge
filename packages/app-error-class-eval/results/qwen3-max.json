@@ -1,0 +1,28 @@
+{
+  "id": "msg-1757186955-Stnhk62wvvUMBRFFwNyc",
+  "type": "assistant",
+  "parentMessageId": "msg-1757186955-PMAVWz5g5hxhpBjlD2bK",
+  "context": "main-chat",
+  "contentType": "text",
+  "characterId": "char-1757186016-7EH5O1rbD6V6adnKvqD9",
+  "citations": [],
+  "images": [],
+  "files": [],
+  "createdAt": "2025-09-06T19:29:15.584Z",
+  "updatedAt": "2025-09-06T19:30:11.104Z",
+  "isGenerating": false,
+  "isRetrying": false,
+  "isEdited": false,
+  "isCollapsed": true,
+  "metadata": {
+    "plugins": [],
+    "generateDuration": 2993,
+    "latencyDuration": 3702,
+    "tokensCount": 192,
+    "tokensPerSecond": 64.14968259271635,
+    "variantSlug": "qwen/qwen3-max",
+    "provider": "Alibaba",
+    "cost": "0.0015216"
+  },
+  "content": "```typescript\n/**\n * Base app error type with required code property\n */\ninterface AppErrorType {\n  code: string;\n}\n\n/**\n * Creates an error class with a fixed code\n */\nfunction AppError(code: string): new (...args: any[]) => AppErrorType & { code: typeof code } {\n  return class extends Error {\n    public readonly code = code;\n    constructor(message?: string) {\n      super(message);\n      Object.setPrototypeOf(this, new.target.prototype);\n    }\n  };\n}\n\n/**\n * Type guard to match error object against error class by code\n */\nfunction matchErrorClass<E extends { code: string }>(\n  error: object,\n  ErrorClass: { code: E['code'] }\n): error is { code: E['code'] } {\n  return (error as { code?: unknown }).code === ErrorClass.code;\n}\n\n// Example error class\nclass AuthTokenError extends AppError(\"AUTH_TOKEN\") {}\n```"
+}

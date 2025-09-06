@@ -1,0 +1,30 @@
+{
+  "id": "msg-1757186955-3ZgrAehRQHeXuAhlgpl0",
+  "type": "assistant",
+  "parentMessageId": "msg-1757186955-PMAVWz5g5hxhpBjlD2bK",
+  "context": "main-chat",
+  "contentType": "text",
+  "characterId": "char-1757186048-fSRkGtxK2uqkyXCj1w8K",
+  "citations": [],
+  "images": [],
+  "files": [],
+  "createdAt": "2025-09-06T19:29:15.588Z",
+  "updatedAt": "2025-09-06T19:30:15.914Z",
+  "isGenerating": false,
+  "isRetrying": false,
+  "isEdited": false,
+  "isCollapsed": true,
+  "metadata": {
+    "plugins": [],
+    "generateDuration": 45242,
+    "latencyDuration": 2386,
+    "reasoningDuration": 1210,
+    "tokensCount": 3756,
+    "tokensPerSecond": 83.02020246673446,
+    "variantSlug": "openai/gpt-5",
+    "provider": "OpenAI",
+    "cost": "0.0379425"
+  },
+  "reasoning": "**Writing code with return types**\n\nThe user wants all functions to have a defined return type, so I'll make sure to include that in my output. I've already noted two functions, AppError and matchErrorClass, which I need to format properly. There's also a request about formatting file names, but that doesn't seem relevant right now. So, let's focus on producing the code with the correct return types for the functions mentioned.",
+  "content": "```typescript\n/* Types */\nexport type AppErrorInstance<C extends string = string> = Error & {\n  readonly code: C;\n};\n\nexport type AppErrorType<C extends string = string> = AppErrorInstance<C>;\n\nexport type Class<I, S = {}> = { new (...args: any[]): I } & S;\n\n/** Create a typed AppError class with a fixed code */\nexport function AppError<C extends string>(code: C): Class<AppErrorInstance<C>, { readonly code: C }> {\n  class GeneratedAppError extends Error implements AppErrorInstance<C> {\n    static readonly code: C = code;\n    readonly code: C = code;\n\n    constructor(message?: string) {\n      super(message ?? code);\n      Object.setPrototypeOf(this, new.target.prototype);\n    }\n  }\n  return GeneratedAppError;\n}\n\n/** Match a network error object to a specific AppError class by code */\nexport function matchErrorClass<E extends Class<AppErrorInstance<string>, { readonly code: string }>>(\n  error: unknown,\n  ErrorClass: E\n): error is { code: E[\"code\"] } {\n  if (typeof error !== \"object\" || error === null) return false;\n  const maybe = error as { code?: unknown };\n  return typeof maybe.code === \"string\" && maybe.code === ErrorClass.code;\n}\n\n/* Example error class */\nexport class AuthTokenError extends AppError(\"AUTH_TOKEN\") {}\n```"
+}

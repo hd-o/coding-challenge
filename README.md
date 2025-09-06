@@ -2,6 +2,12 @@
 
 My coding challenge solutions, and projects where I explore different technologies
 
+## 🤖 AI & ML
+
+> [🥈 App Error Class Eval](./packages/app-error-class-eval) <br>
+`#2025` `#ai` `#typescript` `#eval` <br>
+Comparison of AI models in generating App Error classes
+
 ## 🧮 Algorithms
 
 > [🛒 Cart Discounts](./packages/cart-discounts) <br>
@@ -12,7 +18,7 @@ Calculating total price for shopping carts, with discounts applied
 `#2024` `#data` `#functional` <br>
 Composable functional array predicates
 
-## 🟢 Automated Testing
+## 🧪 Automated Testing
 
 > [🛗 Elevator Specs](./packages/elevator-specs) <br>
   `#2022` `#elevator` `#jest` `#spec` <br>

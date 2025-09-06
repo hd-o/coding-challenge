@@ -1,0 +1,30 @@
+{
+  "id": "msg-1757186955-cMwFE4Z0rK5ELOrUoVV1",
+  "type": "assistant",
+  "parentMessageId": "msg-1757186955-PMAVWz5g5hxhpBjlD2bK",
+  "context": "main-chat",
+  "contentType": "text",
+  "characterId": "char-1757186125-ExtYPn6rvTR5xUXpqg3A",
+  "citations": [],
+  "images": [],
+  "files": [],
+  "createdAt": "2025-09-06T19:29:15.590Z",
+  "updatedAt": "2025-09-06T19:30:17.597Z",
+  "isGenerating": false,
+  "isRetrying": false,
+  "isEdited": false,
+  "isCollapsed": true,
+  "metadata": {
+    "plugins": [],
+    "generateDuration": 32616,
+    "latencyDuration": 3930,
+    "reasoningDuration": 31916,
+    "tokensCount": 1926,
+    "tokensPerSecond": 59.05077262693157,
+    "variantSlug": "anthropic/claude-opus-4.1",
+    "provider": "Google",
+    "cost": "0.149955"
+  },
+  "reasoning": "Let me break down what's needed:\n\n1. A function `AppError` that takes a code string and returns a class that extends some base error type\n2. The class should have a `code` property that matches the input\n3. An example `AuthTokenError` class that extends `AppError(\"AUTH_TOKEN\")`\n4. A function `matchErrorClass` for the frontend that checks if an error object matches a specific error class\n\nLet me think about the types:\n- `AppErrorType` should be the base type for all app errors\n- `Class<T>` should represent a class constructor\n- The `AppError` function should return a class constructor\n- The `matchErrorClass` function should use type guards\n\nHere's my implementation:\n\n```typescript\ntype Class<T> = new (...args: any[]) => T;\n\ninterface AppErrorType {\n  code: string;\n  message?: string;\n}\n\n/** Creates an error class with a specific error code */\nfunction AppError(code: string): Class<AppErrorType> & { code: string } {\n  return class extends Error implements AppErrorType {\n    static code = code;\n    code = code;\n    \n    constructor(message?: string) {\n      super(message);\n      this.name = this.constructor.name;\n    }\n  } as Class<AppErrorType> & { code: string };\n}\n\nclass AuthTokenError extends AppError(\"AUTH_TOKEN\") {}\n\n/** Checks if an error object matches a specific error class */\nfunction matchErrorClass<E extends Class<AppErrorType> & { code: string }>(\n  error: object,\n  ErrorClass: E\n): error is { code: E[\"code\"] } {\n  return (\n    typeof error === \"object\" &&\n    error !== null &&\n    \"code\" in error &&\n    error.code === ErrorClass.code\n  );\n}\n```\n\nWait, I need to be more careful with the typing. Let me reconsider:\n\n\nI'm focusing on creating a robust error handling mechanism with type-safe error classes. The key is to ensure each error has a unique code and can be easily identified and matched.\n\nThe implementation allows dynamic error class creation with a static code property, enabling precise error type checking and handling across the application.\n\nThe `matchErrorClass` function provides a type-safe way to validate error objects against specific error classes, enhancing error management strategies.\n\nBy leveraging TypeScript's type system, we can create strongly typed error classes with unique identifiers while maintaining flexibility in error handling.\n\nThe approach uses generics and a custom function to generate error classes with predefined error codes. This allows for precise error type checking without excessive type casting, enabling more robust error management in the application.\n\nThe implementation provides a clean mechanism for creating and matching specific error types with their associated codes. I'm refining the error handling approach, ensuring type safety while creating a flexible error class mechanism. The implementation carefully manages error code typing without resorting to unsafe type casting. The approach allows creating specific error classes with predefined codes, maintaining strong type guarantees during error matching and handling.\n\nThe type assertion seems necessary given TypeScript's current type inference limitations, providing a clean and type-safe way to define and work with application-specific errors.",
+  "content": "```typescript\ninterface AppErrorType {\n  code: string;\n  message?: string;\n}\n\ntype Class<T> = new (...args: any[]) => T;\n\n/** Creates an error class with a specific error code */\nfunction AppError<Code extends string>(code: Code): Class<AppErrorType> & { code: Code } {\n  class AppErrorImpl extends Error implements AppErrorType {\n    static code = code;\n    code = code;\n    \n    constructor(message?: string) {\n      super(message);\n      this.name = this.constructor.name;\n    }\n  }\n  \n  return AppErrorImpl as Class<AppErrorType> & { code: Code };\n}\n\nclass AuthTokenError extends AppError(\"AUTH_TOKEN\") {}\n\n/** Checks if an error object matches a specific error class */\nfunction matchErrorClass<E extends Class<AppErrorType> & { code: string }>(\n  error: object,\n  ErrorClass: E\n): error is { code: E[\"code\"] } {\n  return (\n    typeof error === \"object\" &&\n    error !== null &&\n    \"code\" in error &&\n    error.code === ErrorClass.code\n  );\n}\n```"
+}

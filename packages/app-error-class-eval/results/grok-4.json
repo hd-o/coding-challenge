@@ -1,0 +1,29 @@
+{
+  "id": "msg-1757186955-gduTdcP63JimlQZhGYhH",
+  "type": "assistant",
+  "parentMessageId": "msg-1757186955-PMAVWz5g5hxhpBjlD2bK",
+  "context": "main-chat",
+  "contentType": "text",
+  "characterId": "char-1757186203-6UR5ROtUjMBT4OadgGVB",
+  "citations": [],
+  "images": [],
+  "files": [],
+  "createdAt": "2025-09-06T19:29:15.592Z",
+  "updatedAt": "2025-09-06T19:37:04.017Z",
+  "isGenerating": false,
+  "isRetrying": false,
+  "isEdited": false,
+  "isCollapsed": true,
+  "metadata": {
+    "plugins": [],
+    "variantSlug": "x-ai/grok-4",
+    "latencyDuration": 1119,
+    "generateDuration": 85676,
+    "tokensCount": 3684,
+    "tokensPerSecond": 42.99920631215276,
+    "provider": "xAI",
+    "cost": "0.0566565"
+  },
+  "reasoning": "",
+  "content": "```typescript\ninterface AppErrorType extends Error {\n  code: string;\n}\n\ntype Class<T> = new (...args: any[]) => T;\n\n/**\n * Creates a custom error class with the given code.\n */\nfunction AppError<C extends string>(code: C): Class<AppErrorType & { code: C }> & { code: C } {\n  class AppErrorImpl extends Error {\n    static readonly code = code;\n\n    public code: C = code;\n\n    constructor(message?: string) {\n      super(message);\n      this.name = 'AppError';\n    }\n  }\n\n  return AppErrorImpl;\n}\n\n/**\n * Type guard to match if the error object has the specific error class code.\n */\nfunction matchErrorClass<E extends Class<AppErrorType> & { code: string }>(error: object, ErrorClass: E): error is { code: E['code'] } {\n  if (!('code' in error)) {\n    return false;\n  }\n  const code = Reflect.get(error, 'code');\n  return typeof code === 'string' && code === ErrorClass.code;\n}\n\nclass AuthTokenError extends AppError(\"AUTH_TOKEN\") {}\n```"
+}

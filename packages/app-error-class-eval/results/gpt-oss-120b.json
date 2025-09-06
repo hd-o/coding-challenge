@@ -1,0 +1,30 @@
+{
+  "id": "msg-1757186955-76IsYfAErABDoPPejru0",
+  "type": "assistant",
+  "parentMessageId": "msg-1757186955-PMAVWz5g5hxhpBjlD2bK",
+  "context": "main-chat",
+  "contentType": "text",
+  "characterId": "char-1757186055-F6bDyd7OmBrxe5fLbSLG",
+  "citations": [],
+  "images": [],
+  "files": [],
+  "createdAt": "2025-09-06T19:29:15.589Z",
+  "updatedAt": "2025-09-06T19:30:16.752Z",
+  "isGenerating": false,
+  "isRetrying": false,
+  "isEdited": false,
+  "isCollapsed": true,
+  "metadata": {
+    "plugins": [],
+    "generateDuration": 5151,
+    "latencyDuration": 2193,
+    "reasoningDuration": 3352,
+    "tokensCount": 912,
+    "tokensPerSecond": 177.05299941758884,
+    "variantSlug": "openai/gpt-oss-120b",
+    "provider": "Groq",
+    "cost": "0.0007401"
+  },
+  "reasoning": "We need to produce TypeScript code implementing feature: function to create classes in backend `AppError: (code: string) => Class<AppErrorType>`. Example error class `class AuthTokenError extends AppError(\"AUTH_TOKEN\") {}`. Also a frontend function `matchErrorClass` that takes error object and an ErrorClass (which extends AppError) and returns type predicate: error is { code: E[\"code\"] }. Need to define types: AppErrorType maybe base class? Provide Class<T> type (constructor). Avoid `as any`. Use generic constraints. Provide JSDoc comments.\n\nImplementation: Define interface AppErrorType { code: string; }. Create type Class<T> = new (...args: any[]) => T; but avoid any? We can use unknown[].\n\nfunction AppError(code: string) {\n  return class extends (class {\n    static readonly code = code;\n    readonly code = code;\n  }) {};\n}\n\nBut need to type return: Class<AppErrorType>. Use generic? Actually AppError returns a class with static property code and instance property code. We'll define base class.\n\ntype AppErrorConstructor = new (...args: unknown[]) => AppErrorType & { readonly code: string };\n\nfunction AppError(code: string): AppErrorConstructor { ... }\n\nImplement.\n\nFor matchErrorClass: function matchErrorClass<E extends AppErrorConstructor>(error: object, ErrorClass: E): error is { code: InstanceType<E>[\"code\"] } . But we need to get static code. Use typeof ErrorClass[\"code\"].\n\nDefine: function matchErrorClass<E extends AppErrorConstructor>(error: unknown, ErrorClass: E): error is { code: typeof ErrorClass[\"code\"] }.\n\nReturn boolean checking if error is object with code equal to ErrorClass.code.\n\nImplementation: if (typeof error === \"object\" && error !== null && \"code\" in error) { return (error as any).code === ErrorClass.code; } but cannot use any. Use type guard: const err = error as Record<string, unknown>. But that's cast. Could use `error as { [k: string]: unknown }`. That's still a cast but not any. Acceptable? Avoid as any but as unknown is fine. Use `if (typeof (error as any) === \"object\")` still any. Might use `if (typeof error === \"object\" && error !== null && \"code\" in error) { const e = error as { code?: unknown }; return e.code === ErrorClass.code; }` That's fine.\n\nReturn type boolean but with type predicate.\n\nImplement.\n\nMake sure not to add examples beyond AuthTokenError. Provide AuthTokenError class.\n\nProvide code block with typescript.\n\nLet's craft.\n\n",
+  "content": "```typescript\n/** Base type for all application errors */\nexport interface AppErrorType {\n  /** Unique error identifier */\n  readonly code: string;\n}\n\n/** Constructor type for an AppError class */\nexport type AppErrorClass = new (...args: unknown[]) => AppErrorType & {\n  /** Static error identifier */\n  readonly code: string;\n};\n\n/**\n * Factory that creates a new error class bound to a specific error code.\n *\n * @param code - The unique error code.\n * @returns A class extending `AppErrorType` with the given code.\n */\nexport function AppError(code: string): AppErrorClass {\n  return class extends (class {\n    /** Instance error code */\n    readonly code = code;\n  }) {\n    /** Static error code */\n    static readonly code = code;\n  };\n}\n\n/** Example backend error class */\nexport class AuthTokenError extends AppError(\"AUTH_TOKEN\") {}\n\n/**\n * Checks whether a network response error object matches a specific AppError class.\n *\n * @param error - The error object received from the backend.\n * @param ErrorClass - The AppError class to match against.\n * @returns `true` if `error` has a `code` equal to `ErrorClass.code`.\n */\nexport function matchErrorClass<E extends AppErrorClass>(\n  error: unknown,\n  ErrorClass: E\n): error is { code: typeof ErrorClass[\"code\"] } {\n  if (\n    typeof error === \"object\" &&\n    error !== null &&\n    \"code\" in error\n  ) {\n    const { code } = error as { code?: unknown };\n    return code === ErrorClass.code;\n  }\n  return false;\n}\n```"
+}
